@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Fate Changer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="how_you_can_help_description">As a student or teacher, you can start a letter-writing campaign in your school to lobby governments. As an individual, you can also write or donate. Share the app and empower others to help our oceans.</string>
+    <string name="learn_write_share">Learn, Write, Share</string>
+    <string name="how_you_can_help">How You Can Help</string>
+    <string name="start">START</string>
+    <string name="welcome_to_fate_changer">Welcome To Fatechanger</string>
+    <string name="children_saving_the_ocean">Children saving the ocean</string>
+    <string name="welcome_to_fate_changer_description">The app was designed to give children a voice, teaching them about the growing tragedy of ocean pollution, and empowering them to do something about it and change fate.</string>
+    <string name="stay_engaged">STAY ENGAGED</string>
+    <string name="stay_connected_for_updates">Stay connected for updates.</string>
+    <string name="stay_engaged_description">Track of the Fatechanger app\'s progress and get an annual reminder to write another letter to keep up pressure to protect our waters. Follow or share ocean pollution news.</string>
 </resources>
