@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/green_plant"
+        android:src="@drawable/actinia"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/onboarding_guideline"
         app:layout_constraintEnd_toEndOf="parent"

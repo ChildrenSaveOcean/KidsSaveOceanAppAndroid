@@ -1,19 +1,25 @@
 package com.kidssaveocean.fatechanger.onboarding;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kidssaveocean.fatechanger.R;
+import com.kidssaveocean.fatechanger.userIdentification.UserIdentificationActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Optional;
 
 public class OnboardingFragment extends Fragment {
 
@@ -52,4 +58,14 @@ public class OnboardingFragment extends Fragment {
 
         return layout;
     }
+
+    @Optional
+    @OnClick(R.id.start_button)
+    public void clickStart (Button startButton) {
+        Intent intent = new Intent(getActivity(), UserIdentificationActivity.class);
+        startActivity(intent);
+        return;
+    }
+
+
 }

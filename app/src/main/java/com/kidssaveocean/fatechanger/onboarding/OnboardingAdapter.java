@@ -32,7 +32,7 @@ public class OnboardingAdapter extends FragmentPagerAdapter {
                 layoutId = R.layout.fragment_no_button_onboarding;
                 break;
             case 1:
-                imageId = R.drawable.green_plant;
+                imageId = R.drawable.actinia;
                 titleId = R.string.how_you_can_help;
                 subTitleId = R.string.learn_write_share;
                 descriptionId = R.string.how_you_can_help_description;
