@@ -43,8 +43,8 @@ public class UserIdentificationActivity extends AppCompatActivity {
         teacherFragment.setDesciption(R.string.i_am_a_teacher_description);
 
         othersFragment.setBackgroundImage(R.drawable.turtle);
-        othersFragment.setUserTypeText(R.string.i_want_to);
-        othersFragment.setDesciption(R.string.i_want_to_description);
+        othersFragment.setUserTypeText(R.string.neither_student_nor_teacher);
+        othersFragment.setDesciption(R.string.neither_student_nor_teacher_description);
 
     }
 }

@@ -18,6 +18,6 @@
     <string name="i_am_a_student_description">Get started on a letter-writing campaign, we\'ll show you how!</string>
     <string name="i_am_a_teacher">I am a Teacher</string>
     <string name="i_am_a_teacher_description">We have lots of learning material available to help you engage your students.</string>
-    <string name="i_want_to">I want to</string>
-    <string name="i_want_to_description">We need your support and donations. Learn how you can engage with Fatechanger.</string>
+    <string name="neither_student_nor_teacher">Neither a Student nor Teacher?</string>
+    <string name="neither_student_nor_teacher_description">We need your support and donations. Learn how you can engage with Fatechanger.</string>
 </resources>
