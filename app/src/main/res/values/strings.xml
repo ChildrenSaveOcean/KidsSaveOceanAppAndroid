@@ -20,4 +20,8 @@
     <string name="i_am_a_teacher_description">We have lots of learning material available to help you engage your students.</string>
     <string name="neither_student_nor_teacher">Neither a Student nor Teacher?</string>
     <string name="neither_student_nor_teacher_description">We need your support and donations. Learn how you can engage with Fatechanger.</string>
+    <string name="Unable_To_Play_Youtube_Video">Error! Unable to play youtube video!</string>
+    <string name="students">Students</string>
+    <string name="teachers">Teachers</string>
+    <string name="others">Others</string>
 </resources>

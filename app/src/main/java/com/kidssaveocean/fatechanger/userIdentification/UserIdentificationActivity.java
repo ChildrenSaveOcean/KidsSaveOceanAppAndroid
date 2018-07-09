@@ -24,10 +24,10 @@ public class UserIdentificationActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            Window w = getWindow();
+//            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+//        }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         studentFragment = (UserIdentificationFragment) fragmentManager.findFragmentById(R.id.student_fragment);
@@ -37,14 +37,17 @@ public class UserIdentificationActivity extends AppCompatActivity {
         studentFragment.setBackgroundImage(R.drawable.clownfish);
         studentFragment.setUserTypeText(R.string.i_am_a_student);
         studentFragment.setDesciption(R.string.i_am_a_student_description);
+        studentFragment.setUpImageButtonOnClick(getString(R.string.students));
 
         teacherFragment.setBackgroundImage(R.drawable.jellyfish);
         teacherFragment.setUserTypeText(R.string.i_am_a_teacher);
         teacherFragment.setDesciption(R.string.i_am_a_teacher_description);
+        teacherFragment.setUpImageButtonOnClick(getString(R.string.teachers));
 
         othersFragment.setBackgroundImage(R.drawable.turtle);
         othersFragment.setUserTypeText(R.string.neither_student_nor_teacher);
         othersFragment.setDesciption(R.string.neither_student_nor_teacher_description);
+        othersFragment.setUpImageButtonOnClick(getString(R.string.others));
 
     }
 }
