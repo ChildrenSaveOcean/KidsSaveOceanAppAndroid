@@ -2,7 +2,6 @@ package com.kidssaveocean.fatechanger.bottomNavigation;
 
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +9,7 @@ import android.widget.Toast;
 
 import com.kidssaveocean.fatechanger.R;
 import com.kidssaveocean.fatechanger.donation.DonationFragment;
+import com.kidssaveocean.fatechanger.userIdentification.HomeFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +27,10 @@ public class BottomNavigationActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(setUpOnNavigationItemSelectedListener());
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_container, new HomeFragment());
+        transaction.commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener setUpOnNavigationItemSelectedListener() {
@@ -36,8 +40,9 @@ public class BottomNavigationActivity extends AppCompatActivity {
             Fragment fragment;
 
             switch (menuItem.getItemId()) {
-                case R.id.action_world:
-                    Toast.makeText(BottomNavigationActivity.this,"Home", Toast.LENGTH_LONG).show();
+                case R.id.action_home:
+                    fragment = new HomeFragment();
+                    transaction.replace(R.id.fragment_container, fragment);
                     break;
 
                 case R.id.action_news:

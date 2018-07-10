@@ -1,35 +1,35 @@
 package com.kidssaveocean.fatechanger.userIdentification;
 
-import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.kidssaveocean.fatechanger.R;
 import butterknife.ButterKnife;
 
 
-public class UserIdentificationActivity extends AppCompatActivity {
+public class HomeFragment extends Fragment {
 
     UserIdentificationFragment studentFragment;
     UserIdentificationFragment teacherFragment;
     UserIdentificationFragment othersFragment;
 
+    public HomeFragment() {
+
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                            Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_identification);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        ButterKnife.bind(this);
+        ButterKnife.bind(this, view);
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            Window w = getWindow();
-//            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-//        }
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getChildFragmentManager();
         studentFragment = (UserIdentificationFragment) fragmentManager.findFragmentById(R.id.student_fragment);
         teacherFragment = (UserIdentificationFragment) fragmentManager.findFragmentById(R.id.teacher_fragment);
         othersFragment = (UserIdentificationFragment) fragmentManager.findFragmentById(R.id.others_fragment);
@@ -49,5 +49,6 @@ public class UserIdentificationActivity extends AppCompatActivity {
         othersFragment.setDesciption(R.string.neither_student_nor_teacher_description);
         othersFragment.setUpImageButtonOnClick(getString(R.string.others));
 
+        return view;
     }
 }
