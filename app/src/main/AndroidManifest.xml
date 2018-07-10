@@ -26,7 +26,9 @@
         <activity
             android:name=".introductionVideo.IntroductionVideoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".bottomNavigation.BottomNavigationActivity"></activity>
+        <activity
+            android:name=".bottomNavigation.BottomNavigationActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="lightgray">#E5E5E5</color>
     <color name="gray">#b2b2b2</color>
+    <color name="gold">#DAA520</color>
+    <color name="greenish_blue">#2672b3</color>
 </resources>
