@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -99,6 +100,13 @@ public class GeneralImageListCardView extends CardView {
                      .apply(RequestOptions.bitmapTransform(new CropSquareTransformation()))
                      .into(holder.cardImage);
             }
+
+            if (cardList.size() - 1 == position) {
+                holder.divider.setVisibility(INVISIBLE);
+            }
+            else {
+                holder.divider.setVisibility(VISIBLE);
+            }
         }
 
         @Override
@@ -111,6 +119,7 @@ public class GeneralImageListCardView extends CardView {
             TextView title;
             TextView description;
             ImageView next;
+            View divider;
 
             public ViewHolder (CardView cardView) {
                 super(cardView);
@@ -118,6 +127,7 @@ public class GeneralImageListCardView extends CardView {
                 title = (TextView) cardView.findViewById(R.id.card_title);
                 description = (TextView) cardView.findViewById(R.id.card_description);
                 next = (ImageView) cardView.findViewById(R.id.card_next);
+                divider = cardView.findViewById(R.id.divider);
             }
         }
     }
