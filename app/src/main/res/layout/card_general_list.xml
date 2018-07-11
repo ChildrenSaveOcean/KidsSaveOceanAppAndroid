@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
-    android:id="@+id/card_general_list"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="15dp"
-    android:padding="10dp"
-    android:background="@color/gold"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="30dp">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/card_general_list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gold"
         android:paddingBottom="10dp">
 
         <TextView

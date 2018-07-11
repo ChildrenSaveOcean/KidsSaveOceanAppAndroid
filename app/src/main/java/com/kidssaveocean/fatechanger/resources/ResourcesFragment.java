@@ -50,9 +50,9 @@ public class ResourcesFragment extends Fragment {
         GeneralImageListCardView.GeneralImageListCardViewAdapter adapter = new GeneralImageListCardView.GeneralImageListCardViewAdapter(getContext(), cardList);
         studentResourceCard.setAdapter(adapter);
 
-//        teacherResourceCard = (GeneralImageListCardView) view.findViewById(R.id.teachers_resource_card);
-//        teacherResourceCard.setListTitle("For Teacher");
-//        teacherResourceCard.setAdapter(adapter);
+        teacherResourceCard = (GeneralImageListCardView) view.findViewById(R.id.teachers_resource_card);
+        teacherResourceCard.setListTitle("For Teacher");
+        teacherResourceCard.setAdapter(adapter);
 
 
         return view;
