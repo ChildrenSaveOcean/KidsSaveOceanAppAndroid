@@ -17,13 +17,6 @@
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/action_donate"
-        android:enabled="true"
-        android:icon="@drawable/donate"
-        android:title="Donate"
-        app:showAsAction="always"/>
-
-    <item
         android:id="@+id/action_resources"
         android:enabled="true"
         android:icon="@drawable/resources"
@@ -36,4 +29,12 @@
         android:icon="@drawable/map"
         android:title="Map"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_donate"
+        android:enabled="true"
+        android:icon="@drawable/donate"
+        android:title="Donate"
+        app:showAsAction="always"/>
+
 </menu>
