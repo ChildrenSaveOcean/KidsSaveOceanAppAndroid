@@ -28,4 +28,13 @@
     <string name="donation_description">Donations are tax-deductible and 100% of proceeds go to support saving the ocean.</string>
     <string name="donate_now">Donate Now</string>
     <string name="for_students">For Students</string>
+    <string name="sample_letters">Sample Letters</string>
+    <string name="sample_letters_description">Here are some examples of letters that students have written.</string>
+    <string name="country_contacts">Country Contacts</string>
+    <string name="country_contacts_description">Look up who is the best person to write to in your country.</string>
+    <string name="teaching_9_to_12">Teaching Materials\n Ages 9 - 12</string>
+    <string name="teaching_13_to_15">Teaching Materials\n Ages 13 - 15</string>
+    <string name="teaching_16_to_18">Teaching Materials\n Ages 16 - 18</string>
+    <string name="for_student">For Student</string>
+    <string name="for_teacher">For Teacher</string>
 </resources>
