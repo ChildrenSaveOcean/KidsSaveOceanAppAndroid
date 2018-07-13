@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kidssaveocean.fatechanger.R;
-import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity;
+import com.kidssaveocean.fatechanger.onboarding.userIdentification.UserIdentificationActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,7 +60,7 @@ public class OnboardingFragment extends Fragment {
     @Optional
     @OnClick(R.id.start_button)
     public void clickStart (Button startButton) {
-        Intent intent = new Intent(getActivity(), BottomNavigationActivity.class);
+        Intent intent = new Intent(getActivity(), UserIdentificationActivity.class);
         startActivity(intent);
         return;
     }

@@ -11,7 +11,7 @@ import com.kidssaveocean.fatechanger.R;
 import com.kidssaveocean.fatechanger.donation.DonationFragment;
 import com.kidssaveocean.fatechanger.map.MapFragment;
 import com.kidssaveocean.fatechanger.resources.ResourcesFragment;
-import com.kidssaveocean.fatechanger.userIdentification.HomeFragment;
+import com.kidssaveocean.fatechanger.onboarding.userIdentification.UserIdentificationFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +31,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(setUpOnNavigationItemSelectedListener());
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_container, new HomeFragment());
+        //transaction.add(R.id.fragment_container, new UserIdentificationFragment());
         transaction.commit();
     }
 
@@ -43,8 +43,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
 
             switch (menuItem.getItemId()) {
                 case R.id.action_home:
-                    fragment = new HomeFragment();
-                    transaction.replace(R.id.fragment_container, fragment);
+                    Toast.makeText(BottomNavigationActivity.this,"Home", Toast.LENGTH_LONG).show();
                     break;
 
                 case R.id.action_news:

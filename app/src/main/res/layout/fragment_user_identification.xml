@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".userIdentification.UserIdentificationFragment">
+    tools:context=".onboarding.userIdentification.UserIdentificationCardFragment">
 
     <ImageButton
         android:id="@+id/user_identification_image_button"

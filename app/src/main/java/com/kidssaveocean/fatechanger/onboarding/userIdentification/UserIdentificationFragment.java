@@ -1,4 +1,4 @@
-package com.kidssaveocean.fatechanger.userIdentification;
+package com.kidssaveocean.fatechanger.onboarding.userIdentification;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,13 +11,13 @@ import com.kidssaveocean.fatechanger.R;
 import butterknife.ButterKnife;
 
 
-public class HomeFragment extends Fragment {
+public class UserIdentificationFragment extends Fragment {
 
-    UserIdentificationFragment studentFragment;
-    UserIdentificationFragment teacherFragment;
-    UserIdentificationFragment othersFragment;
+    UserIdentificationCardFragment studentFragment;
+    UserIdentificationCardFragment teacherFragment;
+    UserIdentificationCardFragment othersFragment;
 
-    public HomeFragment() {
+    public UserIdentificationFragment() {
 
     }
 
@@ -30,9 +30,9 @@ public class HomeFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         FragmentManager fragmentManager = getChildFragmentManager();
-        studentFragment = (UserIdentificationFragment) fragmentManager.findFragmentById(R.id.student_fragment);
-        teacherFragment = (UserIdentificationFragment) fragmentManager.findFragmentById(R.id.teacher_fragment);
-        othersFragment = (UserIdentificationFragment) fragmentManager.findFragmentById(R.id.others_fragment);
+        studentFragment = (UserIdentificationCardFragment) fragmentManager.findFragmentById(R.id.student_fragment);
+        teacherFragment = (UserIdentificationCardFragment) fragmentManager.findFragmentById(R.id.teacher_fragment);
+        othersFragment = (UserIdentificationCardFragment) fragmentManager.findFragmentById(R.id.others_fragment);
 
         studentFragment.setBackgroundImage(R.drawable.clownfish);
         studentFragment.setUserTypeText(R.string.i_am_a_student);

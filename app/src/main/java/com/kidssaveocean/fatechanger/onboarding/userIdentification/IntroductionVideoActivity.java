@@ -1,7 +1,9 @@
-package com.kidssaveocean.fatechanger.introductionVideo;
+package com.kidssaveocean.fatechanger.onboarding.userIdentification;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -9,9 +11,12 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.kidssaveocean.fatechanger.R;
+import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import com.kidssaveocean.fatechanger.database.entities.Onboarding;
 
 public class IntroductionVideoActivity extends AppCompatActivity {
 
@@ -48,5 +53,14 @@ public class IntroductionVideoActivity extends AppCompatActivity {
         });
     }
 
+    @OnClick(R.id.start_button)
+    public void clickStartButton (Button button) {
+        CompletedOnboardingTask completedOnboardingTask = new CompletedOnboardingTask();
+        completedOnboardingTask.execute(this);
+        Intent intent = new Intent(this, BottomNavigationActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+
+    }
 
 }

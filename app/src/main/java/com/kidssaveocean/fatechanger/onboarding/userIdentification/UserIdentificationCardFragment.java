@@ -1,4 +1,4 @@
-package com.kidssaveocean.fatechanger.userIdentification;
+package com.kidssaveocean.fatechanger.onboarding.userIdentification;
 
 
 import android.content.Intent;
@@ -15,25 +15,21 @@ import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.kidssaveocean.fatechanger.R;
-import com.kidssaveocean.fatechanger.introductionVideo.IntroductionVideoActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
-
-import static com.kidssaveocean.fatechanger.introductionVideo.IntroductionVideoActivity.INTRO_TYPE;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserIdentificationFragment extends Fragment {
+public class UserIdentificationCardFragment extends Fragment {
 
     @BindView(R.id.user_identification_image_button) ImageButton backgroundImage;
     @BindView(R.id.user_identification_type_text_view) TextView userIdTypeTextView;
     @BindView(R.id.description) TextView descriptionTextView;
 
-    public UserIdentificationFragment() {
+    public UserIdentificationCardFragment() {
         // Required empty public constructor
     }
 
