@@ -2,7 +2,7 @@
 
 ## Table Of Contents
 1. [Introduction](#introduction)
-2. [Key Elements](#key-elements)
+2. [Screenshots](#screenshots)
 3. [Project Requirements](#project-requirements)
 
 ### Introduction
@@ -15,19 +15,14 @@ The app is mainly targets towards students and teachers, but also invites the wi
 
 ___
 
-### Key Elements
+### Screenshots
 
-* The app will include animated short films about the problem of ocean trash, the kids’ solution to solve it, and how users can join to help.  (In addition to the shorts, links to pre-packaged teacher materials will enable educators to easily embrace the project.)
+<img src="screenshots/onboarding_1.jpg" width="216"> <img src="screenshots/onboarding_2.jpg" width="216">
+<img src="screenshots/onboarding_3.jpg" width="216">
 
-* Map screen: google-map-like navigation.  Shows number of letters written and from where, and any government-level progress.
+<img src="screenshots/user_id_1.jpg" width="216"> <img src="screenshots/user_id_2.jpg" width="216">
 
-* Data entry screen: here kids, teachers and community find out where to write, and can enter their data after they’ve written letters. Users can also send us word of any government-level changes that have occurred.
-
-* The last whale song video: animated music video of the song Ocean Full of Ghosts, sung by three 16-year-old girls
-
-* Social network share screen.
-
-* Top ten list: which countries have written the most? Will also include running tab of total letters written.
+<img src="screenshots/resources.jpg" width="216"> <img src="screenshots/donation.jpg" width="216"> 
 
 [Back to Top](#table-of-contents)
 
