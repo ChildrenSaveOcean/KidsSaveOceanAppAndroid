@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.kidssaveocean.fatechanger.R;
 import com.kidssaveocean.fatechanger.donation.DonationFragment;
 import com.kidssaveocean.fatechanger.map.MapFragment;
+import com.kidssaveocean.fatechanger.news.NewsFragment;
 import com.kidssaveocean.fatechanger.resources.ResourcesFragment;
 import com.kidssaveocean.fatechanger.onboarding.userIdentification.UserIdentificationFragment;
 
@@ -47,7 +48,8 @@ public class BottomNavigationActivity extends AppCompatActivity {
                     break;
 
                 case R.id.action_news:
-                     Toast.makeText(BottomNavigationActivity.this,"News", Toast.LENGTH_LONG).show();
+                    fragment = new NewsFragment();
+                    transaction.replace(R.id.fragment_container, fragment);
                      break;
 
                 case R.id.action_donate:
