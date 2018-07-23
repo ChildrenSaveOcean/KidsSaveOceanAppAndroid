@@ -16,6 +16,9 @@
         android:text="@string/how_you_can_help_capitalized"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"
+        android:gravity="left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -27,6 +30,9 @@
         android:textColor="@android:color/white"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
+        android:gravity="left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/how_you_can_help_text_view"/>
 
     <TextView
@@ -38,6 +44,9 @@
         android:textColor="@android:color/white"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:gravity="left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"/>
 
     <android.support.v7.widget.CardView
