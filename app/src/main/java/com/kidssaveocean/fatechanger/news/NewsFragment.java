@@ -23,6 +23,7 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         webView = (WebView) inflater.inflate(R.layout.fragment_news, container, false);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setUseWideViewPort(true);
         return webView;
     }
 
