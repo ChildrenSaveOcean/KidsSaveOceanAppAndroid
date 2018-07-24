@@ -6,11 +6,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.kidssaveocean.fatechanger.R;
 
 public class NewsFragment extends Fragment {
+
+    private static final String url = "https://www.kidssaveocean.com/copy-of-news";
 
     WebView webView;
 
@@ -22,14 +25,16 @@ public class NewsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         webView = (WebView) inflater.inflate(R.layout.fragment_news, container, false);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setUseWideViewPort(true);
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
         return webView;
     }
 
     public void onResume () {
         super.onResume();
-        webView.loadUrl("https://www.kidssaveocean.com/news");
+        webView.loadUrl(url);
     }
 
 }
