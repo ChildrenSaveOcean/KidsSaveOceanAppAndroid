@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.kidssaveocean.fatechanger.R;
 import com.kidssaveocean.fatechanger.donation.DonationFragment;
+import com.kidssaveocean.fatechanger.home.HomeCardFragment;
+import com.kidssaveocean.fatechanger.home.HomeFragment;
 import com.kidssaveocean.fatechanger.map.MapFragment;
 import com.kidssaveocean.fatechanger.news.NewsFragment;
 import com.kidssaveocean.fatechanger.resources.ResourcesFragment;
@@ -32,7 +34,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(setUpOnNavigationItemSelectedListener());
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        //transaction.add(R.id.fragment_container, new UserIdentificationFragment());
+        transaction.add(R.id.fragment_container, new HomeFragment());
         transaction.commit();
     }
 
@@ -44,7 +46,8 @@ public class BottomNavigationActivity extends AppCompatActivity {
 
             switch (menuItem.getItemId()) {
                 case R.id.action_home:
-                    Toast.makeText(BottomNavigationActivity.this,"Home", Toast.LENGTH_LONG).show();
+                    fragment = new HomeFragment();
+                    transaction.replace(R.id.fragment_container, fragment);
                     break;
 
                 case R.id.action_news:

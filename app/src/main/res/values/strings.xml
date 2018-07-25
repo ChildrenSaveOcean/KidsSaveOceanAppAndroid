@@ -37,4 +37,12 @@
     <string name="teaching_16_to_18">Teaching Materials\n Ages 16 - 18</string>
     <string name="for_student">For Student</string>
     <string name="for_teacher">For Teacher</string>
+    <string name="updates">UPDATES</string>
+    <string name="letter_writing_update">Letter Writing Campaign</string>
+    <string name="see_our_progress">See our progress</string>
+    <string name="interview">INTERVIEW</string>
+    <string name="peder_hill">Peder Hill</string>
+    <string name="q_and_a_with_founder"><![CDATA[Q&A with the founder]]></string>
+    <string name="high_scores">High Scores</string>
+    <string name="see_where_your_country_ranks">See where your country ranks</string>
 </resources>
