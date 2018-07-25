@@ -25,7 +25,7 @@ public class UserIdentificationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                             Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_identification, container, false);
 
         ButterKnife.bind(this, view);
 
