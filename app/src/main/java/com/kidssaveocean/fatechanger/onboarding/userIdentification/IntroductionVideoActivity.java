@@ -1,8 +1,8 @@
 package com.kidssaveocean.fatechanger.onboarding.userIdentification;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +16,6 @@ import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.kidssaveocean.fatechanger.database.entities.Onboarding;
 
 public class IntroductionVideoActivity extends AppCompatActivity {
 
