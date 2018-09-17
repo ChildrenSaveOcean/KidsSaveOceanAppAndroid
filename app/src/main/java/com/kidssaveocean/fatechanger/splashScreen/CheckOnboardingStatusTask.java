@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity;
+import com.kidssaveocean.fatechanger.database.AppDatabase;
 import com.kidssaveocean.fatechanger.database.entities.Onboarding;
 import com.kidssaveocean.fatechanger.onboarding.OnboardingActivity;
-
-import com.kidssaveocean.fatechanger.database.AppDatabase;
 
 public class CheckOnboardingStatusTask extends AsyncTask<Activity, Void, Boolean> {
 
