@@ -1,4 +1,4 @@
-package com.kidssaveocean.fatechanger.letters;
+package com.kidssaveocean.fatechanger.letters.map;
 
 
 import android.os.Bundle;

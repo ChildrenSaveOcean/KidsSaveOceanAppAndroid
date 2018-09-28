@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.kidssaveocean.fatechanger.R;
 import com.kidssaveocean.fatechanger.donation.DonationFragment;
 import com.kidssaveocean.fatechanger.home.HomeFragment;
-import com.kidssaveocean.fatechanger.letters.LettersMasterFragment;
+import com.kidssaveocean.fatechanger.letters.master.LettersMasterFragment;
 import com.kidssaveocean.fatechanger.news.NewsFragment;
 import com.kidssaveocean.fatechanger.resources.ResourcesFragment;
 

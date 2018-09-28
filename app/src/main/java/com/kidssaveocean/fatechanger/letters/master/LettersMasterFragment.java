@@ -1,4 +1,4 @@
-package com.kidssaveocean.fatechanger.letters;
+package com.kidssaveocean.fatechanger.letters.master;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

@@ -2,9 +2,21 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#000</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#20c2de</color>
     <color name="lightgray">#E5E5E5</color>
     <color name="gray">#b2b2b2</color>
     <color name="gold">#DAA520</color>
     <color name="greenish_blue">#2672b3</color>
+
+    <array name="listColors">
+        <item>#3597c9</item>
+        <item>#fdb12a</item>
+        <item>#81b737</item>
+        <item>#a68abb</item>
+        <item>#333940</item>
+        <item>#c53f23</item>
+        <item>#9b8f89</item>
+        <item>#7e193b</item>
+        <item>#5dcfc5</item>
+    </array>
 </resources>
