@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.kidssaveocean.fatechanger.R;
 import com.kidssaveocean.fatechanger.donation.DonationFragment;
 import com.kidssaveocean.fatechanger.home.HomeFragment;
-import com.kidssaveocean.fatechanger.map.MapFragment;
+import com.kidssaveocean.fatechanger.letters.LettersMasterFragment;
 import com.kidssaveocean.fatechanger.news.NewsFragment;
 import com.kidssaveocean.fatechanger.resources.ResourcesFragment;
 
@@ -19,7 +19,8 @@ import butterknife.ButterKnife;
 
 public class BottomNavigationActivity extends AppCompatActivity {
 
-    @BindView(R.id.bottom_navigation_bar) BottomNavigationView bottomNavigationView;
+    @BindView(R.id.bottom_navigation_bar)
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,25 +51,25 @@ public class BottomNavigationActivity extends AppCompatActivity {
                 case R.id.action_news:
                     fragment = new NewsFragment();
                     transaction.replace(R.id.fragment_container, fragment);
-                     break;
+                    break;
 
                 case R.id.action_donate:
-                     fragment = new DonationFragment();
-                     transaction.replace(R.id.fragment_container, fragment);
-                     break;
+                    fragment = new DonationFragment();
+                    transaction.replace(R.id.fragment_container, fragment);
+                    break;
 
-                 case R.id.action_resources:
-                     fragment = new ResourcesFragment();
-                     transaction.replace(R.id.fragment_container, fragment);
-                     break;
+                case R.id.action_resources:
+                    fragment = new ResourcesFragment();
+                    transaction.replace(R.id.fragment_container, fragment);
+                    break;
 
-                 case R.id.action_map:
-                     fragment = new MapFragment();
-                     transaction.replace(R.id.fragment_container, fragment);
-                     break;
+                case R.id.action_map:
+                    fragment = LettersMasterFragment.newInstance();
+                    transaction.replace(R.id.fragment_container, fragment);
+                    break;
 
-                 default:
-                     return false;
+                default:
+                    return false;
 
             }
 

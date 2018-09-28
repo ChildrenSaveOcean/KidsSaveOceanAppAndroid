@@ -1,4 +1,4 @@
-package com.kidssaveocean.fatechanger.map;
+package com.kidssaveocean.fatechanger.letters;
 
 
 import android.os.Bundle;
@@ -18,6 +18,15 @@ import com.kidssaveocean.fatechanger.R;
 
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
+
+    public static MapFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        MapFragment fragment = new MapFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     public MapFragment() {
         // Required empty public constructor
