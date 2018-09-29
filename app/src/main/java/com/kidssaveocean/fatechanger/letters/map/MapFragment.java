@@ -9,17 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.kidssaveocean.fatechanger.R;
 
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
+    //region new instance
     public static MapFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -32,11 +30,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public MapFragment() {
         // Required empty public constructor
     }
+    //endregion
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    //region lifecycle
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -49,14 +45,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             fragment.getMapAsync(this);
         return view;
     }
+    //endregion
 
+    //region implementation OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
+        /*
         LatLng sydney = new LatLng(-33.852, 151.211);
         googleMap.addMarker(new MarkerOptions().position(sydney)
                 .title("Marker in Sydney"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        */
     }
+    //endregion
 }

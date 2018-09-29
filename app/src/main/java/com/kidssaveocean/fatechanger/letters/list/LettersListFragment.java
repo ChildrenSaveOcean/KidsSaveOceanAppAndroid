@@ -18,12 +18,14 @@ import com.kidssaveocean.fatechanger.R;
  */
 public class LettersListFragment extends Fragment implements LettersListContract.View {
 
+    //region UI elements
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    //endregion
 
     private Context context;
 
+    //region new instance
     public static LettersListFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -37,7 +39,9 @@ public class LettersListFragment extends Fragment implements LettersListContract
     public LettersListFragment() {
         // Required empty public constructor
     }
+    //endregion
 
+    //region lifecycle
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -57,7 +61,7 @@ public class LettersListFragment extends Fragment implements LettersListContract
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
@@ -66,5 +70,6 @@ public class LettersListFragment extends Fragment implements LettersListContract
 
         return view;
     }
+    //endregion
 
 }
