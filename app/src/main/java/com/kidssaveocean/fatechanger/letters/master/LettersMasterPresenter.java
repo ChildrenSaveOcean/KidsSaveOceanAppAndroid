@@ -78,12 +78,12 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
         }
 
         int seconds = 0;
-        if(BuildConfig.DEBUG)
+        if (BuildConfig.DEBUG)
             seconds = 3;
 
         mCompositeDisposable.clear();
         Disposable disposable = mRepository.getAll()
-                .delay(seconds,TimeUnit.SECONDS)
+                .delay(seconds, TimeUnit.SECONDS)
                 .subscribeOn(mSchedulerProvider.io())
                 .observeOn(mSchedulerProvider.ui())
                 .subscribe(

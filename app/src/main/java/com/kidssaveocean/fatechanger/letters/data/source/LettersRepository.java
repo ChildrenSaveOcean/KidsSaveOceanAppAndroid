@@ -4,10 +4,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 
+
 import com.kidssaveocean.fatechanger.Repository;
 import com.kidssaveocean.fatechanger.letters.data.Letter;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Flowable;
 
@@ -33,6 +37,13 @@ public class LettersRepository implements Repository<Letter> {
     @VisibleForTesting
     private
     boolean mCacheIsDirty = false;
+
+    /**
+     * This variable has package local visibility so it can be accessed from tests.
+     */
+    @VisibleForTesting
+    @Nullable
+    List<Letter> mCachedLetters;
 
     //region Singleton implementation
     // Prevent direct instantiation.
@@ -94,6 +105,13 @@ public class LettersRepository implements Repository<Letter> {
     @Override
     public Flowable<List<Letter>> getAll() {
         // Respond immediately with cache if available and not dirty
+        /*if (mCachedLetters != null && !mCacheIsDirty) {
+            return Flowable.fromIterable(mCachedLetters).toList().toFlowable();
+        } else if (mCachedLetters == null) {
+            mCachedLetters = new ArrayList<>();
+        }*/
+
+        // Respond immediately with cache if available and not dirty
         if (!mCacheIsDirty) {
             // Todo: should return whichever is available first.
             return getLocalLetters();
@@ -120,7 +138,16 @@ public class LettersRepository implements Repository<Letter> {
      * @return list of letters from local
      */
     private Flowable<List<Letter>> getLocalLetters() {
-        return mLettersLocalDataSource.getAll();
+        return mLettersLocalDataSource
+                .getAll()
+                .flatMap(letters -> {
+                    mCachedLetters = new ArrayList<>();
+                    return Flowable.fromIterable(letters).doOnNext(item -> mCachedLetters.add(item)
+                    ).toList().toFlowable();
+                })
+                .doOnComplete(() -> mCacheIsDirty = false);
+
+        //;
     }
 
     /**
@@ -133,10 +160,19 @@ public class LettersRepository implements Repository<Letter> {
                 .getAll()
                 .flatMap(letters -> {
                     mLettersLocalDataSource.removeAll();
-                    return Flowable.fromIterable(letters).doOnNext(mLettersLocalDataSource::add).toList().toFlowable();
+                    mCachedLetters = new ArrayList<>();
+                    return Flowable.fromIterable(letters).doOnNext(item -> {
+                                mCachedLetters.add(item);
+                                mLettersLocalDataSource.add(item);
+                            }
+                    ).toList().toFlowable();
                 })
                 .doOnComplete(() -> mCacheIsDirty = false);
     }
     //endregion
+
+    public List<Letter> getCachedLetters() {
+        return mCachedLetters;
+    }
 
 }

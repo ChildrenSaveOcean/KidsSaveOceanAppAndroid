@@ -7,10 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kidssaveocean.fatechanger.R;
+import com.kidssaveocean.fatechanger.letters.data.Letter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyLetterAdapter extends RecyclerView.Adapter<MyLetterViewHolder> {
     int[] colors;
 
+    private List<Letter> items = new ArrayList<>();
     public MyLetterAdapter(int[] colors) {
         this.colors = colors;
     }
@@ -25,11 +30,16 @@ public class MyLetterAdapter extends RecyclerView.Adapter<MyLetterViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyLetterViewHolder holder, int position) {
-        holder.bind(position, colors[position]);
+        holder.bind(position, colors[position % (colors.length - 1)], items.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return colors.length;
+        return items.size();
+    }
+
+    void updateItems(List<Letter> cachedLetters) {
+        items = cachedLetters;
+        notifyDataSetChanged();
     }
 }

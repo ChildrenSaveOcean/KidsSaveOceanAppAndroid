@@ -12,18 +12,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kidssaveocean.fatechanger.R;
+import com.kidssaveocean.fatechanger.letters.LetterInjection;
+import com.kidssaveocean.fatechanger.letters.data.Letter;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class LettersListFragment extends Fragment implements LettersListContract.View {
 
-    //region UI elements
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private MyLetterAdapter mAdapter;
     //endregion
 
     private Context context;
+
+    private LettersListContract.Presenter presenter;
 
     //region new instance
     public static LettersListFragment newInstance() {
@@ -46,6 +50,8 @@ public class LettersListFragment extends Fragment implements LettersListContract
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
+
+        presenter = new LettersListPresenter(LetterInjection.provideLettersRepository(context), this);
     }
 
     @Override
@@ -54,22 +60,34 @@ public class LettersListFragment extends Fragment implements LettersListContract
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_letters_list, container, false);
 
-        mRecyclerView = view.findViewById(R.id.recyclerView);
+        //region UI elements
+        RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
+        // specify an adapter
         mAdapter = new MyLetterAdapter(context.getResources().getIntArray(R.array.listColors));
         mRecyclerView.setAdapter(mAdapter);
 
+        presenter.loadLetter();
+
         return view;
     }
+    //endregion
+
+    //region implementation LettersListContract.View
+
+    @Override
+    public void setLetters(List<Letter> cachedLetters) {
+        mAdapter.updateItems(cachedLetters);
+    }
+
     //endregion
 
 }

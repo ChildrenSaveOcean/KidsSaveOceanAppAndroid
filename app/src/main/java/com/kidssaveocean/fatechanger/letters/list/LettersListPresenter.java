@@ -10,4 +10,9 @@ public class LettersListPresenter implements LettersListContract.Presenter {
         this.repository = repository;
         this.view = view;
     }
+
+    @Override
+    public void loadLetter() {
+        view.setLetters(repository.getCachedLetters());
+    }
 }
