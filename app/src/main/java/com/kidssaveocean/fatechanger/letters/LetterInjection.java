@@ -20,7 +20,7 @@ public class LetterInjection {
 
     public static LettersRepository provideLettersRepository(@NonNull Context context) {
         LetterRoomDatabase database = LetterRoomDatabase.getDatabase(context);
-        return LettersRepository.getInstance(FakeLettersRemoteDataSource.getInstance(),
+        return LettersRepository.getInstance(FakeLettersRemoteDataSource.getInstance(), // todo: fake remote
                 LettersLocalDataSource.getInstance(database.letterDao()));
     }
 

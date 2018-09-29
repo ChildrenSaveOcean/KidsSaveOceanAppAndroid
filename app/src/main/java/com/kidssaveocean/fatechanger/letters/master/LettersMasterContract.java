@@ -6,6 +6,7 @@ import com.kidssaveocean.fatechanger.letters.data.Letter;
 import java.util.List;
 
 public class LettersMasterContract {
+
     public interface View {
 
         void setPresenter(LettersMasterPresenter lettersMasterPresenter);
@@ -26,7 +27,7 @@ public class LettersMasterContract {
     }
 
     interface Presenter extends BasePresenter {
-
         void loadLetters(boolean forceUpdate);
     }
+
 }

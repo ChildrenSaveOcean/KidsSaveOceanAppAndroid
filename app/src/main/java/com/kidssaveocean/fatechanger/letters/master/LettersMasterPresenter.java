@@ -28,6 +28,7 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
     @NonNull
     private CompositeDisposable mCompositeDisposable;
 
+    //region constructor
     public LettersMasterPresenter(LettersRepository repository, LettersMasterContract.View view
             , BaseSchedulerProvider schedulerProvider) {
         mRepository = checkNotNull(repository, "lettersRepository cannot be null");
@@ -36,6 +37,7 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
         mCompositeDisposable = new CompositeDisposable();
         this.mView.setPresenter(this);
     }
+    //endregion
 
     // region implementation LettersMasterContract.Presenter
 
@@ -58,6 +60,8 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
     }
 
     // endregion
+
+    //region private methods
 
     /**
      * @param forceUpdate   Pass in true to refresh the data in the {@link LettersRepository}
@@ -117,5 +121,6 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
         }
         return i;
     }
+    //endregion
 
 }

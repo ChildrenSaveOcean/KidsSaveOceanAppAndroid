@@ -17,7 +17,10 @@ import com.kidssaveocean.fatechanger.letters.data.Letter;
 
 import java.util.List;
 
-
+/**
+ * Fragment containing the number of letters received and countries where are from.
+ * It also contains a Tab Bar to switch between a Map or a List of Top 10 countries
+ */
 public class LettersMasterFragment extends Fragment implements LettersMasterContract.View {
 
     private LettersMasterContract.Presenter mPresenter;
@@ -90,21 +93,23 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
 
     @Override
     public void setLoadingIndicator(boolean active) {
-        progressBar.setVisibility(active? View.VISIBLE : View.GONE);
+        progressBar.setVisibility(active ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void showLetters(List<Letter> letters) {
-
+        // Todo: send data to Map and Top 10
     }
 
     @Override
     public void noLetters() {
+        // Todo: show info
         Toast.makeText(getContext(), "noLetters", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showLoadingLettersError() {
+        // Todo: show error
         Toast.makeText(getContext(), "showLoadingLettersError", Toast.LENGTH_SHORT).show();
     }
 
@@ -112,6 +117,7 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
     public void updateLettersText(String s) {
         lettersTextView.setText(s);
     }
+
 
     @Override
     public void updateCountriesText(String s) {
