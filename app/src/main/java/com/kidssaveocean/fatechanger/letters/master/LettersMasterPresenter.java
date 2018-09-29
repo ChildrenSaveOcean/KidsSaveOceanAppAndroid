@@ -93,7 +93,7 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
             // Show a message indicating there are no letters for that filter type.
             mView.noLetters();
         } else {
-            int i = letters.stream().mapToInt(Letter::getLetters).sum();
+            int i = getNLetters(letters);
             nLetters = String.valueOf(i);
             nCountries = String.valueOf(letters.size());
             // Show the list of letters
@@ -102,6 +102,14 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
 
         mView.updateCountriesText(nCountries);
         mView.updateLettersText(nLetters);
+    }
+
+    private int getNLetters(List<Letter> letters) {
+        int i = 0;
+        for (Letter letter: letters) {
+            i += letter.getLetters();
+        }
+        return i;
     }
 
 }

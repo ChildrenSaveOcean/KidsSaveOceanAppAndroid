@@ -122,7 +122,10 @@ public class LettersRepository implements Repository<Letter> {
      */
     @Override
     public Flowable<List<Letter>> query(Specification specification) {
+        return mLettersRemoteDataSource.query(specification);
+
         // Todo
+        /*
         // Respond immediately with cache if available and not dirty
         if (mCachedLetters != null && !mCacheIsDirty) {
             return Flowable.fromIterable(mCachedLetters.values()).toList().toFlowable();
@@ -142,6 +145,7 @@ public class LettersRepository implements Repository<Letter> {
                     .firstOrError()
                     .toFlowable();
         }
+        */
     }
 
 
