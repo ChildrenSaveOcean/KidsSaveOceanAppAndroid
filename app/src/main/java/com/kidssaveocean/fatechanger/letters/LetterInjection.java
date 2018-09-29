@@ -16,7 +16,7 @@ import com.kidssaveocean.fatechanger.letters.data.source.LettersRepository;
  * {@link Repository} at compile time. This is useful for testing, since it allows us to use
  * a fake instance of the class to isolate the dependencies and run a test hermetically.
  */
-public class Injection {
+public class LetterInjection {
 
     public static LettersRepository provideLettersRepository(@NonNull Context context) {
         LetterRoomDatabase database = LetterRoomDatabase.getDatabase(context);
