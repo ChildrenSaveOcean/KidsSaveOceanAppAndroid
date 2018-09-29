@@ -3,10 +3,9 @@ package com.kidssaveocean.fatechanger.letters.data.source;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.util.Log;
 
-import com.kidssaveocean.fatechanger.letters.data.Letter;
 import com.kidssaveocean.fatechanger.Repository;
+import com.kidssaveocean.fatechanger.letters.data.Letter;
 
 import java.util.List;
 
@@ -27,14 +26,15 @@ public class LettersRepository implements Repository<Letter> {
     @NonNull
     private final Repository<Letter> mLettersLocalDataSource;
 
-
     /**
      * Marks the cache as invalid, to force an update the next time data is requested. This variable
      * has package local visibility so it can be accessed from tests.
      */
     @VisibleForTesting
+    private
     boolean mCacheIsDirty = false;
 
+    //region Singleton implementation
     // Prevent direct instantiation.
     private LettersRepository(@NonNull Repository<Letter> lettersRemoteDataSource,
                               @NonNull Repository<Letter> lettersLocalDataSource) {
@@ -64,29 +64,7 @@ public class LettersRepository implements Repository<Letter> {
     public static void destroyInstance() {
         INSTANCE = null;
     }
-
-    /**
-     * @return list of letters from local
-     */
-    private Flowable<List<Letter>> getLocalLetters() {
-        Flowable<List<Letter>> result = mLettersLocalDataSource.getAll();
-        return result;
-    }
-
-    /**
-     * Get remote Letters and save them in Local
-     *
-     * @return list of letters
-     */
-    private Flowable<List<Letter>> getAndSaveRemoteLetters() {
-        return mLettersRemoteDataSource
-                .getAll()
-                .flatMap(letters -> {
-                    mLettersLocalDataSource.removeAll();
-                    return Flowable.fromIterable(letters).doOnNext(mLettersLocalDataSource::add).toList().toFlowable();
-                })
-                .doOnComplete(() -> mCacheIsDirty = false);
-    }
+    //endregion
 
     //region implementation Repository
 
@@ -110,17 +88,16 @@ public class LettersRepository implements Repository<Letter> {
     }
 
     /**
-     * Gets letters from cache, local data source (SQLite) or remote data source, whichever is
+     * Gets letters from local data source (Room) or remote data source, whichever is
      * available first.
      */
     @Override
     public Flowable<List<Letter>> getAll() {
         // Respond immediately with cache if available and not dirty
         if (!mCacheIsDirty) {
-            Log.d(TAG, "getAll: local data");
+            // Todo: should return whichever is available first.
             return getLocalLetters();
         } else {
-            Log.d(TAG, "getAll: remote data");
             return getAndSaveRemoteLetters();
         }
     }
@@ -136,5 +113,30 @@ public class LettersRepository implements Repository<Letter> {
     public void refresh() {
         mCacheIsDirty = true;
     }
+
+    //region private methods
+
+    /**
+     * @return list of letters from local
+     */
+    private Flowable<List<Letter>> getLocalLetters() {
+        return mLettersLocalDataSource.getAll();
+    }
+
+    /**
+     * Get remote Letters and save them in Local
+     *
+     * @return list of letters
+     */
+    private Flowable<List<Letter>> getAndSaveRemoteLetters() {
+        return mLettersRemoteDataSource
+                .getAll()
+                .flatMap(letters -> {
+                    mLettersLocalDataSource.removeAll();
+                    return Flowable.fromIterable(letters).doOnNext(mLettersLocalDataSource::add).toList().toFlowable();
+                })
+                .doOnComplete(() -> mCacheIsDirty = false);
+    }
+    //endregion
 
 }

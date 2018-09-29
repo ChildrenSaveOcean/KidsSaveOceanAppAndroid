@@ -8,7 +8,6 @@ import com.kidssaveocean.fatechanger.letters.data.Letter;
 import com.kidssaveocean.fatechanger.letters.data.source.LettersRepository;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;

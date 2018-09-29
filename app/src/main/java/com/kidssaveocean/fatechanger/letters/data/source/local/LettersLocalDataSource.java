@@ -2,8 +2,8 @@ package com.kidssaveocean.fatechanger.letters.data.source.local;
 
 import android.util.Log;
 
-import com.kidssaveocean.fatechanger.letters.data.Letter;
 import com.kidssaveocean.fatechanger.Repository;
+import com.kidssaveocean.fatechanger.letters.data.Letter;
 
 import java.util.List;
 
