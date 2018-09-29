@@ -90,8 +90,12 @@ public class LettersMasterPresenterTest {
         // When tasks are loaded
         mLettersPresenter.loadLetters(Mockito.anyBoolean());
 
+        // Then progress indicator is hidden and all letters are shown in UI
+        verify(mLettersView).setLoadingIndicator(false);
         // Then an error message is shown
         verify(mLettersView).showLoadingLettersError();
+
+
     }
 
 }

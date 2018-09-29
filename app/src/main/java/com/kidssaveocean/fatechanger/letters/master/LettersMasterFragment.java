@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +25,10 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
     //region UI elements
     private TextView lettersTextView;
     private TextView countriesTextView;
+    private ProgressBar progressBar;
     //endregion
 
+    //region new instance
     public LettersMasterFragment() {
         // Required empty public constructor
     }
@@ -37,15 +40,9 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
         fragment.setArguments(args);
         return fragment;
     }
+    //endregion
 
     //region lifecycle
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -62,6 +59,7 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
         TabLayout tabLayout = view.findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
 
+        progressBar = view.findViewById(R.id.progressBar);
         return view;
     }
 
@@ -92,7 +90,7 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
 
     @Override
     public void setLoadingIndicator(boolean active) {
-
+        progressBar.setVisibility(active? View.VISIBLE : View.GONE);
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.kidssaveocean.fatechanger.letters.data.Letter;
 import com.kidssaveocean.fatechanger.letters.data.source.LettersRepository;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -77,13 +78,11 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
                 .observeOn(mSchedulerProvider.ui())
                 .subscribe(
                         //onNext
-                        letters -> {
-                            Log.d(TAG, "loadLetters: reveived");
-                            processLetters(letters);
-                        },
+                        this::processLetters,
                         //onError
                         throwable -> {
                             Log.e(TAG, "error: " + throwable.getMessage());
+                            mView.setLoadingIndicator(false);
                             mView.showLoadingLettersError();
                         },
                         //onCompletion
