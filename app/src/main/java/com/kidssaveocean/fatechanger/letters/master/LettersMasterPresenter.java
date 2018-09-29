@@ -4,10 +4,12 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.kidssaveocean.fatechanger.BaseSchedulerProvider;
+import com.kidssaveocean.fatechanger.BuildConfig;
 import com.kidssaveocean.fatechanger.letters.data.Letter;
 import com.kidssaveocean.fatechanger.letters.data.source.LettersRepository;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -75,8 +77,13 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
             mRepository.refresh();
         }
 
+        int seconds = 0;
+        if(BuildConfig.DEBUG)
+            seconds = 3;
+
         mCompositeDisposable.clear();
         Disposable disposable = mRepository.getAll()
+                .delay(seconds,TimeUnit.SECONDS)
                 .subscribeOn(mSchedulerProvider.io())
                 .observeOn(mSchedulerProvider.ui())
                 .subscribe(
@@ -111,6 +118,7 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
 
         mView.updateCountriesText(nCountries);
         mView.updateLettersText(nLetters);
+        mView.setUpPagerAdapter();
     }
 
     private int getNLetters(List<Letter> letters) {

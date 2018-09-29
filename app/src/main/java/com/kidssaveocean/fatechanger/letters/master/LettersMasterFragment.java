@@ -29,6 +29,9 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
     private TextView lettersTextView;
     private TextView countriesTextView;
     private ProgressBar progressBar;
+
+    private ViewPager viewPager;
+    private LettersPagerAdapter myPagerAdapter;
     //endregion
 
     //region new instance
@@ -56,8 +59,10 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
         lettersTextView = view.findViewById(R.id.n_letters);
         countriesTextView = view.findViewById(R.id.n_countries);
 
-        ViewPager viewPager = view.findViewById(R.id.pager);
-        LettersPagerAdapter myPagerAdapter = new LettersPagerAdapter(getChildFragmentManager());
+
+        viewPager = view.findViewById(R.id.pager);
+
+        myPagerAdapter = new LettersPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(myPagerAdapter);
         TabLayout tabLayout = view.findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
@@ -122,6 +127,11 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
     @Override
     public void updateCountriesText(String s) {
         countriesTextView.setText(s);
+    }
+
+    @Override
+    public void setUpPagerAdapter() {
+        myPagerAdapter.ready();
     }
 
     //endregion

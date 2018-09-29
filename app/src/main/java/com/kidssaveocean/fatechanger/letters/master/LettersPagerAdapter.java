@@ -1,16 +1,29 @@
 package com.kidssaveocean.fatechanger.letters.master;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.util.SparseArray;
 
 import com.kidssaveocean.fatechanger.letters.list.LettersListFragment;
 import com.kidssaveocean.fatechanger.letters.map.MapFragment;
 
-public class LettersPagerAdapter extends FragmentPagerAdapter {
+/**
+ * Difference between FragmentPagerAdapter & FragmentStatePagerAdapter
+ * Source: https://medium.com/inloopx/adventures-with-fragmentstatepageradapter-4f56a643f8e0
+ */
+public class LettersPagerAdapter extends FragmentStatePagerAdapter {
 
-    public LettersPagerAdapter(FragmentManager fm) {
+    /**
+     * say if it's ready for instantiate the Fragments
+     */
+    private boolean isReady = false;
+
+    LettersPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -18,6 +31,9 @@ public class LettersPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        if(!isReady) {
+            return new Fragment();
+        }
         switch (position) {
             case 0:
                 return MapFragment.newInstance();
@@ -46,5 +62,18 @@ public class LettersPagerAdapter extends FragmentPagerAdapter {
         }
     }
 
+    @Override
+    public int getItemPosition(@NonNull Object object){
+        return PagerAdapter.POSITION_NONE;
+    }
     //endregion
+
+    /**
+     * set isReady to true and refresh the view
+     */
+    void ready() {
+        isReady = true;
+        notifyDataSetChanged();
+    }
+
 }

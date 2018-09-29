@@ -24,6 +24,8 @@ public class LettersMasterContract {
         void updateLettersText(String s);
 
         void updateCountriesText(String s);
+
+        void setUpPagerAdapter();
     }
 
     interface Presenter extends BasePresenter {
