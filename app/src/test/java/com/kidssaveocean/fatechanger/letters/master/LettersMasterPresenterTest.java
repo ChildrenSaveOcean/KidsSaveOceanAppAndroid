@@ -78,6 +78,7 @@ public class LettersMasterPresenterTest {
         // Then progress indicator is shown
         verify(mLettersView).setLoadingIndicator(true);
 
+
         verify(mLettersView).updateLettersText(Mockito.anyString());
         verify(mLettersView).updateCountriesText(Mockito.anyString());
 

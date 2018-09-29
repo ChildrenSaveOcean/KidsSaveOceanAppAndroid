@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.kidssaveocean.fatechanger.R;
 import com.kidssaveocean.fatechanger.letters.Letter;
@@ -18,6 +19,11 @@ import java.util.List;
 public class LettersMasterFragment extends Fragment implements LettersMasterContract.View {
 
     private LettersMasterContract.Presenter mPresenter;
+
+    //region UI elements
+    private TextView lettersTextView;
+    private TextView countriesTextView;
+    //endregion
 
     public LettersMasterFragment() {
         // Required empty public constructor
@@ -45,6 +51,11 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_letters_master, container, false);
+
+
+
+        lettersTextView = view.findViewById(R.id.n_letters);
+        countriesTextView = view.findViewById(R.id.n_countries);
 
         ViewPager viewPager = view.findViewById(R.id.pager);
         LettersPagerAdapter myPagerAdapter = new LettersPagerAdapter(getChildFragmentManager());
@@ -102,12 +113,12 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
 
     @Override
     public void updateLettersText(String s) {
-
+        lettersTextView.setText(s);
     }
 
     @Override
     public void updateCountriesText(String s) {
-
+        countriesTextView.setText(s);
     }
 
     //endregion

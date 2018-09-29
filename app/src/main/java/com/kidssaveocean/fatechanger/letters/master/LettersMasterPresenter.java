@@ -37,7 +37,7 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
 
     @Override
     public void subscribe() {
-
+        loadLetters(true);
     }
 
     @Override
@@ -93,8 +93,9 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
             // Show a message indicating there are no letters for that filter type.
             mView.noLetters();
         } else {
-            nLetters = "3422"; // Todo hardcoded
-            nCountries = "13"; // todo hardcoded
+            int i = letters.stream().mapToInt(Letter::getLetters).sum();
+            nLetters = String.valueOf(i);
+            nCountries = String.valueOf(letters.size());
             // Show the list of letters
             mView.showLetters(letters);
         }
