@@ -87,13 +87,20 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
     }
 
     private void processLetters(@NonNull List<Letter> letters) {
+        String nLetters = "0";
+        String nCountries = "0";
         if (letters.isEmpty()) {
             // Show a message indicating there are no letters for that filter type.
             mView.noLetters();
         } else {
+            nLetters = "3422"; // Todo hardcoded
+            nCountries = "13"; // todo hardcoded
             // Show the list of letters
             mView.showLetters(letters);
         }
+
+        mView.updateCountriesText(nCountries);
+        mView.updateLettersText(nLetters);
     }
 
 }

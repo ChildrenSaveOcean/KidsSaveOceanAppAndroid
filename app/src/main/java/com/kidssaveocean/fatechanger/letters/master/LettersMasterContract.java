@@ -19,6 +19,10 @@ public class LettersMasterContract {
         void noLetters();
 
         void showLoadingLettersError();
+
+        void updateLettersText(String s);
+
+        void updateCountriesText(String s);
     }
 
     interface Presenter extends BasePresenter {

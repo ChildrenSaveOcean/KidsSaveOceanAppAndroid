@@ -75,6 +75,10 @@ public class LettersMasterPresenterTest {
 
         // Then progress indicator is shown
         verify(mLettersView).setLoadingIndicator(true);
+
+        verify(mLettersView).updateLettersText("");
+        verify(mLettersView).updateCountriesText("");
+
         // Then progress indicator is hidden and all letters are shown in UI
         verify(mLettersView).setLoadingIndicator(false);
     }

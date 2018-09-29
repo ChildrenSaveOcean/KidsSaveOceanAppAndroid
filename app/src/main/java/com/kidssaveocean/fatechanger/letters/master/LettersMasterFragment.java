@@ -99,6 +99,17 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
     public void showLoadingLettersError() {
 
     }
+
+    @Override
+    public void updateLettersText(String s) {
+
+    }
+
+    @Override
+    public void updateCountriesText(String s) {
+
+    }
+
     //endregion
 
 }
