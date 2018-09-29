@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kidssaveocean.fatechanger.R;
-import com.kidssaveocean.fatechanger.letters.Letter;
+import com.kidssaveocean.fatechanger.letters.data.Letter;
 
 import java.util.List;
 

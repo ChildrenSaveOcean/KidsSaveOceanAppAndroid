@@ -1,7 +1,7 @@
 package com.kidssaveocean.fatechanger.letters.master;
 
-import com.kidssaveocean.fatechanger.letters.BasePresenter;
-import com.kidssaveocean.fatechanger.letters.Letter;
+import com.kidssaveocean.fatechanger.BasePresenter;
+import com.kidssaveocean.fatechanger.letters.data.Letter;
 
 import java.util.List;
 

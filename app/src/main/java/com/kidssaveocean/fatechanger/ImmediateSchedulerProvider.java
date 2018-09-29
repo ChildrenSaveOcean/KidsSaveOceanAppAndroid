@@ -1,6 +1,8 @@
-package com.kidssaveocean.fatechanger.letters;
+package com.kidssaveocean.fatechanger;
 
 import android.support.annotation.NonNull;
+
+import com.kidssaveocean.fatechanger.BaseSchedulerProvider;
 
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;

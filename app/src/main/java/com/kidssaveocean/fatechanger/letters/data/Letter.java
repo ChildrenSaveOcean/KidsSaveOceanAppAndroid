@@ -1,4 +1,4 @@
-package com.kidssaveocean.fatechanger.letters;
+package com.kidssaveocean.fatechanger.letters.data;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

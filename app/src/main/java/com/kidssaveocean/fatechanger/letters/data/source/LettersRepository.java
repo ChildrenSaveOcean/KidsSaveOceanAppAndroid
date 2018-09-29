@@ -1,12 +1,12 @@
-package com.kidssaveocean.fatechanger.letters.repository;
+package com.kidssaveocean.fatechanger.letters.data.source;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
-import com.kidssaveocean.fatechanger.letters.Letter;
-import com.kidssaveocean.fatechanger.letters.Repository;
+import com.kidssaveocean.fatechanger.letters.data.Letter;
+import com.kidssaveocean.fatechanger.Repository;
 
 import java.util.List;
 

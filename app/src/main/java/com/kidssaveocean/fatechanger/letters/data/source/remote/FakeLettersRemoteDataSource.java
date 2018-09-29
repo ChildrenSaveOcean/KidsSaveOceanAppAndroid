@@ -1,7 +1,7 @@
-package com.kidssaveocean.fatechanger.letters.repository;
+package com.kidssaveocean.fatechanger.letters.data.source.remote;
 
-import com.kidssaveocean.fatechanger.letters.Letter;
-import com.kidssaveocean.fatechanger.letters.Repository;
+import com.kidssaveocean.fatechanger.letters.data.Letter;
+import com.kidssaveocean.fatechanger.Repository;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;

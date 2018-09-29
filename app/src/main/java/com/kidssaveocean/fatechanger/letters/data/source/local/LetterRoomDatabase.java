@@ -1,9 +1,11 @@
-package com.kidssaveocean.fatechanger.letters;
+package com.kidssaveocean.fatechanger.letters.data.source.local;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+
+import com.kidssaveocean.fatechanger.letters.data.Letter;
 
 @Database(entities = {Letter.class}, version = 1)
 public abstract class LetterRoomDatabase extends RoomDatabase {

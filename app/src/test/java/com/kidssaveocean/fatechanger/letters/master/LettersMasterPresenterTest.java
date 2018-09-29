@@ -1,10 +1,10 @@
 package com.kidssaveocean.fatechanger.letters.master;
 
 import com.google.common.collect.Lists;
-import com.kidssaveocean.fatechanger.letters.BaseSchedulerProvider;
-import com.kidssaveocean.fatechanger.letters.ImmediateSchedulerProvider;
-import com.kidssaveocean.fatechanger.letters.Letter;
-import com.kidssaveocean.fatechanger.letters.repository.LettersRepository;
+import com.kidssaveocean.fatechanger.BaseSchedulerProvider;
+import com.kidssaveocean.fatechanger.ImmediateSchedulerProvider;
+import com.kidssaveocean.fatechanger.letters.data.Letter;
+import com.kidssaveocean.fatechanger.letters.data.source.LettersRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,6 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

@@ -3,9 +3,9 @@ package com.kidssaveocean.fatechanger.letters.master;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.kidssaveocean.fatechanger.letters.BaseSchedulerProvider;
-import com.kidssaveocean.fatechanger.letters.Letter;
-import com.kidssaveocean.fatechanger.letters.repository.LettersRepository;
+import com.kidssaveocean.fatechanger.BaseSchedulerProvider;
+import com.kidssaveocean.fatechanger.letters.data.Letter;
+import com.kidssaveocean.fatechanger.letters.data.source.LettersRepository;
 
 import java.util.List;
 

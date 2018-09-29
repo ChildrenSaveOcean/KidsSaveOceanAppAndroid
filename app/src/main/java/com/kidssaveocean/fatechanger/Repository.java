@@ -1,4 +1,4 @@
-package com.kidssaveocean.fatechanger.letters;
+package com.kidssaveocean.fatechanger;
 
 import java.util.List;
 
@@ -10,8 +10,6 @@ public interface Repository<T> {
     void update(T item);
 
     void remove(T item);
-
-//    void remove(Specification specification);
 
     Flowable<List<T>> getAll();
 

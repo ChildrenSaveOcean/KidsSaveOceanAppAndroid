@@ -3,9 +3,13 @@ package com.kidssaveocean.fatechanger.letters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.kidssaveocean.fatechanger.letters.repository.FakeLettersRemoteDataSource;
-import com.kidssaveocean.fatechanger.letters.repository.LettersLocalDataSource;
-import com.kidssaveocean.fatechanger.letters.repository.LettersRepository;
+import com.kidssaveocean.fatechanger.BaseSchedulerProvider;
+import com.kidssaveocean.fatechanger.SchedulerProvider;
+import com.kidssaveocean.fatechanger.letters.data.source.local.LetterRoomDatabase;
+import com.kidssaveocean.fatechanger.Repository;
+import com.kidssaveocean.fatechanger.letters.data.source.remote.FakeLettersRemoteDataSource;
+import com.kidssaveocean.fatechanger.letters.data.source.local.LettersLocalDataSource;
+import com.kidssaveocean.fatechanger.letters.data.source.LettersRepository;
 
 /**
  * Enables injection of mock implementations for
