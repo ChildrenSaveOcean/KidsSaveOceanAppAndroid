@@ -9,12 +9,14 @@ import com.kidssaveocean.fatechanger.letters.repository.LettersRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
 import io.reactivex.Flowable;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -76,8 +78,8 @@ public class LettersMasterPresenterTest {
         // Then progress indicator is shown
         verify(mLettersView).setLoadingIndicator(true);
 
-        verify(mLettersView).updateLettersText("");
-        verify(mLettersView).updateCountriesText("");
+        verify(mLettersView).updateLettersText(Mockito.anyString());
+        verify(mLettersView).updateCountriesText(Mockito.anyString());
 
         // Then progress indicator is hidden and all letters are shown in UI
         verify(mLettersView).setLoadingIndicator(false);
