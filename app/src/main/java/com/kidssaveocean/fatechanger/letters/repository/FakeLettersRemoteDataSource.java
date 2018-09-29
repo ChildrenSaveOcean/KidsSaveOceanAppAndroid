@@ -19,6 +19,36 @@ public class FakeLettersRemoteDataSource implements Repository<Letter> {
 
     // Prevent direct instantiation.
     private FakeLettersRemoteDataSource() {
+        Letter l1 = new Letter("1", "Findland", 1456);
+        LETTER_SERVICE_DATA.put(l1.getId(), l1);
+
+        Letter l2 = new Letter("12", "United States", 1451);
+        LETTER_SERVICE_DATA.put(l2.getId(), l2);
+
+        Letter l3 = new Letter("13", "Brazil", 933);
+        LETTER_SERVICE_DATA.put(l3.getId(), l3);
+
+        Letter l4 = new Letter("14", "Austria", 701);
+        LETTER_SERVICE_DATA.put(l4.getId(), l4);
+
+        Letter l5 = new Letter("15", "Germany", 645);
+        LETTER_SERVICE_DATA.put(l5.getId(), l5);
+
+        Letter l6 = new Letter("16", "Australia", 511);
+        LETTER_SERVICE_DATA.put(l6.getId(), l6);
+
+        Letter l7 = new Letter("17", "Poland", 492);
+        LETTER_SERVICE_DATA.put(l7.getId(), l7);
+
+        Letter l8 = new Letter("18", "Thailand", 439);
+        LETTER_SERVICE_DATA.put(l8.getId(), l8);
+
+        Letter l9 = new Letter("19", "Argentina", 387);
+        LETTER_SERVICE_DATA.put(l9.getId(), l9);
+
+        Letter l10 = new Letter("10", "Canada", 201);
+        LETTER_SERVICE_DATA.put(l10.getId(), l10);
+
     }
 
     public static FakeLettersRemoteDataSource getInstance() {
