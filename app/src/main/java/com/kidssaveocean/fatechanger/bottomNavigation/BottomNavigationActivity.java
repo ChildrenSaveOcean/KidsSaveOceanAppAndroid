@@ -9,7 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import com.kidssaveocean.fatechanger.R;
 import com.kidssaveocean.fatechanger.donation.DonationFragment;
 import com.kidssaveocean.fatechanger.home.HomeFragment;
+import com.kidssaveocean.fatechanger.letters.Injection;
+import com.kidssaveocean.fatechanger.letters.master.LettersMasterContract;
 import com.kidssaveocean.fatechanger.letters.master.LettersMasterFragment;
+import com.kidssaveocean.fatechanger.letters.master.LettersMasterPresenter;
 import com.kidssaveocean.fatechanger.news.NewsFragment;
 import com.kidssaveocean.fatechanger.resources.ResourcesFragment;
 
@@ -66,6 +69,10 @@ public class BottomNavigationActivity extends AppCompatActivity {
                 case R.id.action_map:
                     fragment = LettersMasterFragment.newInstance();
                     transaction.replace(R.id.fragment_container, fragment);
+
+                    new LettersMasterPresenter(Injection.provideLettersRepository(getApplication()),
+                            (LettersMasterContract.View) fragment,
+                            Injection.provideSchedulerProvider());
                     break;
 
                 default:

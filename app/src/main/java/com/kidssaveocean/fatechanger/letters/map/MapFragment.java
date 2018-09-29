@@ -2,6 +2,7 @@ package com.kidssaveocean.fatechanger.letters.map;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -38,13 +39,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         FragmentManager fragmentManager = getChildFragmentManager();
         SupportMapFragment fragment = (SupportMapFragment) fragmentManager.findFragmentById(R.id.map);
-        fragment.getMapAsync(this);
+        if (fragment != null)
+            fragment.getMapAsync(this);
         return view;
     }
 

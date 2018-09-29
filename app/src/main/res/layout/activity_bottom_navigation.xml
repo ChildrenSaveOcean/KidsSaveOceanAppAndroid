@@ -21,6 +21,7 @@
         app:itemIconTint="@drawable/bottom_navigation_selector"
         app:itemTextColor="@drawable/bottom_navigation_selector"
         app:menu="@menu/menu_bottom_navigation"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:labelVisibilityMode="labeled"/>
 
 </android.support.constraint.ConstraintLayout>

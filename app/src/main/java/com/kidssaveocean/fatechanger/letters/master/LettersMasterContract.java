@@ -1,11 +1,28 @@
 package com.kidssaveocean.fatechanger.letters.master;
 
-public class LettersMasterContract {
-    interface View {
+import com.kidssaveocean.fatechanger.letters.BasePresenter;
+import com.kidssaveocean.fatechanger.letters.Letter;
 
+import java.util.List;
+
+public class LettersMasterContract {
+    public interface View {
+
+        void setPresenter(LettersMasterPresenter lettersMasterPresenter);
+
+        boolean isActive();
+
+        void setLoadingIndicator(boolean active);
+
+        void showLetters(List<Letter> letters);
+
+        void noLetters();
+
+        void showLoadingLettersError();
     }
 
-    interface Presenter {
+    interface Presenter extends BasePresenter {
 
+        void loadLetters(boolean forceUpdate);
     }
 }

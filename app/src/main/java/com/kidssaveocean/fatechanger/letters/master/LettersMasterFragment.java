@@ -10,10 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kidssaveocean.fatechanger.R;
+import com.kidssaveocean.fatechanger.letters.Letter;
+
+import java.util.List;
 
 
 public class LettersMasterFragment extends Fragment implements LettersMasterContract.View {
 
+    private LettersMasterContract.Presenter mPresenter;
 
     public LettersMasterFragment() {
         // Required empty public constructor
@@ -50,10 +54,51 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
 
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.subscribe();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mPresenter.unsubscribe();
+    }
     //endregion
 
     //region implementation LettersMasterContract.View
 
+    @Override
+    public void setPresenter(LettersMasterPresenter lettersMasterPresenter) {
+        mPresenter = lettersMasterPresenter;
+    }
+
+    @Override
+    public boolean isActive() {
+        return isAdded();
+    }
+
+    @Override
+    public void setLoadingIndicator(boolean active) {
+
+    }
+
+    @Override
+    public void showLetters(List<Letter> letters) {
+
+    }
+
+    @Override
+    public void noLetters() {
+
+    }
+
+    @Override
+    public void showLoadingLettersError() {
+
+    }
     //endregion
 
 }
