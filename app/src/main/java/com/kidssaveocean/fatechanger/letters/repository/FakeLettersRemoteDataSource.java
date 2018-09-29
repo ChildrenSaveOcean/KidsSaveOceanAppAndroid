@@ -2,7 +2,6 @@ package com.kidssaveocean.fatechanger.letters.repository;
 
 import com.kidssaveocean.fatechanger.letters.Letter;
 import com.kidssaveocean.fatechanger.letters.Repository;
-import com.kidssaveocean.fatechanger.letters.Specification;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -76,9 +75,14 @@ public class FakeLettersRemoteDataSource implements Repository<Letter> {
     }
 
     @Override
-    public Flowable<List<Letter>> query(Specification specification) {
+    public Flowable<List<Letter>> getAll() {
         Collection<Letter> values = LETTER_SERVICE_DATA.values();
         return Flowable.fromIterable(values).toList().toFlowable();
+    }
+
+    @Override
+    public void removeAll() {
+        LETTER_SERVICE_DATA.clear();
     }
 
     //endregion

@@ -7,6 +7,8 @@ import android.content.Context;
 
 @Database(entities = {Letter.class}, version = 1)
 public abstract class LetterRoomDatabase extends RoomDatabase {
+
+
     public abstract LetterDao letterDao();
 
     private static volatile LetterRoomDatabase INSTANCE;
@@ -17,7 +19,7 @@ public abstract class LetterRoomDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     // Create database here
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            LetterRoomDatabase.class, "letters_table")
+                            LetterRoomDatabase.class, "letters_db")
                             .build();
                 }
             }

@@ -70,7 +70,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
                     fragment = LettersMasterFragment.newInstance();
                     transaction.replace(R.id.fragment_container, fragment);
 
-                    new LettersMasterPresenter(Injection.provideLettersRepository(getApplication()),
+                    new LettersMasterPresenter(Injection.provideLettersRepository(this),
                             (LettersMasterContract.View) fragment,
                             Injection.provideSchedulerProvider());
                     break;

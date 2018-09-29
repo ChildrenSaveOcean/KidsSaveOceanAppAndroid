@@ -4,7 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity(tableName = "letters_table")
+@Entity(tableName = "letters")
 public class Letter {
     @PrimaryKey
     @NonNull
@@ -14,45 +14,36 @@ public class Letter {
     @NonNull
     private int letters;
 
-    private double latitude;
-    private double longitude;
 
-    public Letter(String id, String country, int letters) {
+    public Letter(@NonNull String id, @NonNull String country, int letters) {
         this.id = id;
         this.country = country;
         this.letters = letters;
     }
 
-    public void setCoordinates(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
+    @NonNull
     public String getId() {
         return id;
     }
 
+    public void setId(@NonNull String id) {
+        this.id = id;
+    }
+
+    @NonNull
     public String getCountry() {
         return country;
+    }
+
+    public void setCountry(@NonNull String country) {
+        this.country = country;
     }
 
     public int getLetters() {
         return letters;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setLetters(int letters) {
+        this.letters = letters;
     }
 }

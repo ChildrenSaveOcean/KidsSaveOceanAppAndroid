@@ -1,6 +1,6 @@
 package com.kidssaveocean.fatechanger.letters;
 
-import android.app.Application;
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.kidssaveocean.fatechanger.letters.repository.FakeLettersRemoteDataSource;
@@ -14,9 +14,10 @@ import com.kidssaveocean.fatechanger.letters.repository.LettersRepository;
  */
 public class Injection {
 
-    public static LettersRepository provideLettersRepository(@NonNull Application application) {
+    public static LettersRepository provideLettersRepository(@NonNull Context context) {
+        LetterRoomDatabase database = LetterRoomDatabase.getDatabase(context);
         return LettersRepository.getInstance(FakeLettersRemoteDataSource.getInstance(),
-                LettersLocalDataSource.getInstance(application));
+                LettersLocalDataSource.getInstance(database.letterDao()));
     }
 
     public static BaseSchedulerProvider provideSchedulerProvider() {

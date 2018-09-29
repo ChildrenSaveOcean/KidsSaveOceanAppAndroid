@@ -1,39 +1,38 @@
 package com.kidssaveocean.fatechanger.letters.repository;
 
-import android.app.Application;
+import android.util.Log;
 
 import com.kidssaveocean.fatechanger.letters.Letter;
 import com.kidssaveocean.fatechanger.letters.LetterDao;
-import com.kidssaveocean.fatechanger.letters.LetterRoomDatabase;
 import com.kidssaveocean.fatechanger.letters.Repository;
-import com.kidssaveocean.fatechanger.letters.Specification;
 
 import java.util.List;
 
 import io.reactivex.Flowable;
 
 public class LettersLocalDataSource implements Repository<Letter> {
-    LetterDao letterDao;
+    private static final String TAG = "LettersLocalDataSource";
+    private LetterDao letterDao;
 
     //region singleton implementation
     private static LettersLocalDataSource INSTANCE;
 
-    public static LettersLocalDataSource getInstance(Application application) {
+    public static LettersLocalDataSource getInstance(LetterDao letterDao) {
         if (INSTANCE == null) {
-            INSTANCE = new LettersLocalDataSource(application);
+            INSTANCE = new LettersLocalDataSource(letterDao);
         }
         return INSTANCE;
     }
 
-    private LettersLocalDataSource(Application application) {
-        LetterRoomDatabase db = LetterRoomDatabase.getDatabase(application);
-        letterDao = db.letterDao();
+    private LettersLocalDataSource(LetterDao letterDao) {
+        this.letterDao = letterDao;
     }
     //endregion
 
     @Override
     public void add(Letter item) {
-        letterDao.insert(item);
+        Log.d(TAG, "add");
+        letterDao.insertLetter(item);
     }
 
     @Override
@@ -47,9 +46,15 @@ public class LettersLocalDataSource implements Repository<Letter> {
     }
 
     @Override
-    public Flowable<List<Letter>> query(Specification specification) {
-        //Todo
-        return letterDao.getAllLetters();
+    public Flowable<List<Letter>> getAll() {
+        Log.d(TAG, "getAll");
+        Flowable<List<Letter>> result =  letterDao.getAllLetters();
+        return result;
     }
 
+    @Override
+    public void removeAll() {
+        Log.d(TAG, "removeAll");
+        letterDao.deleteAllLetters();
+    }
 }

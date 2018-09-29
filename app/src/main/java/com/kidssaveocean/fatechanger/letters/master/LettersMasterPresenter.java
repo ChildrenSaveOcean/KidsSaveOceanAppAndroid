@@ -1,6 +1,7 @@
 package com.kidssaveocean.fatechanger.letters.master;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.kidssaveocean.fatechanger.letters.BaseSchedulerProvider;
 import com.kidssaveocean.fatechanger.letters.Letter;
@@ -8,13 +9,15 @@ import com.kidssaveocean.fatechanger.letters.repository.LettersRepository;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class LettersMasterPresenter implements LettersMasterContract.Presenter {
+
+    private static final String TAG = "LettersMasterPresenter";
+
     private final LettersRepository mRepository;
     private final LettersMasterContract.View mView;
     private final BaseSchedulerProvider mSchedulerProvider;
@@ -37,11 +40,12 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
 
     @Override
     public void subscribe() {
-        loadLetters(true);
+        loadLetters(false);
     }
 
     @Override
     public void unsubscribe() {
+        Log.d(TAG, "unsubscribe: ");
         mCompositeDisposable.clear();
     }
 
@@ -50,7 +54,6 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
         // Simplification for sample: a network reload will be forced on first load.
         loadLetters(forceUpdate || mFirstLoad, true);
         mFirstLoad = false;
-
     }
 
     // endregion
@@ -64,24 +67,28 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
             mView.setLoadingIndicator(true);
         }
         if (forceUpdate) {
+            Log.d(TAG, "loadLetters: forceUpload");
             mRepository.refresh();
         }
 
         mCompositeDisposable.clear();
-        Disposable disposable = mRepository
-                .query(null) // Todo:
-                .flatMap(Flowable::fromIterable)
-                .toList()
+        Disposable disposable = mRepository.getAll()
                 .subscribeOn(mSchedulerProvider.io())
                 .observeOn(mSchedulerProvider.ui())
                 .subscribe(
-                        // onNext
+                        //onNext
                         letters -> {
+                            Log.d(TAG, "loadLetters: reveived");
                             processLetters(letters);
-                            mView.setLoadingIndicator(false);
                         },
-                        // onError
-                        throwable -> mView.showLoadingLettersError());
+                        //onError
+                        throwable -> {
+                            Log.e(TAG, "error: " + throwable.getMessage());
+                            mView.showLoadingLettersError();
+                        },
+                        //onCompletion
+                        () -> mView.setLoadingIndicator(false));
+
 
         mCompositeDisposable.add(disposable);
     }
@@ -106,7 +113,7 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
 
     private int getNLetters(List<Letter> letters) {
         int i = 0;
-        for (Letter letter: letters) {
+        for (Letter letter : letters) {
             i += letter.getLetters();
         }
         return i;

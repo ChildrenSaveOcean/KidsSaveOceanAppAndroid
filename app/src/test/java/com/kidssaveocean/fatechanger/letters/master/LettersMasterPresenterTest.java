@@ -68,12 +68,9 @@ public class LettersMasterPresenterTest {
     @Test
     public void loadAllLettersFromRepositoryAndLoadIntoView() {
         // Given an initialized LettersPresenter with initialized letters
-        when(mLettersRepository.query(null /* todo: All letters*/)).thenReturn(Flowable.just(LETTERS));
+        when(mLettersRepository.getAll()).thenReturn(Flowable.just(LETTERS));
 
-        // When loading of Letters is requested
-        //mLettersPresenter.setFiltering(LettersFilterType.ALL_TASKS);
-
-        mLettersPresenter.loadLetters(true);
+        mLettersPresenter.loadLetters(Mockito.anyBoolean());
 
         // Then progress indicator is shown
         verify(mLettersView).setLoadingIndicator(true);
@@ -89,10 +86,10 @@ public class LettersMasterPresenterTest {
     @Test
     public void errorLoadingTasks_ShowsError() {
         // Given that no tasks are available in the repository
-        when(mLettersRepository.query(null /*todo*/)).thenReturn(Flowable.error(new Exception()));
+        when(mLettersRepository.getAll()).thenReturn(Flowable.error(new Exception()));
 
         // When tasks are loaded
-        mLettersPresenter.loadLetters(true);
+        mLettersPresenter.loadLetters(Mockito.anyBoolean());
 
         // Then an error message is shown
         verify(mLettersView).showLoadingLettersError();

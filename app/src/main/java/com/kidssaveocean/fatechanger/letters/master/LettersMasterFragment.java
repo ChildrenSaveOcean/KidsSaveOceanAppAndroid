@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kidssaveocean.fatechanger.R;
 import com.kidssaveocean.fatechanger.letters.Letter;
@@ -52,8 +53,6 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_letters_master, container, false);
 
-
-
         lettersTextView = view.findViewById(R.id.n_letters);
         countriesTextView = view.findViewById(R.id.n_countries);
 
@@ -61,7 +60,7 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
         LettersPagerAdapter myPagerAdapter = new LettersPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(myPagerAdapter);
         TabLayout tabLayout = view.findViewById(R.id.tablayout);
-        tabLayout.setupWithViewPager(viewPager);//.setUpWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
 
         return view;
     }
@@ -103,12 +102,12 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
 
     @Override
     public void noLetters() {
-
+        Toast.makeText(getContext(), "noLetters", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showLoadingLettersError() {
-
+        Toast.makeText(getContext(), "showLoadingLettersError", Toast.LENGTH_SHORT).show();
     }
 
     @Override

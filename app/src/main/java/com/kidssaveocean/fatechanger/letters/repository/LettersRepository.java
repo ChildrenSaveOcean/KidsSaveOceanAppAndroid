@@ -3,14 +3,12 @@ package com.kidssaveocean.fatechanger.letters.repository;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.util.Log;
 
 import com.kidssaveocean.fatechanger.letters.Letter;
 import com.kidssaveocean.fatechanger.letters.Repository;
-import com.kidssaveocean.fatechanger.letters.Specification;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Flowable;
 
@@ -18,6 +16,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 
 public class LettersRepository implements Repository<Letter> {
+    private static final String TAG = "LettersRepository";
+
     @Nullable
     private static LettersRepository INSTANCE = null;
 
@@ -27,13 +27,6 @@ public class LettersRepository implements Repository<Letter> {
     @NonNull
     private final Repository<Letter> mLettersLocalDataSource;
 
-
-    /**
-     * This variable has package local visibility so it can be accessed from tests.
-     */
-    @VisibleForTesting
-    @Nullable
-    Map<String, Letter> mCachedLetters;
 
     /**
      * Marks the cache as invalid, to force an update the next time data is requested. This variable
@@ -72,22 +65,26 @@ public class LettersRepository implements Repository<Letter> {
         INSTANCE = null;
     }
 
-
-    private Flowable<List<Letter>> getAndCacheLocalLetters() {
-        return mLettersLocalDataSource.query(null) //Todo
-                .flatMap(letters -> Flowable.fromIterable(letters)
-                        .doOnNext(letter -> mCachedLetters.put(letter.getId(), letter))
-                        .toList()
-                        .toFlowable());
+    /**
+     * @return list of letters from local
+     */
+    private Flowable<List<Letter>> getLocalLetters() {
+        Flowable<List<Letter>> result = mLettersLocalDataSource.getAll();
+        return result;
     }
 
+    /**
+     * Get remote Letters and save them in Local
+     *
+     * @return list of letters
+     */
     private Flowable<List<Letter>> getAndSaveRemoteLetters() {
         return mLettersRemoteDataSource
-                .query(null)
-                .flatMap(letters -> Flowable.fromIterable(letters).doOnNext(letter -> {
-                    mLettersLocalDataSource.add(letter);
-                    mCachedLetters.put(letter.getId(), letter);
-                }).toList().toFlowable())
+                .getAll()
+                .flatMap(letters -> {
+                    mLettersLocalDataSource.removeAll();
+                    return Flowable.fromIterable(letters).doOnNext(mLettersLocalDataSource::add).toList().toFlowable();
+                })
                 .doOnComplete(() -> mCacheIsDirty = false);
     }
 
@@ -103,17 +100,13 @@ public class LettersRepository implements Repository<Letter> {
         checkNotNull(letter);
         mLettersRemoteDataSource.update(letter);
         mLettersLocalDataSource.update(letter);
-
-        // Do in memory cache update to keep the app UI up to date
-        if (mCachedLetters == null) {
-            mCachedLetters = new LinkedHashMap<>();
-        }
-        mCachedLetters.put(letter.getId(), letter);
     }
 
     @Override
-    public void remove(Letter item) {
-
+    public void remove(Letter letter) {
+        checkNotNull(letter);
+        mLettersRemoteDataSource.remove(letter);
+        mLettersLocalDataSource.remove(letter);
     }
 
     /**
@@ -121,39 +114,27 @@ public class LettersRepository implements Repository<Letter> {
      * available first.
      */
     @Override
-    public Flowable<List<Letter>> query(Specification specification) {
-        return mLettersRemoteDataSource.query(specification);
-
-        // Todo
-        /*
+    public Flowable<List<Letter>> getAll() {
         // Respond immediately with cache if available and not dirty
-        if (mCachedLetters != null && !mCacheIsDirty) {
-            return Flowable.fromIterable(mCachedLetters.values()).toList().toFlowable();
-        } else if (mCachedLetters == null) {
-            mCachedLetters = new LinkedHashMap<>();
-        }
-
-        Flowable<List<Letter>> remoteLetters = getAndSaveRemoteLetters();
-
-        if (mCacheIsDirty) {
-            return remoteLetters;
+        if (!mCacheIsDirty) {
+            Log.d(TAG, "getAll: local data");
+            return getLocalLetters();
         } else {
-            // Query the local storage if available. If not, query the network.
-            Flowable<List<Letter>> localLetters = getAndCacheLocalLetters();
-            return Flowable.concat(localLetters, remoteLetters)
-                    .filter(letters -> !letters.isEmpty())
-                    .firstOrError()
-                    .toFlowable();
+            Log.d(TAG, "getAll: remote data");
+            return getAndSaveRemoteLetters();
         }
-        */
     }
 
-
+    @Override
+    public void removeAll() {
+        mLettersLocalDataSource.removeAll();
+        mLettersRemoteDataSource.removeAll();
+    }
 
     //endregion
-
 
     public void refresh() {
         mCacheIsDirty = true;
     }
+
 }

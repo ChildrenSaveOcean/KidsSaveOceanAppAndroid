@@ -13,6 +13,8 @@ public interface Repository<T> {
 
 //    void remove(Specification specification);
 
-    Flowable<List<T>> query(Specification specification);
+    Flowable<List<T>> getAll();
+
+    void removeAll();
 
 }
