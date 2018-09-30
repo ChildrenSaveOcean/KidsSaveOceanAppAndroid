@@ -1,6 +1,7 @@
 package com.kidssaveocean.fatechanger.letters.map;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,9 +14,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.kidssaveocean.fatechanger.R;
+import com.kidssaveocean.fatechanger.letters.LetterInjection;
+import com.kidssaveocean.fatechanger.letters.data.Letter;
+import com.kidssaveocean.fatechanger.letters.list.LettersListPresenter;
+
+import java.util.List;
 
 
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback, MapContract.View {
+
+    MapContract.Presenter presenter;
 
     //region new instance
     public static MapFragment newInstance() {
@@ -34,6 +42,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     //region lifecycle
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        presenter = new MapPresenter(LetterInjection.provideLettersRepository(context), this);
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,6 +66,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     //region implementation OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        presenter.loadLetter();
+    }
+    //endregion
+
+    //region implementation MapContract.View
+
+    @Override
+    public void setLetters(List<Letter> cachedLetters) {
+        // Todo: draw markers
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
         /*
@@ -59,5 +84,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         */
     }
+
+    @Override
+    public boolean isActive() {
+        return isAdded();
+    }
+
     //endregion
 }
