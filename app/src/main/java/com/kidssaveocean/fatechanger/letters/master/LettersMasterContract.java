@@ -15,8 +15,6 @@ public class LettersMasterContract {
 
         void setLoadingIndicator(boolean active);
 
-        void showLetters(List<Letter> letters);
-
         void noLetters();
 
         void showLoadingLettersError();

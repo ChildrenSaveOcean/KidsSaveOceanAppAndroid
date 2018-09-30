@@ -102,11 +102,6 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
     }
 
     @Override
-    public void showLetters(List<Letter> letters) {
-        // Todo: send data to Map and Top 10
-    }
-
-    @Override
     public void noLetters() {
         // Todo: show info
         Toast.makeText(getContext(), "noLetters", Toast.LENGTH_SHORT).show();

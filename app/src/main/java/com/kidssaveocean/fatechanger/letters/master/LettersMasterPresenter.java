@@ -112,8 +112,6 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
             int i = getNLetters(letters);
             nLetters = String.valueOf(i);
             nCountries = String.valueOf(letters.size());
-            // Show the list of letters
-            mView.showLetters(letters);
         }
 
         mView.updateCountriesText(nCountries);
