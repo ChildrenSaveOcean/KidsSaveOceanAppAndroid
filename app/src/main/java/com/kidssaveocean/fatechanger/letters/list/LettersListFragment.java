@@ -88,6 +88,12 @@ public class LettersListFragment extends Fragment implements LettersListContract
         mAdapter.updateItems(cachedLetters);
     }
 
+    @Override
+    public boolean isActive() {
+        return isAdded();
+    }
+
+
     //endregion
 
 }
