@@ -62,7 +62,7 @@ public class LettersMasterFragment extends Fragment implements LettersMasterCont
 
         viewPager = view.findViewById(R.id.pager);
 
-        myPagerAdapter = new LettersPagerAdapter(getChildFragmentManager());
+        myPagerAdapter = new LettersPagerAdapter(getChildFragmentManager(), getContext());
         viewPager.setAdapter(myPagerAdapter);
         TabLayout tabLayout = view.findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);

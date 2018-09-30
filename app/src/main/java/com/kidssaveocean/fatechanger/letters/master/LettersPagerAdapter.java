@@ -1,5 +1,6 @@
 package com.kidssaveocean.fatechanger.letters.master;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.util.SparseArray;
 
+import com.kidssaveocean.fatechanger.R;
 import com.kidssaveocean.fatechanger.letters.list.LettersListFragment;
 import com.kidssaveocean.fatechanger.letters.map.MapFragment;
 
@@ -22,9 +24,12 @@ public class LettersPagerAdapter extends FragmentStatePagerAdapter {
      * say if it's ready for instantiate the Fragments
      */
     private boolean isReady = false;
+    
+    private Context context; 
 
-    LettersPagerAdapter(FragmentManager fm) {
+    LettersPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
+        this.context = context;
     }
 
     //region implementation FragmentPagerAdapter
@@ -54,9 +59,9 @@ public class LettersPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Map"; // Todo: hardcoded text
+                return context.getString(R.string.tab_bar_map);
             case 1:
-                return "List";
+                return context.getString(R.string.tab_bar_top_ten);
             default:
                 return null;
         }
