@@ -26,6 +26,7 @@ public class LettersMasterPresenter implements LettersMasterContract.Presenter {
 
     private boolean mFirstLoad = true;
 
+    // container of disposables,
     @NonNull
     private CompositeDisposable mCompositeDisposable;
 
