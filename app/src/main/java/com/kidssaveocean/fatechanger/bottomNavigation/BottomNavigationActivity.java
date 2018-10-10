@@ -1,20 +1,17 @@
 package com.kidssaveocean.fatechanger.bottomNavigation;
 
+import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.kidssaveocean.fatechanger.R;
 import com.kidssaveocean.fatechanger.donation.DonationFragment;
-import com.kidssaveocean.fatechanger.home.HomeCardFragment;
 import com.kidssaveocean.fatechanger.home.HomeFragment;
 import com.kidssaveocean.fatechanger.map.MapFragment;
 import com.kidssaveocean.fatechanger.news.NewsFragment;
 import com.kidssaveocean.fatechanger.resources.ResourcesFragment;
-import com.kidssaveocean.fatechanger.onboarding.userIdentification.UserIdentificationFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
