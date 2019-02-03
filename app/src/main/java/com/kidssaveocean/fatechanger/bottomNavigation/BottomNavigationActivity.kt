@@ -33,7 +33,6 @@ class BottomNavigationActivity : AppCompatActivity() {
 
         return BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
 
-            val transaction = supportFragmentManager.beginTransaction()
             val fragment: Fragment? = when (menuItem.itemId) {
                 R.id.action_home -> HomeFragment()
                 R.id.action_news -> NewsFragment()
@@ -44,7 +43,8 @@ class BottomNavigationActivity : AppCompatActivity() {
             }
 
             fragment?.run {
-                transaction.replace(R.id.fragment_container, fragment)
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_container, this)
                 transaction.commit()
                 true
             } ?: false
