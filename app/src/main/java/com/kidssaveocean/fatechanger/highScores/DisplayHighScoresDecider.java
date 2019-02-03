@@ -15,7 +15,7 @@ public class DisplayHighScoresDecider {
         // Checks to see where your country is in the rankings.
         int yourCountryIndex = -1;
         for (int i = 0; i < countries.size(); i++) {
-            if (countries.get(i).name.equalsIgnoreCase(yourCountryName)) {
+            if (countries.get(i).getName().equalsIgnoreCase(yourCountryName)) {
                 yourCountryIndex = i;
                 break;
             }
@@ -25,7 +25,7 @@ public class DisplayHighScoresDecider {
         // then show all of the countries in the top 10. (Not gurantee to have 10 countries present)
         if (yourCountryIndex == -1 || countries.size() <= 10) {
             for (int i = 0; i < countries.size(); i++) {
-                countries.get(i).rank = i + 1;
+                countries.get(i).setRank(i + 1);
             }
             return countries;
         }
@@ -34,7 +34,7 @@ public class DisplayHighScoresDecider {
         // and there are 11 or more countries (from previous check), show the top 10.
         else if (yourCountryIndex <= 6) {
             for (int i = 0; i < 10; i++) {
-                countries.get(i).rank = i + 1;
+                countries.get(i).setRank(i + 1);
             }
             return countries.subList(0, 10);
         }
@@ -45,12 +45,12 @@ public class DisplayHighScoresDecider {
             List<Country> solution = new ArrayList<>(10);
 
             for (int i = 0; i < 3; i++) {
-                countries.get(i).rank = i + 1;
+                countries.get(i).setRank(i + 1);
             }
             solution.addAll(countries.subList(0, 3));
 
             for (int i = countries.size() - 7; i < countries.size(); i++) {
-                countries.get(i).rank = i + 1;
+                countries.get(i).setRank(i + 1);
             }
             solution.addAll(countries.subList(countries.size() - 7, countries.size()));
 
@@ -63,12 +63,12 @@ public class DisplayHighScoresDecider {
             List<Country> solution = new ArrayList<>(10);
 
             for (int i = 0; i < 2; i++) {
-                countries.get(i).rank = i + 1;
+                countries.get(i).setRank(i + 1);
             }
             solution.addAll(countries.subList(0, 3));
 
             for (int i = yourCountryIndex - 3; i < yourCountryIndex + 4; i++) {
-                countries.get(i).rank = i + 1;
+                countries.get(i).setRank(i + 1);
             }
             solution.addAll(countries.subList(yourCountryIndex - 3, yourCountryIndex + 4));
             return solution;
@@ -78,14 +78,14 @@ public class DisplayHighScoresDecider {
     public static void logCountriesToBeDisplay (List<Country> countries, String yourCountryName) {
         List<Country> countriesToBeDisplayed = fetchCountriesToBeDisplay(countries, yourCountryName);
         for (Country country : countriesToBeDisplayed) {
-            Log.d(DisplayHighScoresDecider.class.getSimpleName(), country.rank + ". " + country.name + ": " + country.numOfLetters);
+            Log.d(DisplayHighScoresDecider.class.getSimpleName(), country.getRank() + ". " + country.getName() + ": " + country.getNumOfLetters());
         }
     }
 
     public static void logAllCounties (List<Country> countries) {
         Collections.sort(countries);
         for (int i = 0; i < countries.size(); i++) {
-            Log.d(DisplayHighScoresDecider.class.getSimpleName(), (i + 1) + ". " + countries.get(i).name + ": " + countries.get(i).numOfLetters);
+            Log.d(DisplayHighScoresDecider.class.getSimpleName(), (i + 1) + ". " + countries.get(i).getName() + ": " + countries.get(i).getNumOfLetters());
         }
     }
 }
