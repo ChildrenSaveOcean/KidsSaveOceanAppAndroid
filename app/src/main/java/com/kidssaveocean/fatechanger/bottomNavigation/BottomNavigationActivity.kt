@@ -34,39 +34,20 @@ class BottomNavigationActivity : AppCompatActivity() {
         return BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
 
             val transaction = supportFragmentManager.beginTransaction()
-            val fragment: Fragment
-
-            when (menuItem.itemId) {
-                R.id.action_home -> {
-                    fragment = HomeFragment()
-                    transaction.replace(R.id.fragment_container, fragment)
-                }
-
-                R.id.action_news -> {
-                    fragment = NewsFragment()
-                    transaction.replace(R.id.fragment_container, fragment)
-                }
-
-                R.id.action_donate -> {
-                    fragment = DonationFragment()
-                    transaction.replace(R.id.fragment_container, fragment)
-                }
-
-                R.id.action_resources -> {
-                    fragment = ResourcesFragment()
-                    transaction.replace(R.id.fragment_container, fragment)
-                }
-
-                R.id.action_map -> {
-                    fragment = MapFragment()
-                    transaction.replace(R.id.fragment_container, fragment)
-                }
+            val fragment: Fragment? = when (menuItem.itemId) {
+                R.id.action_home -> HomeFragment()
+                R.id.action_news -> NewsFragment()
+                R.id.action_donate -> DonationFragment()
+                R.id.action_resources -> ResourcesFragment()
+                R.id.action_map -> MapFragment()
+                else -> null
             }
 
-            transaction.commit()
-
-            true
+            fragment?.run {
+                transaction.replace(R.id.fragment_container, fragment)
+                transaction.commit()
+                true
+            } ?: false
         }
     }
-
 }
