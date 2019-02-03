@@ -10,10 +10,8 @@ public class CompletedOnboardingTask extends AsyncTask<Context, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Context... context) {
-        AppDatabase db = AppDatabase.getAppDatabase(context[0].getApplicationContext());
-        KeyValue onboarding = new KeyValue();
-        onboarding.setKey(KeyValue.ONBOARDING);
-        onboarding.setValue("COMPLETE");
+        AppDatabase db = AppDatabase.Companion.getAppDatabase(context[0].getApplicationContext());
+        KeyValue onboarding = new KeyValue(KeyValue.ONBOARDING, "COMPLETE");
         db.keyValueDao().insertKeyValue(onboarding);
         return true;
     }
