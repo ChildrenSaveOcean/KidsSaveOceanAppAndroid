@@ -82,7 +82,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/donate_now"
-                android:onClick="pressDonateButton"
                 android:textColor="@android:color/white"
                 android:background="@color/greenish_blue"/>
         </LinearLayout>
