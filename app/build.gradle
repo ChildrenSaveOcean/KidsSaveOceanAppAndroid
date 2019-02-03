@@ -62,8 +62,4 @@ dependencies {
 
     // Streams
     implementation 'com.annimon:stream:1.2.1'
-
-    // Android Debug Database
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
-
 }
