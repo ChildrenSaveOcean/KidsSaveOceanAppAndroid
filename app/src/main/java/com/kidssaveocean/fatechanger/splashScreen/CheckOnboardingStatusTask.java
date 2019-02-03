@@ -15,7 +15,7 @@ public class CheckOnboardingStatusTask extends AsyncTask<Activity, Void, Boolean
     protected Boolean doInBackground(Activity... activities) {
         Intent intent;
 
-        AppDatabase db = AppDatabase.getAppDatabase(activities[0]);
+        AppDatabase db = AppDatabase.Companion.getAppDatabase(activities[0]);
         KeyValue keyValue = db.keyValueDao().getKeyValue(KeyValue.ONBOARDING);
 
         if (keyValue != null) {
