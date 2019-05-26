@@ -21,7 +21,6 @@ class ResourcesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         val webView: WebView = view.findViewById(R.id.webview)
         webView.settings.javaScriptEnabled = true
         webView.loadUrl("https://www.kidssaveocean.com/fatechanger-resources")
