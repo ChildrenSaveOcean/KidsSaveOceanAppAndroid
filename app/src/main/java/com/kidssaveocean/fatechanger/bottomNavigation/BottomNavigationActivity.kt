@@ -1,5 +1,7 @@
 package com.kidssaveocean.fatechanger.bottomNavigation
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -36,7 +38,7 @@ class BottomNavigationActivity : AppCompatActivity() {
             val fragment: Fragment? = when (menuItem.itemId) {
                 R.id.action_home -> HomeFragment()
                 R.id.action_news -> NewsFragment()
-                R.id.action_donate -> DonationFragment()
+                R.id.action_dashboard -> ResourcesFragment()
                 R.id.action_resources -> ResourcesFragment()
                 R.id.action_map -> MapFragment()
                 else -> null

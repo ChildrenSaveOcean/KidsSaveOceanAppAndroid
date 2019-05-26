@@ -1,14 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".map.MapFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
 
-    <fragment
-        android:id="@+id/map"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+        android:layout_height="210dp">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ocean_water"
+            />
+
+        <TextView
+            android:id="@+id/letters_written"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="80dp"
+            android:textColor="#FFFFFF"
+            style="@style/TextAppearance.AppCompat.Display1"
+            android:text="9,017"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/letters_written"
+            app:layout_constraintLeft_toLeftOf="@id/letters_written"
+            app:layout_constraintRight_toRightOf="@id/letters_written"
+            android:textColor="#FFFFFF"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:text="Letters Written"/>
+
+        <TextView
+            android:id="@+id/countries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="80dp"
+            android:textColor="#FFFFFF"
+            style="@style/TextAppearance.AppCompat.Display1"
+            android:text="14"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/countries"
+            app:layout_constraintLeft_toLeftOf="@id/countries"
+            app:layout_constraintRight_toRightOf="@id/countries"
+            android:textColor="#FFFFFF"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:text="Countries"/>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:tabTextColor="#B9B9B9"
+            app:tabIndicatorColor="#FFFFFF"
+            app:tabSelectedTextColor="#FFFFFF"
+            app:tabRippleColor="#B9B9B9"
+            />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/ic_mail"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>

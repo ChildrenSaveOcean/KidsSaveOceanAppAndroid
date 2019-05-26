@@ -2,6 +2,7 @@ package com.kidssaveocean.fatechanger.map
 
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
@@ -20,10 +21,18 @@ import com.kidssaveocean.fatechanger.R
 class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_map, container, false)
+        return inflater.inflate(R.layout.fragment_map, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val fragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         fragment!!.getMapAsync(this)
-        return view
+
+        val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
+
+
+        tabLayout.addTab(tabLayout.newTab().setText("Map"))
+        tabLayout.addTab(tabLayout.newTab().setText("Top Ten"))
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
