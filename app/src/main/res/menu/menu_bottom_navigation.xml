@@ -17,24 +17,24 @@
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/action_resources"
+        android:id="@+id/action_dashboard"
         android:enabled="true"
         android:icon="@drawable/ic_dashboard"
+        android:title="Dashboard"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_resources"
+        android:enabled="true"
+        android:icon="@drawable/ic_resources"
         android:title="Resources"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_map"
         android:enabled="true"
-        android:icon="@drawable/ic_resources"
-        android:title="Map"
-        app:showAsAction="always"/>
-
-    <item
-        android:id="@+id/action_donate"
-        android:enabled="true"
         android:icon="@drawable/ic_map"
-        android:title="Donate"
+        android:title="Map"
         app:showAsAction="always"/>
 
 </menu>
