@@ -38,6 +38,8 @@
     <string name="for_student">For Student</string>
     <string name="for_teacher">For Teacher</string>
     <string name="updates">UPDATES</string>
+    <string name="light_it_up">LIGHT IT UP</string>
+    <string name="your_activist_dashboard">Your Activist Dashboard</string>
     <string name="letter_writing_update">Letter Writing Campaign</string>
     <string name="see_our_progress">See our progress</string>
     <string name="interview">INTERVIEW</string>
@@ -45,4 +47,5 @@
     <string name="q_and_a_with_founder"><![CDATA[Q&A with the founder]]></string>
     <string name="high_scores">High Scores</string>
     <string name="see_where_your_country_ranks">See where your country ranks</string>
+    <string name="empty_string"></string>
 </resources>
