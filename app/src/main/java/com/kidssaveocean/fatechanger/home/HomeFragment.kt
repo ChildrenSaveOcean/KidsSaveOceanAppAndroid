@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
+import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
 class HomeFragment : Fragment() {
 
@@ -17,6 +19,7 @@ class HomeFragment : Fragment() {
         val secondFragment = childFragmentManager.findFragmentById(R.id.second_fragment) as HomeCardFragment?
         val thirdFragment = childFragmentManager.findFragmentById(R.id.third_fragment) as HomeCardFragment?
         val fourthFragment = childFragmentManager.findFragmentById(R.id.fourth_fragment) as HomeCardFragment?
+        val bottomActivity = activity as BottomNavigationActivity?
 
         firstFragment?.setBackgroundImage(R.drawable.letter_writing_map)
         firstFragment?.setTypeText(R.string.updates)
@@ -37,6 +40,9 @@ class HomeFragment : Fragment() {
         fourthFragment?.setTypeText(R.string.light_it_up)
         fourthFragment?.setTitleText(R.string.your_activist_dashboard)
         fourthFragment?.setSubtitleTextView(R.string.empty_string)
+        fourthFragment?.tapAction({
+            bottomActivity?.bottom_navigation_bar?.selectedItemId = R.id.action_dashboard
+        })
 
         return view
     }
