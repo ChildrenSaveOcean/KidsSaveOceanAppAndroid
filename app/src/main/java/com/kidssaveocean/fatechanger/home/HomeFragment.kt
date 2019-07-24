@@ -5,10 +5,12 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.kidssaveocean.fatechanger.LetterFragment
 
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import kotlinx.android.synthetic.main.activity_bottom_navigation.*
+
 
 class HomeFragment : Fragment() {
 
@@ -20,15 +22,18 @@ class HomeFragment : Fragment() {
         val qaFragment = childFragmentManager.findFragmentById(R.id.qa_fragment) as HomeCardFragment?
         val scoreFragment = childFragmentManager.findFragmentById(R.id.score_fragment) as HomeCardFragment?
         val dashboardFragment = childFragmentManager.findFragmentById(R.id.dashboard_fragment) as HomeCardFragment?
-        val bottomActivity = activity as BottomNavigationActivity?
+        val bottomActivity = activity as BottomNavigationActivity
 
         letterFragment?.setBackgroundImage(R.drawable.sunset_and_people)
         letterFragment?.setTypeText(R.string.how_you_can_help_capitalized)
         letterFragment?.setTitleText(R.string.write_and_get_the_world_out)
         letterFragment?.setSubtitleTextView(R.string.empty_string)
-//        letterFragment?.tapAction({
-//            bottomActivity?.bottom_navigation_bar?.selectedItemId = R.id.action_dashboard
-//        })
+        letterFragment?.tapAction {
+            val fragmentTransaction = bottomActivity.supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_container, LetterFragment(), "letter_fragment")
+            fragmentTransaction.addToBackStack("letter_fragment")
+            fragmentTransaction.commit()
+        }
 
         mapFragment?.setBackgroundImage(R.drawable.letter_writing_map)
         mapFragment?.setTypeText(R.string.updates)
@@ -49,9 +54,9 @@ class HomeFragment : Fragment() {
         dashboardFragment?.setTypeText(R.string.light_it_up)
         dashboardFragment?.setTitleText(R.string.your_activist_dashboard)
         dashboardFragment?.setSubtitleTextView(R.string.empty_string)
-        dashboardFragment?.tapAction({
-            bottomActivity?.bottom_navigation_bar?.selectedItemId = R.id.action_dashboard
-        })
+        dashboardFragment?.tapAction {
+            bottomActivity.bottom_navigation_bar?.selectedItemId = R.id.action_dashboard
+        }
 
         return view
     }
