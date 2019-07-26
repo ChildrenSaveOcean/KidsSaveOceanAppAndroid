@@ -49,4 +49,10 @@
     <string name="see_where_your_country_ranks">See where your country ranks</string>
     <string name="empty_string"></string>
     <string name="write_and_get_the_world_out">Write And Get The World Out</string>
+    <string name="select_your_country">Select Your Country</string>
+    <string name="who_do_I_write_a_letter_to">Who do I write a letter to?</string>
+    <string name="to_tell_my_government_how_I_feel">To tell my government how I feel</string>
+    <string name="submit">Submit</string>
+
+
 </resources>

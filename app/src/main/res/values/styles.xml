@@ -33,4 +33,14 @@
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
+    <style name="main_button_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/button_onboarding_start</item>
+    </style>
+
+    <style name="small_button_style" parent="main_button_style">
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

@@ -3,16 +3,13 @@ package com.kidssaveocean.fatechanger
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.os.Debug
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import android.widget.NumberPicker
 
 /**
  * A simple [Fragment] subclass.
@@ -24,23 +21,22 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class LetterFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_letter, container, false)
+
+        var view = inflater.inflate(R.layout.fragment_letter, container, false)
+
+        val picker = view.findViewById(R.id.country_picker) as NumberPicker?
+        val countries = arrayOf("country_0", "country_1", "country_2", "country_3", "country_4")
+        picker?.minValue = 0
+        picker?.maxValue = countries.size - 1
+        picker?.displayedValues = countries
+        picker?.wrapSelectorWheel = true
+        picker?.setOnValueChangedListener { picker, oldVal, newVal ->
+            Log.d("new value", newVal.toString())
+        }
+
+        return view
     }
-
-
 }
