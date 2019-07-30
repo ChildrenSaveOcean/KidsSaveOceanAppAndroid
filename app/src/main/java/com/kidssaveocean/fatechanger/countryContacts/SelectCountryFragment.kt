@@ -1,26 +1,24 @@
-package com.kidssaveocean.fatechanger
+package com.kidssaveocean.fatechanger.countryContacts
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.os.Debug
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.NumberPicker
+import com.kidssaveocean.fatechanger.R
 
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [LetterFragment.OnFragmentInteractionListener] interface
+ * [SelectCountryFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [LetterFragment.newInstance] factory method to
+ * Use the [SelectCountryFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class LetterFragment : Fragment() {
+class SelectCountryFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kidssaveocean.fatechanger.LetterFragment
+import com.kidssaveocean.fatechanger.countryContacts.SelectCountryFragment
 
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
         letterFragment?.setSubtitleTextView(R.string.empty_string)
         letterFragment?.tapAction {
             val fragmentTransaction = bottomActivity.supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, LetterFragment(), "letter_fragment")
+            fragmentTransaction.replace(R.id.fragment_container, SelectCountryFragment(), "letter_fragment")
             fragmentTransaction.addToBackStack("letter_fragment")
             fragmentTransaction.commit()
         }
