@@ -7,4 +7,6 @@
     <color name="gray">#b2b2b2</color>
     <color name="gold">#DAA520</color>
     <color name="greenish_blue">#2672b3</color>
+    <color name="blueish_subtitle_color">#4a81b6</color>
+    <color name="select_country_title_color">#474c53</color>
 </resources>
