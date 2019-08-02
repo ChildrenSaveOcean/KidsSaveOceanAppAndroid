@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.countryContacts.CountryInfoFragment
+import com.kidssaveocean.fatechanger.countryContacts.CountryIntroFragment
 import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
 
@@ -30,7 +31,7 @@ class HomeFragment : Fragment() {
         countryFragment?.setSubtitleTextView(R.string.empty_string)
         countryFragment?.tapAction {
             val fragmentTransaction = bottomActivity.supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, CountryInfoFragment(), "country_fragment")
+            fragmentTransaction.replace(R.id.fragment_container, CountryIntroFragment(), "country_fragment")
             fragmentTransaction.addToBackStack("country_fragment")
             fragmentTransaction.commit()
         }
