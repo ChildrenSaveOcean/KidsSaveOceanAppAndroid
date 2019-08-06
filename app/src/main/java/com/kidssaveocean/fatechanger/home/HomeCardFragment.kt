@@ -39,4 +39,10 @@ class HomeCardFragment : Fragment() {
 
 
     fun setSubtitleTextView(textId: Int) = subtitle_text_view.setText(textId)
+
+    fun tapAction(function: () -> Unit) {
+        home_card_image_button.setOnClickListener {
+            function()
+        }
+    }
 }

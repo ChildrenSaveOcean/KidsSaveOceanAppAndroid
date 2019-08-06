@@ -28,7 +28,7 @@ class NewsFragment : Fragment() {
     }
 
     companion object {
-        private const val url = "https://www.kidssaveocean.com/copy-of-news"
+        private const val url = "https://www.kidssaveocean.com/updates"
     }
 
 }
