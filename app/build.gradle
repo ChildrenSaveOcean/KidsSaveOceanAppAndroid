@@ -66,7 +66,14 @@ dependencies {
     // Streams
     implementation 'com.annimon:stream:1.2.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:17.0.1'
+    implementation 'com.google.firebase:firebase-auth:18.1.0'
+    implementation 'com.google.firebase:firebase-database:18.0.1'
 }
 repositories {
     mavenCentral()
 }
+
+apply plugin: 'com.google.gms.google-services'
