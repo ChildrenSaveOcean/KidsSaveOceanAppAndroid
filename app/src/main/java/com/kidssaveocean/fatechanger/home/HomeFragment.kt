@@ -8,7 +8,6 @@ import android.view.ViewGroup
 
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
-import com.kidssaveocean.fatechanger.countryContacts.CountryInfoFragment
 import com.kidssaveocean.fatechanger.countryContacts.CountryIntroFragment
 import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
