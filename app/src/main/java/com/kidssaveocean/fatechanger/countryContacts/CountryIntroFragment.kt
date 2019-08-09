@@ -11,6 +11,7 @@ import android.widget.Button
 
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
+import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
 
 class CountryIntroFragment : Fragment() {
@@ -23,12 +24,13 @@ class CountryIntroFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_country_intro, container, false)
         var button = view.findViewById(R.id.write_to_where_button) as Button?
         button?.setOnClickListener {
-
-            val bottomActivity = activity as BottomNavigationActivity
-            val fragmentTransaction = bottomActivity.supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, fragment , "select_country_fragment")
-            fragmentTransaction.addToBackStack("select_country_fragment")
-            fragmentTransaction.commit()
+            if (FirebaseService.getInstance().hasCountries) {
+                val bottomActivity = activity as BottomNavigationActivity
+                fragment.addToNavigationStack(
+                    bottomActivity.supportFragmentManager,
+                    R.id.fragment_container,
+                    "select_country_fragment")
+            }
         }
         return view
     }
