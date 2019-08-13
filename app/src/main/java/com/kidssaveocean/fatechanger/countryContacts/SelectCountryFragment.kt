@@ -19,20 +19,20 @@ import kotlin.collections.ArrayList
 
 class SelectCountryFragment : Fragment(), Observer {
 
-    private var countries : ArrayList<CountryModel> = arrayListOf()
+    private var countries : List<CountryModel> = listOf()
     private var letterAddress : String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         if (countries.isEmpty()) {
-            countries = FirebaseService.getInstance().getCountries() as ArrayList<CountryModel>
-            letterAddress = countries[0]?.countryAddress
+            countries = FirebaseService.getInstance().countries
+            letterAddress = countries[0]?.country_address
         }
 
         var view = inflater.inflate(R.layout.fragment_letter, container, false)
 
-        val countryNames = countries.map { it.countryName }.toTypedArray()
+        val countryNames = countries.map { it.country_name }.toTypedArray()
         val picker = view.findViewById(R.id.country_picker) as NumberPicker?
         picker?.minValue = 0
         picker?.maxValue = countries.size - 1
@@ -40,7 +40,7 @@ class SelectCountryFragment : Fragment(), Observer {
         picker?.wrapSelectorWheel = true
         picker?.setOnValueChangedListener { _, _, newVal ->
             val model = countries[newVal]
-            letterAddress = model?.countryAddress
+            letterAddress = model?.country_address
         }
         val button = view.findViewById(R.id.submit_button) as Button?
         button?.setOnClickListener {
@@ -61,11 +61,8 @@ class SelectCountryFragment : Fragment(), Observer {
     override fun update(o: Observable?, arg: Any?) {
         when (o) {
             is FirebaseService -> {
-                countries.clear()
-                for (country in o.getCountries()) {
-                    countries.add(country)
-                }
-                letterAddress = countries[0]?.countryAddress
+                countries = o.countries
+                letterAddress = countries[0]?.country_address
             }
         }
     }
