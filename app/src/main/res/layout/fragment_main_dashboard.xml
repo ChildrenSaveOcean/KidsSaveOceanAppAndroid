@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dashboard_bg_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".dashboard.MainDashboardFragment">
+
+    <LinearLayout
+        android:id="@+id/icons"
+        android:layout_marginTop="@dimen/standart_margin"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/firstIcon"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:src="@drawable/dashboard_blue_icon" />
+        <ImageView
+            android:id="@+id/secondIcon"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:src="@drawable/dashboard_blue_icon" />
+        <ImageView
+            android:id="@+id/thirdIcon"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:src="@drawable/dashboard_blue_icon" />
+        <ImageView
+            android:id="@+id/fourthIcon"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:src="@drawable/dashboard_blue_icon" />
+        <ImageView
+            android:id="@+id/fifthIcon"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:src="@drawable/dashboard_blue_icon" />
+        <ImageView
+            android:id="@+id/sixthIcon"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:src="@drawable/dashboard_blue_icon" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mainDashboard"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dashboard_meter_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icons"
+        app:layout_constraintBottom_toTopOf="@+id/alert_field">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_margin="@dimen/standart_margin"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/meter_scale" />
+            <ImageView
+                android:layout_margin="@dimen/standart_margin"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/incomplete_fist_and_writing" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@drawable/dashboard_buttons_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_margin="@dimen/standart_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TASK: Spread Fatechanger by sharing"/>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+                <ImageView
+                    android:layout_marginEnd="40dp"
+                    android:src="@drawable/how_button"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:src="@drawable/i_did_it_button"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/alert_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <ImageView
+            android:id="@+id/steering_wheel"
+            android:layout_margin="@dimen/standart_margin"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/wheel_volume" />
+        <ImageView
+            android:layout_margin="@dimen/standart_margin"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/action_alert" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
