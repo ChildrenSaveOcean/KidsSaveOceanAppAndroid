@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res/com.kidssaveocean.fatechanger"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dashboard_bg_color"
@@ -10,50 +12,131 @@
     <LinearLayout
         android:id="@+id/icons"
         android:layout_marginTop="@dimen/standart_margin"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:id="@+id/firstIcon"
-            android:layout_margin="@dimen/dashboard_icon_margin"
-            android:layout_width="@dimen/dashboard_icon_size"
-            android:layout_height="@dimen/dashboard_icon_size"
-            android:src="@drawable/dashboard_blue_icon" />
-        <ImageView
-            android:id="@+id/secondIcon"
-            android:layout_margin="@dimen/dashboard_icon_margin"
-            android:layout_width="@dimen/dashboard_icon_size"
-            android:layout_height="@dimen/dashboard_icon_size"
-            android:src="@drawable/dashboard_blue_icon" />
-        <ImageView
-            android:id="@+id/thirdIcon"
-            android:layout_margin="@dimen/dashboard_icon_margin"
-            android:layout_width="@dimen/dashboard_icon_size"
-            android:layout_height="@dimen/dashboard_icon_size"
-            android:src="@drawable/dashboard_blue_icon" />
-        <ImageView
-            android:id="@+id/fourthIcon"
-            android:layout_margin="@dimen/dashboard_icon_margin"
-            android:layout_width="@dimen/dashboard_icon_size"
-            android:layout_height="@dimen/dashboard_icon_size"
-            android:src="@drawable/dashboard_blue_icon" />
-        <ImageView
-            android:id="@+id/fifthIcon"
-            android:layout_margin="@dimen/dashboard_icon_margin"
-            android:layout_width="@dimen/dashboard_icon_size"
-            android:layout_height="@dimen/dashboard_icon_size"
-            android:src="@drawable/dashboard_blue_icon" />
-        <ImageView
-            android:id="@+id/sixthIcon"
-            android:layout_margin="@dimen/dashboard_icon_margin"
-            android:layout_width="@dimen/dashboard_icon_size"
-            android:layout_height="@dimen/dashboard_icon_size"
-            android:src="@drawable/dashboard_blue_icon" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                <com.kidssaveocean.fatechanger.views.SurferIconView
+                    android:id="@+id/firstIcon"
+                    custom:isActive="false"
+                    custom:status="completed"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    android:layout_width="@dimen/dashboard_icon_size"
+                    android:layout_height="@dimen/dashboard_icon_size" />
+                <View
+                    android:layout_gravity="center"
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                <com.kidssaveocean.fatechanger.views.SurferIconView
+                    android:id="@+id/secondIcon"
+                    custom:isActive="true"
+                    custom:status="uncompleted"
+                    android:paddingLeft="@dimen/dashboard_icon_margin"
+                    android:paddingRight="@dimen/dashboard_icon_margin"
+                    android:paddingTop="@dimen/dashboard_icon_margin"
+                    android:paddingBottom="10dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp" />
+                <View
+                    android:layout_gravity="center"
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                <com.kidssaveocean.fatechanger.views.SurferIconView
+                    android:id="@+id/thirdIcon"
+                    custom:isActive="false"
+                    custom:status="completed"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    android:layout_width="@dimen/dashboard_icon_size"
+                    android:layout_height="@dimen/dashboard_icon_size" />
+                <View
+                    android:layout_gravity="center"
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                <com.kidssaveocean.fatechanger.views.SurferIconView
+                    android:id="@+id/fourthIcon"
+                    custom:isActive="false"
+                    custom:status="completed"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    android:layout_width="@dimen/dashboard_icon_size"
+                    android:layout_height="@dimen/dashboard_icon_size" />
+                <View
+                    android:layout_gravity="center"
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                <com.kidssaveocean.fatechanger.views.SurferIconView
+                    android:id="@+id/fifthIcon"
+                    custom:isActive="false"
+                    custom:status="completed"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    android:layout_width="@dimen/dashboard_icon_size"
+                    android:layout_height="@dimen/dashboard_icon_size" />
+                <View
+                    android:layout_gravity="center"
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                <com.kidssaveocean.fatechanger.views.SurferIconView
+                    android:id="@+id/sixthIcon"
+                    custom:isActive="false"
+                    custom:status="completed"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    android:layout_width="@dimen/dashboard_icon_size"
+                    android:layout_height="@dimen/dashboard_icon_size" />
+                <View
+                    android:layout_gravity="center"
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF" />
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_marginRight="@dimen/bottom_icon_line_margin"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dashboard_stroke_width"
+            android:background="#FFFFFF" />
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/mainDashboard"
