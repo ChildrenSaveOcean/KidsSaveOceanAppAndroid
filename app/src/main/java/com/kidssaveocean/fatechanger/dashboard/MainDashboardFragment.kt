@@ -15,8 +15,8 @@ import com.kidssaveocean.fatechanger.extensions.getScreenSize
 import android.graphics.*
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import com.kidssaveocean.fatechanger.extensions.dpToPx
-import com.kidssaveocean.fatechanger.extensions.pxToDp
+import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
+import com.kidssaveocean.fatechanger.views.ActionAlertDialog
 import kotlinx.android.synthetic.main.fragment_main_dashboard.*
 
 
@@ -41,6 +41,11 @@ class MainDashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val bottomActivity = activity as BottomNavigationActivity
+        action_alert_button.setOnClickListener {
+            ActionAlertDialog(bottomActivity).show()
+        }
 
         icons.viewTreeObserver.addOnGlobalLayoutListener {
             if (icons != null) {
@@ -95,11 +100,12 @@ private class BackgroundDrawable(
         line.style = Paint.Style.STROKE
         line.strokeWidth = activity.resources.getDimension(R.dimen.dashboard_stroke_width)//.dpToPx()
 
-        // connecting lines
+        // draw lines points
         val point_1 = PointF(topLeftSteeringWeelCorner.x,  topLeftSteeringWeelCorner.y)
         val point_2 = PointF(topLeftSteeringWeelCorner.x - 100,  topLeftSteeringWeelCorner.y - 100)
         val point_3 = PointF(point_2.x, bottomLeftPoint.y - activity.resources.getDimension(R.dimen.dashboard_stroke_width) / 2)
         val point_4 = PointF(point_3.x + 100,  point_3.y)
+        // connecting lines
         canvas.drawLine(point_1.x, point_1.y, point_2.x, point_2.y, line)
         canvas.drawLine(point_2.x, point_2.y, point_3.x, point_3.y, line)
         canvas.drawLine(point_3.x, point_3.y, point_4.x, point_4.y, line)
