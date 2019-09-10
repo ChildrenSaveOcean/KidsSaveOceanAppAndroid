@@ -15,16 +15,19 @@ import com.kidssaveocean.fatechanger.extensions.getScreenSize
 import android.graphics.*
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
-import com.kidssaveocean.fatechanger.views.ActionAlertDialog
 import kotlinx.android.synthetic.main.fragment_main_dashboard.*
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
+
+
 
 
 class MainDashboardFragment : Fragment() {
 
+    private var currentCircleAngle : Float = 0f
     private var topLeftSteeringWeelCorner : PointF? = null
-    var hasBackground : Boolean = false
-    var bottomLeftPoint : PointF? = null
+    private var hasBackground : Boolean = false
+    private var bottomLeftPoint : PointF? = null
 
     val isAllPointsInitiated : Boolean
         get() {
@@ -42,9 +45,8 @@ class MainDashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomActivity = activity as BottomNavigationActivity
         action_alert_button.setOnClickListener {
-            ActionAlertDialog(bottomActivity).show()
+            animateCircle(2)
         }
 
         icons.viewTreeObserver.addOnGlobalLayoutListener {
@@ -72,6 +74,29 @@ class MainDashboardFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun animateCircle(position : Int) {
+        when (position) {
+            0,1,2,3,4,5 -> {
+                val angleStep = 50f
+                val newAngle = position * angleStep
+                val rotate = RotateAnimation(
+                        currentCircleAngle,
+                        newAngle,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f
+                )
+                rotate.fillAfter = true
+                rotate.duration = 1000
+                floating_area.startAnimation(rotate)
+                currentCircleAngle = newAngle
+            }
+            else -> println("Wrong position number")
+        }
+
     }
 }
 
