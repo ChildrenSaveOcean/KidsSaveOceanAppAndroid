@@ -21,6 +21,10 @@ fun Fragment.addToNavigationStack(manager: FragmentManager, containerId: Int, ta
     fragmentTransaction.commit()
 }
 
+
+/*
+* Extracting common settings of WebView to prevent code duplication in the use of WebView
+* */
 @SuppressLint("SetJavaScriptEnabled")
 fun WebView.loadSetting() {
 
