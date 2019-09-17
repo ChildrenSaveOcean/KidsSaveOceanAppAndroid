@@ -2,9 +2,6 @@
 <resources>
     <declare-styleable name="SurferIconView">
         <attr name="isActive" format="boolean" />
-        <attr name="status" format="enum">
-            <enum name="uncompleted" value="0"/>
-            <enum name="completed" value="1"/>
-        </attr>
+        <attr name="isCompleted" format="boolean" />
     </declare-styleable>
 </resources>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="standart_margin">10dp</dimen>
-    <dimen name="dashboard_icon_size">50dp</dimen>
+    <dimen name="dashboard_icon_size">60dp</dimen>
     <dimen name="dashboard_and_line_icon_height">70dp</dimen>
     <dimen name="dashboard_icon_margin">3dp</dimen>
     <dimen name="dashboard_stroke_width">3dp</dimen>
-    <dimen name="bottom_icon_line_margin">17dp</dimen>
+    <dimen name="bottom_icon_line_margin">20dp</dimen>
     <dimen name="dashboard_circle_size">10dp</dimen>
+    <dimen name="nobody_listen_buttons_height">180dp</dimen>
 </resources>

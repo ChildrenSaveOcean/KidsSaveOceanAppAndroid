@@ -10,23 +10,31 @@ import android.widget.Button
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
+import com.kidssaveocean.fatechanger.resources.ResourcesFragment
+import kotlinx.android.synthetic.main.fragment_nobodys_listening.*
 
 class NobodysListeningFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_nobodys_listening, container, false)
+        return inflater.inflate(R.layout.fragment_nobodys_listening, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val bottomActivity = activity as BottomNavigationActivity
-        val goldenRulesButton = view.findViewById(R.id.golden_rules_button) as Button?
-        goldenRulesButton?.setOnClickListener {
+        golden_rules_button?.setOnClickListener {
             GoldenRulesFragment().addToNavigationStack(
                     bottomActivity.supportFragmentManager,
-                    R.id.fragment_container,
-                    "golden_rules_fragment")
+                    R.id.fragment_container)
         }
 
-        return view
+        activist_toolkit_button?.setOnClickListener {
+            ResourcesFragment("https://www.kidssaveocean.com/studentresources").addToNavigationStack(
+                    bottomActivity.supportFragmentManager,
+                    R.id.fragment_container)
+        }
     }
 }

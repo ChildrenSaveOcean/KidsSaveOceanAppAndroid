@@ -32,6 +32,10 @@ class BottomNavigationActivity : AppCompatActivity() {
         transaction.commit()
     }
 
+    fun setMenuItem(itemId : Int) {
+        bottom_navigation_bar?.selectedItemId = itemId;
+    }
+
     private fun setUpOnNavigationItemSelectedListener(): BottomNavigationView.OnNavigationItemSelectedListener {
 
         return BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->

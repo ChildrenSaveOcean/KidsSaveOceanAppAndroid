@@ -4,9 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Point
+import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Size
 import android.view.View
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -67,5 +69,13 @@ fun View.setBg(context: Context, resId : Int, alpha: Float = 1F) {
         this.setBackgroundDrawable(drawable);
     } else {
         this.setBackground(drawable);
+    }
+}
+
+fun ImageView.setImage(context: Context, resId : Int){
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        this.setImageDrawable(getResources().getDrawable(resId, context.theme));
+    } else {
+        this.setImageDrawable(getResources().getDrawable(resId));
     }
 }

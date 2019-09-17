@@ -8,28 +8,53 @@ import com.kidssaveocean.fatechanger.extensions.setBg
 
 class SurferIconView (context: Context, attrs: AttributeSet) : View(context, attrs)
 {
-    var _isActive: Boolean = false
+    private var _isActive: Boolean = false
     var isActive: Boolean
         get() = _isActive
         set(value) {
             _isActive = value
-            if (value) {
-                this.setBg(context, R.drawable.surfer_icon_active_bg)
-
-            }
-            else {
-                this.setBg(context, R.drawable.dashboard_red_icon, 0.8F)
+            when (_isActive) {
+                true -> {
+                    if (_isCompleted) {
+                        this.setBg(context, R.drawable.task_completed_active_bg)
+                    }
+                    else {
+                        this.setBg(context, R.drawable.task_uncompleted_active_bg)
+                    }
+                }
+                false -> {
+                    if (_isCompleted) {
+                        this.setBg(context, R.drawable.task_completed_unactive_bg)
+                    }
+                    else {
+                        this.setBg(context, R.drawable.task_uncompleted_unactive_bg, 0.8F)
+                    }
+                }
             }
         }
 
-    var _status : SurferIconStatus = SurferIconStatus.UNCOMPLETED
-    var status: SurferIconStatus
-        get() = _status
+    private var _isCompleted : Boolean = false
+    var isCompleted: Boolean
+        get() = _isCompleted
         set(value) {
-            _status = value
-            when (value) {
-                SurferIconStatus.UNCOMPLETED -> this.setBg(context, R.drawable.dashboard_red_icon)
-                SurferIconStatus.COMPLETED -> this.setBg(context, R.drawable.surfer_icon_default_bg)
+            _isCompleted = value
+            when (_isCompleted) {
+                true -> {
+                    if (_isActive) {
+                        this.setBg(context, R.drawable.task_completed_active_bg)
+                    }
+                    else {
+                        this.setBg(context, R.drawable.task_completed_unactive_bg)
+                    }
+                }
+                false -> {
+                    if (_isActive) {
+                        this.setBg(context, R.drawable.task_uncompleted_active_bg)
+                    }
+                    else {
+                        this.setBg(context, R.drawable.task_uncompleted_unactive_bg, 0.8F)
+                    }
+                }
             }
         }
 
@@ -39,15 +64,11 @@ class SurferIconView (context: Context, attrs: AttributeSet) : View(context, att
                 R.styleable.SurferIconView,
                 0, 0).apply {
             try {
-                status = SurferIconStatus.values()[getInteger(R.styleable.SurferIconView_status, 0)]
+                isCompleted = getBoolean(R.styleable.SurferIconView_isCompleted, false)
                 isActive = getBoolean(R.styleable.SurferIconView_isActive, false)
             } finally {
                 recycle()
             }
         }
     }
-}
-
-enum class SurferIconStatus {
-    UNCOMPLETED, COMPLETED
 }

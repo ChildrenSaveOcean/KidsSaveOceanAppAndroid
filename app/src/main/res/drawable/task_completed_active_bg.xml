@@ -26,5 +26,10 @@
         </shape>
     </item>
     <!-- Background -->
-    <item android:drawable="@drawable/dashboard_blue_icon" />
+    <item android:drawable="@drawable/dashboard_blue_icon">
+        <size
+            android:width="60dp"
+            android:height="60dp"/>
+    </item>
+
 </layer-list>
