@@ -15,6 +15,8 @@ import android.content.Context
 import android.content.Intent
 import com.kidssaveocean.fatechanger.extensions.getScreenSize
 import android.graphics.*
+import android.os.AsyncTask
+import android.view.SoundEffectConstants
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.fragment_main_dashboard.*
@@ -22,10 +24,17 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.countryContacts.CountryIntroFragment
+import com.kidssaveocean.fatechanger.database.AppDatabase
+import com.kidssaveocean.fatechanger.database.entities.DashboardStep
+import com.kidssaveocean.fatechanger.database.entities.KeyValue
 import com.kidssaveocean.fatechanger.extensions.setImage
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.views.ActionAlertDialog
 import io.reactivex.subjects.PublishSubject
+import android.media.MediaPlayer
+import java.lang.reflect.Array.getLength
+import android.content.res.AssetFileDescriptor
+import java.io.IOException
 
 
 class MainDashboardFragment : Fragment() {
@@ -42,7 +51,9 @@ class MainDashboardFragment : Fragment() {
     private var stepFive : DashboardTask = DashboardTask(DashboardSteps.GOVERNMENT, false)
     private var stepSix : DashboardTask = DashboardTask(DashboardSteps.PROTEST, false)
 
-    private var currentTask : DashboardTask = DashboardTask(DashboardSteps.WRITE_LETTER, false)
+    private var currentTask : DashboardTask = DashboardTask(DashboardSteps.RESEARCH, false)
+    private var db : AppDatabase? = null
+    val mp = MediaPlayer()
 
     val isAllPointsInitiated : Boolean
         get() {
@@ -55,6 +66,14 @@ class MainDashboardFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_dashboard, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (db == null) {
+            db = AppDatabase.getAppDatabase(activity as BottomNavigationActivity)
+            initDashboardSteps()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,26 +100,32 @@ class MainDashboardFragment : Fragment() {
         }
 
         firstIcon.setOnClickListener {
+            playClick()
             clickOnSurfer(stepOne)
         }
 
         secondIcon.setOnClickListener {
+            playClick()
             clickOnSurfer(stepTwo)
         }
 
         thirdIcon.setOnClickListener {
+            playClick()
             clickOnSurfer(stepThree)
         }
 
         fourthIcon.setOnClickListener {
+            playClick()
             clickOnSurfer(stepFour)
         }
 
         fifthIcon.setOnClickListener {
+            playClick()
             clickOnSurfer(stepFive)
         }
 
         sixthIcon.setOnClickListener {
+            playClick()
             clickOnSurfer(stepSix)
         }
 
@@ -110,6 +135,24 @@ class MainDashboardFragment : Fragment() {
 
         I_did_it_button?.setOnClickListener {
             currentTask?.isCompleted = currentTask?.isCompleted?.not()
+            var stepKey = ""
+            when(currentTask.type) {
+                DashboardSteps.RESEARCH -> stepKey = DashboardStep.STEP_1
+                DashboardSteps.WRITE_LETTER -> stepKey = DashboardStep.STEP_2
+                DashboardSteps.SHARING -> stepKey = DashboardStep.STEP_3
+                DashboardSteps.LETTER_CAMPAING -> stepKey = DashboardStep.STEP_4
+                DashboardSteps.GOVERNMENT -> stepKey = DashboardStep.STEP_5
+                DashboardSteps.PROTEST -> stepKey = DashboardStep.STEP_6
+            }
+            AsyncTask.execute {
+                val step = db?.dashboardStepDao()?.getDashboardStep(stepKey)
+                if (step != null) {
+                    db?.dashboardStepDao()?.updateDashboardStep(DashboardStep(stepKey, currentTask.isCompleted!!))
+                }
+                else {
+                    db?.dashboardStepDao()?.insertDashboardStep(DashboardStep(stepKey, currentTask.isCompleted!!))
+                }
+            }
         }
 
         icons.viewTreeObserver.addOnGlobalLayoutListener {
@@ -138,27 +181,51 @@ class MainDashboardFragment : Fragment() {
     }
 
     private fun clickOnSurfer(step : DashboardTask) {
+        var value = ""
+        when(step.type) {
+            DashboardSteps.RESEARCH -> value = DashboardStep.STEP_1
+            DashboardSteps.WRITE_LETTER -> value = DashboardStep.STEP_2
+            DashboardSteps.SHARING -> value = DashboardStep.STEP_3
+            DashboardSteps.LETTER_CAMPAING -> value = DashboardStep.STEP_4
+            DashboardSteps.GOVERNMENT -> value = DashboardStep.STEP_5
+            DashboardSteps.PROTEST -> value = DashboardStep.STEP_6
+        }
+
+        AsyncTask.execute {
+            val keyValue = db?.keyValueDao()?.getKeyValue(KeyValue.LAST_CURRENT_STEP)
+            if (keyValue != null) {
+                val keyValue = KeyValue(KeyValue.LAST_CURRENT_STEP, value)
+                db?.keyValueDao()?.updateKeyValue(keyValue)
+            }
+            else {
+                val keyValue = KeyValue(KeyValue.LAST_CURRENT_STEP, value)
+                db?.keyValueDao()?.insertKeyValue(keyValue)
+            }
+        }
+
         currentTask.type = step.type
         currentTask.isCompleted = step.isCompleted
         changeVisuals(currentTask.type!!)
     }
 
     private fun changeVisuals(step : DashboardSteps) {
-        firstIcon.isActive = step.ordinal == 0
-        secondIcon.isActive = step.ordinal == 1
-        thirdIcon.isActive = step.ordinal == 2
-        fourthIcon.isActive = step.ordinal == 3
-        fifthIcon.isActive = step.ordinal == 4
-        sixthIcon.isActive = step.ordinal == 5
-        rotateWheel(step)
-        rotateMeteor(step)
-        when (step) {
-            DashboardSteps.RESEARCH -> task_description?.text = getString(R.string.research_task_description)
-            DashboardSteps.WRITE_LETTER -> task_description?.text = getString(R.string.write_letter_task_description)
-            DashboardSteps.SHARING -> task_description?.text = getString(R.string.sharing_task_description)
-            DashboardSteps.LETTER_CAMPAING -> task_description?.text = getString(R.string.letter_campaing_task_description)
-            DashboardSteps.GOVERNMENT -> task_description?.text = getString(R.string.government_task_description)
-            DashboardSteps.PROTEST -> task_description?.text = getString(R.string.protest_task_description)
+        activity?.runOnUiThread {
+            firstIcon.isActive = step.ordinal == 0
+            secondIcon.isActive = step.ordinal == 1
+            thirdIcon.isActive = step.ordinal == 2
+            fourthIcon.isActive = step.ordinal == 3
+            fifthIcon.isActive = step.ordinal == 4
+            sixthIcon.isActive = step.ordinal == 5
+            rotateWheel(step)
+            rotateMeteor(step)
+            when (step) {
+                DashboardSteps.RESEARCH -> task_description?.text = getString(R.string.research_task_description)
+                DashboardSteps.WRITE_LETTER -> task_description?.text = getString(R.string.write_letter_task_description)
+                DashboardSteps.SHARING -> task_description?.text = getString(R.string.sharing_task_description)
+                DashboardSteps.LETTER_CAMPAING -> task_description?.text = getString(R.string.letter_campaing_task_description)
+                DashboardSteps.GOVERNMENT -> task_description?.text = getString(R.string.government_task_description)
+                DashboardSteps.PROTEST -> task_description?.text = getString(R.string.protest_task_description)
+            }
         }
     }
 
@@ -228,6 +295,18 @@ class MainDashboardFragment : Fragment() {
         }
     }
 
+    private fun changeIconsBg(task : DashboardTask) {
+        when (task.type) {
+            DashboardSteps.RESEARCH -> firstIcon.isCompleted = task.isCompleted!!
+            DashboardSteps.WRITE_LETTER -> secondIcon.isCompleted = task.isCompleted!!
+            DashboardSteps.SHARING -> thirdIcon.isCompleted = task.isCompleted!!
+            DashboardSteps.LETTER_CAMPAING -> fourthIcon.isCompleted = task.isCompleted!!
+            DashboardSteps.GOVERNMENT -> fifthIcon.isCompleted = task.isCompleted!!
+            DashboardSteps.PROTEST -> sixthIcon.isCompleted = task.isCompleted!!
+            else -> println("Unknown type for DashboardSteps")
+        }
+    }
+
     private fun howButtonAction(step : DashboardSteps) {
         val bottomActivity = activity as BottomNavigationActivity
         when (step) {
@@ -258,6 +337,61 @@ class MainDashboardFragment : Fragment() {
                         R.id.fragment_container,
                         "nobody_listening_fragment")
             }
+        }
+    }
+
+    private fun initDashboardSteps(){
+        db?.let {
+            AsyncTask.execute {
+                val savedSteps = it.dashboardStepDao().getAllDashboardSteps()
+                savedSteps.forEach{
+                    when(it.step){
+                        DashboardStep.STEP_1 -> stepOne.isCompleted = it.completed
+                        DashboardStep.STEP_2 -> stepTwo.isCompleted = it.completed
+                        DashboardStep.STEP_3 -> stepThree.isCompleted = it.completed
+                        DashboardStep.STEP_4 -> stepFour.isCompleted = it.completed
+                        DashboardStep.STEP_5 -> stepFive.isCompleted = it.completed
+                        DashboardStep.STEP_6 -> stepSix.isCompleted = it.completed
+                    }
+                }
+
+                changeIconsBg(stepOne)
+                changeIconsBg(stepTwo)
+                changeIconsBg(stepThree)
+                changeIconsBg(stepFour)
+                changeIconsBg(stepFive)
+                changeIconsBg(stepSix)
+
+                val lastSteps = it.keyValueDao().getKeyValue(KeyValue.LAST_CURRENT_STEP)
+                lastSteps?.let {
+                    when(lastSteps.value) {
+                        DashboardStep.STEP_1 -> changeVisuals(DashboardSteps.RESEARCH)
+                        DashboardStep.STEP_2 -> changeVisuals(DashboardSteps.WRITE_LETTER)
+                        DashboardStep.STEP_3 -> changeVisuals(DashboardSteps.SHARING)
+                        DashboardStep.STEP_4 -> changeVisuals(DashboardSteps.LETTER_CAMPAING)
+                        DashboardStep.STEP_5 -> changeVisuals(DashboardSteps.GOVERNMENT)
+                        DashboardStep.STEP_6 -> changeVisuals(DashboardSteps.PROTEST)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun playClick(){
+        if (mp.isPlaying) {
+            mp.stop()
+        }
+        try {
+            mp.reset()
+            val afd: AssetFileDescriptor
+            afd = (activity as BottomNavigationActivity).assets.openFd("knobClick.mp3")
+            mp.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
+            mp.prepare()
+            mp.start()
+        } catch (e: IllegalStateException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 }
