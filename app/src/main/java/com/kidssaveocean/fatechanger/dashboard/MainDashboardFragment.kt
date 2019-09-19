@@ -32,7 +32,6 @@ import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.views.ActionAlertDialog
 import io.reactivex.subjects.PublishSubject
 import android.media.MediaPlayer
-import java.lang.reflect.Array.getLength
 import android.content.res.AssetFileDescriptor
 import java.io.IOException
 
@@ -70,10 +69,8 @@ class MainDashboardFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (db == null) {
-            db = AppDatabase.getAppDatabase(activity as BottomNavigationActivity)
-            initDashboardSteps()
-        }
+
+        initDashboardSteps(activity as BottomNavigationActivity)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,7 +78,7 @@ class MainDashboardFragment : Fragment() {
 
         val bottomActivity = activity as BottomNavigationActivity
 
-        changeVisuals(currentTask.type!!)
+        initDashboardSteps(bottomActivity)
 
         currentTask?.completedObservable?.subscribe {
             changeCompletedStatus(bottomActivity, it)
@@ -135,22 +132,12 @@ class MainDashboardFragment : Fragment() {
 
         I_did_it_button?.setOnClickListener {
             currentTask?.isCompleted = currentTask?.isCompleted?.not()
-            var stepKey = ""
-            when(currentTask.type) {
-                DashboardSteps.RESEARCH -> stepKey = DashboardStep.STEP_1
-                DashboardSteps.WRITE_LETTER -> stepKey = DashboardStep.STEP_2
-                DashboardSteps.SHARING -> stepKey = DashboardStep.STEP_3
-                DashboardSteps.LETTER_CAMPAING -> stepKey = DashboardStep.STEP_4
-                DashboardSteps.GOVERNMENT -> stepKey = DashboardStep.STEP_5
-                DashboardSteps.PROTEST -> stepKey = DashboardStep.STEP_6
-            }
             AsyncTask.execute {
-                val step = db?.dashboardStepDao()?.getDashboardStep(stepKey)
-                if (step != null) {
-                    db?.dashboardStepDao()?.updateDashboardStep(DashboardStep(stepKey, currentTask.isCompleted!!))
-                }
-                else {
-                    db?.dashboardStepDao()?.insertDashboardStep(DashboardStep(stepKey, currentTask.isCompleted!!))
+                val step = db?.dashboardStepDao()?.getDashboardStep(currentTask.type!!)
+                val newStep = DashboardStep(currentTask.type!!, currentTask.isCompleted!!)
+                when (step) {
+                    null -> db?.dashboardStepDao()?.insertDashboardStep(newStep)
+                    else -> db?.dashboardStepDao()?.updateDashboardStep(newStep)
                 }
             }
         }
@@ -193,13 +180,10 @@ class MainDashboardFragment : Fragment() {
 
         AsyncTask.execute {
             val keyValue = db?.keyValueDao()?.getKeyValue(KeyValue.LAST_CURRENT_STEP)
-            if (keyValue != null) {
-                val keyValue = KeyValue(KeyValue.LAST_CURRENT_STEP, value)
-                db?.keyValueDao()?.updateKeyValue(keyValue)
-            }
-            else {
-                val keyValue = KeyValue(KeyValue.LAST_CURRENT_STEP, value)
-                db?.keyValueDao()?.insertKeyValue(keyValue)
+            val newKeyValue = KeyValue(KeyValue.LAST_CURRENT_STEP, value)
+            when (keyValue) {
+                null -> db?.keyValueDao()?.insertKeyValue(newKeyValue)
+                else -> db?.keyValueDao()?.updateKeyValue(newKeyValue)
             }
         }
 
@@ -327,9 +311,17 @@ class MainDashboardFragment : Fragment() {
                 startActivity(shareIntent)
 
             }
-            DashboardSteps.LETTER_CAMPAING -> {}
+            DashboardSteps.LETTER_CAMPAING -> {
+                StartActivistCampaignFragment().addToNavigationStack(
+                        bottomActivity.supportFragmentManager,
+                        R.id.fragment_container,
+                        "activist_fragment")
+            }
             DashboardSteps.GOVERNMENT -> {
-
+                EngageLocalGovernmentFragment().addToNavigationStack(
+                        bottomActivity.supportFragmentManager,
+                        R.id.fragment_container,
+                        "government_fragment")
             }
             DashboardSteps.PROTEST -> {
                 NobodysListeningFragment().addToNavigationStack(
@@ -340,18 +332,22 @@ class MainDashboardFragment : Fragment() {
         }
     }
 
-    private fun initDashboardSteps(){
+    private fun initDashboardSteps(context: Context){
+        if (db == null) {
+            db = AppDatabase.getAppDatabase(context)
+        }
+
         db?.let {
             AsyncTask.execute {
                 val savedSteps = it.dashboardStepDao().getAllDashboardSteps()
                 savedSteps.forEach{
                     when(it.step){
-                        DashboardStep.STEP_1 -> stepOne.isCompleted = it.completed
-                        DashboardStep.STEP_2 -> stepTwo.isCompleted = it.completed
-                        DashboardStep.STEP_3 -> stepThree.isCompleted = it.completed
-                        DashboardStep.STEP_4 -> stepFour.isCompleted = it.completed
-                        DashboardStep.STEP_5 -> stepFive.isCompleted = it.completed
-                        DashboardStep.STEP_6 -> stepSix.isCompleted = it.completed
+                        DashboardSteps.RESEARCH -> stepOne.isCompleted = it.completed
+                        DashboardSteps.WRITE_LETTER -> stepTwo.isCompleted = it.completed
+                        DashboardSteps.SHARING -> stepThree.isCompleted = it.completed
+                        DashboardSteps.LETTER_CAMPAING -> stepFour.isCompleted = it.completed
+                        DashboardSteps.GOVERNMENT -> stepFive.isCompleted = it.completed
+                        DashboardSteps.PROTEST -> stepSix.isCompleted = it.completed
                     }
                 }
 
@@ -365,14 +361,34 @@ class MainDashboardFragment : Fragment() {
                 val lastSteps = it.keyValueDao().getKeyValue(KeyValue.LAST_CURRENT_STEP)
                 lastSteps?.let {
                     when(lastSteps.value) {
-                        DashboardStep.STEP_1 -> changeVisuals(DashboardSteps.RESEARCH)
-                        DashboardStep.STEP_2 -> changeVisuals(DashboardSteps.WRITE_LETTER)
-                        DashboardStep.STEP_3 -> changeVisuals(DashboardSteps.SHARING)
-                        DashboardStep.STEP_4 -> changeVisuals(DashboardSteps.LETTER_CAMPAING)
-                        DashboardStep.STEP_5 -> changeVisuals(DashboardSteps.GOVERNMENT)
-                        DashboardStep.STEP_6 -> changeVisuals(DashboardSteps.PROTEST)
+                        DashboardStep.STEP_1 -> {
+                            currentTask.type = stepOne.type
+                            currentTask.isCompleted = stepOne.isCompleted
+                        }
+                        DashboardStep.STEP_2 -> {
+                            currentTask.type = stepTwo.type
+                            currentTask.isCompleted = stepTwo.isCompleted
+                        }
+                        DashboardStep.STEP_3 -> {
+                            currentTask.type = stepThree.type
+                            currentTask.isCompleted = stepThree.isCompleted
+                        }
+                        DashboardStep.STEP_4 -> {
+                            currentTask.type = stepFour.type
+                            currentTask.isCompleted = stepFour.isCompleted
+                        }
+                        DashboardStep.STEP_5 -> {
+                            currentTask.type = stepFive.type
+                            currentTask.isCompleted = stepFive.isCompleted
+                        }
+                        DashboardStep.STEP_6 -> {
+                            currentTask.type = stepSix.type
+                            currentTask.isCompleted = stepSix.isCompleted
+                        }
                     }
                 }
+
+                changeVisuals(currentTask.type!!)
             }
         }
     }

@@ -69,5 +69,13 @@
     <string name="letter_campaing_task_description">TASK: Start a letter writing campaign</string>
     <string name="government_task_description">TASK: Help create new environmental laws</string>
     <string name="protest_task_description">TASK: Take part in or organize a protest</string>
+    <string name="activist_campaign_text">Start a letter-writing campaign with help from your classmates and teacher to fight plastic and climate emergencies. How many letters can your school write?</string>
+    <string name="activist_campaign_subtitle">Be a leader. Cause a wave.</string>
+    <string name="activist_campaign_title">Start an Activist Campaign</string>
+    <string name="engage_local_government_text">Local governments are usually very open to policy input from youth - especially when it’s well thought out, based on successful programs of other governments, and provides good publicity. If your government won’t engage in dialogue, grab a different tool: consider protesting.</string>
+    <string name="policy_toolkit_text">Policy toolkit</string>
+    <string name="engage_local_government_subtitle">Help your city or county develop policy</string>
+    <string name="engage_local_government_title">Engage local government</string>
+    <string name="tools_with_teeth">Tools with teeth</string>
 
 </resources>

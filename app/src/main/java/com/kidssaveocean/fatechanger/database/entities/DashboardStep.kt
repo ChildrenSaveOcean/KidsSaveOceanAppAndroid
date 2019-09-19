@@ -4,11 +4,17 @@ package com.kidssaveocean.fatechanger.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.kidssaveocean.fatechanger.dashboard.DashboardSteps
 import com.kidssaveocean.fatechanger.database.AppDatabase.Companion.DASHBOARD_STEPS_TABLE
 
 @Entity(tableName = DASHBOARD_STEPS_TABLE)
-data class DashboardStep (@PrimaryKey @ColumnInfo(name = "step") var step: String,
-                          @ColumnInfo(name = "completed") var completed: Boolean) {
+data class DashboardStep (
+        @PrimaryKey @ColumnInfo(name = "step") @TypeConverters
+        val step: DashboardSteps,
+        @ColumnInfo(name = "completed")
+        val completed: Boolean
+) {
 
     companion object {
         const val STEP_1 = "STEP_1"

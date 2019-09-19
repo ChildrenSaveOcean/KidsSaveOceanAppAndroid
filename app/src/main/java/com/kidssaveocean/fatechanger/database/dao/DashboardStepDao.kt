@@ -1,6 +1,7 @@
 package com.kidssaveocean.fatechanger.database.dao
 
 import androidx.room.*
+import com.kidssaveocean.fatechanger.dashboard.DashboardSteps
 
 import com.kidssaveocean.fatechanger.database.entities.DashboardStep
 
@@ -8,7 +9,7 @@ import com.kidssaveocean.fatechanger.database.entities.DashboardStep
 interface DashboardStepDao {
 
     @Query("SELECT * FROM DashboardSteps WHERE step = :step")
-    fun getDashboardStep(step: String): DashboardStep?
+    fun getDashboardStep(step: DashboardSteps): DashboardStep?
 
     @Query("SELECT * FROM DashboardSteps")
     fun getAllDashboardSteps(): List<DashboardStep>
