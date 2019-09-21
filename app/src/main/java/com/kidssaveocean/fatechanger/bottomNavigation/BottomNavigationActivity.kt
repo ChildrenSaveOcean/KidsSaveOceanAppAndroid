@@ -45,6 +45,7 @@ class BottomNavigationActivity : AppCompatActivity() {
             }
 
             fragment?.run {
+                supportFragmentManager.popBackStack()
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.fragment_container, this)
                 transaction.commit()

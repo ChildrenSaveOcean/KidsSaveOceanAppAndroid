@@ -1,6 +1,8 @@
 package com.kidssaveocean.fatechanger.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +12,16 @@ import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.countryContacts.CountryIntroFragment
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
+import com.kidssaveocean.fatechanger.policy.PolicyHomeActivity
+import com.kidssaveocean.fatechanger.policy.PolicyHomeFragment
 import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
-
 class HomeFragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("HomeFragment", "onCreate")
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
@@ -45,6 +53,9 @@ class HomeFragment : Fragment() {
         qaFragment?.setTypeText(R.string.interview)
         qaFragment?.setTitleText(R.string.peder_hill)
         qaFragment?.setSubtitleTextView(R.string.q_and_a_with_founder)
+        qaFragment?.tapAction {
+            startActivity(Intent(activity, PolicyHomeActivity::class.java))
+        }
 
         scoreFragment?.setBackgroundImage(R.drawable.dolphins)
         scoreFragment?.setTypeText(R.string.updates)

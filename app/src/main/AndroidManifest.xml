@@ -37,6 +37,8 @@
 
         <activity android:name=".onboarding.userIdentification.UserIdentificationActivity" />
 
+        <activity android:name=".policy.PolicyHomeActivity" />
+
         <activity android:name=".splashScreen.SplashScreenActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">

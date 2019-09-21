@@ -57,4 +57,7 @@
     <string name="write_a_letter_desctiprion">Write your letter. Stamp, mail it, and enter it in the tracker through the map. And invite friends and family to join this very, very real battle. We can raise an army.</string>
     <string name="write_to_where">Write to where?</string>
 
+    //Policy
+    <string name="policy_home_title">Create New Environmental Policy!</string>
+    <string name="policy_home_subtitle">Youth Citizen Initiative Hijack Headquarters</string>
 </resources>
