@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SurferIconView">
+        <attr name="isActive" format="boolean" />
+        <attr name="isCompleted" format="boolean" />
+    </declare-styleable>
+</resources>
