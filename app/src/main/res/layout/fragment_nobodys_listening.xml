@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dashboard.NobodysListeningFragment"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/nobody_listen_buttons_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/girls"
+                android:src="@drawable/girls_and_megafon"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_height="350dp" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="@string/nobodys_listening_title"
+                android:layout_below="@+id/girls"/>
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_below="@+id/title"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:text="@string/nobodys_listening_subtitle"
+                android:textColor="#4a81b6" />
+            <TextView
+                android:id="@+id/text"
+                android:layout_below="@+id/subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:padding="20dp"
+                android:textAlignment="textStart"
+                android:text="@string/nobodys_listening_text"/>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/nobody_listen_buttons_height">
+        <Button
+            android:id="@+id/golden_rules_button"
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            android:text="@string/golden_rules"
+            style="@style/small_button_style"
+            android:layout_marginBottom="10dp" />
+        <Button
+            android:id="@+id/activist_toolkit_button"
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            android:text="@string/activist_toolkit"
+            style="@style/small_button_style"
+            android:layout_marginBottom="20dp" />
+    </LinearLayout>
+</RelativeLayout>

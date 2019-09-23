@@ -19,7 +19,7 @@ import com.kidssaveocean.fatechanger.utility.GeneralImageListCardView
 import java.util.ArrayList
 
 
-class ResourcesFragment : Fragment() {
+class ResourcesFragment (private val url : String = "https://www.kidssaveocean.com/fatechanger-resources") : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_resources, container, false)
@@ -28,6 +28,6 @@ class ResourcesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val webView: WebView = view.findViewById(R.id.webview)
         webView.loadSetting()
-        webView.loadUrl("https://www.kidssaveocean.com/fatechanger-resources")
+        webView.loadUrl(url)
     }
 }
