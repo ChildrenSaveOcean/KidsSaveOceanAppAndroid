@@ -127,8 +127,9 @@
             </LinearLayout>
         </LinearLayout>
         <View
-            android:layout_marginRight="@dimen/bottom_icon_line_margin"
-            android:layout_marginLeft="@dimen/bottom_icon_line_margin"
+
+            android:layout_marginRight="28dp"
+            android:layout_marginLeft="22dp"
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dashboard_stroke_width"
@@ -198,29 +199,45 @@
             android:background="@drawable/dashboard_buttons_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
+            <com.github.jivimberg.library.AutoResizeTextView
                 android:id="@+id/task_description"
                 android:layout_margin="@dimen/standart_margin"
+                android:text="TASK: Spread Fatechanger by sharing"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TASK: Spread Fatechanger by sharing"/>
+                android:layout_height="wrap_content" />
             <LinearLayout
                 android:gravity="center"
                 android:paddingBottom="10dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageView
+                <com.github.jivimberg.library.AutoResizeTextView
                     android:id="@+id/how_button"
-                    android:layout_marginEnd="40dp"
-                    android:src="@drawable/how_button"
+                    android:padding="5dp"
+                    style="@style/dashboard_button_style"
+                    android:text="How?"
                     android:layout_width="80dp"
-                    android:layout_height="50dp" />
-                <ImageView
-                    android:id="@+id/I_did_it_button"
-                    android:src="@drawable/i_did_it_button"
+                    android:layout_height="35dp"
+                    android:textSize="18dp"
+                    android:layout_marginRight="10dp"/>
+                <com.github.jivimberg.library.AutoResizeTextView
+                    android:id="@+id/I_did_it_1"
+                    android:visibility="gone"
+                    android:padding="5dp"
+                    style="@style/dashboard_button_style"
+                    android:text="I did it about plastic"
                     android:layout_width="80dp"
-                    android:layout_height="50dp" />
+                    android:layout_height="35dp"
+                    android:textSize="18dp"
+                    android:layout_marginRight="10dp"/>
+                <com.github.jivimberg.library.AutoResizeTextView
+                    android:id="@+id/I_did_it_2"
+                    android:padding="5dp"
+                    style="@style/dashboard_button_style"
+                    android:text="I did it!"
+                    android:layout_width="80dp"
+                    android:layout_height="35dp"
+                    android:textSize="18dp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -16,7 +16,6 @@ import android.content.Intent
 import com.kidssaveocean.fatechanger.extensions.getScreenSize
 import android.graphics.*
 import android.os.AsyncTask
-import android.view.SoundEffectConstants
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.fragment_main_dashboard.*
@@ -43,14 +42,14 @@ class MainDashboardFragment : Fragment() {
     private var topLeftSteeringWeelCorner : PointF? = null
     private var bottomLeftPoint : PointF? = null
 
-    private var stepOne : DashboardTask = DashboardTask(DashboardSteps.RESEARCH, false)
-    private var stepTwo : DashboardTask = DashboardTask(DashboardSteps.WRITE_LETTER, false)
-    private var stepThree : DashboardTask = DashboardTask(DashboardSteps.SHARING, false)
-    private var stepFour : DashboardTask = DashboardTask(DashboardSteps.LETTER_CAMPAING, false)
-    private var stepFive : DashboardTask = DashboardTask(DashboardSteps.GOVERNMENT, false)
-    private var stepSix : DashboardTask = DashboardTask(DashboardSteps.PROTEST, false)
+    private var stepOne : DashboardTask = DashboardTask(DashboardSteps.RESEARCH)
+    private var stepTwo : DashboardTask = DashboardTask(DashboardSteps.WRITE_LETTER)
+    private var stepThree : DashboardTask = DashboardTask(DashboardSteps.SHARING)
+    private var stepFour : DashboardTask = DashboardTask(DashboardSteps.LETTER_CAMPAING)
+    private var stepFive : DashboardTask = DashboardTask(DashboardSteps.GOVERNMENT)
+    private var stepSix : DashboardTask = DashboardTask(DashboardSteps.PROTEST)
 
-    private var currentTask : DashboardTask = DashboardTask(DashboardSteps.RESEARCH, false)
+    private var currentTask : DashboardTask = DashboardTask(DashboardSteps.RESEARCH)
     private var db : AppDatabase? = null
     val mp = MediaPlayer()
 
@@ -61,6 +60,10 @@ class MainDashboardFragment : Fragment() {
             return true
         }
 
+    init {
+        stepTwo.isSecondCompleted = false
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -69,7 +72,6 @@ class MainDashboardFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
         initDashboardSteps(activity as BottomNavigationActivity)
     }
 
@@ -81,14 +83,40 @@ class MainDashboardFragment : Fragment() {
         initDashboardSteps(bottomActivity)
 
         currentTask?.completedObservable?.subscribe {
-            changeCompletedStatus(bottomActivity, it)
-            when (currentTask.type) {
-                DashboardSteps.RESEARCH -> stepOne.isCompleted = it
-                DashboardSteps.WRITE_LETTER -> stepTwo.isCompleted = it
-                DashboardSteps.SHARING -> stepThree.isCompleted = it
-                DashboardSteps.LETTER_CAMPAING -> stepFour.isCompleted = it
-                DashboardSteps.GOVERNMENT -> stepFive.isCompleted = it
-                DashboardSteps.PROTEST -> stepSix.isCompleted = it
+
+            bottomActivity?.runOnUiThread {
+                when (currentTask.type) {
+                    DashboardSteps.RESEARCH -> {
+                        stepOne.isFirstCompleted = it.first
+                        stepOne.isSecondCompleted = it.second
+                        changeCompletedStatus(bottomActivity, stepOne)
+                    }
+                    DashboardSteps.WRITE_LETTER -> {
+                        stepTwo.isFirstCompleted = it.first
+                        stepTwo.isSecondCompleted = it.second
+                        changeCompletedStatus(bottomActivity, stepTwo)
+                    }
+                    DashboardSteps.SHARING -> {
+                        stepThree.isFirstCompleted = it.first
+                        stepThree.isSecondCompleted = it.second
+                        changeCompletedStatus(bottomActivity, stepThree)
+                    }
+                    DashboardSteps.LETTER_CAMPAING -> {
+                        stepFour.isFirstCompleted = it.first
+                        stepFour.isSecondCompleted = it.second
+                        changeCompletedStatus(bottomActivity, stepFour)
+                    }
+                    DashboardSteps.GOVERNMENT -> {
+                        stepFive.isFirstCompleted = it.first
+                        stepFive.isSecondCompleted = it.second
+                        changeCompletedStatus(bottomActivity, stepFive)
+                    }
+                    DashboardSteps.PROTEST -> {
+                        stepSix.isFirstCompleted = it.first
+                        stepSix.isSecondCompleted = it.second
+                        changeCompletedStatus(bottomActivity, stepSix)
+                    }
+                }
             }
         }
 
@@ -97,49 +125,49 @@ class MainDashboardFragment : Fragment() {
         }
 
         firstIcon.setOnClickListener {
-            playClick()
+            playClick(bottomActivity)
             clickOnSurfer(stepOne)
         }
 
         secondIcon.setOnClickListener {
-            playClick()
+            playClick(bottomActivity)
             clickOnSurfer(stepTwo)
         }
 
         thirdIcon.setOnClickListener {
-            playClick()
+            playClick(bottomActivity)
             clickOnSurfer(stepThree)
         }
 
         fourthIcon.setOnClickListener {
-            playClick()
+            playClick(bottomActivity)
             clickOnSurfer(stepFour)
         }
 
         fifthIcon.setOnClickListener {
-            playClick()
+            playClick(bottomActivity)
             clickOnSurfer(stepFive)
         }
 
         sixthIcon.setOnClickListener {
-            playClick()
+            playClick(bottomActivity)
             clickOnSurfer(stepSix)
         }
 
         how_button?.setOnClickListener {
-            howButtonAction(currentTask?.type!!)
+            howButtonAction(currentTask.type!!)
         }
 
-        I_did_it_button?.setOnClickListener {
-            currentTask?.isCompleted = currentTask?.isCompleted?.not()
-            AsyncTask.execute {
-                val step = db?.dashboardStepDao()?.getDashboardStep(currentTask.type!!)
-                val newStep = DashboardStep(currentTask.type!!, currentTask.isCompleted!!)
-                when (step) {
-                    null -> db?.dashboardStepDao()?.insertDashboardStep(newStep)
-                    else -> db?.dashboardStepDao()?.updateDashboardStep(newStep)
-                }
+        I_did_it_1?.setOnClickListener {
+            if (currentTask.type == DashboardSteps.WRITE_LETTER) {
+                currentTask.isSecondCompleted = currentTask.isSecondCompleted.not()
+                saveTaskToDb(currentTask)
             }
+        }
+
+        I_did_it_2?.setOnClickListener {
+            currentTask.isFirstCompleted = currentTask.isFirstCompleted.not()
+            saveTaskToDb(currentTask)
         }
 
         icons.viewTreeObserver.addOnGlobalLayoutListener {
@@ -167,6 +195,17 @@ class MainDashboardFragment : Fragment() {
         }
     }
 
+    private fun saveTaskToDb(task : DashboardTask) {
+        AsyncTask.execute {
+            val step = db?.dashboardStepDao()?.getDashboardStep(task.type!!)
+            val newStep = DashboardStep(task.type!!, task.isFirstCompleted, task.isSecondCompleted)
+            when (step) {
+                null -> db?.dashboardStepDao()?.insertDashboardStep(newStep)
+                else -> db?.dashboardStepDao()?.updateDashboardStep(newStep)
+            }
+        }
+    }
+
     private fun clickOnSurfer(step : DashboardTask) {
         var value = ""
         when(step.type) {
@@ -188,28 +227,22 @@ class MainDashboardFragment : Fragment() {
         }
 
         currentTask.type = step.type
-        currentTask.isCompleted = step.isCompleted
-        changeVisuals(currentTask.type!!)
+        currentTask.isFirstCompleted = step.isFirstCompleted
+        currentTask.isSecondCompleted = step.isSecondCompleted
+        changeVisuals(currentTask)
     }
 
-    private fun changeVisuals(step : DashboardSteps) {
+    private fun changeVisuals(task : DashboardTask) {
         activity?.runOnUiThread {
-            firstIcon.isActive = step.ordinal == 0
-            secondIcon.isActive = step.ordinal == 1
-            thirdIcon.isActive = step.ordinal == 2
-            fourthIcon.isActive = step.ordinal == 3
-            fifthIcon.isActive = step.ordinal == 4
-            sixthIcon.isActive = step.ordinal == 5
-            rotateWheel(step)
-            rotateMeteor(step)
-            when (step) {
-                DashboardSteps.RESEARCH -> task_description?.text = getString(R.string.research_task_description)
-                DashboardSteps.WRITE_LETTER -> task_description?.text = getString(R.string.write_letter_task_description)
-                DashboardSteps.SHARING -> task_description?.text = getString(R.string.sharing_task_description)
-                DashboardSteps.LETTER_CAMPAING -> task_description?.text = getString(R.string.letter_campaing_task_description)
-                DashboardSteps.GOVERNMENT -> task_description?.text = getString(R.string.government_task_description)
-                DashboardSteps.PROTEST -> task_description?.text = getString(R.string.protest_task_description)
-            }
+            firstIcon.isActive = task.type?.ordinal == 0
+            secondIcon.isActive = task.type?.ordinal == 1
+            thirdIcon.isActive = task.type?.ordinal == 2
+            fourthIcon.isActive = task.type?.ordinal == 3
+            fifthIcon.isActive = task.type?.ordinal == 4
+            sixthIcon.isActive = task.type?.ordinal == 5
+            rotateWheel(task.type!!)
+            rotateMeteor(task.type!!)
+            changeCompletedStatus(activity as BottomNavigationActivity, task)
         }
     }
 
@@ -257,36 +290,74 @@ class MainDashboardFragment : Fragment() {
         }
     }
 
-    private fun changeCompletedStatus(context : Context, completed : Boolean) {
+    private fun changeCompletedStatus(context : Context, task : DashboardTask) {
+        when (currentTask.type) {
+            DashboardSteps.RESEARCH -> {
+                firstIcon.isCompleted = task.isFirstCompleted
+                I_did_it_1.visibility = View.GONE
+                changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
+            }
+            DashboardSteps.WRITE_LETTER -> {
+                secondIcon.isCompleted = task.isFirstCompleted && task.isSecondCompleted
+                I_did_it_1.visibility = View.VISIBLE
+                when (secondIcon.isCompleted) {
+                    true -> complete_image.setImage(context, R.drawable.complete_fist_and_writing)
+                    false -> complete_image.setImage(context, R.drawable.incomplete_fist_and_writing)
+                }
+                when (task.isSecondCompleted) {
+                    true -> I_did_it_1.text = getString(R.string.Not_yet)
+                    false -> I_did_it_1.text = getString(R.string.I_did_it_about_plastic)
+                }
+                when (task.isFirstCompleted) {
+                    true -> I_did_it_2.text = getString(R.string.Not_yet)
+                    false -> I_did_it_2.text = getString(R.string.I_did_it_about_climate)
+                }
+            }
+            DashboardSteps.SHARING -> {
+                thirdIcon.isCompleted = task.isFirstCompleted
+                I_did_it_1.visibility = View.GONE
+                changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
+            }
+            DashboardSteps.LETTER_CAMPAING -> {
+                fourthIcon.isCompleted = task.isFirstCompleted
+                I_did_it_1.visibility = View.GONE
+                changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
+            }
+            DashboardSteps.GOVERNMENT -> {
+                fifthIcon.isCompleted = task.isFirstCompleted
+                I_did_it_1.visibility = View.GONE
+                changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
+            }
+            DashboardSteps.PROTEST -> {
+                sixthIcon.isCompleted = task.isFirstCompleted
+                I_did_it_1.visibility = View.GONE
+                changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
+            }
+            else -> println("Unknown type for DashboardSteps")
+        }
+    }
+
+    private fun changeTextOnButtonAndFistIcon(context: Context, completed : Boolean) {
         when(completed) {
             true -> {
                 complete_image.setImage(context, R.drawable.complete_fist_and_writing)
-                I_did_it_button.setImage(context, R.drawable.not_yet_button)
+                I_did_it_2.text = getString(R.string.Not_yet)
             }
             false -> {
                 complete_image.setImage(context, R.drawable.incomplete_fist_and_writing)
-                I_did_it_button.setImage(context, R.drawable.i_did_it_button)
+                I_did_it_2.text = getString(R.string.I_did_it)
             }
-        }
-        when (currentTask.type) {
-            DashboardSteps.RESEARCH -> firstIcon.isCompleted = completed
-            DashboardSteps.WRITE_LETTER -> secondIcon.isCompleted = completed
-            DashboardSteps.SHARING -> thirdIcon.isCompleted = completed
-            DashboardSteps.LETTER_CAMPAING -> fourthIcon.isCompleted = completed
-            DashboardSteps.GOVERNMENT -> fifthIcon.isCompleted = completed
-            DashboardSteps.PROTEST -> sixthIcon.isCompleted = completed
-            else -> println("Unknown type for DashboardSteps")
         }
     }
 
     private fun changeIconsBg(task : DashboardTask) {
         when (task.type) {
-            DashboardSteps.RESEARCH -> firstIcon.isCompleted = task.isCompleted!!
-            DashboardSteps.WRITE_LETTER -> secondIcon.isCompleted = task.isCompleted!!
-            DashboardSteps.SHARING -> thirdIcon.isCompleted = task.isCompleted!!
-            DashboardSteps.LETTER_CAMPAING -> fourthIcon.isCompleted = task.isCompleted!!
-            DashboardSteps.GOVERNMENT -> fifthIcon.isCompleted = task.isCompleted!!
-            DashboardSteps.PROTEST -> sixthIcon.isCompleted = task.isCompleted!!
+            DashboardSteps.RESEARCH -> firstIcon.isCompleted = task.isFirstCompleted
+            DashboardSteps.WRITE_LETTER -> secondIcon.isCompleted = task.isFirstCompleted && task.isSecondCompleted
+            DashboardSteps.SHARING -> thirdIcon.isCompleted = task.isFirstCompleted
+            DashboardSteps.LETTER_CAMPAING -> fourthIcon.isCompleted = task.isFirstCompleted
+            DashboardSteps.GOVERNMENT -> fifthIcon.isCompleted = task.isFirstCompleted
+            DashboardSteps.PROTEST -> sixthIcon.isCompleted = task.isFirstCompleted
             else -> println("Unknown type for DashboardSteps")
         }
     }
@@ -304,7 +375,7 @@ class MainDashboardFragment : Fragment() {
             DashboardSteps.SHARING -> {
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+                    putExtra(Intent.EXTRA_TEXT, "https://www.kidssaveocean.com/")
                     type = "text/plain"
                 }
                 val shareIntent = Intent.createChooser(sendIntent, null)
@@ -342,12 +413,15 @@ class MainDashboardFragment : Fragment() {
                 val savedSteps = it.dashboardStepDao().getAllDashboardSteps()
                 savedSteps.forEach{
                     when(it.step){
-                        DashboardSteps.RESEARCH -> stepOne.isCompleted = it.completed
-                        DashboardSteps.WRITE_LETTER -> stepTwo.isCompleted = it.completed
-                        DashboardSteps.SHARING -> stepThree.isCompleted = it.completed
-                        DashboardSteps.LETTER_CAMPAING -> stepFour.isCompleted = it.completed
-                        DashboardSteps.GOVERNMENT -> stepFive.isCompleted = it.completed
-                        DashboardSteps.PROTEST -> stepSix.isCompleted = it.completed
+                        DashboardSteps.RESEARCH -> stepOne.isFirstCompleted = it.first_completed_step
+                        DashboardSteps.WRITE_LETTER -> {
+                            stepTwo.isFirstCompleted = it.first_completed_step
+                            stepTwo.isSecondCompleted = it.second_completed_step
+                        }
+                        DashboardSteps.SHARING -> stepThree.isFirstCompleted = it.first_completed_step
+                        DashboardSteps.LETTER_CAMPAING -> stepFour.isFirstCompleted = it.first_completed_step
+                        DashboardSteps.GOVERNMENT -> stepFive.isFirstCompleted = it.first_completed_step
+                        DashboardSteps.PROTEST -> stepSix.isFirstCompleted = it.first_completed_step
                     }
                 }
 
@@ -358,49 +432,55 @@ class MainDashboardFragment : Fragment() {
                 changeIconsBg(stepFive)
                 changeIconsBg(stepSix)
 
-                val lastSteps = it.keyValueDao().getKeyValue(KeyValue.LAST_CURRENT_STEP)
+                val lastSteps = it?.keyValueDao()?.getKeyValue(KeyValue.LAST_CURRENT_STEP)
                 lastSteps?.let {
                     when(lastSteps.value) {
                         DashboardStep.STEP_1 -> {
                             currentTask.type = stepOne.type
-                            currentTask.isCompleted = stepOne.isCompleted
+                            currentTask.isFirstCompleted = stepOne.isFirstCompleted
+                            currentTask.isSecondCompleted = stepOne.isSecondCompleted
                         }
                         DashboardStep.STEP_2 -> {
                             currentTask.type = stepTwo.type
-                            currentTask.isCompleted = stepTwo.isCompleted
+                            currentTask.isFirstCompleted = stepTwo.isFirstCompleted
+                            currentTask.isSecondCompleted = stepTwo.isSecondCompleted
                         }
                         DashboardStep.STEP_3 -> {
                             currentTask.type = stepThree.type
-                            currentTask.isCompleted = stepThree.isCompleted
+                            currentTask.isFirstCompleted = stepThree.isFirstCompleted
+                            currentTask.isSecondCompleted = stepThree.isSecondCompleted
                         }
                         DashboardStep.STEP_4 -> {
                             currentTask.type = stepFour.type
-                            currentTask.isCompleted = stepFour.isCompleted
+                            currentTask.isFirstCompleted = stepFour.isFirstCompleted
+                            currentTask.isSecondCompleted = stepFour.isSecondCompleted
                         }
                         DashboardStep.STEP_5 -> {
                             currentTask.type = stepFive.type
-                            currentTask.isCompleted = stepFive.isCompleted
+                            currentTask.isFirstCompleted = stepFive.isFirstCompleted
+                            currentTask.isSecondCompleted = stepFive.isSecondCompleted
                         }
                         DashboardStep.STEP_6 -> {
                             currentTask.type = stepSix.type
-                            currentTask.isCompleted = stepSix.isCompleted
+                            currentTask.isFirstCompleted = stepSix.isFirstCompleted
+                            currentTask.isSecondCompleted = stepSix.isSecondCompleted
                         }
                     }
                 }
 
-                changeVisuals(currentTask.type!!)
+                changeVisuals(currentTask)
             }
         }
     }
 
-    private fun playClick(){
+    private fun playClick(context : Context){
         if (mp.isPlaying) {
             mp.stop()
         }
         try {
             mp.reset()
             val afd: AssetFileDescriptor
-            afd = (activity as BottomNavigationActivity).assets.openFd("knobClick.mp3")
+            afd = context.assets.openFd("knobClick.mp3")
             mp.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
             mp.prepare()
             mp.start()
@@ -458,13 +538,14 @@ private class BackgroundDrawable(
     override fun setColorFilter(cf: ColorFilter?) {}
 }
 
-class DashboardTask(dType : DashboardSteps, dIsCompleted : Boolean) {
+class DashboardTask(dType : DashboardSteps) {
 
     private var _type : DashboardSteps? = null
-    private var _isCompleted : Boolean? = null
+    private var _isFirstCompleted : Boolean = false
+    private var _isSecondCompleted : Boolean = true
 
     val typeObservable = PublishSubject.create<DashboardSteps>()
-    val completedObservable = PublishSubject.create<Boolean>()
+    val completedObservable = PublishSubject.create<Pair<Boolean, Boolean>>()
 
     var type : DashboardSteps?
         get() = _type
@@ -473,16 +554,27 @@ class DashboardTask(dType : DashboardSteps, dIsCompleted : Boolean) {
             _type?.let { typeObservable.onNext(it) }
         }
 
-    var isCompleted : Boolean?
-        get() = _isCompleted
+    var isFirstCompleted : Boolean
+        get() = _isFirstCompleted
         set(value) {
-            _isCompleted = value
-            _isCompleted?.let { completedObservable.onNext(it) }
+            if (_isFirstCompleted != value) {
+                completedObservable.onNext(Pair(value, isSecondCompleted))
+            }
+            _isFirstCompleted = value
+        }
+
+    var isSecondCompleted : Boolean
+        get() = _isSecondCompleted
+        set(value) {
+            if (_isSecondCompleted != value) {
+                completedObservable.onNext(Pair(isFirstCompleted, value))
+            }
+            _isSecondCompleted = value
+
         }
 
     init {
         _type = dType
-        _isCompleted = dIsCompleted
     }
 }
 

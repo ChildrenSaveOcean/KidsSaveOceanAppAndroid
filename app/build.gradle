@@ -76,6 +76,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     // Rx
     implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+
+    implementation 'com.github.jivimberg:autoresizetextview:0.0.2'
 }
 repositories {
     mavenCentral()

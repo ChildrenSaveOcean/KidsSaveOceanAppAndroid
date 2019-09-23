@@ -77,5 +77,10 @@
     <string name="engage_local_government_subtitle">Help your city or county develop policy</string>
     <string name="engage_local_government_title">Engage local government</string>
     <string name="tools_with_teeth">Tools with teeth</string>
+    <string name="I_did_it">I did it!</string>
+    <string name="Not_yet">Not yet</string>
+    <string name="I_did_it_about_plastic">I did it about plastic!</string>
+    <string name="I_did_it_about_climate">I did it about climate!</string>
+
 
 </resources>

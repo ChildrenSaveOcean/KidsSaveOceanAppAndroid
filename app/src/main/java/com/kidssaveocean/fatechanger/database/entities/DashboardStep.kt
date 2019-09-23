@@ -12,8 +12,12 @@ import com.kidssaveocean.fatechanger.database.AppDatabase.Companion.DASHBOARD_ST
 data class DashboardStep (
         @PrimaryKey @ColumnInfo(name = "step") @TypeConverters
         val step: DashboardSteps,
-        @ColumnInfo(name = "completed")
-        val completed: Boolean
+        /* The column represents "I did it!" button or "I did it about climate" */
+        @ColumnInfo(name = "first_completed_step")
+        val first_completed_step: Boolean,
+        /* The column represents "I did it about plastic" button */
+        @ColumnInfo(name = "second_completed_step")
+        val second_completed_step: Boolean
 ) {
 
     companion object {
