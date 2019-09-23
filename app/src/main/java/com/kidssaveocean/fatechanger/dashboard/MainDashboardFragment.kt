@@ -195,6 +195,14 @@ class MainDashboardFragment : Fragment() {
         }
     }
 
+    private fun clickOnSurfer(step : DashboardTask) {
+        saveLastCurrentTaskToDb(step)
+        currentTask.type = step.type
+        currentTask.isFirstCompleted = step.isFirstCompleted
+        currentTask.isSecondCompleted = step.isSecondCompleted
+        changeVisuals(currentTask)
+    }
+
     private fun saveTaskToDb(task : DashboardTask) {
         AsyncTask.execute {
             val step = db?.dashboardStepDao()?.getDashboardStep(task.type!!)
@@ -206,9 +214,9 @@ class MainDashboardFragment : Fragment() {
         }
     }
 
-    private fun clickOnSurfer(step : DashboardTask) {
+    private fun saveLastCurrentTaskToDb(task : DashboardTask) {
         var value = ""
-        when(step.type) {
+        when(task.type) {
             DashboardSteps.RESEARCH -> value = DashboardStep.STEP_1
             DashboardSteps.WRITE_LETTER -> value = DashboardStep.STEP_2
             DashboardSteps.SHARING -> value = DashboardStep.STEP_3
@@ -225,11 +233,6 @@ class MainDashboardFragment : Fragment() {
                 else -> db?.keyValueDao()?.updateKeyValue(newKeyValue)
             }
         }
-
-        currentTask.type = step.type
-        currentTask.isFirstCompleted = step.isFirstCompleted
-        currentTask.isSecondCompleted = step.isSecondCompleted
-        changeVisuals(currentTask)
     }
 
     private fun changeVisuals(task : DashboardTask) {
