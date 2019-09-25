@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_policy_step.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 
 class PolicyStepsActivity: BaseActivity() {
-    val stepsViewModel= StepsViewModel()
+    private val stepsViewModel= StepsViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
