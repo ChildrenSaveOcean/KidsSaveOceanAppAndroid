@@ -1,15 +1,22 @@
 package com.kidssaveocean.fatechanger.policy
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.common.BaseActivity
+import kotlinx.android.synthetic.main.activity_policy_home.*
 
-class PolicyHomeActivity: AppCompatActivity() {
+class PolicyHomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_policy_fragment)
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragment, PolicyHomeFragment())
-        transaction.commit()
+        setContentView(R.layout.activity_policy_home)
+
+        imgHowToWork.setOnClickListener{
+            startActivity(Intent(this, PolicyVideoActivity::class.java))
+        }
+
+        imgFollowStep.setOnClickListener{
+            startActivity(Intent(this, PolicyStepsActivity::class.java))
+        }
     }
 }

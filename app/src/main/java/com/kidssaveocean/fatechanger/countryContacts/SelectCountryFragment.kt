@@ -17,7 +17,7 @@ import com.google.android.gms.location.LocationServices
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
-import com.kidssaveocean.fatechanger.firebase.CountryModel
+import com.kidssaveocean.fatechanger.firebase.model.CountryModel
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
 import java.util.*
 

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/policy_step_top"
+            app:layout_constraintDimensionRatio="294:70"/>
+
+        <com.google.android.material.appbar.AppBarLayout
+            app:layout_constraintTop_toTopOf="@id/imgTop"
+            app:layout_constraintBottom_toBottomOf="@id/imgTop"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/transparent"
+            app:elevation="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:navigationIcon="@drawable/ic_back"
+                app:contentInsetStartWithNavigation="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/back"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/tvPolicyStepTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:letterSpacing="0.02"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/policy_home_title"
+            android:textColor="#474c53"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/imgTop" />
+
+        <TextView
+            android:id="@+id/tvPolicyStepSubTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvPolicyStepTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#53585f"
+            android:letterSpacing="-0.02"
+            android:lineSpacingExtra="2sp"
+            android:gravity="center"
+            android:text="@string/policy_step_subtitle"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rlvSteps"
+            app:layout_constraintTop_toBottomOf="@id/tvPolicyStepSubTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

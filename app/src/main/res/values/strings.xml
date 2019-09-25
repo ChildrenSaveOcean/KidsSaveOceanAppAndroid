@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Fate Changer</string>
 
+    <string name="back">Back</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="how_you_can_help_description">As a student or teacher, you can start a letter-writing campaign in your school to lobby governments. As an individual, you can also write or donate. Share the app and empower others to help our oceans.</string>
@@ -57,7 +59,15 @@
     <string name="write_a_letter_desctiprion">Write your letter. Stamp, mail it, and enter it in the tracker through the map. And invite friends and family to join this very, very real battle. We can raise an army.</string>
     <string name="write_to_where">Write to where?</string>
 
-    //Policy
+    <!-- Policy -->
     <string name="policy_home_title">Create New Environmental Policy!</string>
     <string name="policy_home_subtitle">Youth Citizen Initiative Hijack Headquarters</string>
+    <string name="policy_step_subtitle">7 Step, Change the World, Repeat</string>
+    <string name="step_one">Watch the video about the ballot process to understand how it works.</string>
+    <string name="step_two">Vote on which policy you want passed.</string>
+    <string name="step_three">After kids decide, you’ll be notified. Check out the policy, then enter in the app how many signatures you plan to collect.</string>
+    <string name="step_four">Download and print the signature collection paper. Begin collecting. Share.</string>
+    <string name="step_five">As you collect signatures, keep them updated - see how many we need.</string>
+    <string name="step_six">We can’t do this alone; we must recruit other organizations to help - kids will lead, adults will follow. Tell your local newspaper,  environmenal groups, your friends!</string>
+    <string name="step_seven">You’ll be notified when and where to mail your signature papers.</string>
 </resources>

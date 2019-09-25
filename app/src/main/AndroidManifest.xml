@@ -37,7 +37,12 @@
 
         <activity android:name=".onboarding.userIdentification.UserIdentificationActivity" />
 
-        <activity android:name=".policy.PolicyHomeActivity" />
+        <activity android:name=".policy.PolicyHomeActivity"/>
+
+        <activity android:name=".policy.PolicyStepsActivity"/>
+
+        <activity android:name=".policy.PolicyVideoActivity"
+            android:screenOrientation="landscape"/>
 
         <activity android:name=".splashScreen.SplashScreenActivity"
             android:theme="@style/SplashTheme"

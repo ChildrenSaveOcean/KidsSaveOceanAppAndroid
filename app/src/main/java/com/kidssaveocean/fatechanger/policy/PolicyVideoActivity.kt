@@ -1,24 +1,23 @@
 package com.kidssaveocean.fatechanger.policy
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerSupportFragment
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.common.BaseActivity
 
-class PolicyVideoActivity: AppCompatActivity() {
+class PolicyVideoActivity: BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_policy_video)
-        val fragment = supportFragmentManager.findFragmentById(R.id.fragment) as YouTubePlayerSupportFragment?
+        val fragment = supportFragmentManager.findFragmentById(R.id.frgVideo) as YouTubePlayerSupportFragment?
         fragment?.initialize(DEVELOPER_KEY, object : YouTubePlayer.OnInitializedListener {
             override fun onInitializationSuccess(provider: YouTubePlayer.Provider, youTubePlayer: YouTubePlayer, wasRestored: Boolean) {
                 if (!wasRestored) {
-                    youTubePlayer.cueVideo(INTRO_VIDEO_STRING)
+                    youTubePlayer.cueVideo(POLICY_VIDEO_STRING)
                 }
             }
 
@@ -30,6 +29,6 @@ class PolicyVideoActivity: AppCompatActivity() {
 
     companion object {
         private const val DEVELOPER_KEY = "Apparently you don't need a key to play videos"
-        private const val INTRO_VIDEO_STRING = "aWbPiPh_gaU"
+        private const val POLICY_VIDEO_STRING = "HQTUWK7CM-Y"
     }
 }

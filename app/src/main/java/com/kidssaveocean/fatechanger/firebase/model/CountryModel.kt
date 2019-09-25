@@ -1,4 +1,4 @@
-package com.kidssaveocean.fatechanger.firebase
+package com.kidssaveocean.fatechanger.firebase.model
 
 data class CountryModel (
     val country_name : String = "",

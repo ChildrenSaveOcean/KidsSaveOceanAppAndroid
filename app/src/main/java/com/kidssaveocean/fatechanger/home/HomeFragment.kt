@@ -13,7 +13,6 @@ import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.countryContacts.CountryIntroFragment
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.policy.PolicyHomeActivity
-import com.kidssaveocean.fatechanger.policy.PolicyHomeFragment
 import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
 class HomeFragment : Fragment() {
