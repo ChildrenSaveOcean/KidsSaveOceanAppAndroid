@@ -18,5 +18,9 @@ class PolicyHomeActivity : BaseActivity() {
         imgFollowStep.setOnClickListener{
             startActivity(Intent(this, PolicyStepsActivity::class.java))
         }
+
+        imgImpact.setOnClickListener{
+            startActivity(Intent(this, PolicyImpactActivity::class.java))
+        }
     }
 }

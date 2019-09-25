@@ -96,4 +96,12 @@
     <string name="step_five">As you collect signatures, keep them updated - see how many we need.</string>
     <string name="step_six">We can’t do this alone; we must recruit other organizations to help - kids will lead, adults will follow. Tell your local newspaper,  environmenal groups, your friends!</string>
     <string name="step_seven">You’ll be notified when and where to mail your signature papers.</string>
+    <string name="policy_impact_title">Multiply your Impact!</string>
+    <string name="first_paragraph">Collecting signatures yourself is brilliant. But let’s do a little math.</string>
+    <string name="second_paragraph">You = Bunch of signatures</string>
+    <string name="third_paragraph">Now, say you get your girl scout troop or surf buddies or class to collect them too.</string>
+    <string name="fourth_paragraph">Bunch * 20-ish = Loads of signatures</string>
+    <string name="fifth_paragraph">And ask them to multiply their impact…</string>
+    <string name="sixth_paragraph">Loads * Multiplied = MONSTER IMPACT
+</string>
 </resources>

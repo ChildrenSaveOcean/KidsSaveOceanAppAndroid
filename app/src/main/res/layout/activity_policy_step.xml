@@ -18,32 +18,7 @@
             android:src="@drawable/policy_step_top"
             app:layout_constraintDimensionRatio="294:70"/>
 
-        <com.google.android.material.appbar.AppBarLayout
-            app:layout_constraintTop_toTopOf="@id/imgTop"
-            app:layout_constraintBottom_toBottomOf="@id/imgTop"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@color/transparent"
-            app:elevation="0dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                app:navigationIcon="@drawable/ic_back"
-                app:contentInsetStartWithNavigation="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/back"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-
-            </androidx.appcompat.widget.Toolbar>
-
-        </com.google.android.material.appbar.AppBarLayout>
+        <include layout="@layout/view_toolbar"/>
 
         <TextView
             android:id="@+id/tvPolicyStepTitle"

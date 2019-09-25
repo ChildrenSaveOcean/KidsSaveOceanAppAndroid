@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kidssaveocean.fatechanger.R
 import kotlinx.android.synthetic.main.item_policy_step.view.*
 
-class PolicyStepsAdapter(val items: List<String>): RecyclerView.Adapter<PolicyStepsAdapter.ViewHolder>() {
+class PolicyStepsAdapter: RecyclerView.Adapter<PolicyStepsAdapter.ViewHolder>() {
+    lateinit var items: List<String>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_policy_step, parent, false)

@@ -1,13 +1,15 @@
 package com.kidssaveocean.fatechanger.policy
 
 import android.os.Bundle
-import android.widget.LinearLayout
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.common.BaseActivity
 import kotlinx.android.synthetic.main.activity_policy_step.*
+import kotlinx.android.synthetic.main.view_toolbar.*
 
 class PolicyStepsActivity: BaseActivity() {
+    val stepsViewModel= StepsViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,16 +26,19 @@ class PolicyStepsActivity: BaseActivity() {
             onBackPressed()
         }
 
-        val list = mutableListOf<String>()
-        list.add(resources.getString(R.string.step_one))
-        list.add(resources.getString(R.string.step_two))
-        list.add(resources.getString(R.string.step_three))
-        list.add(resources.getString(R.string.step_four))
-        list.add(resources.getString(R.string.step_five))
-        list.add(resources.getString(R.string.step_six))
-        list.add(resources.getString(R.string.step_seven))
+        rlvSteps?.run {
+            layoutManager = LinearLayoutManager(this@PolicyStepsActivity)
+            val policyStepsAdapter = PolicyStepsAdapter()
+            adapter = policyStepsAdapter
+            subscribeUi(policyStepsAdapter)
+        }
 
-        rlvSteps.layoutManager = LinearLayoutManager(this)
-        rlvSteps.adapter = PolicyStepsAdapter(list)
+    }
+
+    fun subscribeUi(adapter: PolicyStepsAdapter) {
+        stepsViewModel.steps.observe(this, Observer{
+            adapter.items = it
+            adapter.notifyDataSetChanged()
+        })
     }
 }
