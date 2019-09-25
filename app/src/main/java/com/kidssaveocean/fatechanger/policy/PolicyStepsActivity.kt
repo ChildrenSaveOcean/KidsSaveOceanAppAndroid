@@ -35,7 +35,7 @@ class PolicyStepsActivity: BaseActivity() {
 
     }
 
-    fun subscribeUi(adapter: PolicyStepsAdapter) {
+    private fun subscribeUi(adapter: PolicyStepsAdapter) {
         stepsViewModel.steps.observe(this, Observer{
             adapter.items = it
             adapter.notifyDataSetChanged()
