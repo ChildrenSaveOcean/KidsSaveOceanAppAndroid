@@ -12,6 +12,7 @@ data class KeyValue ( @PrimaryKey @ColumnInfo(name = "key") var key: String,
 
     companion object {
         const val ONBOARDING = "ONBOARDING"
+        const val LAST_CURRENT_STEP = "LAST_CURRENT_STEP"
     }
 
 }

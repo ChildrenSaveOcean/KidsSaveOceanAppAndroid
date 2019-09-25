@@ -58,6 +58,32 @@
     <string name="write_a_letter_and_spread_the_word">Write a letter and spread the word.</string>
     <string name="write_a_letter_desctiprion">Write your letter. Stamp, mail it, and enter it in the tracker through the map. And invite friends and family to join this very, very real battle. We can raise an army.</string>
     <string name="write_to_where">Write to where?</string>
+    <string name="golden_rules_text">1) Only if your parents say it’s okay\n2) Only if it’s legal in your country\n3) Always and only peacefully\n4) Communicate a clear message and demands\n5) Use personal stories to get your message across\n6) Make signs, borrow a bullhorn\n7) 3 weeks before: notify other schools, environmental groups and kidssaveocean.com\n8) 3 days before: notify the press and remind others\n 9) If there’s any trouble, leave immediately\n10) Stand up for what you believe in. Though you may be shy, have steel determination</string>
+    <string name="activist_toolkit">Activist toolkit</string>
+    <string name="golden_rules_of_protesting">Golden Rules of Protesting</string>
+    <string name="golden_rules">Golden rules</string>
+    <string name="nobodys_listening_text">Grownups have trouble changing. If you deeply feel the world must change faster to save the ocean and its creatures, multiply your activist impact by protesting.</string>
+    <string name="nobodys_listening_subtitle">March, Sit-in, Demonstrate!</string>
+    <string name="nobodys_listening_title">Feel Nobody’s Listening?</string>
+    <string name="research_task_description">TASK: Research plastic ocean pollution</string>
+    <string name="write_letter_task_description">TASK: Write your government a letter</string>
+    <string name="sharing_task_description">TASK: Spread Fatechanger by sharing</string>
+    <string name="letter_campaing_task_description">TASK: Start a letter writing campaign</string>
+    <string name="government_task_description">TASK: Help create new environmental laws</string>
+    <string name="protest_task_description">TASK: Take part in or organize a protest</string>
+    <string name="activist_campaign_text">Start a letter-writing campaign with help from your classmates and teacher to fight plastic and climate emergencies. How many letters can your school write?</string>
+    <string name="activist_campaign_subtitle">Be a leader. Cause a wave.</string>
+    <string name="activist_campaign_title">Start an Activist Campaign</string>
+    <string name="engage_local_government_text">Local governments are usually very open to policy input from youth - especially when it’s well thought out, based on successful programs of other governments, and provides good publicity. If your government won’t engage in dialogue, grab a different tool: consider protesting.</string>
+    <string name="policy_toolkit_text">Policy toolkit</string>
+    <string name="engage_local_government_subtitle">Help your city or county develop policy</string>
+    <string name="engage_local_government_title">Engage local government</string>
+    <string name="tools_with_teeth">Tools with teeth</string>
+    <string name="I_did_it">I did it!</string>
+    <string name="Not_yet">Not yet</string>
+    <string name="I_did_it_about_plastic">I did it about plastic!</string>
+    <string name="I_did_it_about_climate">I did it about climate!</string>
+
 
     <!-- Policy -->
     <string name="policy_home_title">Create New Environmental Policy!</string>

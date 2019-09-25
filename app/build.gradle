@@ -52,12 +52,12 @@ dependencies {
     // Glide
     implementation 'jp.wasabeef:glide-transformations:3.3.0'
     implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
-    
+
     // Room
     def room_version = "2.1.0"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-    
+
     // Automation
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
@@ -79,6 +79,9 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
+    // Rx
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    implementation 'com.github.jivimberg:autoresizetextview:0.0.2'
 }
 repositories {
     mavenCentral()
