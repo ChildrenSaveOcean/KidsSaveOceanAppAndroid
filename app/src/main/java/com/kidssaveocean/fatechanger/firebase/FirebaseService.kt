@@ -1,10 +1,12 @@
 package com.kidssaveocean.fatechanger.firebase
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.kidssaveocean.fatechanger.firebase.model.CountryModel
 import java.util.*
 
 class FirebaseService : Observable ()  {
@@ -31,6 +33,7 @@ class FirebaseService : Observable ()  {
     }
 
     init {
+        Log.d("FirebaseService", "init")
         auth.signInAnonymously().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 var dbInstance = FirebaseDatabase.getInstance().reference;

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.kidssaveocean.fatechanger">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
+        tools:replace="android:icon"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -36,6 +38,15 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".onboarding.userIdentification.UserIdentificationActivity" />
+
+        <activity android:name=".policy.PolicyHomeActivity"/>
+
+        <activity android:name=".policy.PolicyStepsActivity"/>
+
+        <activity android:name=".policy.PolicyImpactActivity"/>
+
+        <activity android:name=".policy.PolicyVideoActivity"
+            android:screenOrientation="landscape"/>
 
         <activity android:name=".splashScreen.SplashScreenActivity"
             android:theme="@style/SplashTheme"

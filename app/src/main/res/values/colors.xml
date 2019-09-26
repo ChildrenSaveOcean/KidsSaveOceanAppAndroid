@@ -10,4 +10,8 @@
     <color name="greenish_blue">#2672b3</color>
     <color name="blueish_subtitle_color">#4a81b6</color>
     <color name="select_country_title_color">#474c53</color>
+
+    <color name="transparent">#00FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="dashboard_bg_color">#24a3fd</color>
 </resources>

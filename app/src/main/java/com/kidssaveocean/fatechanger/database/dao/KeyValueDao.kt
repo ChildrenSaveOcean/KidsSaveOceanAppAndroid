@@ -1,9 +1,6 @@
 package com.kidssaveocean.fatechanger.database.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 import com.kidssaveocean.fatechanger.database.entities.KeyValue
 
@@ -19,5 +16,6 @@ interface KeyValueDao {
     @Delete
     fun deleteKeyValue(keyValue: KeyValue)
 
-
+    @Update
+    fun updateKeyValue(keyValue: KeyValue)
 }

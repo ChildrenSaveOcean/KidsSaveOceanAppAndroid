@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.dashboard.MainDashboardFragment
 import com.kidssaveocean.fatechanger.donation.DonationFragment
 import com.kidssaveocean.fatechanger.home.HomeFragment
 import com.kidssaveocean.fatechanger.map.MapFragment
@@ -31,6 +32,10 @@ class BottomNavigationActivity : AppCompatActivity() {
         transaction.commit()
     }
 
+    fun setMenuItem(itemId : Int) {
+        bottom_navigation_bar?.selectedItemId = itemId;
+    }
+
     private fun setUpOnNavigationItemSelectedListener(): BottomNavigationView.OnNavigationItemSelectedListener {
 
         return BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
@@ -38,13 +43,14 @@ class BottomNavigationActivity : AppCompatActivity() {
             val fragment: Fragment? = when (menuItem.itemId) {
                 R.id.action_home -> HomeFragment()
                 R.id.action_news -> NewsFragment()
-                R.id.action_dashboard -> ResourcesFragment()
+                R.id.action_dashboard -> MainDashboardFragment()
                 R.id.action_resources -> ResourcesFragment()
                 R.id.action_map -> MapFragment()
                 else -> null
             }
 
             fragment?.run {
+                supportFragmentManager.popBackStack()
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.fragment_container, this)
                 transaction.commit()
