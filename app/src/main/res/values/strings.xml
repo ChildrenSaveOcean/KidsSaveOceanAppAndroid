@@ -5,16 +5,18 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="how_you_can_help_description">As a student or teacher, you can start a letter-writing campaign in your school to lobby governments. As an individual, you can also write or donate. Share the app and empower others to help our oceans.</string>
-    <string name="learn_write_share">Learn, Write, Share</string>
+    <string name="how_you_can_help_description">As a student, fight to protect the ocean or stop climate change by deeply engaging your government. We’ll show you how. As a teacher, we have rich and expanding resources. As a parent or individual, you can empower the kids.</string>
+    <string name="learn_write_share">Write, Share, Engage</string>
     <string name="how_you_can_help">How You Can Help</string>
     <string name="start">START</string>
     <string name="welcome_to_fate_changer">Welcome To Fatechanger</string>
-    <string name="children_saving_the_ocean">Children saving the ocean</string>
-    <string name="welcome_to_fate_changer_description">The app was designed to give children a voice, teaching them about the growing tragedy of ocean pollution, and empowering them to do something about it and change fate.</string>
-    <string name="stay_engaged">STAY ENGAGED</string>
-    <string name="stay_connected_for_updates">Stay connected for updates.</string>
-    <string name="stay_engaged_description">Track of the Fatechanger app\'s progress and get an annual reminder to write another letter to keep up pressure to protect our waters. Follow or share ocean pollution news.</string>
+    <string name="children_saving_the_ocean">A Tool with Teeth</string>
+    <string name="welcome_to_fate_changer_description">This app was designed with a single purpose: to give youth a powerful voice to protect our world’s environment. It is no ordinary app.</string>
+    <string name="are_you_ready">Are you ready?</string>
+    <string name="empty"></string>
+    <string name="stay_engaged">Engage</string>
+    <string name="stay_connected_for_updates">Stay Connected for Updates.</string>
+    <string name="stay_engaged_description">Visit the app often to track our progress and get Action Alerts. Watch a growing army of determined kids change the world.</string>
     <string name="how_you_can_help_capitalized">HOW YOU CAN HELP</string>
     <string name="i_am_a_student">I am a Student</string>
     <string name="i_am_a_student_description">Get started on a letter-writing campaign, we\'ll show you how!</string>

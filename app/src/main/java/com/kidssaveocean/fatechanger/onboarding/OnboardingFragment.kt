@@ -24,6 +24,7 @@ class OnboardingFragment : Fragment() {
         val subTitleTextId = bundle.getInt(SUBTITLE)
         val descriptionTextId = bundle.getInt(DESCRIPTION)
         val layoutId = bundle.getInt(LAYOUT)
+        val extraId = bundle.getInt(EXTRA)
 
         val layout = inflater.inflate(layoutId, container, false) as ConstraintLayout
 
@@ -31,9 +32,9 @@ class OnboardingFragment : Fragment() {
         layout.findViewById<TextView>(R.id.title).setText(titleTextId)
         layout.findViewById<TextView>(R.id.subtitle).setText(subTitleTextId)
         layout.findViewById<TextView>(R.id.description).setText(descriptionTextId)
+        layout.findViewById<TextView>(R.id.extra).setText(extraId)
 
-        layout.findViewById<Button?>(R.id.start_button)?.setOnClickListener {
-            view ->
+        layout.findViewById<Button?>(R.id.start_button)?.setOnClickListener { view ->
             val intent = Intent(activity, UserIdentificationActivity::class.java)
             startActivity(intent)
         }
@@ -48,6 +49,7 @@ class OnboardingFragment : Fragment() {
         val SUBTITLE = "subtitle"
         val DESCRIPTION = "description"
         val LAYOUT = "layout"
+        val EXTRA = "extra"
     }
 
 

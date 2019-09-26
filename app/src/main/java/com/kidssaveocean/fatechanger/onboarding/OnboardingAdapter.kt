@@ -15,34 +15,39 @@ class OnboardingAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         val subTitleId: Int
         val descriptionId: Int
         val layoutId: Int
+        var extraId: Int
 
         when (position) {
             0 -> {
-                imageId = R.drawable.whale_tail
+                imageId = R.drawable.imagery_welcome
                 titleId = R.string.welcome_to_fate_changer
                 subTitleId = R.string.children_saving_the_ocean
                 descriptionId = R.string.welcome_to_fate_changer_description
+                extraId = R.string.are_you_ready
                 layoutId = R.layout.fragment_no_button_onboarding
             }
             1 -> {
-                imageId = R.drawable.actinia
+                imageId = R.drawable.imagery_help
                 titleId = R.string.how_you_can_help
                 subTitleId = R.string.learn_write_share
                 descriptionId = R.string.how_you_can_help_description
+                extraId = R.string.empty
                 layoutId = R.layout.fragment_no_button_onboarding
             }
             2 -> {
-                imageId = R.drawable.reef
+                imageId = R.drawable.imagery_engage
                 titleId = R.string.stay_engaged
                 subTitleId = R.string.stay_connected_for_updates
                 descriptionId = R.string.stay_engaged_description
+                extraId = R.string.empty
                 layoutId = R.layout.fragment_button_onboarding
             }
             else -> {
-                imageId = R.drawable.whale_tail
+                imageId = R.drawable.imagery_welcome
                 titleId = R.string.welcome_to_fate_changer
                 subTitleId = R.string.children_saving_the_ocean
                 descriptionId = R.string.welcome_to_fate_changer_description
+                extraId = R.string.are_you_ready
                 layoutId = R.layout.fragment_no_button_onboarding
             }
         }
@@ -55,6 +60,7 @@ class OnboardingAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         bundle.putInt(OnboardingFragment.SUBTITLE, subTitleId)
         bundle.putInt(OnboardingFragment.DESCRIPTION, descriptionId)
         bundle.putInt(OnboardingFragment.LAYOUT, layoutId)
+        bundle.putInt(OnboardingFragment.EXTRA, extraId)
         return fragment
     }
 
