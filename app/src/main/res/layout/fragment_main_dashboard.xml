@@ -125,10 +125,26 @@
                     android:layout_height="match_parent"
                     android:background="#FFFFFF" />
             </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                <com.kidssaveocean.fatechanger.views.SurferIconView
+                    android:id="@+id/seventhIcon"
+                    custom:isActive="false"
+                    custom:isCompleted="false"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    android:layout_width="@dimen/dashboard_icon_size"
+                    android:layout_height="@dimen/dashboard_icon_size" />
+                <View
+                    android:layout_gravity="center"
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF" />
+            </LinearLayout>
         </LinearLayout>
         <View
-
-            android:layout_marginRight="28dp"
+            android:layout_marginRight="24dp"
             android:layout_marginLeft="22dp"
             android:layout_gravity="center"
             android:layout_width="match_parent"

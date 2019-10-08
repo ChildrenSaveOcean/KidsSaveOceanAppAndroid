@@ -27,6 +27,7 @@ data class DashboardStep (
         const val STEP_4 = "STEP_4"
         const val STEP_5 = "STEP_5"
         const val STEP_6 = "STEP_6"
+        const val STEP_7 = "STEP_7"
     }
 
 }

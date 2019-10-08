@@ -83,9 +83,10 @@
     <string name="tools_with_teeth">Tools with teeth</string>
     <string name="I_did_it">I did it!</string>
     <string name="Not_yet">Not yet</string>
+    <string name="I_plan_to">I plan to!</string>
     <string name="I_did_it_about_plastic">I did it about plastic!</string>
     <string name="I_did_it_about_climate">I did it about climate!</string>
-
+    <string name="env_policy_description">I plan to join the environmental policy hijack!</string>
 
     <!-- Policy -->
     <string name="policy_home_title">Create New Environmental Policy!</string>
