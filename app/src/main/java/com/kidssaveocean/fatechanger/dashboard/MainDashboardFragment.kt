@@ -32,6 +32,7 @@ import com.kidssaveocean.fatechanger.views.ActionAlertDialog
 import io.reactivex.subjects.PublishSubject
 import android.media.MediaPlayer
 import android.content.res.AssetFileDescriptor
+import com.kidssaveocean.fatechanger.policy.PolicyHomeActivity
 import java.io.IOException
 
 
@@ -48,6 +49,7 @@ class MainDashboardFragment : Fragment() {
     private var stepFour : DashboardTask = DashboardTask(DashboardSteps.LETTER_CAMPAING)
     private var stepFive : DashboardTask = DashboardTask(DashboardSteps.GOVERNMENT)
     private var stepSix : DashboardTask = DashboardTask(DashboardSteps.PROTEST)
+    private var stepSeven : DashboardTask = DashboardTask(DashboardSteps.HIJACK)
 
     private var currentTask : DashboardTask = DashboardTask(DashboardSteps.RESEARCH)
     private var db : AppDatabase? = null
@@ -116,6 +118,11 @@ class MainDashboardFragment : Fragment() {
                         stepSix.isSecondCompleted = it.second
                         changeCompletedStatus(bottomActivity, stepSix)
                     }
+                    DashboardSteps.HIJACK -> {
+                        stepSeven.isFirstCompleted = it.first
+                        stepSeven.isSecondCompleted = it.second
+                        changeCompletedStatus(bottomActivity, stepSeven)
+                    }
                 }
             }
         }
@@ -152,6 +159,11 @@ class MainDashboardFragment : Fragment() {
         sixthIcon.setOnClickListener {
             playClick(bottomActivity)
             clickOnSurfer(stepSix)
+        }
+
+        seventhIcon.setOnClickListener {
+            playClick(bottomActivity)
+            clickOnSurfer(stepSeven)
         }
 
         how_button?.setOnClickListener {
@@ -223,6 +235,7 @@ class MainDashboardFragment : Fragment() {
             DashboardSteps.LETTER_CAMPAING -> value = DashboardStep.STEP_4
             DashboardSteps.GOVERNMENT -> value = DashboardStep.STEP_5
             DashboardSteps.PROTEST -> value = DashboardStep.STEP_6
+            DashboardSteps.HIJACK -> value = DashboardStep.STEP_7
         }
 
         AsyncTask.execute {
@@ -243,16 +256,18 @@ class MainDashboardFragment : Fragment() {
             fourthIcon.isActive = task.type?.ordinal == 3
             fifthIcon.isActive = task.type?.ordinal == 4
             sixthIcon.isActive = task.type?.ordinal == 5
+            seventhIcon.isActive = task.type?.ordinal == 6
             rotateWheel(task.type!!)
             rotateMeteor(task.type!!)
+            changeDescriptionText(task)
             changeCompletedStatus(activity as BottomNavigationActivity, task)
         }
     }
 
     private fun rotateWheel(step : DashboardSteps) {
         when (step.ordinal) {
-            0,1,2,3,4,5 -> {
-                val angleStep = 50f
+            0,1,2,3,4,5,6 -> {
+                val angleStep = 42.5f
                 val newAngle = step.ordinal * angleStep
                 val rotate = RotateAnimation(
                         currentCircleAngle,
@@ -273,8 +288,8 @@ class MainDashboardFragment : Fragment() {
 
     private fun rotateMeteor(step : DashboardSteps) {
         when (step.ordinal) {
-            0,1,2,3,4,5 -> {
-                val angleStep = 30f
+            0,1,2,3,4,5,6 -> {
+                val angleStep = 25f
                 val newAngle = (step.ordinal + 1) * angleStep
                 val rotate = RotateAnimation(
                         currentMeteorAngle,
@@ -336,6 +351,20 @@ class MainDashboardFragment : Fragment() {
                 I_did_it_1.visibility = View.GONE
                 changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
             }
+            DashboardSteps.HIJACK -> {
+                seventhIcon.isCompleted = task.isFirstCompleted
+                I_did_it_1.visibility = View.GONE
+                when(task.isFirstCompleted) {
+                    true -> {
+                        complete_image.setImage(context, R.drawable.complete_fist_and_writing)
+                        I_did_it_2.text = getString(R.string.Not_yet)
+                    }
+                    false -> {
+                        complete_image.setImage(context, R.drawable.incomplete_fist_and_writing)
+                        I_did_it_2.text = getString(R.string.I_plan_to)
+                    }
+                }
+            }
             else -> println("Unknown type for DashboardSteps")
         }
     }
@@ -361,6 +390,20 @@ class MainDashboardFragment : Fragment() {
             DashboardSteps.LETTER_CAMPAING -> fourthIcon.isCompleted = task.isFirstCompleted
             DashboardSteps.GOVERNMENT -> fifthIcon.isCompleted = task.isFirstCompleted
             DashboardSteps.PROTEST -> sixthIcon.isCompleted = task.isFirstCompleted
+            DashboardSteps.HIJACK -> seventhIcon.isCompleted = task.isFirstCompleted
+            else -> println("Unknown type for DashboardSteps")
+        }
+    }
+
+    private fun changeDescriptionText(task : DashboardTask) {
+        when (task.type) {
+            DashboardSteps.RESEARCH -> task_description.text = getString(R.string.research_task_description)
+            DashboardSteps.WRITE_LETTER -> task_description.text = getString(R.string.write_letter_task_description)
+            DashboardSteps.SHARING -> task_description.text = getString(R.string.sharing_task_description)
+            DashboardSteps.LETTER_CAMPAING -> task_description.text = getString(R.string.letter_campaing_task_description)
+            DashboardSteps.GOVERNMENT -> task_description.text = getString(R.string.government_task_description)
+            DashboardSteps.PROTEST -> task_description.text = getString(R.string.protest_task_description)
+            DashboardSteps.HIJACK -> task_description.text = getString(R.string.env_policy_description)
             else -> println("Unknown type for DashboardSteps")
         }
     }
@@ -403,6 +446,9 @@ class MainDashboardFragment : Fragment() {
                         R.id.fragment_container,
                         "nobody_listening_fragment")
             }
+            DashboardSteps.HIJACK -> {
+                startActivity(Intent(activity, PolicyHomeActivity::class.java))
+            }
         }
     }
 
@@ -425,6 +471,7 @@ class MainDashboardFragment : Fragment() {
                         DashboardSteps.LETTER_CAMPAING -> stepFour.isFirstCompleted = it.first_completed_step
                         DashboardSteps.GOVERNMENT -> stepFive.isFirstCompleted = it.first_completed_step
                         DashboardSteps.PROTEST -> stepSix.isFirstCompleted = it.first_completed_step
+                        DashboardSteps.HIJACK -> stepSeven.isFirstCompleted = it.first_completed_step
                     }
                 }
 
@@ -434,6 +481,7 @@ class MainDashboardFragment : Fragment() {
                 changeIconsBg(stepFour)
                 changeIconsBg(stepFive)
                 changeIconsBg(stepSix)
+                changeIconsBg(stepSeven)
 
                 val lastSteps = it?.keyValueDao()?.getKeyValue(KeyValue.LAST_CURRENT_STEP)
                 lastSteps?.let {
@@ -467,6 +515,11 @@ class MainDashboardFragment : Fragment() {
                             currentTask.type = stepSix.type
                             currentTask.isFirstCompleted = stepSix.isFirstCompleted
                             currentTask.isSecondCompleted = stepSix.isSecondCompleted
+                        }
+                        DashboardStep.STEP_7 -> {
+                            currentTask.type = stepSeven.type
+                            currentTask.isFirstCompleted = stepSeven.isFirstCompleted
+                            currentTask.isSecondCompleted = stepSeven.isSecondCompleted
                         }
                     }
                 }
@@ -587,5 +640,6 @@ enum class DashboardSteps {
     SHARING,
     LETTER_CAMPAING,
     GOVERNMENT,
-    PROTEST
+    PROTEST,
+    HIJACK
 }
