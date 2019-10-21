@@ -7,12 +7,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
+import io.reactivex.subjects.PublishSubject
 import java.util.*
 
 class FirebaseService : Observable ()  {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val _countries : MutableCollection<CountryModel> = mutableListOf()
+
+    val countriesObservable = PublishSubject.create<List<CountryModel>>()
 
     val countries : List<CountryModel>
         get() = _countries.toList()
@@ -49,6 +52,7 @@ class FirebaseService : Observable ()  {
                             }
                         }
                         notifyObservers(countries)
+                        countriesObservable.onNext(countries)
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
