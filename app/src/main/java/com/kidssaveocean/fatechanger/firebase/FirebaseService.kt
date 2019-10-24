@@ -7,6 +7,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
+import com.kidssaveocean.fatechanger.highScores.Country
 import io.reactivex.subjects.PublishSubject
 import java.util.*
 
@@ -47,6 +48,7 @@ class FirebaseService : Observable ()  {
                         for (item in dataSnapshot.children) {
                             var countryModel = item.getValue(CountryModel::class.java)
                             countryModel?.let {
+                                it.country_code = item.key!!
                                 _countries.add(it)
                                 setChanged()
                             }
@@ -61,5 +63,11 @@ class FirebaseService : Observable ()  {
                 })
             }
         }
+    }
+
+    fun increaseWrittenLettersNumber(country : CountryModel) {
+        var dbInstance = FirebaseDatabase.getInstance().reference;
+        dbInstance.child(COUNTRIES_TABLE).child(country.country_code)
+        // To be continued
     }
 }

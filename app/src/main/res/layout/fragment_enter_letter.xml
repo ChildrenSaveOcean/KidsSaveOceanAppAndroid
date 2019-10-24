@@ -6,6 +6,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".map.EnterLetterFragment">
 
+    <ProgressBar
+        android:layout_weight="1"
+        android:id="@+id/progressBar_cyclic"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:minWidth="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/country_picker"
+        app:layout_constraintHeight_percent=".5"
+        app:layout_constraintLeft_toLeftOf="@id/country_picker"
+        app:layout_constraintRight_toRightOf="@id/country_picker"
+        app:layout_constraintTop_toTopOf="@id/country_picker"
+        app:layout_constraintWidth_percent=".5"/>
+
     <TextView
         android:id="@+id/title"
         android:text="@string/letter_tracker"
@@ -54,6 +69,7 @@
         app:layout_constraintBottom_toTopOf="@id/country_picker"/>
     <NumberPicker
         android:id="@+id/country_picker"
+        android:visibility="invisible"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_width="match_parent"

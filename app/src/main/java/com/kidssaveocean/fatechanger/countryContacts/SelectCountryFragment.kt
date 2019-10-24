@@ -17,6 +17,7 @@ import com.google.android.gms.location.LocationServices
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
+import com.kidssaveocean.fatechanger.extensions.getCountryByLocation
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
 import java.util.*
@@ -109,33 +110,12 @@ class SelectCountryFragment : Fragment(), Observer {
         fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
                     location?.let { it ->
-                        val latitude = it.latitude
-                        val longitude = it.longitude
-                        val country = findCountry(latitude, longitude)
+                        val country = it.getCountryByLocation(countries)
                         country?.let { c ->
                             val index = countries.indexOf(c)
                             picker?.value = index
                         }
                     }
                 }
-    }
-
-    private fun findCountry(latitude : Double, longitude : Double): CountryModel? {
-        var closestCoutry : CountryModel? = null
-        var minDistance = 0.0
-        val startPoint = Location("myLocation")
-        startPoint.latitude = latitude
-        startPoint.longitude = longitude
-        for (country in countries) {
-            val endPoint = Location("capitalLocation")
-            endPoint.latitude = country.latitude
-            endPoint.longitude = country.longitude
-            val distance = startPoint.distanceTo(endPoint).toDouble()
-            if (minDistance == 0.0 || distance < minDistance) {
-                minDistance = distance
-                closestCoutry = country
-            }
-        }
-        return closestCoutry
     }
 }
