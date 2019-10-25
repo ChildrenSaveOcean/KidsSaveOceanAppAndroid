@@ -1,6 +1,8 @@
 package com.kidssaveocean.fatechanger.map
 
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -17,6 +19,8 @@ import com.google.android.gms.location.LocationServices
 
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
+import com.kidssaveocean.fatechanger.dashboard.DashboardSteps
+import com.kidssaveocean.fatechanger.dashboard.MainDashboardFragment
 import com.kidssaveocean.fatechanger.extensions.getCountryByLocation
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
@@ -29,6 +33,7 @@ class EnterLetterFragment : Fragment() {
 
     private val PERMISSION_ACCESS_FINE_LOCATION : Int = 111
     private var countries : List<CountryModel> = listOf()
+    private var currentCountry : CountryModel? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -45,28 +50,55 @@ class EnterLetterFragment : Fragment() {
 
         countries = FirebaseService.getInstance().countries
 
+        submit_button.setOnClickListener {
+            val dialog = AlertDialog.Builder(bottomActivity)
+            dialog
+                .setTitle(R.string.enter_letter_dialog_question)
+                .setPositiveButton(R.string.enter_letter_positive_answer) { _, _ ->
+                    run {
+                        currentCountry?.let { FirebaseService.getInstance().increaseWrittenLettersNumber(it) }
+                    }
+                    AlertDialog.Builder(bottomActivity)
+                            .setTitle(R.string.youre_letter_has_been_recorded)
+                            .setMessage(R.string.enter_letter_congratulations_title)
+                            .setPositiveButton(R.string.fatechangers_click_here) { _, _ ->
+                                bottomActivity.openMainDashboard(DashboardSteps.WRITE_LETTER)
+                            }
+                            .create()
+                            .show()
+
+                }
+                .setNegativeButton(R.string.enter_letter_negative_answer) { dialog, _ -> dialog.cancel() }
+
+            dialog.create().show()
+        }
+
         when (countries.isNotEmpty()) {
             true -> fillPicker(countries)
             false -> {
-                FirebaseService.getInstance().countriesObservable.subscribe {
-                    if (it.isNotEmpty()) {
-                        progressBar_cyclic.visibility = View.GONE
-                        country_picker.visibility = View.VISIBLE
-                        countries = it
-                        fillPicker(it)
+                FirebaseService.getInstance().countriesObservable
+                        .doOnError {
+                            print(it.message)
+                        }
+                        .subscribe {
+                            if (it.isNotEmpty()) {
+                                progressBar_cyclic.visibility = View.GONE
+                                country_picker.visibility = View.VISIBLE
+                                countries = it
+                                fillPicker(it)
 
-                        if (ContextCompat.checkSelfPermission(bottomActivity, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-                            ActivityCompat.requestPermissions(
-                                    bottomActivity,
-                                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                                    PERMISSION_ACCESS_FINE_LOCATION
-                            )
+                                if (ContextCompat.checkSelfPermission(bottomActivity, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+                                    ActivityCompat.requestPermissions(
+                                            bottomActivity,
+                                            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                                            PERMISSION_ACCESS_FINE_LOCATION
+                                    )
+                                }
+                                else {
+                                    obtainLocation()
+                                }
+                            }
                         }
-                        else {
-                            obtainLocation()
-                        }
-                    }
-                }
             }
         }
     }
@@ -78,7 +110,7 @@ class EnterLetterFragment : Fragment() {
         country_picker.displayedValues = countryNames
         country_picker.wrapSelectorWheel = true
         country_picker.setOnValueChangedListener { _, _, newVal ->
-            val model = countries[newVal]
+            currentCountry = countries[newVal]
         }
     }
 
