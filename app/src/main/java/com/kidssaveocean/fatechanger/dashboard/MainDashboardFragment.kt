@@ -36,12 +36,13 @@ import com.kidssaveocean.fatechanger.policy.PolicyHomeActivity
 import java.io.IOException
 
 
-class MainDashboardFragment : Fragment() {
+class MainDashboardFragment (step: DashboardSteps? = null) : Fragment() {
 
     private var currentCircleAngle : Float = 0f
     private var currentMeteorAngle : Float = 0f
     private var topLeftSteeringWeelCorner : PointF? = null
     private var bottomLeftPoint : PointF? = null
+    private var lastStep : String? = null
 
     private var stepOne : DashboardTask = DashboardTask(DashboardSteps.RESEARCH)
     private var stepTwo : DashboardTask = DashboardTask(DashboardSteps.WRITE_LETTER)
@@ -64,6 +65,17 @@ class MainDashboardFragment : Fragment() {
 
     init {
         stepTwo.isSecondCompleted = false
+        step?.let {
+            when(it) {
+                DashboardSteps.RESEARCH -> lastStep = DashboardStep.STEP_1
+                DashboardSteps.WRITE_LETTER -> lastStep = DashboardStep.STEP_2
+                DashboardSteps.SHARING -> lastStep = DashboardStep.STEP_3
+                DashboardSteps.LETTER_CAMPAING -> lastStep = DashboardStep.STEP_4
+                DashboardSteps.GOVERNMENT -> lastStep = DashboardStep.STEP_5
+                DashboardSteps.PROTEST -> lastStep = DashboardStep.STEP_6
+                DashboardSteps.HIJACK -> lastStep = DashboardStep.STEP_7
+            }
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -483,44 +495,46 @@ class MainDashboardFragment : Fragment() {
                 changeIconsBg(stepSix)
                 changeIconsBg(stepSeven)
 
-                val lastSteps = it?.keyValueDao()?.getKeyValue(KeyValue.LAST_CURRENT_STEP)
-                lastSteps?.let {
-                    when(lastSteps.value) {
-                        DashboardStep.STEP_1 -> {
-                            currentTask.type = stepOne.type
-                            currentTask.isFirstCompleted = stepOne.isFirstCompleted
-                            currentTask.isSecondCompleted = stepOne.isSecondCompleted
-                        }
-                        DashboardStep.STEP_2 -> {
-                            currentTask.type = stepTwo.type
-                            currentTask.isFirstCompleted = stepTwo.isFirstCompleted
-                            currentTask.isSecondCompleted = stepTwo.isSecondCompleted
-                        }
-                        DashboardStep.STEP_3 -> {
-                            currentTask.type = stepThree.type
-                            currentTask.isFirstCompleted = stepThree.isFirstCompleted
-                            currentTask.isSecondCompleted = stepThree.isSecondCompleted
-                        }
-                        DashboardStep.STEP_4 -> {
-                            currentTask.type = stepFour.type
-                            currentTask.isFirstCompleted = stepFour.isFirstCompleted
-                            currentTask.isSecondCompleted = stepFour.isSecondCompleted
-                        }
-                        DashboardStep.STEP_5 -> {
-                            currentTask.type = stepFive.type
-                            currentTask.isFirstCompleted = stepFive.isFirstCompleted
-                            currentTask.isSecondCompleted = stepFive.isSecondCompleted
-                        }
-                        DashboardStep.STEP_6 -> {
-                            currentTask.type = stepSix.type
-                            currentTask.isFirstCompleted = stepSix.isFirstCompleted
-                            currentTask.isSecondCompleted = stepSix.isSecondCompleted
-                        }
-                        DashboardStep.STEP_7 -> {
-                            currentTask.type = stepSeven.type
-                            currentTask.isFirstCompleted = stepSeven.isFirstCompleted
-                            currentTask.isSecondCompleted = stepSeven.isSecondCompleted
-                        }
+                if (lastStep == null) {
+                    val lastSteps = it.keyValueDao().getKeyValue(KeyValue.LAST_CURRENT_STEP)
+                    lastStep = lastSteps.value
+                }
+
+                when(lastStep) {
+                    DashboardStep.STEP_1 -> {
+                        currentTask.type = stepOne.type
+                        currentTask.isFirstCompleted = stepOne.isFirstCompleted
+                        currentTask.isSecondCompleted = stepOne.isSecondCompleted
+                    }
+                    DashboardStep.STEP_2 -> {
+                        currentTask.type = stepTwo.type
+                        currentTask.isFirstCompleted = stepTwo.isFirstCompleted
+                        currentTask.isSecondCompleted = stepTwo.isSecondCompleted
+                    }
+                    DashboardStep.STEP_3 -> {
+                        currentTask.type = stepThree.type
+                        currentTask.isFirstCompleted = stepThree.isFirstCompleted
+                        currentTask.isSecondCompleted = stepThree.isSecondCompleted
+                    }
+                    DashboardStep.STEP_4 -> {
+                        currentTask.type = stepFour.type
+                        currentTask.isFirstCompleted = stepFour.isFirstCompleted
+                        currentTask.isSecondCompleted = stepFour.isSecondCompleted
+                    }
+                    DashboardStep.STEP_5 -> {
+                        currentTask.type = stepFive.type
+                        currentTask.isFirstCompleted = stepFive.isFirstCompleted
+                        currentTask.isSecondCompleted = stepFive.isSecondCompleted
+                    }
+                    DashboardStep.STEP_6 -> {
+                        currentTask.type = stepSix.type
+                        currentTask.isFirstCompleted = stepSix.isFirstCompleted
+                        currentTask.isSecondCompleted = stepSix.isSecondCompleted
+                    }
+                    DashboardStep.STEP_7 -> {
+                        currentTask.type = stepSeven.type
+                        currentTask.isFirstCompleted = stepSeven.isFirstCompleted
+                        currentTask.isSecondCompleted = stepSeven.isSecondCompleted
                     }
                 }
 

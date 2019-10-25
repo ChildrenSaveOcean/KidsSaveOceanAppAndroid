@@ -87,6 +87,18 @@
     <string name="I_did_it_about_plastic">I did it about plastic!</string>
     <string name="I_did_it_about_climate">I did it about climate!</string>
     <string name="env_policy_description">I plan to join the environmental policy hijack!</string>
+    <string name="enter_your_letter">Enter Your Letter</string>
+    <string name="letter_tracker">Letter Tracker</string>
+    <string name="enter_a_letter_in_the_tracker">Enter a Letter in the Tracker</string>
+    <string name="written_a_letter_stamped_and_mailed_it_off_you_re_awesome_you_ve_got_fire_in_your_belly_and_stood_up_to_change_fate">Written a letter, stamped, and mailed it off? You’re awesome. You’ve got fire in your belly and stood up to change fate.</string>
+    <string name="select_the_country_you_wrote_to">Select the country you wrote to:</string>
+    <string name="click_submit_only_after_you_ve_mailed_it">Click Submit only after you’ve mailed it.</string>
+    <string name="enter_letter_dialog_question">Are you certain you\'ve stamped and mailed it?</string>
+    <string name="enter_letter_positive_answer">Yes, I\'ve already mailed it!</string>
+    <string name="enter_letter_negative_answer">No, not yet</string>
+    <string name="youre_letter_has_been_recorded">You\’re Letter Has Been Recorded</string>
+    <string name="enter_letter_congratulations_title">Congratulations! You\’re one of us now. A Fatechanger</string>
+    <string name="fatechangers_click_here">Fatechangers click here</string>
 
     <!-- Policy -->
     <string name="policy_home_title">Create New Environmental Policy!</string>

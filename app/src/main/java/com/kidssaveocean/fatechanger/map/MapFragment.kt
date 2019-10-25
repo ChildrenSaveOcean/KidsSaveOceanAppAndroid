@@ -16,6 +16,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
+import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
+import kotlinx.android.synthetic.main.fragment_map.*
 
 
 class MapFragment : Fragment(), OnMapReadyCallback {
@@ -33,6 +36,13 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         tabLayout.addTab(tabLayout.newTab().setText("Map"))
         tabLayout.addTab(tabLayout.newTab().setText("Top Ten"))
+
+        enter_your_letter.setOnClickListener {
+            EnterLetterFragment().addToNavigationStack(
+                    (activity as BottomNavigationActivity).supportFragmentManager,
+                    R.id.fragment_container,
+                    "enter_letter_fragment")
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

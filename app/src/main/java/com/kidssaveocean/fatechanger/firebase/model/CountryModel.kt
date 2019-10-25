@@ -1,6 +1,7 @@
 package com.kidssaveocean.fatechanger.firebase.model
 
 data class CountryModel (
+    var country_code : String = "",
     val country_name : String = "",
     val country_number : Long = 0,
     val country_address : String = "",

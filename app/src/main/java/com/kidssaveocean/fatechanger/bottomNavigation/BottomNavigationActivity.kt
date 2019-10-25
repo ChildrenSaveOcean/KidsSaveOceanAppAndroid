@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.dashboard.DashboardSteps
 import com.kidssaveocean.fatechanger.dashboard.MainDashboardFragment
 import com.kidssaveocean.fatechanger.donation.DonationFragment
 import com.kidssaveocean.fatechanger.home.HomeFragment
@@ -19,6 +20,8 @@ import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
 
 class BottomNavigationActivity : AppCompatActivity() {
+
+    private var step: DashboardSteps? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +39,12 @@ class BottomNavigationActivity : AppCompatActivity() {
         bottom_navigation_bar?.selectedItemId = itemId;
     }
 
+    fun openMainDashboard(step: DashboardSteps) {
+        this.step = step
+        setMenuItem(R.id.action_dashboard)
+        this.step = null
+    }
+
     private fun setUpOnNavigationItemSelectedListener(): BottomNavigationView.OnNavigationItemSelectedListener {
 
         return BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
@@ -43,7 +52,7 @@ class BottomNavigationActivity : AppCompatActivity() {
             val fragment: Fragment? = when (menuItem.itemId) {
                 R.id.action_home -> HomeFragment()
                 R.id.action_news -> NewsFragment()
-                R.id.action_dashboard -> MainDashboardFragment()
+                R.id.action_dashboard -> MainDashboardFragment(step)
                 R.id.action_resources -> ResourcesFragment()
                 R.id.action_map -> MapFragment()
                 else -> null
