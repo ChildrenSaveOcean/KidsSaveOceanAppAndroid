@@ -13,5 +13,6 @@
 
     <color name="transparent">#00FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="dashboard_bg_color">#24a3fd</color>
 </resources>

@@ -85,6 +85,9 @@ dependencies {
     // Rx
     implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
     implementation 'com.github.jivimberg:autoresizetextview:0.0.2'
+
+    //wheelpicker
+    implementation 'cn.aigestudio.wheelpicker:WheelPicker:1.1.3'
 }
 repositories {
     mavenCentral()
