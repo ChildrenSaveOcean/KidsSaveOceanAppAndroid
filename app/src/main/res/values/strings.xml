@@ -103,6 +103,9 @@
     <!-- Policy -->
     <string name="policy_home_title">Create New Environmental Policy!</string>
     <string name="policy_home_subtitle">Youth Citizen Initiative Hijack Headquarters</string>
+    <string name="policy_vote_subtitle">Which environmental policy do you feel\nyouth should try to get passed?</string>
+    <string name="policy_vote_summary_title">Summary of Policy</string>
+    <string name="vote">VOTE</string>
     <string name="policy_step_subtitle">7 Step, Change the World, Repeat</string>
     <string name="step_one">Watch the video about the ballot process to understand how it works.</string>
     <string name="step_two">Vote on which policy you want passed.</string>

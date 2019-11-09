@@ -45,6 +45,8 @@
 
         <activity android:name=".policy.PolicyImpactActivity"/>
 
+        <activity android:name=".policy.PolicyVoteActivity"/>
+
         <activity android:name=".policy.PolicyVideoActivity"
             android:screenOrientation="landscape"/>
 

@@ -30,6 +30,10 @@ class PolicyHomeActivity : BaseActivity() {
             startActivity(Intent(this, PolicyStepsActivity::class.java))
         }
 
+        imgPolicyPush.setOnClickListener{
+            startActivity(Intent(this, PolicyVoteActivity::class.java))
+        }
+
         imgImpact.setOnClickListener{
             startActivity(Intent(this, PolicyImpactActivity::class.java))
         }
