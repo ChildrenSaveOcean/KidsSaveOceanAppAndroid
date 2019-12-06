@@ -12,7 +12,7 @@
         android:layout_height="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/ic_round"
+        android:background="@drawable/ic_round_red"
         android:gravity="center"
         android:textSize="20sp"
         android:layout_marginStart="15dp"

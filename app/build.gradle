@@ -5,6 +5,11 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
+
+    androidExtensions {
+        experimental = true
+    }
+
     defaultConfig {
         applicationId "com.kidssaveocean.fatechanger"
         minSdkVersion 21
@@ -24,6 +29,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -42,6 +48,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
+
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation "android.arch.lifecycle:viewmodel:1.1.2"
+
     // Google
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
@@ -57,7 +67,7 @@ dependencies {
     implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
 
     // Room
-    def room_version = "2.1.0"
+    def room_version = "2.2.1"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
@@ -71,20 +81,29 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Firebase
-    implementation 'com.google.firebase:firebase-core:17.2.0'
-    implementation 'com.google.firebase:firebase-auth:19.0.0'
-    implementation 'com.google.firebase:firebase-database:19.1.0'
+    implementation 'com.google.firebase:firebase-core:17.2.1'
+    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.google.firebase:firebase-database:19.2.0'
 
     // Location
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
     //Rxjava
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     // Rx
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
     implementation 'com.github.jivimberg:autoresizetextview:0.0.2'
+
+    // Dagger core dependencies
+    implementation 'com.google.dagger:dagger:2.25.2'
+    kapt 'com.google.dagger:dagger-compiler:2.25.2'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.25.2'
+    // Dagger Android dependencies
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.16'
+    implementation 'com.google.dagger:dagger-android:2.16'
+    implementation 'com.google.dagger:dagger-android-support:2.16'
 
     //wheelpicker
     implementation 'cn.aigestudio.wheelpicker:WheelPicker:1.1.3'

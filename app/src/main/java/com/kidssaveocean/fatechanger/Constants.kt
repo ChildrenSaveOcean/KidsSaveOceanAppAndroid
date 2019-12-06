@@ -9,4 +9,8 @@ object Constants {
     const val TABLE_NAME_ACTIONS = "ACTIONS"
     const val TABLE_NAME_POLICIES = "POLICIES"
     const val TABLE_NAME_USERS = "USERS"
+
+    const val requestPolicyVote = 100
+    const val intentPolicyName = "policyName"
+    const val intentPolicyValue = "policyValue"
 }
