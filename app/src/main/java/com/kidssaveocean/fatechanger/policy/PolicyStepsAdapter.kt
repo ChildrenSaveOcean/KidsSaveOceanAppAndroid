@@ -7,20 +7,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kidssaveocean.fatechanger.R
 import kotlinx.android.synthetic.main.item_policy_step.view.*
 
-class PolicyStepsAdapter: RecyclerView.Adapter<PolicyStepsAdapter.ViewHolder>() {
-    lateinit var items: List<String>
+class PolicyStepsAdapter : RecyclerView.Adapter<PolicyStepsAdapter.ViewHolder>() {
+    private var items: List<String>? = null
+
+    fun setData(data: List<String>){
+        items = data
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_policy_step, parent, false)
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = items?.size ?: 0
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.view.tvNumber.text = (position + 1).toString()
-        holder.view.tvStepContent.text = items[position]
+        holder.view.tvStepContent.text = items?.get(position) ?: ""
     }
 
     class ViewHolder(val view: View): RecyclerView.ViewHolder(view)
+
 }

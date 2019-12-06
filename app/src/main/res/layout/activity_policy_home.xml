@@ -12,11 +12,11 @@
         <ImageView
             android:id="@+id/imgTop"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="centerCrop"
             android:src="@drawable/policy_step_top"
-            app:layout_constraintDimensionRatio="294:70"/>
+            app:layout_constraintDimensionRatio="997:283"/>
 
         <include layout="@layout/view_toolbar"/>
 
