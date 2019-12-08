@@ -1,3 +1,3 @@
 package com.kidssaveocean.fatechanger.firebase
 
-class FirebaseFailedException : Exception()
+class FirebaseFailedException(override val message: String): Exception()

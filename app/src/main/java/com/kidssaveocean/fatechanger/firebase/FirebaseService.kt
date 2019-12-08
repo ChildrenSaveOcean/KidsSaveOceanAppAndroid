@@ -2,17 +2,18 @@ package com.kidssaveocean.fatechanger.firebase
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
+import com.kidssaveocean.fatechanger.highScores.Country
+import io.reactivex.subjects.PublishSubject
 import java.util.*
 
 class FirebaseService : Observable ()  {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val _countries : MutableCollection<CountryModel> = mutableListOf()
+
+    val countriesObservable = PublishSubject.create<List<CountryModel>>()
 
     val countries : List<CountryModel>
         get() = _countries.toList()
@@ -36,6 +37,7 @@ class FirebaseService : Observable ()  {
         Log.d("FirebaseService", "init")
         auth.signInAnonymously().addOnCompleteListener { task ->
             if (task.isSuccessful) {
+                Log.d("FirebaseService", task.result?.user?.uid)
                 var dbInstance = FirebaseDatabase.getInstance().reference;
                 dbInstance.child(COUNTRIES_TABLE).addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -44,11 +46,13 @@ class FirebaseService : Observable ()  {
                         for (item in dataSnapshot.children) {
                             var countryModel = item.getValue(CountryModel::class.java)
                             countryModel?.let {
+                                it.country_code = item.key!!
                                 _countries.add(it)
                                 setChanged()
                             }
                         }
                         notifyObservers(countries)
+                        countriesObservable.onNext(countries)
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
@@ -56,6 +60,33 @@ class FirebaseService : Observable ()  {
                     }
                 })
             }
+        }
+    }
+
+    fun increaseWrittenLettersNumber(country : CountryModel) {
+
+        var writtenLetters = country.letters_written_to_country + 1
+
+        val dbObject: HashMap<String, Any> = hashMapOf(
+                "country_name" to country.country_name,
+                "country_number" to country.country_number,
+                "country_address" to country.country_address,
+                "country_head_of_state_title" to country.country_head_of_state_title,
+                "latitude" to country.latitude,
+                "longitude" to country.longitude,
+                "letters_written_to_country" to writtenLetters
+        )
+
+        try {
+            FirebaseDatabase
+                    .getInstance()
+                    .reference
+                    .child(COUNTRIES_TABLE)
+                    .child(country.country_code)
+                    .setValue(dbObject)
+        }
+        catch (dE: DatabaseException) {
+            print("Firebase exception: ${dE.message}")
         }
     }
 }

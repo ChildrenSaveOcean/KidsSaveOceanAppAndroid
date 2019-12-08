@@ -1,7 +1,6 @@
 package com.kidssaveocean.fatechanger.firebase.repository
 
 import android.util.Log
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -13,47 +12,48 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 
 @Suppress("NAME_SHADOWING")
-abstract class BaseFirebaseDBRepo<T : Any, R : Any>(tableName: String, clazz: Class<T>) {
+abstract class BaseFirebaseDBRepo<T : Any, R : Any>(private val tableName: String, private val clazz: Class<T>) {
 
     private val subject = BehaviorSubject.create<List<Pair<String, T>>>()
 
     init {
-
         Log.d("FirebaseService", "init")
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                FirebaseDatabase.getInstance().reference.child(tableName)
-                        .addListenerForSingleValueEvent(object : ValueEventListener {
-                            override fun onCancelled(databaseError: DatabaseError) {
-                                subject.onError(FirebaseFailedException())
-                            }
-
-                            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                Log.d("FirebaseService", "onDataChange")
-                                val list = dataSnapshot.children
-                                        .filter { dataSnapshot.key != null && dataSnapshot.getValue(clazz) != null }
-                                        .map {
-                                            Pair(it.key!!, it.getValue(clazz)!!)
-                                        }
-                                subject.onNext(list)
-                            }
-                        })
-            } else {
-                subject.onError(FirebaseFailedException())
-            }
+        if (!FirebaseAuthCheckRepo.isAuth) {
+            FirebaseAuthCheckRepo.signIn()
         }
     }
 
     fun getDataObservable(): Observable<R> {
         Log.d("FirebaseService", "getDataObservable")
         return Observable.create<List<Pair<String, T>>> { emitter ->
-            subject.subscribe {
+            subject.subscribe({
                 emitter.onNext(it)
-            }
+            }, {
+                emitter.onError(it)
+            })
         }.map {
             handleData(it)
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getData(){
+        FirebaseDatabase.getInstance().reference.child(tableName)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        subject.onError(FirebaseFailedException(databaseError.message))
+                    }
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        Log.d("FirebaseService", "onDataChange")
+                        val list = dataSnapshot.children
+                                .filter { dataSnapshot.key != null && dataSnapshot.getValue(clazz) != null }
+                                .map {
+                                    Pair(it.key!!, it.getValue(clazz)!!)
+                                }
+                        subject.onNext(list)
+                    }
+                })
     }
 
     abstract fun handleData(list: List<Pair<String, T>>): R

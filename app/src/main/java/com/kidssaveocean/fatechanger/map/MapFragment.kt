@@ -12,14 +12,17 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.BaseOnTabSelectedListener
 import com.kidssaveocean.fatechanger.R
-import com.kidssaveocean.fatechanger.firebase.FirebaseService
-import com.kidssaveocean.fatechanger.firebase.model.CountryModel
-import java.util.*
+
+import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
+import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
+import kotlinx.android.synthetic.main.fragment_map.*
+
 
 
 class MapFragment : Fragment() {
     var manager: FragmentManager? = null
     var transaction: FragmentTransaction? = null
+
 
     var mapShownFragment = MapShownFragment()
     var countryListFragment = CountryListFragment()
@@ -34,6 +37,15 @@ class MapFragment : Fragment() {
 
         tabLayout.addTab(tabLayout.newTab().setText("Map").setTag("Map"))
         tabLayout.addTab(tabLayout.newTab().setText("Top Ten").setTag("Top Ten"))
+
+
+        enter_your_letter.setOnClickListener {
+            EnterLetterFragment().addToNavigationStack(
+                    (activity as BottomNavigationActivity).supportFragmentManager,
+                    R.id.fragment_container,
+                    "enter_letter_fragment")
+        }
+    }
 
         manager = childFragmentManager
 
@@ -78,6 +90,7 @@ class MapFragment : Fragment() {
             }
 
         })
+
 
     }
 }
