@@ -10,8 +10,17 @@
     <color name="greenish_blue">#2672b3</color>
     <color name="blueish_subtitle_color">#4a81b6</color>
     <color name="select_country_title_color">#474c53</color>
-
     <color name="transparent">#00FFFFFF</color>
     <color name="black">#000000</color>
     <color name="dashboard_bg_color">#24a3fd</color>
+    <color name="rank_1">#3597C9</color>
+    <color name="rank_2">#FDB12A</color>
+    <color name="rank_3">#81B737</color>
+    <color name="rank_4">#A68ABB</color>
+    <color name="rank_5">#333940</color>
+    <color name="rank_6">#C53F23</color>
+    <color name="rank_7">#9B8F89</color>
+    <color name="rank_8">#7E193B</color>
+    <color name="rank_9">#5DCFC5</color>
+    <color name="rank_10">#7C878C</color>
 </resources>
