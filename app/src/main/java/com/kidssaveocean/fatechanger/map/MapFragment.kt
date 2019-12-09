@@ -45,7 +45,7 @@ class MapFragment : Fragment() {
                     R.id.fragment_container,
                     "enter_letter_fragment")
         }
-    }
+
 
         manager = childFragmentManager
 
@@ -90,7 +90,6 @@ class MapFragment : Fragment() {
             }
 
         })
-
 
     }
 }
