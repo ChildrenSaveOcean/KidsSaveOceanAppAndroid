@@ -21,7 +21,7 @@ class FirebaseGetDataInAct : BaseActivity() {
          * This method will return a disposable, need to dispose it onDestroy(),
          * Here we can directly call disposableOnDestroy(), under the hood it will handle the disposables.
          */
-        disposableOnDestroy(HijackPoliciesRepo.getDataObservable().subscribe({ data ->
+        disposableOnDestroy(HijackPoliciesRepo.getData().subscribe({ data ->
             /**
              * Success callback. Will return the data we request.
              * The return type of the data depends on the business requirements.
@@ -35,9 +35,5 @@ class FirebaseGetDataInAct : BaseActivity() {
              */
             it.message
         }))
-        /**
-         * This method will get data from Firebase.
-         */
-        HijackPoliciesRepo.getData()
     }
 }

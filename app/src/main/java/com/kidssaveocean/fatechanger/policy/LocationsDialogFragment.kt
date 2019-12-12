@@ -1,8 +1,5 @@
 package com.kidssaveocean.fatechanger.policy
 
-import android.app.AlertDialog
-import android.app.Dialog
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +21,7 @@ class LocationsDialogFragment: DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         val locationsAdapter = LocationsAdapter()
         val pccActivity = activity as PolicyControlCenterActivity
-        locationsAdapter.setpolicyLocations(pccActivity.policyLocations)
+        locationsAdapter.setPolicyLocations(pccActivity.policyLocations)
         rcvLocations.layoutManager = LinearLayoutManager(activity)
         rcvLocations.adapter = locationsAdapter
         rcvLocations.addItemDecoration(DividerItemDecoration(activity, RecyclerView.VERTICAL))

@@ -11,6 +11,11 @@ object Constants {
     const val TABLE_NAME_USERS = "USERS"
 
     const val requestPolicyVote = 100
+    const val requestPolicyCentrolCenter = 101
     const val intentPolicyName = "policyName"
     const val intentPolicyValue = "policyValue"
+    const val intentCampaignValue = "campaignVaule"
+    const val intentCampaignName = "campaignName"
+    const val shareText = "https://www.kidssaveocean.com/change-fate"
+    const val learnMoreUrl= "https://www.kidssaveocean.com/projects"
 }

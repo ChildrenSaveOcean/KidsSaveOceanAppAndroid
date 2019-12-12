@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_policy">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/view_toolbar"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupNotLive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tvTrackContent,btnSpread"
+        android:visibility="invisible"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupLive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tvLive,lytLived,lytBottom,imgAlert"/>
+
+    <TextView
+        android:id="@+id/tvLive"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        android:textSize="45sp"
+        android:text="@string/live"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvTrackTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvLive"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:text="@string/policy_track_title"/>
+
+    <TextView
+        android:id="@+id/tvTrackSubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvTrackTitle"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:layout_marginTop="5dp"
+        android:text="@string/policy_track_subtitle"/>
+
+    <TextView
+        android:id="@+id/tvTrackContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvTrackSubtitle"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="@string/policy_track_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnSpread"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvTrackContent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ic_round_red"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:text="@string/spread"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textAllCaps="false"/>
+
+    <include
+        android:id="@+id/lytLived"
+        layout="@layout/track_campaign_live"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTrackSubtitle"/>
+
+    <include
+        android:id="@+id/lytBottom"
+        layout="@layout/track_campaign_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/lytLived"/>
+
+    <ImageView
+        android:id="@+id/imgAlert"
+        android:layout_width="95dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_action_alert"
+        app:layout_constraintTop_toBottomOf="@id/lytBottom"
+        app:layout_constraintDimensionRatio="74:88"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

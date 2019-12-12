@@ -1,3 +1,3 @@
 package com.kidssaveocean.fatechanger.firebase.model
 
-data class PoliciesModel(var policy_description: String = "", var policy_location: String = "")
+data class PoliciesModel(val policy_description: String = "", val policy_location: String = "")
