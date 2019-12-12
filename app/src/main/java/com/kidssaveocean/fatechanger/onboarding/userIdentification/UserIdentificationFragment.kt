@@ -22,17 +22,17 @@ class UserIdentificationFragment : Fragment() {
         var teacherFragment = childFragmentManager.findFragmentById(R.id.teacher_fragment) as UserIdentificationCardFragment?
         var othersFragment = childFragmentManager.findFragmentById(R.id.others_fragment) as UserIdentificationCardFragment?
 
-        studentFragment!!.setBackgroundImage(R.drawable.clownfish)
+        studentFragment!!.setBackgroundImage(R.drawable.experience_card_student)
         studentFragment!!.setUserTypeText(R.string.i_am_a_student)
         studentFragment!!.setDesciption(R.string.i_am_a_student_description)
         studentFragment!!.setUpImageButtonOnClick(getString(R.string.students))
 
-        teacherFragment!!.setBackgroundImage(R.drawable.jellyfish)
+        teacherFragment!!.setBackgroundImage(R.drawable.experience_card_teacher)
         teacherFragment!!.setUserTypeText(R.string.i_am_a_teacher)
         teacherFragment!!.setDesciption(R.string.i_am_a_teacher_description)
         teacherFragment!!.setUpImageButtonOnClick(getString(R.string.teachers))
 
-        othersFragment!!.setBackgroundImage(R.drawable.turtle)
+        othersFragment!!.setBackgroundImage(R.drawable.experience_card_support)
         othersFragment!!.setUserTypeText(R.string.neither_student_nor_teacher)
         othersFragment!!.setDesciption(R.string.neither_student_nor_teacher_description)
         othersFragment!!.setUpImageButtonOnClick(getString(R.string.others))
