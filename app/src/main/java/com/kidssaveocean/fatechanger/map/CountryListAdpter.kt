@@ -43,12 +43,14 @@ class CountryListAdpter(private val context: Context)
     override fun getItemCount(): Int = countriesLocal.size
 
     override fun onBindViewHolder(holder: ViewHoder, position: Int) {
-        holder.rankNumber.text = "${position + 1}"
-        holder.grad.setColor(context.resources.getColor(colorList[position]))
+        holder.run {
+            rankNumber.text = "${position + 1}"
+            grad.setColor(context.resources.getColor(colorList[position]))
 
-        holder.countryName.text = countriesLocal[position].country_name
-        holder.countryLetterNumber.text = countriesLocal[position].letters_written_to_country.toString()
+            countryName.text = countriesLocal[position].country_name
+            countryLetterNumber.text = countriesLocal[position].letters_written_to_country.toString()
 
+        }
     }
 
 

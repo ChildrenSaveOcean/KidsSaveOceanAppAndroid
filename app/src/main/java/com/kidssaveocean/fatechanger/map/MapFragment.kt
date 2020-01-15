@@ -15,29 +15,32 @@ import com.kidssaveocean.fatechanger.R
 
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
+import com.kidssaveocean.fatechanger.firebase.FirebaseService
+import com.kidssaveocean.fatechanger.firebase.model.CountryModel
 import kotlinx.android.synthetic.main.fragment_map.*
+import java.util.*
 
 
-
-class MapFragment : Fragment() {
+class MapFragment : Fragment(), Observer {
     var manager: FragmentManager? = null
     var transaction: FragmentTransaction? = null
-
-
     var mapShownFragment = MapShownFragment()
     var countryListFragment = CountryListFragment()
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        FirebaseService.getInstance().addObserver(this)
         return inflater.inflate(R.layout.fragment_map, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
 
-        tabLayout.addTab(tabLayout.newTab().setText("Map").setTag("Map"))
-        tabLayout.addTab(tabLayout.newTab().setText("Top Ten").setTag("Top Ten"))
-
+        tabLayout.run {
+            addTab(newTab().setText("Map View").setTag("Map"))
+            addTab(newTab().setText("Top 10 View").setTag("Top Ten"))
+        }
 
         enter_your_letter.setOnClickListener {
             EnterLetterFragment().addToNavigationStack(
@@ -47,10 +50,10 @@ class MapFragment : Fragment() {
         }
 
         manager = childFragmentManager
-
-        transaction = manager?.beginTransaction()
-        transaction?.add(R.id.fragment_map_container, mapShownFragment)
-        transaction?.commit()
+        transaction = manager?.beginTransaction()?.apply {
+            add(R.id.fragment_map_container, mapShownFragment)
+            commit()
+        }
 
         tabLayout.addOnTabSelectedListener(object : BaseOnTabSelectedListener<TabLayout.Tab> {
             override fun onTabReselected(p0: TabLayout.Tab?) {
@@ -67,21 +70,25 @@ class MapFragment : Fragment() {
                 // Use hide/show to save the state of fragment
                 when (tab?.tag) {
                     "Map" -> {
-                        transaction?.hide(countryListFragment)
-                        transaction?.show(mapShownFragment)
-                        transaction?.commit()
+                        transaction?.run {
+                            hide(countryListFragment)
+                            show(mapShownFragment)
+                            commit()
+                        }
                     }
 
                     "Top Ten" -> {
-                        transaction?.hide(mapShownFragment)
-                        if (countryListFragment.isAdded) {
-                            transaction?.show(countryListFragment)
-                            transaction?.commit()
-                        } else {
-                            transaction?.add(R.id.fragment_map_container, countryListFragment)
-                            transaction?.commit()
-                        }
+                        transaction?.run {
 
+                            hide(mapShownFragment)
+                            if (countryListFragment.isAdded) {
+                                show(countryListFragment)
+                                commit()
+                            } else {
+                                add(R.id.fragment_map_container, countryListFragment)
+                                commit()
+                            }
+                        }
                     }
                 }
 
@@ -90,6 +97,27 @@ class MapFragment : Fragment() {
 
         })
 
+    }
+
+    override fun update(o: Observable?, arg: Any?) {
+        when (o) {
+            is FirebaseService -> {
+                updateText(o.countries)
+            }
+        }
+    }
+
+    private fun updateText(data: List<CountryModel>) {
+        var letterNum: Long = 0
+        if (data.isNotEmpty()) {
+            countries.text = data.size.toString()
+
+            for (i in data.indices) {
+                letterNum = letterNum.plus(data[i].country_number)
+            }
+
+            letters_written.text = letterNum.toString()
+        }
 
     }
 }

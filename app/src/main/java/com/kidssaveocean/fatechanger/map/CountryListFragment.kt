@@ -26,18 +26,20 @@ class CountryListFragment : Fragment(), Observer {
         FirebaseService.getInstance().addObserver(this)
 
         adapter = CountryListAdpter(activity as Context)
-
         recyclerview.adapter = adapter
-        recyclerview.layoutManager = LinearLayoutManager(activity)
-        recyclerview.addItemDecoration(object : DividerItemDecoration(activity, VERTICAL) {})
+
+        recyclerview.run {
+            layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(object : DividerItemDecoration(activity, VERTICAL) {})
+        }
 
         updateList(FirebaseService.getInstance().countries)
 
         return view
     }
 
-    private fun updateList(data : List<CountryModel>) {
-        if (!data.isEmpty()){
+    private fun updateList(data: List<CountryModel>) {
+        if (data.isNotEmpty()) {
             adapter.countriesLocal = data as MutableList<CountryModel>
             adapter.notifyDataSetChanged()
         }
