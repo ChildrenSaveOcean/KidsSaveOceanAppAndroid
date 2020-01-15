@@ -10,9 +10,9 @@ import kotlinx.android.synthetic.main.item_location.view.*
 
 class LocationsAdapter: RecyclerView.Adapter<LocationsAdapter.LocationsViewHolder>() {
     private var policyLocations: List<Pair<String, HijackPolicyLocationModel>>? = null
-    lateinit var onItemCLickedListener: OnItemCLickedListener
+    private lateinit var onItemCLickedListener: OnItemCLickedListener
 
-    fun setpolicyLocations(data: List<Pair<String, HijackPolicyLocationModel>>?){
+    fun setPolicyLocations(data: List<Pair<String, HijackPolicyLocationModel>>?){
         policyLocations = data
         notifyDataSetChanged()
     }
@@ -39,5 +39,5 @@ class LocationsAdapter: RecyclerView.Adapter<LocationsAdapter.LocationsViewHolde
         }
     }
 
-    class LocationsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){}
+    class LocationsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

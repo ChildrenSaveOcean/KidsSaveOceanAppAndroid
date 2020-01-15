@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,131 +23,146 @@
 
         <TextView
             android:id="@+id/tvControlCenterTitle"
-            app:layout_constraintTop_toBottomOf="@id/imgTop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
             android:gravity="center_horizontal"
+            android:text="@string/policy_control_center_title"
+            android:textColor="#474c53"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#474c53"
-            android:text="@string/policy_control_center_title"/>
+            app:layout_constraintTop_toBottomOf="@id/imgTop" />
 
         <TextView
             android:id="@+id/tvControlCenterSubTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvControlCenterTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:gravity="center_horizontal"
-            android:textSize="16sp"
+            android:text="@string/policy_control_center_subtitle"
             android:textColor="#53585f"
-            android:text="@string/policy_control_center_subtitle"/>
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tvControlCenterTitle" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tvPolicyChosen,tvPolicyChosenContent,tvLocation,tvLocationContent,btnShare,btnLearnMore"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvControlCenterSubTitle"
+            app:layout_constraintVertical_bias="0.4" />
 
         <TextView
             android:id="@+id/tvPolicyChosen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tvControlCenterSubTitle"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/policy_chosen"
             android:textColor="#53585f"
             android:textSize="18sp"
-            android:text="@string/policy_chosen"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvControlCenterSubTitle" />
 
         <TextView
             android:id="@+id/tvPolicyChosenContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tvControlCenterSubTitle"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
-            app:layout_constraintStart_toEndOf="@id/tvPolicyChosen"
             android:textColor="#53585f"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tvPolicyChosen"
+            app:layout_constraintTop_toBottomOf="@id/tvControlCenterSubTitle" />
 
         <TextView
             android:id="@+id/tvLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvPolicyChosenContent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:text="@string/policy_location_live"
             android:textColor="#d0021b"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:text="@string/policy_location_live"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPolicyChosenContent" />
 
         <TextView
             android:id="@+id/tvLocationContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvPolicyChosenContent"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            app:layout_constraintStart_toEndOf="@id/tvLocation"
             android:textColor="#d0021b"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tvLocation"
+            app:layout_constraintTop_toBottomOf="@id/tvPolicyChosenContent" />
 
         <Button
             android:id="@+id/btnLearnMore"
             android:layout_width="120dp"
             android:layout_height="40dp"
-            android:background="@drawable/ic_round_red"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.2"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLocationContent"
             android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:textColor="@color/white"
+            android:background="@drawable/ic_round_red"
             android:text="@string/policy_control_center_learn_more"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationContent" />
 
         <Button
             android:id="@+id/btnShare"
             android:layout_width="120dp"
             android:layout_height="40dp"
-            android:background="@drawable/ic_round_red"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.8"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLocationContent"
             android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:textColor="@color/white"
+            android:background="@drawable/ic_round_red"
             android:text="@string/policy_control_center_share"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationContent" />
 
         <include
             android:id="@+id/lytChooseLocation"
             layout="@layout/policy_control_center_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
+            android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@id/btnShare"
-            tools:layout_editor_absoluteX="0dp"
-            android:visibility="visible"/>
+            tools:layout_editor_absoluteX="0dp" />
 
         <include
             android:id="@+id/lytRequirement"
             layout="@layout/policy_control_center_requirement"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintTop_toBottomOf="@id/lytChooseLocation"
             tools:layout_editor_absoluteX="0dp" />
@@ -158,10 +172,10 @@
             layout="@layout/policy_center_control_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
-            app:layout_constraintTop_toBottomOf="@id/lytRequirement"/>
+            app:layout_constraintTop_toBottomOf="@id/lytRequirement" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="@string/policy_deadline"
+            android:text="@string/policy_total_collected"
             android:textColor="#53585f"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"

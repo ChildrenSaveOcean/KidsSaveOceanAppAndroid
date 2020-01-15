@@ -1,6 +1,7 @@
 package com.kidssaveocean.fatechanger.policy
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -9,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.WebViewActivity
 import com.kidssaveocean.fatechanger.common.BaseActivity
 import com.kidssaveocean.fatechanger.firebase.model.CampaignsModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
@@ -21,55 +23,52 @@ import kotlinx.android.synthetic.main.policy_control_center_requirement.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 
 
-class PolicyControlCenterActivity: BaseActivity() {
+class PolicyControlCenterActivity : BaseActivity() {
     var policyLocations: List<Pair<String, HijackPolicyLocationModel>>? = null
     private var campaigns: List<Pair<String, CampaignsModel>>? = null
     private var campaign: CampaignsModel? = null
     private lateinit var campaignName: String
+    private var policyValue: HijackPoliciesModel? = null
+    private lateinit var policyName: String
 
-    var policyLocation: Pair<String, HijackPolicyLocationModel>? = null
+    private var policyLocation: Pair<String, HijackPolicyLocationModel>? = null
 
     private val chooseLocation = 0
     private val notLived = 1
     private val lived = 2
-    private var policyValue: HijackPoliciesModel? = null
-    private lateinit var policyName: String
     private var situation: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_policy_control_center)
 
-        toolbar.setOnClickListener{
+        toolbar.setOnClickListener {
             onBackPressed()
         }
 
-        setViews(chooseLocation)
-        lytSpinner.isEnabled = false
+        initView()
+
         val data = intent.getParcelableExtra<HijackPoliciesModel>(Constants.intentPolicyValue)
 
         val policiesViewModel = ViewModelProviders.of(this).get(PoliciesViewModel::class.java)
 
-        if (data != null){
-            policyValue = data
-            policyName = intent.getStringExtra(Constants.intentPolicyName)
-        } else{
-            policiesViewModel.getLiveDataPolicies().observe(this, Observer {
-                policyName = it[0].first
-                policyValue = it[0].second
-                checkDataReturn()
-            })
-        }
-        policiesViewModel.getLiveDataCampaigns().observe(this, Observer {
-            campaigns = it
-            checkDataReturn()
-        })
-
-        policiesViewModel.getLiveDataPolicyLocations().observe(this, Observer {
-            policyLocations = it
+        policiesViewModel.getPolicyCombineData().observe(this, Observer {
+            if (data == null) {
+                policyName = it.policies[0].first
+                policyValue = it.policies[0].second
+            } else {
+                policyValue = data
+                policyName = intent.getStringExtra(Constants.intentPolicyName)
+            }
+            campaigns = it.campaigns
+            policyLocations = it.policyLocations
             lytSpinner.isEnabled = true
-            policyLocation = it[0]
-            tvYourLocation.text = it[0].second.location
+            policyLocation = it.policyLocations[0]
+            tvYourLocation.text = it.policyLocations[0].second.location
+            progressBar.visibility = View.GONE
+            if (groupTop.visibility == View.INVISIBLE) {
+                groupTop.visibility = View.VISIBLE
+            }
             checkDataReturn()
         })
 
@@ -89,45 +88,60 @@ class PolicyControlCenterActivity: BaseActivity() {
                         checkDataReturn()
                         dialog.dismiss()
                     }
-                    .setNegativeButton(resources.getString(R.string.no)){ dialog, _ ->
+                    .setNegativeButton(resources.getString(R.string.no)) { dialog, _ ->
                         dialog.dismiss()
                     }.create().show()
         }
 
         btnPlannedUpdate.setOnClickListener {
-            if (situation == notLived){
+            if (situation == notLived) {
                 policiesViewModel.setSignatureRequest(campaignName, etPlannedSign.text.toString().toInt())
                 val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
             }
         }
+
+        btnShare.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, Constants.shareText)
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+
+        btnLearnMore.setOnClickListener {
+            startActivity(Intent(this, WebViewActivity::class.java))
+        }
     }
 
-    fun selectedLocation(position: Int){
+    fun selectedLocation(position: Int) {
         policyLocation = policyLocations?.get(position)
         tvYourLocation.text = policyLocation?.second?.location ?: ""
         checkDataReturn()
     }
 
-    private fun checkDataReturn(){
-        when{
+    private fun checkDataReturn() {
+        when {
             policyValue != null && campaigns.isNullOrEmpty() -> {
                 situation = chooseLocation
                 tvPolicyChosenContent.text = policyValue?.description
             }
             policyValue != null && !campaigns.isNullOrEmpty() && !policyLocations.isNullOrEmpty() -> {
                 campaigns?.map {
-                     if (policyName == it.second.hijack_policy && policyLocation?.first == it.second.location_id){
-                         campaign = it.second
-                         campaignName = it.first
-                     }
+                    if (policyName == it.second.hijack_policy && policyLocation?.first == it.second.location_id) {
+                        campaign = it.second
+                        campaignName = it.first
+                    }
                 }
-                if (campaign != null){
-                    when(campaign?.live){
+                if (campaign != null) {
+                    when (campaign?.live) {
                         true -> situation = lived
                         false -> situation = notLived
                     }
-                }else{
+                } else {
                     situation = chooseLocation
                 }
                 tvPolicyChosenContent.text = policyValue?.description
@@ -136,8 +150,16 @@ class PolicyControlCenterActivity: BaseActivity() {
         setViews(situation)
     }
 
-    private fun setViews(situation: Int){
-        when(situation){
+    private fun initView() {
+        progressBar.visibility = View.VISIBLE
+        groupTop.visibility = View.INVISIBLE
+        lytBottom.visibility = View.INVISIBLE
+        lytRequirement.visibility = View.INVISIBLE
+        lytChooseLocation.visibility = View.INVISIBLE
+    }
+
+    private fun setViews(situation: Int) {
+        when (situation) {
             chooseLocation -> {
                 lytChooseLocation.visibility = View.VISIBLE
                 btnChooseLocation.visibility = View.VISIBLE
@@ -182,5 +204,14 @@ class PolicyControlCenterActivity: BaseActivity() {
                 tvPlannedSign.text = campaign?.signatures_required.toString()
             }
         }
+    }
+
+    override fun onBackPressed() {
+        if (campaign != null){
+            intent.putExtra(Constants.intentCampaignValue, campaign)
+            intent.putExtra(Constants.intentCampaignName, campaignName)
+        }
+        setResult(Activity.RESULT_OK, intent)
+        this.finish()
     }
 }

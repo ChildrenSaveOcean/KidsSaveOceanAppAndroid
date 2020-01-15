@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tvTrackChosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/policy_chosen"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvTrackChosenContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/tvTrackChosen"
+        app:layout_constraintTop_toTopOf="@id/tvTrackChosen" />
+
+    <TextView
+        android:id="@+id/tvTitleCampaignLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="5dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/campaign_location"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTrackChosenContent" />
+
+    <TextView
+        android:id="@+id/tvCampaignLoc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="abcde"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/tvTitleCampaignLoc"
+        app:layout_constraintEnd_toStartOf="@id/btnMoreInfo"
+        app:layout_constraintTop_toTopOf="@id/tvTitleCampaignLoc" />
+
+    <TextView
+        android:id="@+id/tvTitleSignaturesRequired"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="5dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/policy_signature_required"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleCampaignLoc" />
+
+    <TextView
+        android:id="@+id/tvSignaturesRequired"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="997,139"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/btnMoreInfo"
+        app:layout_constraintStart_toEndOf="@id/tvTitleSignaturesRequired"
+        app:layout_constraintTop_toTopOf="@id/tvTitleSignaturesRequired" />
+
+    <TextView
+        android:id="@+id/tvTitleDeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/policy_deadline"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleSignaturesRequired" />
+
+    <TextView
+        android:id="@+id/tvDeadline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="May 3, 2020"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/btnLiveSpread"
+        app:layout_constraintStart_toEndOf="@id/tvTitleDeadline"
+        app:layout_constraintTop_toTopOf="@id/tvTitleDeadline" />
+
+    <TextView
+        android:id="@+id/tvTitleTotalCollected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/total_collected_so_far"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleDeadline" />
+
+    <TextView
+        android:id="@+id/tvTotalCollected"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="77,777"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/btnLiveSpread"
+        app:layout_constraintStart_toEndOf="@id/tvTitleTotalCollected"
+        app:layout_constraintTop_toTopOf="@id/tvTitleTotalCollected" />
+
+    <Button
+        android:id="@+id/btnMoreInfo"
+        android:layout_width="95dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tvTitleCampaignLoc"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleSignaturesRequired"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ic_round_red"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:text="@string/more_info"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnLiveSpread"
+        android:layout_width="95dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tvDeadline"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleTotalCollected"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ic_round_red"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:text="@string/spread"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textAllCaps="false"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
