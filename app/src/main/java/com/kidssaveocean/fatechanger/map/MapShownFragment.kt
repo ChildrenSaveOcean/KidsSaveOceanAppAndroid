@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -49,7 +50,9 @@ class MapShownFragment : Fragment(), OnMapReadyCallback, Observer {
     override fun update(o: Observable?, arg: Any?) {
         when (o) {
             is FirebaseService -> {
-                drawMarks()
+                if (o.countries.isNotEmpty()) {
+                    drawMarks()
+                }
             }
         }
     }
@@ -70,10 +73,12 @@ class MapShownFragment : Fragment(), OnMapReadyCallback, Observer {
                 val country = LatLng(item.latitude, item.longitude)
 
                 CustomMapMarkerView.numberLetter = item.country_number.toString()
+                val icon = BitmapDescriptorFactory
+                        .fromBitmap(activity?.let { createDrawableFromView(it, CustomMapMarkerView(it)) })
 
                 mGoogleMap.addMarker(MarkerOptions()
                         .position(country)
-                        .icon(BitmapDescriptorFactory.fromBitmap(activity?.let { createDrawableFromView(it, CustomMapMarkerView(it)) }))
+                        .icon(icon)
                         .title(item.country_name))
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(country))
             }
