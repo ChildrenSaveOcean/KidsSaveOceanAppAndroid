@@ -1,5 +1,6 @@
 package com.kidssaveocean.fatechanger.dagger.component
 
+import com.kidssaveocean.fatechanger.MainApplication
 import com.kidssaveocean.fatechanger.dagger.module.HijackPoliciesRepoModule
 import com.kidssaveocean.fatechanger.firebase.viewmodel.PoliciesViewModel
 import com.kidssaveocean.fatechanger.firebase.viewmodel.PolicyStepsViewModel
@@ -17,4 +18,5 @@ interface HijackPolicyComponent {
 
     fun inject(policiesViewModel: PoliciesViewModel)
     fun inject(policyStepsViewModel: PolicyStepsViewModel)
+    fun inject(mainApplication: MainApplication)
 }

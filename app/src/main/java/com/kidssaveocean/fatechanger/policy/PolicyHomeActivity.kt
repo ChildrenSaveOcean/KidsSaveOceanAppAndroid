@@ -73,13 +73,13 @@ class PolicyHomeActivity : BaseActivity() {
                 Constants.requestPolicyVote -> {
                     data?.apply {
                         policyValue = getParcelableExtra(Constants.intentPolicyValue)
-                        policyName = getStringExtra(Constants.intentPolicyName)
+                        policyName = getStringExtra(Constants.intentPolicyName)?: ""
                     }
                 }
                 Constants.requestPolicyCentrolCenter -> {
                     data?.apply {
                         campaign = getParcelableExtra(Constants.intentCampaignValue)
-                        campaignName = getStringExtra(Constants.intentCampaignName)
+                        campaignName = getStringExtra(Constants.intentCampaignName)?: ""
                     }
                 }
             }

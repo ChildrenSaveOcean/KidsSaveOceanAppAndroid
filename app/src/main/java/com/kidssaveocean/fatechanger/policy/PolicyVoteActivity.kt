@@ -3,6 +3,8 @@ package com.kidssaveocean.fatechanger.policy
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
+import android.view.TextureView
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
@@ -12,11 +14,10 @@ import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.common.BaseActivity
 import com.kidssaveocean.fatechanger.dagger.component.DaggerHijackPolicyComponent
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
-import com.kidssaveocean.fatechanger.firebase.repository.HijackPoliciesRepo
+import com.kidssaveocean.fatechanger.firebase.repository.UsersRepo
 import com.kidssaveocean.fatechanger.firebase.viewmodel.PoliciesViewModel
 import kotlinx.android.synthetic.main.activity_policy_vote.*
 import kotlinx.android.synthetic.main.view_toolbar.*
-import javax.inject.Inject
 
 class PolicyVoteActivity : BaseActivity() {
     private var votes: Int = 0
@@ -24,7 +25,6 @@ class PolicyVoteActivity : BaseActivity() {
     private var policyValue: HijackPoliciesModel? = null
 
     private var policies: MutableList<Pair<String, HijackPoliciesModel>> = mutableListOf()
-    @Inject lateinit var hijackPoliciesRepo: HijackPoliciesRepo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,10 +58,21 @@ class PolicyVoteActivity : BaseActivity() {
                 policyName = policies[0].first
                 votes = policyValue?.votes ?: 0
                 tvSummaryContent.text = policyValue?.summary
-                btnVote.isEnabled = true
+                if (!TextUtils.isEmpty(UsersRepo.userModel?.second?.hijack_policy_selected)){
+                    btnVote.isEnabled = false
+                    AlertDialog.Builder(this@PolicyVoteActivity)
+                            .setMessage(resources.getString(R.string.policy_vote_already))
+                            .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
+                                dialog.dismiss()
+                            }.create().show()
 
+                }else{
+                    btnVote.isEnabled = true
+                }
             }
         })
+
+
 
         btnVote?.apply {
             isEnabled = false
@@ -70,6 +81,10 @@ class PolicyVoteActivity : BaseActivity() {
                         .setMessage(resources.getString(R.string.policy_vote_dialog_message))
                         .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
                             policesViewModel.policyVote(policyName,"votes", votes + 1)
+                            UsersRepo.userModel?.second?.apply {
+                                hijack_policy_selected = policyName
+                                UsersRepo.updateOrCreateUser(this)
+                            }
                             dialog.dismiss()
                             onBackPressed()
                         }

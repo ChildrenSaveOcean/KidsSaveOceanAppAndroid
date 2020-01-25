@@ -2,7 +2,6 @@ package com.kidssaveocean.fatechanger.firebase.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.kidssaveocean.fatechanger.dagger.component.DaggerHijackPolicyComponent
 import com.kidssaveocean.fatechanger.firebase.model.CampaignsModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
@@ -11,14 +10,11 @@ import com.kidssaveocean.fatechanger.firebase.model.PolicyCombineData
 import com.kidssaveocean.fatechanger.firebase.repository.CampaignsRepo
 import com.kidssaveocean.fatechanger.firebase.repository.HijackPoliciesRepo
 import com.kidssaveocean.fatechanger.firebase.repository.HijackPolicyLocationRepo
-import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Function3
 import javax.inject.Inject
 
-class PoliciesViewModel : ViewModel() {
-    private val disposables = mutableListOf<Disposable>()
+class PoliciesViewModel : BaseViewModel() {
     lateinit var liveDataPolicies: MutableLiveData<List<Pair<String, HijackPoliciesModel>>>
     @Inject
     lateinit var hijackPoliciesRepo: HijackPoliciesRepo
@@ -78,17 +74,10 @@ class PoliciesViewModel : ViewModel() {
     }
 
     fun campaignCreated(campaignsModel: CampaignsModel?, campaignName: String) {
-        campaignsRepo.campaignCreated(campaignsModel, campaignName)
+        campaignsRepo.createCampaign(campaignsModel, campaignName)
     }
 
-    fun setSignatureRequest(campaignName: String, requestNumber: Int) {
-        campaignsRepo.setSignatureRequest(campaignName, requestNumber)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        disposables.map {
-            it.dispose()
-        }
+    fun setCampaignValue(campaignName: String, childName: String, requestNumber: Int) {
+        campaignsRepo.setValue(campaignName, childName, requestNumber)
     }
 }
