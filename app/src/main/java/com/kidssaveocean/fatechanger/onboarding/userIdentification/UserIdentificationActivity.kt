@@ -6,7 +6,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.common.UserRecoverableException
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.firebase.repository.UsersRepo
 
 class UserIdentificationActivity : AppCompatActivity(), UserIdentificaitonRecyclerAdapter.ItemClick {
     private enum class Operator {
@@ -33,6 +35,10 @@ class UserIdentificationActivity : AppCompatActivity(), UserIdentificaitonRecycl
             Operator.STUDENT.ordinal-> enterVideoActivity(getString(R.string.students))
             Operator.TEACHER.ordinal -> enterVideoActivity(getString(R.string.teachers))
             Operator.SUPPORT.ordinal -> enterVideoActivity(getString(R.string.others))
+        }
+        UsersRepo.userModel?.second?.apply {
+            user_person_type = position
+            UsersRepo.updateOrCreateUser(this)
         }
     }
 

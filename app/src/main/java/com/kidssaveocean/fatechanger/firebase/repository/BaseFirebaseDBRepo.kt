@@ -13,13 +13,6 @@ import io.reactivex.schedulers.Schedulers
 @Suppress("NAME_SHADOWING")
 abstract class BaseFirebaseDBRepo<T : Any, R : Any>(private val tableName: String, private val clazz: Class<T>) {
 
-    init {
-        Log.d("FirebaseService", "init")
-        if (!FirebaseAuthCheckRepo.isAuth) {
-            FirebaseAuthCheckRepo.signIn()
-        }
-    }
-
     fun getData(): Single<R> {
         return Single.create<List<Pair<String, T>>> { emitter ->
             FirebaseDatabase.getInstance().reference.child(tableName)

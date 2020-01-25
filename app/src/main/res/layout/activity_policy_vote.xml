@@ -98,6 +98,6 @@
         android:text="@string/vote"
         android:textSize="17sp"
         android:textColor="@color/white"
-        android:background="@drawable/ic_round_red"/>
+        android:background="@drawable/bg_signatures_update"/>
 
 </FrameLayout>

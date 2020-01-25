@@ -9,17 +9,17 @@ object CampaignsRepo: BaseFirebaseDBRepo<CampaignsModel, List<Pair<String, Campa
         return list
     }
 
-    fun campaignCreated(campaignsModel: CampaignsModel?, campaignName: String){
-        FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_CAMPAIGNS).child(campaignName).push()
-        FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_CAMPAIGNS).child(campaignName).child("hijack_policy").setValue(campaignsModel?.hijack_policy)
-        FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_CAMPAIGNS).child(campaignName).child("live").setValue(campaignsModel?.live)
-        FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_CAMPAIGNS).child(campaignName).child("location_id").setValue(campaignsModel?.location_id)
-        FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_CAMPAIGNS).child(campaignName).child("signatures_collected").setValue(campaignsModel?.signatures_collected)
-        FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_CAMPAIGNS).child(campaignName).child("signatures_pledged").setValue(campaignsModel?.signatures_pledged)
-        FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_CAMPAIGNS).child(campaignName).child("signatures_required").setValue(campaignsModel?.signatures_required)
+    fun createCampaign(campaignsModel: CampaignsModel?, campaignName: String){
+        FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_CAMPAIGNS).child(campaignName).apply {
+            push()
+            child("hijack_policy").setValue(campaignsModel?.hijack_policy)
+            child("live").setValue(campaignsModel?.live)
+            child("location_id").setValue(campaignsModel?.location_id)
+            child("signatures_collected").setValue(campaignsModel?.signatures_collected)
+            child("signatures_required").setValue(campaignsModel?.signatures_required)}
     }
 
-    fun setSignatureRequest(campaignName: String, requestNumber: Int){
-        FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_CAMPAIGNS).child(campaignName).child("signatures_required").setValue(requestNumber)
+    fun setValue(campaignName: String, childName: String, requestNumber: Int){
+        FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_CAMPAIGNS).child(campaignName).child(childName).setValue(requestNumber)
     }
 }

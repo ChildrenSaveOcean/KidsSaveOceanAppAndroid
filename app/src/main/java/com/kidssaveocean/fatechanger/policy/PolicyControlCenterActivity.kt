@@ -3,6 +3,7 @@ package com.kidssaveocean.fatechanger.policy
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
@@ -15,6 +16,8 @@ import com.kidssaveocean.fatechanger.common.BaseActivity
 import com.kidssaveocean.fatechanger.firebase.model.CampaignsModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPolicyLocationModel
+import com.kidssaveocean.fatechanger.firebase.repository.CampaignsRepo
+import com.kidssaveocean.fatechanger.firebase.repository.UsersRepo
 import com.kidssaveocean.fatechanger.firebase.viewmodel.PoliciesViewModel
 import kotlinx.android.synthetic.main.activity_policy_control_center.*
 import kotlinx.android.synthetic.main.policy_center_control_bottom.*
@@ -26,7 +29,7 @@ import kotlinx.android.synthetic.main.view_toolbar.*
 class PolicyControlCenterActivity : BaseActivity() {
     var policyLocations: List<Pair<String, HijackPolicyLocationModel>>? = null
     private var campaigns: List<Pair<String, CampaignsModel>>? = null
-    private var campaign: CampaignsModel? = null
+    private var campaignModel: CampaignsModel? = null
     private lateinit var campaignName: String
     private var policyValue: HijackPoliciesModel? = null
     private lateinit var policyName: String
@@ -48,17 +51,30 @@ class PolicyControlCenterActivity : BaseActivity() {
 
         initView()
 
-        val data = intent.getParcelableExtra<HijackPoliciesModel>(Constants.intentPolicyValue)
+//        val data = intent.getParcelableExtra<HijackPoliciesModel>(Constants.intentPolicyValue)
 
         val policiesViewModel = ViewModelProviders.of(this).get(PoliciesViewModel::class.java)
 
         policiesViewModel.getPolicyCombineData().observe(this, Observer {
-            if (data == null) {
+            //            if (data == null) {
+//                policyName = it.policies[0].first
+//                policyValue = it.policies[0].second
+//            } else {
+//                policyValue = data
+//                policyName = intent.getStringExtra(Constants.intentPolicyName)
+//            }
+            UsersRepo.userModel?.second?.apply {
+                policyName = this.hijack_policy_selected
+            }
+            if (!TextUtils.isEmpty(policyName)) {
+                it.policies.forEach { policy ->
+                    if (policy.first == policyName) {
+                        policyValue = policy.second
+                    }
+                }
+            } else {
                 policyName = it.policies[0].first
                 policyValue = it.policies[0].second
-            } else {
-                policyValue = data
-                policyName = intent.getStringExtra(Constants.intentPolicyName)
             }
             campaigns = it.campaigns
             policyLocations = it.policyLocations
@@ -69,7 +85,13 @@ class PolicyControlCenterActivity : BaseActivity() {
             if (groupTop.visibility == View.INVISIBLE) {
                 groupTop.visibility = View.VISIBLE
             }
-            checkDataReturn()
+            UsersRepo.userModel?.second?.campaign?.apply {
+                campaignName = campaign_id
+                if (!TextUtils.isEmpty(campaign_id)) {
+                    checkDataReturn(true)
+                } else
+                    checkDataReturn(false)
+            }
         })
 
         lytSpinner.setOnClickListener {
@@ -80,25 +102,48 @@ class PolicyControlCenterActivity : BaseActivity() {
             AlertDialog.Builder(this)
                     .setMessage(resources.getString(R.string.campaign_dialog_message))
                     .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
-                        campaign = policyLocation?.first?.let { locationId ->
-                            CampaignsModel(policyName, false, locationId, 0, 0, 0)
+                        //                        campaign = policyLocation?.first?.let { locationId ->
+//                            CampaignsModel(policyName, false, locationId, 0, 0)
+//                        }
+//                        campaignName = "campaign_${campaigns?.size?.plus(1)}"
+//                        policiesViewModel.campaignCreated(campaign, campaignName)
+                        UsersRepo.userModel?.second?.apply {
+                            campaign?.campaign_id = campaignName
+                            campaign?.signatures_collected = campaignModel?.signatures_collected
+                                    ?: 0
+                            UsersRepo.updateOrCreateUser(this)
                         }
-                        campaignName = "campaign_${campaigns?.size?.plus(1)}"
-                        policiesViewModel.campaignCreated(campaign, campaignName)
-                        checkDataReturn()
+
+                        checkDataReturn(true)
                         dialog.dismiss()
                     }
                     .setNegativeButton(resources.getString(R.string.no)) { dialog, _ ->
                         dialog.dismiss()
+                        AlertDialog.Builder(this)
+                                .setMessage(resources.getString(R.string.policy_location_not_choose))
+                                .setPositiveButton(resources.getString(R.string.yes)) { dialog1, _ ->
+                                    dialog1.dismiss()
+                                }.create().show()
                     }.create().show()
         }
 
         btnPlannedUpdate.setOnClickListener {
-            if (situation == notLived) {
-                policiesViewModel.setSignatureRequest(campaignName, etPlannedSign.text.toString().toInt())
-                val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+            UsersRepo.userModel?.second?.apply {
+                signatures_pledged = etPlannedSign.text.toString().toInt()
+                UsersRepo.updateOrCreateUser(this)
             }
+            val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+        }
+
+        btnCollectedUpdate.setOnClickListener {
+            UsersRepo.userModel?.second?.apply {
+                campaign?.signatures_collected = etCollectedSign.text.toString().toInt()
+                UsersRepo.updateOrCreateUser(this)
+            }
+            CampaignsRepo.setValue(campaignName, "signatures_collected", etCollectedSign.text.toString().toInt())
+            val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
         }
 
         btnShare.setOnClickListener {
@@ -120,34 +165,45 @@ class PolicyControlCenterActivity : BaseActivity() {
     fun selectedLocation(position: Int) {
         policyLocation = policyLocations?.get(position)
         tvYourLocation.text = policyLocation?.second?.location ?: ""
-        checkDataReturn()
+        checkDataReturn(false)
     }
 
-    private fun checkDataReturn() {
+    private fun checkDataReturn(isChoose: Boolean) {
         when {
             policyValue != null && campaigns.isNullOrEmpty() -> {
                 situation = chooseLocation
                 tvPolicyChosenContent.text = policyValue?.description
             }
             policyValue != null && !campaigns.isNullOrEmpty() && !policyLocations.isNullOrEmpty() -> {
-                campaigns?.map {
-                    if (policyName == it.second.hijack_policy && policyLocation?.first == it.second.location_id) {
-                        campaign = it.second
-                        campaignName = it.first
-                    }
-                }
-                if (campaign != null) {
-                    when (campaign?.live) {
-                        true -> situation = lived
-                        false -> situation = notLived
+
+                if (TextUtils.isEmpty(campaignName)) {
+                    campaigns?.map {
+                        if (policyName == it.second.hijack_policy && policyLocation?.first == it.second.location_id) {
+                            campaignModel = it.second
+                            campaignName = it.first
+                        }
                     }
                 } else {
-                    situation = chooseLocation
+                    campaigns?.map {
+                        if (campaignName == it.first) {
+                            campaignModel = it.second
+                        }
+                    }
                 }
-                tvPolicyChosenContent.text = policyValue?.description
             }
         }
-        setViews(situation)
+
+        if (campaignModel != null) {
+            when (campaignModel?.live) {
+                true -> situation = lived
+                false -> situation = notLived
+            }
+        } else {
+            situation = chooseLocation
+        }
+        tvPolicyChosenContent.text = policyValue?.description
+
+        setViews(situation, isChoose)
     }
 
     private fun initView() {
@@ -158,57 +214,78 @@ class PolicyControlCenterActivity : BaseActivity() {
         lytChooseLocation.visibility = View.INVISIBLE
     }
 
-    private fun setViews(situation: Int) {
-        when (situation) {
-            chooseLocation -> {
-                lytChooseLocation.visibility = View.VISIBLE
-                btnChooseLocation.visibility = View.VISIBLE
-                lytRequirement.visibility = View.INVISIBLE
-                lytBottom.visibility = View.GONE
-                lytSpinner.isEnabled = true
-                tvLocation.text = resources.getString(R.string.policy_location_campaigns)
-                tvLocationContent.text = resources.getString(R.string.policy_location_not_live)
+    private fun setViews(situation: Int, isChoose: Boolean) {
+        if (isChoose) {
+            when (situation) {
+                chooseLocation -> {
+                    lytChooseLocation.visibility = View.VISIBLE
+                    btnChooseLocation.visibility = View.VISIBLE
+                    lytRequirement.visibility = View.INVISIBLE
+                    lytBottom.visibility = View.GONE
+                    lytSpinner.isEnabled = true
+                    tvLocation.text = resources.getString(R.string.policy_location_campaigns)
+                    tvLocationContent.text = resources.getString(R.string.policy_location_not_live)
+                }
+                notLived -> {
+                    lytChooseLocation.visibility = View.VISIBLE
+                    btnChooseLocation.visibility = View.GONE
+                    imgTriangle.visibility = View.INVISIBLE
+                    lytRequirement.visibility = View.VISIBLE
+                    groupRequirement.visibility = View.INVISIBLE
+                    lytBottom.visibility = View.VISIBLE
+                    tvNotLive.visibility = View.VISIBLE
+                    tvPlannedSign.visibility = View.INVISIBLE
+                    etPlannedSign.visibility = View.VISIBLE
+                    tvLivedNotice.visibility = View.GONE
+                    btnCollectedUpdate.isEnabled = false
+                    etCollectedSign.isEnabled = false
+                    lytSpinner.isEnabled = false
+                    tvLocation.text = resources.getString(R.string.policy_location_campaigns)
+                    tvLocationContent.text = resources.getString(R.string.policy_location_not_live)
+                    etPlannedSign.setText(UsersRepo.userModel?.second?.signatures_pledged.toString())
+                }
+                lived -> {
+                    lytChooseLocation.visibility = View.GONE
+                    lytRequirement.visibility = View.VISIBLE
+                    groupRequirement.visibility = View.VISIBLE
+                    tvNotLive.visibility = View.GONE
+                    lytBottom.visibility = View.VISIBLE
+                    tvPlannedSign.visibility = View.INVISIBLE
+                    etPlannedSign.visibility = View.VISIBLE
+                    tvLivedNotice.visibility = View.VISIBLE
+                    btnCollectedUpdate.isEnabled = true
+                    etCollectedSign.isEnabled = true
+                    tvLocation.text = resources.getString(R.string.policy_location_live)
+                    tvLocationContent.text = policyLocation?.second?.location
+                    etCollectedSign.setText(campaignModel?.signatures_collected.toString())
+                    tvSignaturesRequired.text = campaignModel?.signatures_required.toString()
+//                tvPlannedSign.text = UsersRepo.userModel?.second?.signatures_pledged.toString()
+                    etPlannedSign.setText(UsersRepo.userModel?.second?.signatures_pledged.toString())
+                    tvTotalCollected.text = campaignModel?.signatures_collected.toString()
+                }
             }
-            notLived -> {
-                lytChooseLocation.visibility = View.VISIBLE
-                btnChooseLocation.visibility = View.GONE
-                imgTriangle.visibility = View.INVISIBLE
-                lytRequirement.visibility = View.VISIBLE
-                groupRequirement.visibility = View.INVISIBLE
-                lytBottom.visibility = View.VISIBLE
-                tvNotLive.visibility = View.VISIBLE
-                tvPlannedSign.visibility = View.INVISIBLE
-                etPlannedSign.visibility = View.VISIBLE
-                tvLivedNotice.visibility = View.GONE
-                btnCollectedUpdate.isEnabled = false
-                tvCollectedSign.isEnabled = false
-                lytSpinner.isEnabled = false
-                tvLocation.text = resources.getString(R.string.policy_location_campaigns)
-                tvLocationContent.text = resources.getString(R.string.policy_location_not_live)
-            }
-            lived -> {
-                lytChooseLocation.visibility = View.GONE
-                lytRequirement.visibility = View.VISIBLE
-                groupRequirement.visibility = View.VISIBLE
-                tvNotLive.visibility = View.GONE
-                lytBottom.visibility = View.VISIBLE
-                tvPlannedSign.visibility = View.VISIBLE
-                etPlannedSign.visibility = View.INVISIBLE
-                tvLivedNotice.visibility = View.VISIBLE
-                btnCollectedUpdate.isEnabled = true
-                tvCollectedSign.isEnabled = true
-                tvLocation.text = resources.getString(R.string.policy_location_live)
-                tvLocationContent.text = policyLocation?.second?.location
-                tvCollectedSign.text = campaign?.signatures_collected.toString()
-                tvSignaturesRequired.text = campaign?.signatures_required.toString()
-                tvPlannedSign.text = campaign?.signatures_required.toString()
+        } else {
+            lytChooseLocation.visibility = View.VISIBLE
+            btnChooseLocation.visibility = View.VISIBLE
+            lytRequirement.visibility = View.INVISIBLE
+            lytBottom.visibility = View.GONE
+            lytSpinner.isEnabled = true
+            when (situation) {
+                lived -> {
+                    tvLocation.text = resources.getString(R.string.policy_location_live)
+                    tvLocationContent.text = policyLocation?.second?.location
+                }
+                else -> {
+                    tvLocation.text = resources.getString(R.string.policy_location_campaigns)
+                    tvLocationContent.text = resources.getString(R.string.policy_location_not_live)
+                }
             }
         }
     }
 
     override fun onBackPressed() {
-        if (campaign != null){
-            intent.putExtra(Constants.intentCampaignValue, campaign)
+        if (campaignModel != null) {
+            intent.putExtra(Constants.intentCampaignValue, campaignModel)
             intent.putExtra(Constants.intentCampaignName, campaignName)
         }
         setResult(Activity.RESULT_OK, intent)
