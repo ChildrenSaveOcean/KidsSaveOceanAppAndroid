@@ -497,7 +497,7 @@ class MainDashboardFragment (step: DashboardSteps? = null) : Fragment() {
 
                 if (lastStep == null) {
                     val lastSteps = it.keyValueDao().getKeyValue(KeyValue.LAST_CURRENT_STEP)
-                    lastStep = lastSteps.value
+                    lastStep = lastSteps?.value ?: DashboardStep.STEP_1
                 }
 
                 when(lastStep) {
