@@ -103,6 +103,10 @@
     <!-- Policy -->
     <string name="policy_home_title">Create New Environmental Policy!</string>
     <string name="policy_home_subtitle">Youth Citizen Initiative Hijack Headquarters</string>
+    <string name="policy_vote_input">Input from environmental leaders</string>
+    <string name="policy_vote_impact">IMPACT</string>
+    <string name="policy_vote_difficulty">DIFFICULTY</string>
+    <string name="policy_vote_impact_div_difficulty">IMPACT/DIFFICULTY</string>
     <string name="policy_vote_subtitle">Which environmental policy do you feel\nyouth should try to get passed?</string>
     <string name="policy_vote_summary_title">Summary of Policy</string>
     <string name="policy_vote_dialog_message">Are you sure you want to vote for this policy?</string>
