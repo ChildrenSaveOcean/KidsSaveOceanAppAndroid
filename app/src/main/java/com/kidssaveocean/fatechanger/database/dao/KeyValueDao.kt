@@ -7,8 +7,8 @@ import com.kidssaveocean.fatechanger.database.entities.KeyValue
 @Dao
 interface KeyValueDao {
 
-    @Query("SELECT * FROM KeyValue WHERE key = :key")
-    fun getKeyValue(key: String): KeyValue
+    @Query("SELECT * FROM KeyValue WHERE `key` = :key")
+    fun getKeyValue(key: String): KeyValue?
 
     @Insert
     fun insertKeyValue(keyValue: KeyValue)

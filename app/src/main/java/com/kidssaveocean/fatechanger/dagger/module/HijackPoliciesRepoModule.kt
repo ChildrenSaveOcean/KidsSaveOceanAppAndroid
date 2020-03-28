@@ -12,6 +12,21 @@ abstract class HijackPoliciesRepoModule {
     companion object {
         @JvmStatic
         @Provides
+        fun getUserRepo(): UsersRepo {
+            return UsersRepo
+        }
+
+        @JvmStatic
+        @Provides
+        fun getUserModel(campaign: Campaign, dash_joined_a_policy_hijack_campaign: Boolean, dash_learn_about_problem: Boolean,
+                         dash_protest: Boolean, dash_share: Boolean,
+                         dash_wrote_a_letter_about_climate: Boolean, dash_wrote_a_letter_about_plastic: Boolean, hijack_policy_selected: String, location_id: String, signatures_pledged: Int,
+                         user_letters_written: Int = 0, user_person_type: Int): UsersModel {
+            return UsersModel(campaign, dash_joined_a_policy_hijack_campaign, dash_learn_about_problem, dash_protest, dash_share, dash_wrote_a_letter_about_climate, dash_wrote_a_letter_about_plastic, hijack_policy_selected, location_id, signatures_pledged, user_letters_written, user_person_type)
+        }
+
+        @JvmStatic
+        @Provides
         fun getPoliciesRepo(): HijackPoliciesRepo {
             return HijackPoliciesRepo
         }
@@ -31,9 +46,8 @@ abstract class HijackPoliciesRepoModule {
         @JvmStatic
         @Provides
         fun getCampaignsModel(hijack_policy: String, live: Boolean,
-                              location_id: String, signatures_collected: Int,
-                              signatures_pledged: Int, signatures_required: Int): CampaignsModel {
-            return CampaignsModel(hijack_policy, live, location_id, signatures_collected, signatures_pledged, signatures_required)
+                              location_id: String, signatures_collected: Int, signatures_required: Int): CampaignsModel {
+            return CampaignsModel(hijack_policy, live, location_id, signatures_collected, signatures_required)
         }
 
 
