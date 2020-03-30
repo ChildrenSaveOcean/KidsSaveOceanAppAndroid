@@ -17,7 +17,7 @@ import java.util.*
 class CountryListFragment : Fragment(), Observer {
 
     private var countries: List<CountryModel> = listOf()
-    private lateinit var adapter: CountryListAdpter
+    private lateinit var mAdapter: CountryListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_country_list, container, false)
@@ -25,8 +25,8 @@ class CountryListFragment : Fragment(), Observer {
 
         FirebaseService.getInstance().addObserver(this)
 
-        adapter = CountryListAdpter(activity as Context)
-        recyclerview.adapter = adapter
+        mAdapter = CountryListAdapter(activity as Context)
+        recyclerview.adapter = mAdapter
 
         recyclerview.run {
             layoutManager = LinearLayoutManager(activity)
@@ -40,8 +40,8 @@ class CountryListFragment : Fragment(), Observer {
 
     private fun updateList(data: List<CountryModel>) {
         if (data.isNotEmpty()) {
-            adapter.countriesLocal = data as MutableList<CountryModel>
-            adapter.notifyDataSetChanged()
+            mAdapter.countriesLocal = data as MutableList<CountryModel>
+            mAdapter.notifyDataSetChanged()
         }
 
     }

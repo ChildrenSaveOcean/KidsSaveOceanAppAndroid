@@ -37,6 +37,8 @@ class MapFragment : Fragment(), Observer {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
 
+        updateText(FirebaseService.getInstance().countries)
+
         tabLayout.run {
             addTab(newTab().setText("Map View").setTag("Map"))
             addTab(newTab().setText("Top 10 View").setTag("Top Ten"))

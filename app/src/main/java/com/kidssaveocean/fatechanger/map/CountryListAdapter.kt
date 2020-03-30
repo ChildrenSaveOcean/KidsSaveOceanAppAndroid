@@ -5,19 +5,18 @@ import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
 
-class CountryListAdpter(private val context: Context)
-    : RecyclerView.Adapter<CountryListAdpter.ViewHoder>() {
+class CountryListAdapter(private val context: Context)
+    : RecyclerView.Adapter<CountryListAdapter.ViewHoder>() {
 
     var countriesLocal: MutableList<CountryModel> = mutableListOf()
         set(value) {
             val number = if (value.size > 10) 10 else value.size
-            field.addAll(value.sortedByDescending { it.letters_written_to_country }.take(number))
+            field.addAll(value.sortedByDescending { it.country_number }.take(number))
         }
 
     private val colorList = listOf(
@@ -48,7 +47,7 @@ class CountryListAdpter(private val context: Context)
             grad.setColor(context.resources.getColor(colorList[position]))
 
             countryName.text = countriesLocal[position].country_name
-            countryLetterNumber.text = countriesLocal[position].letters_written_to_country.toString()
+            countryLetterNumber.text = countriesLocal[position].country_number.toString()
 
         }
     }
