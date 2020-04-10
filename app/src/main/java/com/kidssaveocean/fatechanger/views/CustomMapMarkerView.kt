@@ -69,7 +69,7 @@ class CustomMapMarkerView : View {
 
         paint.color = Color.WHITE
         paint.textSize = 25f
-        canvas.drawText(numberLetter, 10f, radius + 10, paint)
+        canvas.drawText(numberLetter, 8f, radius + 10, paint)
 
     }
 

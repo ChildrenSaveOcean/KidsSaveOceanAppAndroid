@@ -63,13 +63,12 @@ class MapShownFragment : Fragment(), OnMapReadyCallback, Observer {
         drawMarks()
     }
 
-
     private fun drawMarks() {
         countries.clear()
         countries.addAll(FirebaseService.getInstance().countries)
 
         for (item in countries) {
-            if (item.letters_written_to_country > 0) {
+            if (item.country_number > 0) {
                 val country = LatLng(item.latitude, item.longitude)
 
                 CustomMapMarkerView.numberLetter = item.country_number.toString()
