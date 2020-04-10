@@ -26,12 +26,11 @@ class MapFragment : Fragment(), Observer {
     var transaction: FragmentTransaction? = null
     var mapShownFragment = MapShownFragment()
     var countryListFragment = CountryListFragment()
+    var flag = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         FirebaseService.getInstance().addObserver(this)
         return inflater.inflate(R.layout.fragment_map, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,6 +41,7 @@ class MapFragment : Fragment(), Observer {
         tabLayout.run {
             addTab(newTab().setText("Map View").setTag("Map"))
             addTab(newTab().setText("Top 10 View").setTag("Top Ten"))
+            getTabAt(flag)?.select()
         }
 
         enter_your_letter.setOnClickListener {
@@ -53,7 +53,8 @@ class MapFragment : Fragment(), Observer {
 
         manager = childFragmentManager
         transaction = manager?.beginTransaction()?.apply {
-            add(R.id.fragment_map_container, mapShownFragment)
+            if (!mapShownFragment.isAdded)
+                add(R.id.fragment_map_container, mapShownFragment)
             commit()
         }
 
@@ -72,6 +73,7 @@ class MapFragment : Fragment(), Observer {
                 // Use hide/show to save the state of fragment
                 when (tab?.tag) {
                     "Map" -> {
+                        flag = 0
                         transaction?.run {
                             hide(countryListFragment)
                             show(mapShownFragment)
@@ -80,6 +82,7 @@ class MapFragment : Fragment(), Observer {
                     }
 
                     "Top Ten" -> {
+                        flag = 1
                         transaction?.run {
 
                             hide(mapShownFragment)
