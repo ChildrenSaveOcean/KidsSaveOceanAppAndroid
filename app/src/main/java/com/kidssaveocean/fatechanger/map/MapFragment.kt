@@ -55,6 +55,8 @@ class MapFragment : Fragment(), Observer {
         transaction = manager?.beginTransaction()?.apply {
             if (!mapShownFragment.isAdded)
                 add(R.id.fragment_map_container, mapShownFragment)
+            else
+                show(mapShownFragment)
             commit()
         }
 
@@ -88,11 +90,10 @@ class MapFragment : Fragment(), Observer {
                             hide(mapShownFragment)
                             if (countryListFragment.isAdded) {
                                 show(countryListFragment)
-                                commit()
                             } else {
                                 add(R.id.fragment_map_container, countryListFragment)
-                                commit()
                             }
+                            commit()
                         }
                     }
                 }

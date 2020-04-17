@@ -48,7 +48,7 @@ class HomeFragment : Fragment(), HomeRecyclerAdapter.ItemClick {
         return view
     }
 
-    override fun OnItemClick(v: View, position: Int) {
+    override fun onItemClick(v: View, position: Int) {
         val bottomActivity = activity as BottomNavigationActivity
 
         when (position) {

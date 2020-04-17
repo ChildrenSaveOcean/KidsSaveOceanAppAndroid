@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.kidssaveocean.fatechanger.R
 
 class HomeRecyclerAdapter(private val context: Context)
-    : RecyclerView.Adapter<HomeRecyclerAdapter.ViewHoder>() {
+    : RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder>() {
     val inflater: LayoutInflater = LayoutInflater.from(context)
     var itemClick: ItemClick? = null
     private val imageIds = listOf(
@@ -18,26 +18,27 @@ class HomeRecyclerAdapter(private val context: Context)
             R.drawable.experience_card_impact,
             R.drawable.experience_card_intro,
             R.drawable.experience_activist_dashboard,
-            R.drawable.experience_card_watch
+            R.drawable.experience_card_watch,
+            R.drawable.share_like_a_boss
     )
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHoder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = inflater.inflate(R.layout.home_recycler_item, parent, false)
-        return ViewHoder(view)
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int = imageIds.size
 
-    override fun onBindViewHolder(holder: ViewHoder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(context)
                 .load(imageIds[position])
                 .into(holder.imageView)
         holder.imageView.setOnClickListener {
-            itemClick!!.OnItemClick(holder.imageView, position) }
+            itemClick!!.onItemClick(holder.imageView, position) }
     }
 
 
-    class ViewHoder(val view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         var imageView: ImageView = view.findViewById(R.id.iv_home_recycler)
 
     }
@@ -47,7 +48,7 @@ class HomeRecyclerAdapter(private val context: Context)
     }
 
     interface ItemClick {
-        fun OnItemClick(v: View, position: Int);
+        fun onItemClick(v: View, position: Int);
     }
 
 }
