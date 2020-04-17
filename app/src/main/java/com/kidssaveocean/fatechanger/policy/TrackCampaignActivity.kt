@@ -21,7 +21,8 @@ import kotlinx.android.synthetic.main.track_campaign_bottom.*
 import kotlinx.android.synthetic.main.track_campaign_live.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 
-class TrackCampaignActivity: BaseActivity() {
+class TrackCampaignActivity : BaseActivity(), View.OnClickListener {
+
     private var campaignModel: CampaignsModel? = null
     private var policyValue: HijackPoliciesModel? = null
     private lateinit var policyName: String
@@ -42,16 +43,9 @@ class TrackCampaignActivity: BaseActivity() {
 
         initData()
 
-        btnLiveSpread.setOnClickListener {
-            val sendIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, Constants.shareText)
-                type = "text/plain"
-            }
 
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(shareIntent)
-        }
+        btnLiveSpread.setOnClickListener(this)
+        btnSpread.setOnClickListener(this)
 
         btnMoreInfo.setOnClickListener {
             startActivity(Intent(this, WebViewActivity::class.java))
@@ -64,14 +58,14 @@ class TrackCampaignActivity: BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == Constants.requestPolicyCentrolCenter){
+        if (resultCode == Activity.RESULT_OK && requestCode == Constants.requestPolicyCentrolCenter) {
             initData()
         }
     }
 
-    private fun setView(){
+    private fun setView() {
         lytMain.visibility = View.VISIBLE
-        if (isLive){
+        if (isLive) {
             groupLive.visibility = View.VISIBLE
             groupNotLive.visibility = View.INVISIBLE
             tvTrackChosenContent.text = policyValue?.description
@@ -80,20 +74,20 @@ class TrackCampaignActivity: BaseActivity() {
             tvSignaturesRequired.text = campaignModel?.signatures_required.toString()
             tvTotalCollected.text = campaignModel?.signatures_collected.toString()
             tvCampaignLoc.text = policyLocation?.second?.location.toString()
-        }else{
+        } else {
             groupLive.visibility = View.INVISIBLE
             groupNotLive.visibility = View.VISIBLE
         }
     }
 
-    private fun initData(){
+    private fun initData() {
 
 //        campaign = intent.getParcelableExtra(Constants.intentCampaignValue)
         campaignName = UsersRepo.userModel?.second?.campaign?.campaign_id.toString()
-        if (TextUtils.isEmpty(campaignName)){
+        if (TextUtils.isEmpty(campaignName)) {
             isLive = false
             setView()
-        }else{
+        } else {
 //            campaignName = intent.getStringExtra(Constants.intentCampaignName)
 //            isLive = campaign!!.live
             policyViewModel.getPolicyCombineData().observe(this, Observer {
@@ -101,14 +95,14 @@ class TrackCampaignActivity: BaseActivity() {
                     if (campaign.first == campaignName)
                         campaignModel = campaign.second
                 }
-                it.policies.map {policy->
-                    if (campaignModel?.hijack_policy == policy.first){
+                it.policies.map { policy ->
+                    if (campaignModel?.hijack_policy == policy.first) {
                         policyName = policy.first
                         policyValue = policy.second
                     }
                 }
                 it.policyLocations.map { location ->
-                    if (campaignModel?.location_id == location.first){
+                    if (campaignModel?.location_id == location.first) {
                         policyLocation = location
                     }
                 }
@@ -116,5 +110,17 @@ class TrackCampaignActivity: BaseActivity() {
                 setView()
             })
         }
+    }
+
+    override fun onClick(v: View?) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, Constants.shareText)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+
     }
 }
