@@ -51,7 +51,7 @@
         android:id="@+id/btnChooseLocation"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:background="@drawable/bg_choose_location"
+        android:background="@drawable/bg_blue_round_button"
         android:textSize="18sp"
         android:textColor="@color/white"
         android:paddingStart="20dp"

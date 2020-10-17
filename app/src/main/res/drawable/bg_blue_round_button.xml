@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-<corners android:radius="40dp" />
-<solid android:color="@color/color_policy_step"/>
+
+    <corners
+        android:radius="10dp"/>
+    <solid android:color="@color/write_letter_button"/>
 </shape>

@@ -25,4 +25,6 @@
     <color name="rank_9">#5DCFC5</color>
     <color name="rank_10">#7C878C</color>
     <color name="color_map_select">#20c2de</color>
+    <color name="write_letter_button">#1fa1e9</color>
+    <color name="color_policy_step">#e71fa1e9</color>
 </resources>

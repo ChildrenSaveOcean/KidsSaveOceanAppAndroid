@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:text="@string/your_planned_signatures" />
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/tvYourPlanned"
         app:layout_constraintStart_toEndOf="@id/tvYourPlanned"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:layout_marginStart="10dp"
         android:text="200" />
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvYourPlanned"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:text="@string/your_collected_signatures" />
 
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/tvYourCollected"
         app:layout_constraintStart_toEndOf="@id/tvYourCollected"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:layout_marginStart="10dp"
         android:text="200" />

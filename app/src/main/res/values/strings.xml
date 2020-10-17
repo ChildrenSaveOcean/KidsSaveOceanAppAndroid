@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fate Changer</string>
+    <string name="app_name">FateChanger</string>
 
     <string name="back">Back</string>
 
@@ -9,7 +9,7 @@
     <string name="learn_write_share">Write, Share, Engage</string>
     <string name="how_you_can_help">How You Can Help</string>
     <string name="start">START</string>
-    <string name="welcome_to_fate_changer">Welcome To Fatechanger</string>
+    <string name="welcome_to_fate_changer">Welcome To FateChanger</string>
     <string name="children_saving_the_ocean">A Tool with Teeth</string>
     <string name="welcome_to_fate_changer_description">This app was designed with a single purpose: to give youth a powerful voice to protect our world’s environment. It is no ordinary app.</string>
     <string name="are_you_ready">Are you ready?</string>
@@ -60,6 +60,7 @@
     <string name="write_a_letter_and_spread_the_word">Write a letter and spread the word.</string>
     <string name="write_a_letter_desctiprion">Write your letter. Stamp, mail it, and enter it in the tracker through the map. And invite friends and family to join this very, very real battle. We can raise an army.</string>
     <string name="write_to_where">Write to where?</string>
+    <string name="write_about_what">Write about what?</string>
     <string name="golden_rules_text">1) Only if your parents say it’s okay\n2) Only if it’s legal in your country\n3) Always and only peacefully\n4) Communicate a clear message and demands\n5) Use personal stories to get your message across\n6) Make signs, borrow a bullhorn\n7) 3 weeks before: notify other schools, environmental groups and kidssaveocean.com\n8) 3 days before: notify the press and remind others\n 9) If there’s any trouble, leave immediately\n10) Stand up for what you believe in. Though you may be shy, have steel determination</string>
     <string name="activist_toolkit">Activist toolkit</string>
     <string name="golden_rules_of_protesting">Golden Rules of Protesting</string>

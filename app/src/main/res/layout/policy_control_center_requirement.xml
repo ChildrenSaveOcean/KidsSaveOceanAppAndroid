@@ -84,7 +84,7 @@
             android:id="@+id/imgAlert"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/ic_action_alert"
+            android:src="@drawable/action_alert"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="74:88"
             app:layout_constraintEnd_toEndOf="parent"
