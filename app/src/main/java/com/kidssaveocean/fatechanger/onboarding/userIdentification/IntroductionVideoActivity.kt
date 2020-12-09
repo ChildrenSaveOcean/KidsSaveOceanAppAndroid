@@ -24,7 +24,7 @@ class IntroductionVideoActivity : AppCompatActivity() {
         youtube_text_view.text = title
 
         val fragment = supportFragmentManager.findFragmentById(R.id.youtube_fragment) as YouTubePlayerSupportFragment?
-        fragment!!.initialize(DEVELOPER_KEY, object : YouTubePlayer.OnInitializedListener {
+        fragment?.initialize(DEVELOPER_KEY, object : YouTubePlayer.OnInitializedListener {
             override fun onInitializationSuccess(provider: YouTubePlayer.Provider, youTubePlayer: YouTubePlayer, wasRestored: Boolean) {
                 if (!wasRestored) {
                     youTubePlayer.cueVideo(INTRO_VIDEO_STRING)
