@@ -1,303 +1,339 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:custom="http://schemas.android.com/apk/res/com.kidssaveocean.fatechanger"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dashboard_bg_color"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".dashboard.MainDashboardFragment">
 
     <LinearLayout
         android:id="@+id/icons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/standart_margin"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
-            android:gravity="center_horizontal|center_vertical"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                android:layout_height="@dimen/dashboard_and_line_icon_height"
+                android:orientation="vertical">
+
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/firstIcon"
-                    custom:isActive="true"
-                    custom:isCompleted="false"
-                    android:layout_margin="@dimen/dashboard_icon_margin"
                     android:layout_width="@dimen/dashboard_icon_size"
-                    android:layout_height="@dimen/dashboard_icon_size" />
+                    android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    custom:isActive="true"
+                    custom:isCompleted="false" />
+
                 <View
-                    android:layout_gravity="center"
                     android:layout_width="3dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:background="#FFFFFF" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                android:layout_height="@dimen/dashboard_and_line_icon_height"
+                android:orientation="vertical">
+
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/secondIcon"
-                    custom:isActive="false"
-                    custom:isCompleted="false"
-                    android:layout_margin="@dimen/dashboard_icon_margin"
                     android:layout_width="@dimen/dashboard_icon_size"
-                    android:layout_height="@dimen/dashboard_icon_size" />
+                    android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    custom:isActive="false"
+                    custom:isCompleted="false" />
+
                 <View
-                    android:layout_gravity="center"
                     android:layout_width="3dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:background="#FFFFFF" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                android:layout_height="@dimen/dashboard_and_line_icon_height"
+                android:orientation="vertical">
+
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/thirdIcon"
-                    custom:isActive="false"
-                    custom:isCompleted="false"
-                    android:layout_margin="@dimen/dashboard_icon_margin"
                     android:layout_width="@dimen/dashboard_icon_size"
-                    android:layout_height="@dimen/dashboard_icon_size" />
+                    android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    custom:isActive="false"
+                    custom:isCompleted="false" />
+
                 <View
-                    android:layout_gravity="center"
                     android:layout_width="3dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:background="#FFFFFF" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                android:layout_height="@dimen/dashboard_and_line_icon_height"
+                android:orientation="vertical">
+
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/fourthIcon"
-                    custom:isActive="false"
-                    custom:isCompleted="false"
-                    android:layout_margin="@dimen/dashboard_icon_margin"
                     android:layout_width="@dimen/dashboard_icon_size"
-                    android:layout_height="@dimen/dashboard_icon_size" />
+                    android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    custom:isActive="false"
+                    custom:isCompleted="false" />
+
                 <View
-                    android:layout_gravity="center"
                     android:layout_width="3dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:background="#FFFFFF" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                android:layout_height="@dimen/dashboard_and_line_icon_height"
+                android:orientation="vertical">
+
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/fifthIcon"
-                    custom:isActive="false"
-                    custom:isCompleted="false"
-                    android:layout_margin="@dimen/dashboard_icon_margin"
                     android:layout_width="@dimen/dashboard_icon_size"
-                    android:layout_height="@dimen/dashboard_icon_size" />
+                    android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    custom:isActive="false"
+                    custom:isCompleted="false" />
+
                 <View
-                    android:layout_gravity="center"
                     android:layout_width="3dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:background="#FFFFFF" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dashboard_and_line_icon_height">
+                android:layout_height="@dimen/dashboard_and_line_icon_height"
+                android:orientation="vertical">
+
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/sixthIcon"
-                    custom:isActive="false"
-                    custom:isCompleted="false"
-                    android:layout_margin="@dimen/dashboard_icon_margin"
                     android:layout_width="@dimen/dashboard_icon_size"
-                    android:layout_height="@dimen/dashboard_icon_size" />
+                    android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_margin="@dimen/dashboard_icon_margin"
+                    custom:isActive="false"
+                    custom:isCompleted="false" />
+
                 <View
-                    android:layout_gravity="center"
                     android:layout_width="3dp"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dashboard_and_line_icon_height">
-                <com.kidssaveocean.fatechanger.views.SurferIconView
-                    android:id="@+id/seventhIcon"
-                    custom:isActive="false"
-                    custom:isCompleted="false"
-                    android:layout_margin="@dimen/dashboard_icon_margin"
-                    android:layout_width="@dimen/dashboard_icon_size"
-                    android:layout_height="@dimen/dashboard_icon_size" />
-                <View
                     android:layout_gravity="center"
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
                     android:background="#FFFFFF" />
             </LinearLayout>
+
         </LinearLayout>
+
         <View
-            android:layout_marginRight="24dp"
-            android:layout_marginLeft="22dp"
-            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dashboard_stroke_width"
+            android:layout_gravity="center"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="24dp"
             android:background="#FFFFFF" />
     </LinearLayout>
 
 
     <LinearLayout
         android:id="@+id/mainDashboard"
-        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/dashboard_meter_bg"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/alert_field"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/icons"
-        app:layout_constraintBottom_toTopOf="@+id/alert_field">
+        app:layout_constraintTop_toBottomOf="@+id/icons">
+
         <LinearLayout
-            android:orientation="horizontal"
-            android:background="@android:color/transparent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal">
+
             <FrameLayout
-                android:layout_margin="@dimen/standart_margin"
-                android:layout_width="120dp"
-                android:layout_height="120dp">
-                <ImageView
-                    android:layout_margin="@dimen/standart_margin"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/meter_scale" />
-                <FrameLayout
-                    android:id="@+id/meteor_ball"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp">
-                    <View
-                        android:layout_marginLeft="6dp"
-                        android:layout_gravity="left|center"
-                        android:background="#4e89b6"
-                        android:layout_width="54dp"
-                        android:layout_height="2dp" />
-                    <View
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_gravity="left"
-                        android:background="@drawable/dashboard_black_circle"
-                        android:layout_width="8dp"
-                        android:layout_height="8dp" />
-                    <View
-                        android:layout_gravity="center"
-                        android:background="@drawable/dashboard_small_white_circle"
-                        android:layout_width="6dp"
-                        android:layout_height="6dp" />
-                </FrameLayout>
-            </FrameLayout>
-            <ImageView
-                android:id="@+id/complete_image"
-                android:layout_margin="@dimen/standart_margin"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_margin="@dimen/standart_margin">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/standart_margin"
+                    android:src="@drawable/meter_scale" />
+
+                <RelativeLayout
+                    android:id="@+id/meteor_ball"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="30dp">
+
+                    <View
+                        android:layout_width="54dp"
+                        android:layout_height="2dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:background="#4e89b6" />
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:background="@drawable/dashboard_black_circle" />
+
+                    <View
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/dashboard_small_white_circle" />
+                </RelativeLayout>
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/complete_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_margin="@dimen/standart_margin"
                 android:src="@drawable/incomplete_fist_and_writing" />
         </LinearLayout>
+
         <LinearLayout
-            android:orientation="vertical"
-            android:background="@drawable/dashboard_buttons_bg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/dashboard_buttons_bg"
+            android:orientation="vertical">
+
             <com.github.jivimberg.library.AutoResizeTextView
                 android:id="@+id/task_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/standart_margin"
-                android:text="TASK: Spread Fatechanger by sharing"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="TASK: Spread Fatechanger by sharing" />
+
             <LinearLayout
-                android:gravity="center"
-                android:paddingBottom="10dp"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp">
+
                 <com.github.jivimberg.library.AutoResizeTextView
                     android:id="@+id/how_button"
-                    android:padding="5dp"
                     style="@style/dashboard_button_style"
-                    android:text="How?"
                     android:layout_width="80dp"
                     android:layout_height="35dp"
-                    android:textSize="18dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:padding="5dp"
+                    android:text="How?"
+                    android:textSize="18dp" />
+
                 <com.github.jivimberg.library.AutoResizeTextView
                     android:id="@+id/I_did_it_1"
-                    android:visibility="gone"
-                    android:padding="5dp"
                     style="@style/dashboard_button_style"
-                    android:text="I did it about plastic"
                     android:layout_width="80dp"
                     android:layout_height="35dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="5dp"
+                    android:text="I did it about plastic"
                     android:textSize="18dp"
-                    android:layout_marginRight="10dp"/>
+                    android:visibility="gone" />
+
                 <com.github.jivimberg.library.AutoResizeTextView
                     android:id="@+id/I_did_it_2"
-                    android:padding="5dp"
                     style="@style/dashboard_button_style"
-                    android:text="I did it!"
                     android:layout_width="80dp"
                     android:layout_height="35dp"
-                    android:textSize="18dp"/>
+                    android:padding="5dp"
+                    android:text="I did it!"
+                    android:textSize="18dp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/alert_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintRight_toRightOf="parent">
+
         <FrameLayout
             android:id="@+id/wheel_area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/steering_wheel"
-                android:layout_margin="@dimen/standart_margin"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_margin="@dimen/standart_margin"
                 android:src="@drawable/wheel_volume" />
+
             <FrameLayout
                 android:id="@+id/floating_area"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
                 android:layout_width="35dp"
-                android:layout_height="35dp">
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent">
+
                 <View
-                    android:layout_gravity="left|bottom"
                     android:id="@+id/dashboard_circle"
-                    android:background="@drawable/dashboard_white_circle"
                     android:layout_width="@dimen/dashboard_circle_size"
-                    android:layout_height="@dimen/dashboard_circle_size" />
+                    android:layout_height="@dimen/dashboard_circle_size"
+                    android:layout_gravity="left|bottom"
+                    android:background="@drawable/dashboard_white_circle" />
             </FrameLayout>
         </FrameLayout>
 
         <ImageView
             android:id="@+id/action_alert_button"
-            android:layout_margin="@dimen/standart_margin"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_toRightOf="@+id/wheel_area"
+            android:layout_alignBottom="@+id/wheel_area"
+            android:layout_margin="10dp"
             android:src="@drawable/ic_action_alert" />
-    </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/link"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_dashboard_link_button"
+        android:scaleType="center"
+        android:text="?"
+        android:textColor="#dceef7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

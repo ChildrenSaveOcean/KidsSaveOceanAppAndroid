@@ -68,8 +68,8 @@
     <string name="nobodys_listening_text">Grownups have trouble changing. If you deeply feel the world must change faster to save the ocean and its creatures, multiply your activist impact by protesting.</string>
     <string name="nobodys_listening_subtitle">March, Sit-in, Demonstrate!</string>
     <string name="nobodys_listening_title">Feel Nobody’s Listening?</string>
-    <string name="research_task_description">TASK: Research plastic ocean pollution</string>
-    <string name="write_letter_task_description">TASK: Write your government a letter</string>
+    <string name="research_task_description">TASK: Research plastic &amp; climate emergencies</string>
+    <string name="write_letter_task_description">TASK: Write your government a letter about plastic</string>
     <string name="sharing_task_description">TASK: Spread Fatechanger by sharing</string>
     <string name="letter_campaing_task_description">TASK: Start a letter writing campaign</string>
     <string name="government_task_description">TASK: Help create new environmental laws</string>
