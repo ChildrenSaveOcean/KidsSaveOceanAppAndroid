@@ -1,28 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="240dp"
-    android:layout_height="120dp"
+    android:layout_width="270dp"
+    android:layout_height="163dp"
     android:layout_gravity="center"
-    android:background="@drawable/action_alert_bg"
-    android:gravity="center_vertical"
+    android:gravity="center"
+    android:background="#0000"
     android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        android:autoSizeTextType="uniform"
-        android:gravity="left"
-        android:text="Fatechanger Action Alerts will call you to support youth actions. Your unity is power."
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
-
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        android:src="@drawable/action_alert" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/overlay_after_alert" />
 </LinearLayout>

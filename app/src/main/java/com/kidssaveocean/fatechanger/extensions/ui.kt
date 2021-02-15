@@ -13,6 +13,7 @@ import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Size
 import android.view.View
+import android.webkit.WebResourceError
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -48,6 +49,11 @@ fun WebView.loadSetting() {
         override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
             view?.loadUrl(request?.url.toString())
             return super.shouldOverrideUrlLoading(view, request)
+        }
+
+        override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+            view?.loadUrl("file:///android_res/drawable/no_internet.png")
+            super.onReceivedError(view, request, error)
         }
     }
 

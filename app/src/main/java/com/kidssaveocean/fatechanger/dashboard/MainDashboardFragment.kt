@@ -317,20 +317,24 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
                 changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
             }
             DashboardSteps.WRITE_LETTER -> {
-                secondIcon.isCompleted = task.isFirstCompleted && task.isSecondCompleted
-                I_did_it_1.visibility = View.VISIBLE
-                when (secondIcon.isCompleted) {
-                    true -> complete_image.setImage(context, R.drawable.complete_fist_and_writing)
-                    false -> complete_image.setImage(context, R.drawable.incomplete_fist_and_writing)
-                }
-                when (task.isSecondCompleted) {
-                    true -> I_did_it_1.text = getString(R.string.Not_yet)
-                    false -> I_did_it_1.text = getString(R.string.I_did_it_about_plastic)
-                }
-                when (task.isFirstCompleted) {
-                    true -> I_did_it_2.text = getString(R.string.Not_yet)
-                    false -> I_did_it_2.text = getString(R.string.I_did_it_about_climate)
-                }
+//                secondIcon.isCompleted = task.isFirstCompleted && task.isSecondCompleted
+//                I_did_it_1.visibility = View.VISIBLE
+//                when (secondIcon.isCompleted) {
+//                    true -> complete_image.setImage(context, R.drawable.complete_fist_and_writing)
+//                    false -> complete_image.setImage(context, R.drawable.incomplete_fist_and_writing)
+//                }
+//                when (task.isSecondCompleted) {
+//                    true -> I_did_it_1.text = getString(R.string.Not_yet)
+//                    false -> I_did_it_1.text = getString(R.string.I_did_it_about_plastic)
+//                }
+//                when (task.isFirstCompleted) {
+//                    true -> I_did_it_2.text = getString(R.string.Not_yet)
+//                    false -> I_did_it_2.text = getString(R.string.I_did_it_about_climate)
+//                }
+
+                secondIcon.isCompleted = task.isFirstCompleted
+                I_did_it_1.visibility = View.GONE
+                changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
             }
             DashboardSteps.SHARING -> {
                 thirdIcon.isCompleted = task.isFirstCompleted
@@ -385,8 +389,8 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
         when (task.type) {
             DashboardSteps.RESEARCH -> task_description.text = getString(R.string.research_task_description)
             DashboardSteps.WRITE_LETTER -> task_description.text = getString(R.string.write_letter_task_description)
-            DashboardSteps.SHARING -> task_description.text = getString(R.string.sharing_task_description)
-            DashboardSteps.LETTER_CAMPAING -> task_description.text = getString(R.string.letter_campaing_task_description)
+            DashboardSteps.SHARING -> task_description.text = getString(R.string.write_letter_task_climate)
+            DashboardSteps.LETTER_CAMPAING -> task_description.text = getString(R.string.sharing_task_description)
             DashboardSteps.GOVERNMENT -> task_description.text = getString(R.string.government_task_description)
             DashboardSteps.PROTEST -> task_description.text = getString(R.string.protest_task_description)
             else -> println("Unknown type for DashboardSteps")

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.Toast
 
 import com.google.android.youtube.player.YouTubeInitializationResult
@@ -16,12 +17,16 @@ import kotlinx.android.synthetic.main.activity_introduction_video.*
 
 class IntroductionVideoActivity : AppCompatActivity() {
 
+    private lateinit var flNoInternet: FrameLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_introduction_video)
 
         val title = intent.getStringExtra(INTRO_TYPE)
         youtube_text_view.text = title
+        flNoInternet = findViewById(R.id.fl_no_internet)
+
 
         val fragment = supportFragmentManager.findFragmentById(R.id.youtube_fragment) as YouTubePlayerSupportFragment?
         fragment?.initialize(DEVELOPER_KEY, object : YouTubePlayer.OnInitializedListener {
@@ -38,7 +43,7 @@ class IntroductionVideoActivity : AppCompatActivity() {
 
     }
 
-    fun clickStartButton(view : View) {
+    fun clickStartButton(view: View) {
         val completedOnboardingTask = CompletedOnboardingTask()
         completedOnboardingTask.execute(this)
         val intent = Intent(this, BottomNavigationActivity::class.java)

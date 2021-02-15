@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.views.ErrorWebViewClient
 
 class NewsFragment : Fragment() {
 
@@ -19,6 +20,7 @@ class NewsFragment : Fragment() {
         settings.javaScriptEnabled = true
         settings.useWideViewPort = true
         settings.loadWithOverviewMode = true
+        webView.webViewClient = ErrorWebViewClient()
         return webView
     }
 

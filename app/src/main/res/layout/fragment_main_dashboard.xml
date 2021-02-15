@@ -173,52 +173,89 @@
             android:background="@android:color/transparent"
             android:orientation="horizontal">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_margin="@dimen/standart_margin">
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_margin="@dimen/standart_margin">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/standart_margin"
+                        android:src="@drawable/meter_scale" />
+
+                    <RelativeLayout
+                        android:id="@+id/meteor_ball"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="30dp">
+
+                        <View
+                            android:layout_width="54dp"
+                            android:layout_height="2dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="6dp"
+                            android:background="#4e89b6" />
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="6dp"
+                            android:background="@drawable/dashboard_black_circle" />
+
+                        <View
+                            android:id="@+id/small_white_circle"
+                            android:layout_width="6dp"
+                            android:layout_height="6dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/dashboard_small_white_circle" />
+
+
+                    </RelativeLayout>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/incomplete_fist_and_writing"
+                    android:text="Complete"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standart_margin"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/standart_margin"
-                    android:src="@drawable/meter_scale" />
+                    android:id="@+id/complete_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/incomplete_fist_and_writing" />
 
-                <RelativeLayout
-                    android:id="@+id/meteor_ball"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="30dp">
+                <TextView
+                    android:id="@+id/complete_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/incomplete_fist_and_writing"
+                    android:text="Complete"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-                    <View
-                        android:layout_width="54dp"
-                        android:layout_height="2dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="6dp"
-                        android:background="#4e89b6" />
-
-                    <View
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="6dp"
-                        android:background="@drawable/dashboard_black_circle" />
-
-                    <View
-                        android:layout_width="6dp"
-                        android:layout_height="6dp"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/dashboard_small_white_circle" />
-                </RelativeLayout>
-            </FrameLayout>
-
-            <ImageView
-                android:id="@+id/complete_image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_margin="@dimen/standart_margin"
-                android:src="@drawable/incomplete_fist_and_writing" />
         </LinearLayout>
 
         <LinearLayout
@@ -232,9 +269,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/standart_margin"
-                android:textStyle="bold"
+                android:text="TASK: Spread Fatechanger by sharing"
                 android:textColor="@color/black"
-                android:text="TASK: Spread Fatechanger by sharing" />
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -317,9 +354,9 @@
             android:id="@+id/action_alert_button"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:layout_toRightOf="@+id/wheel_area"
             android:layout_alignBottom="@+id/wheel_area"
             android:layout_margin="10dp"
+            android:layout_toRightOf="@+id/wheel_area"
             android:src="@drawable/ic_action_alert" />
     </RelativeLayout>
 

@@ -75,11 +75,13 @@ class MapShownFragment : Fragment(), OnMapReadyCallback, Observer {
                 val icon = BitmapDescriptorFactory
                         .fromBitmap(activity?.let { createDrawableFromView(it, CustomMapMarkerView(it)) })
 
-                mGoogleMap.addMarker(MarkerOptions()
-                        .position(country)
-                        .icon(icon)
-                        .title(item.country_name))
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(country))
+                if (icon is BitmapDescriptor){
+                    mGoogleMap.addMarker(MarkerOptions()
+                            .position(country)
+                            .icon(icon)
+                            .title(item.country_name))
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(country))
+                }
             }
         }
     }
