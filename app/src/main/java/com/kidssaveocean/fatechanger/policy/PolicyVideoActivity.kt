@@ -18,7 +18,7 @@ class PolicyVideoActivity: BaseActivity() {
         setContentView(R.layout.activity_policy_video)
 
         flNoInternet = findViewById(R.id.fl_no_internet)
-        flNoInternet.visibility = if (isNetworkConnected()) View.VISIBLE else View.GONE
+        updateFlNoInternet()
 
         val fragment = supportFragmentManager.findFragmentById(R.id.frgVideo) as YouTubePlayerSupportFragment?
         fragment?.initialize(DEVELOPER_KEY, object : YouTubePlayer.OnInitializedListener {
@@ -32,6 +32,15 @@ class PolicyVideoActivity: BaseActivity() {
                 Toast.makeText(this@PolicyVideoActivity, R.string.Unable_To_Play_Youtube_Video, Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    private fun updateFlNoInternet() {
+        flNoInternet.visibility = if (isNetworkConnected()) View.GONE else View.VISIBLE
+    }
+
+    override fun networkChangeConnect() {
+        super.networkChangeConnect()
+        updateFlNoInternet()
     }
 
     companion object {

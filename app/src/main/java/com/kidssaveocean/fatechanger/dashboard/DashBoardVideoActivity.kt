@@ -24,23 +24,29 @@ class DashBoardVideoActivity : BaseActivity() {
         setContentView(R.layout.activity_dashboard_video)
 
         flNoInternet = findViewById(R.id.fl_no_internet)
-        flNoInternet.visibility = if (isNetworkConnected()) View.GONE else View.VISIBLE
+        updateFlNoInternet()
 
         val fragment = supportFragmentManager.findFragmentById(R.id.link_fragment) as YouTubePlayerSupportFragment?
         fragment?.initialize(DEVELOPER_KEY, object : YouTubePlayer.OnInitializedListener {
             override fun onInitializationSuccess(provider: YouTubePlayer.Provider, youTubePlayer: YouTubePlayer, wasRestored: Boolean) {
                 if (!wasRestored) {
                     youTubePlayer.cueVideo(INTRO_VIDEO_STRING)
-                    flNoInternet.visibility = View.GONE
                 }
             }
 
             override fun onInitializationFailure(provider: YouTubePlayer.Provider, youTubeInitializationResult: YouTubeInitializationResult) {
-
-                flNoInternet.visibility = View.VISIBLE
                 Toast.makeText(this@DashBoardVideoActivity, R.string.Unable_To_Play_Youtube_Video, Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    private fun updateFlNoInternet() {
+        flNoInternet.visibility = if (isNetworkConnected()) View.GONE else View.VISIBLE
+    }
+
+    override fun networkChangeConnect() {
+        super.networkChangeConnect()
+        updateFlNoInternet()
     }
 
     companion object {
@@ -50,3 +56,4 @@ class DashBoardVideoActivity : BaseActivity() {
         private const val INTRO_VIDEO_STRING = "x2oClSfdtTY"
     }
 }
+

@@ -12,10 +12,11 @@ import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerSupportFragment
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
+import com.kidssaveocean.fatechanger.common.BaseActivity
 
 import kotlinx.android.synthetic.main.activity_introduction_video.*
 
-class IntroductionVideoActivity : AppCompatActivity() {
+class IntroductionVideoActivity : BaseActivity() {
 
     private lateinit var flNoInternet: FrameLayout
 
@@ -26,6 +27,7 @@ class IntroductionVideoActivity : AppCompatActivity() {
         val title = intent.getStringExtra(INTRO_TYPE)
         youtube_text_view.text = title
         flNoInternet = findViewById(R.id.fl_no_internet)
+        updateFlNoInternet()
 
 
         val fragment = supportFragmentManager.findFragmentById(R.id.youtube_fragment) as YouTubePlayerSupportFragment?
@@ -41,6 +43,15 @@ class IntroductionVideoActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    private fun updateFlNoInternet() {
+        flNoInternet.visibility = if (isNetworkConnected()) View.GONE else View.VISIBLE
+    }
+
+    override fun networkChangeConnect() {
+        super.networkChangeConnect()
+        updateFlNoInternet()
     }
 
     fun clickStartButton(view: View) {
