@@ -56,8 +56,7 @@
 
         <activity android:name=".policy.TrackCampaignActivity"/>
 
-        <activity android:name=".policy.PolicyVideoActivity"
-            android:screenOrientation="landscape"/>
+        <activity android:name=".policy.PolicyVideoActivity"/>
 
         <activity android:name=".splashScreen.SplashScreenActivity"
             android:theme="@style/SplashTheme"

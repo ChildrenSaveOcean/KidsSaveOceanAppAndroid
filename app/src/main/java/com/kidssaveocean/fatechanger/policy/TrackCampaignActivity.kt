@@ -48,17 +48,19 @@ class TrackCampaignActivity : BaseActivity(), View.OnClickListener {
         btnSpread.setOnClickListener(this)
 
         btnMoreInfo.setOnClickListener {
-            startActivity(Intent(this, WebViewActivity::class.java))
+            val intent = Intent(this, WebViewActivity::class.java)
+            intent.putExtra(Constants.INTENT_URL, Constants.URL_LEARN_MORE)
+            startActivity(intent)
         }
 
         btnUpdate.setOnClickListener {
-            startActivityForResult(Intent(this, PolicyControlCenterActivity::class.java), Constants.requestPolicyCentrolCenter)
+            startActivityForResult(Intent(this, PolicyControlCenterActivity::class.java), Constants.REQUEST_POLICY_CONTROL_CENTER)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == Constants.requestPolicyCentrolCenter) {
+        if (resultCode == Activity.RESULT_OK && requestCode == Constants.REQUEST_POLICY_CONTROL_CENTER) {
             initData()
         }
     }
@@ -115,7 +117,7 @@ class TrackCampaignActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, Constants.shareText)
+            putExtra(Intent.EXTRA_TEXT, Constants.URL_SHARE_TEXT)
             type = "text/plain"
         }
 

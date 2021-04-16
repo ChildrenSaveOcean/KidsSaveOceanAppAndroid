@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/white"
-        android:textSize="45sp"
+        android:textSize="35sp"
         android:text="@string/live"
         android:textStyle="bold"/>
 
@@ -45,9 +45,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvLive"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="21sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:text="@string/policy_track_title"/>
 
@@ -58,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvTrackTitle"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:layout_marginTop="5dp"
         android:text="@string/policy_track_subtitle"/>
 
@@ -82,9 +83,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/ic_round_red"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:text="@string/spread"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"

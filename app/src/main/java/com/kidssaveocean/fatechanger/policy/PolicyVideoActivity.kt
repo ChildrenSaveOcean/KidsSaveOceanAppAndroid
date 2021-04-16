@@ -1,50 +1,43 @@
 package com.kidssaveocean.fatechanger.policy
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.Toast
-import com.google.android.youtube.player.YouTubeInitializationResult
-import com.google.android.youtube.player.YouTubePlayer
-import com.google.android.youtube.player.YouTubePlayerSupportFragment
+import android.webkit.WebView
+import androidx.appcompat.widget.Toolbar
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.common.BaseActivity
+import com.kidssaveocean.fatechanger.views.ErrorWebViewClient
+import kotlinx.android.synthetic.main.view_toolbar.*
 
 class PolicyVideoActivity: BaseActivity() {
-    private lateinit var flNoInternet: FrameLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_policy_video)
+        setContentView(R.layout.activity_webview)
 
-        flNoInternet = findViewById(R.id.fl_no_internet)
-        updateFlNoInternet()
-
-        val fragment = supportFragmentManager.findFragmentById(R.id.frgVideo) as YouTubePlayerSupportFragment?
-        fragment?.initialize(DEVELOPER_KEY, object : YouTubePlayer.OnInitializedListener {
-            override fun onInitializationSuccess(provider: YouTubePlayer.Provider, youTubePlayer: YouTubePlayer, wasRestored: Boolean) {
-                if (!wasRestored) {
-                    youTubePlayer.cueVideo(POLICY_VIDEO_STRING)
-                }
+        findViewById<Toolbar>(R.id.toolbar).setOnClickListener{
+            onBackPressed()
+        }
+        var loadUrl = URL
+        if (intent != null) {
+            val url = intent.getStringExtra("URL")
+            if (!TextUtils.isEmpty(url)){
+                loadUrl = url
             }
-
-            override fun onInitializationFailure(provider: YouTubePlayer.Provider, youTubeInitializationResult: YouTubeInitializationResult) {
-                Toast.makeText(this@PolicyVideoActivity, R.string.Unable_To_Play_Youtube_Video, Toast.LENGTH_LONG).show()
-            }
-        })
+        }
+        val webView = this.findViewById<WebView>(R.id.webView)
+        val settings = webView.settings
+        settings.javaScriptEnabled = true
+        settings.useWideViewPort = true
+        settings.loadWithOverviewMode = true
+        webView.webViewClient = ErrorWebViewClient()
+        webView.loadUrl(loadUrl)
     }
 
-    private fun updateFlNoInternet() {
-        flNoInternet.visibility = if (isNetworkConnected()) View.GONE else View.VISIBLE
-    }
-
-    override fun networkChangeConnect() {
-        super.networkChangeConnect()
-        updateFlNoInternet()
-    }
 
     companion object {
-        private const val DEVELOPER_KEY = "Apparently you don't need a key to play videos"
-        private const val POLICY_VIDEO_STRING = "HQTUWK7CM-Y"
+        private const val URL = "https://www.kidssaveocean.com/hijackpolicy"
     }
 }

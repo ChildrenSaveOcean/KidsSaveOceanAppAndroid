@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/policy_chosen"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/tvTrackChosen"
         app:layout_constraintTop_toTopOf="@id/tvTrackChosen" />
@@ -34,7 +34,7 @@
         android:layout_marginTop="15dp"
         android:text="@string/campaign_location"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTrackChosenContent" />
 
@@ -45,7 +45,7 @@
         android:layout_marginStart="5dp"
         android:text="abcde"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/tvTitleCampaignLoc"
         app:layout_constraintEnd_toStartOf="@id/btnMoreInfo"
         app:layout_constraintTop_toTopOf="@id/tvTitleCampaignLoc" />
@@ -54,11 +54,10 @@
         android:id="@+id/tvTitleSignaturesRequired"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="5dp"
         android:layout_marginTop="15dp"
         android:text="@string/policy_signature_required"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitleCampaignLoc" />
 
@@ -68,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/btnMoreInfo"
         app:layout_constraintStart_toEndOf="@id/tvTitleSignaturesRequired"
         app:layout_constraintTop_toTopOf="@id/tvTitleSignaturesRequired" />
@@ -80,7 +79,7 @@
         android:layout_marginTop="15dp"
         android:text="@string/policy_deadline"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitleSignaturesRequired" />
 
@@ -91,7 +90,7 @@
         android:layout_marginStart="5dp"
         android:text="--"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/btnLiveSpread"
         app:layout_constraintStart_toEndOf="@id/tvTitleDeadline"
         app:layout_constraintTop_toTopOf="@id/tvTitleDeadline" />
@@ -103,7 +102,7 @@
         android:layout_marginTop="15dp"
         android:text="@string/total_collected_so_far"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitleDeadline" />
 
@@ -113,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/btnLiveSpread"
         app:layout_constraintStart_toEndOf="@id/tvTitleTotalCollected"
         app:layout_constraintTop_toTopOf="@id/tvTitleTotalCollected" />
@@ -121,30 +120,28 @@
     <Button
         android:id="@+id/btnMoreInfo"
         android:layout_width="95dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@id/tvTitleCampaignLoc"
         app:layout_constraintBottom_toBottomOf="@id/tvTitleSignaturesRequired"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/ic_round_red"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:text="@string/more_info"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        app:layout_constraintDimensionRatio="95:40"
         android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/btnLiveSpread"
         android:layout_width="95dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@id/tvDeadline"
         app:layout_constraintBottom_toBottomOf="@id/tvTitleTotalCollected"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/ic_round_red"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:text="@string/spread"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        app:layout_constraintDimensionRatio="95:40"
         android:textAllCaps="false"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

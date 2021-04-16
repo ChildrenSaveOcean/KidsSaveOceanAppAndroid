@@ -149,7 +149,7 @@ class PolicyControlCenterActivity : BaseActivity() {
         btnShare.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, Constants.shareText)
+                putExtra(Intent.EXTRA_TEXT, Constants.URL_SHARE_TEXT)
                 type = "text/plain"
             }
 
@@ -158,7 +158,9 @@ class PolicyControlCenterActivity : BaseActivity() {
         }
 
         btnLearnMore.setOnClickListener {
-            startActivity(Intent(this, WebViewActivity::class.java))
+            val intent = Intent(this, WebViewActivity::class.java)
+            intent.putExtra(Constants.INTENT_URL, Constants.URL_LEARN_MORE)
+            startActivity(intent)
         }
     }
 
@@ -285,8 +287,8 @@ class PolicyControlCenterActivity : BaseActivity() {
 
     override fun onBackPressed() {
         if (campaignModel != null) {
-            intent.putExtra(Constants.intentCampaignValue, campaignModel)
-            intent.putExtra(Constants.intentCampaignName, campaignName)
+            intent.putExtra(Constants.INTENT_CAMPAIGN_VALUE, campaignModel)
+            intent.putExtra(Constants.INTENT_CAMPAIGN_NAME, campaignName)
         }
         setResult(Activity.RESULT_OK, intent)
         this.finish()

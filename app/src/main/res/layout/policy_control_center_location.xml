@@ -32,7 +32,8 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:layout_marginTop="15dp"
+            android:textSize="16sp"
             android:textColor="#333333"
             android:layout_marginStart="15dp"/>
 
@@ -41,9 +42,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="20dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:src="@drawable/ic_triangle"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -51,8 +52,8 @@
         android:id="@+id/btnChooseLocation"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:background="@drawable/bg_blue_round_button"
-        android:textSize="18sp"
+        android:background="@drawable/ic_round_red"
+        android:textSize="14sp"
         android:textColor="@color/white"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"

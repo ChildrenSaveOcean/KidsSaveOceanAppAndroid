@@ -18,7 +18,7 @@
             android:paddingEnd="5dp"
             android:text="@string/policy_signature_required"
             android:textColor="#53585f"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textColor="#53585f"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@id/imgAlert"
             app:layout_constraintStart_toEndOf="@id/tvTitleSignaturesRequired"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
             android:layout_marginTop="15dp"
             android:text="@string/policy_deadline"
             android:textColor="#53585f"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTitleSignaturesRequired" />
 
@@ -52,7 +52,7 @@
             android:layout_marginTop="15dp"
             android:text="--"
             android:textColor="#53585f"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@id/imgAlert"
             app:layout_constraintStart_toEndOf="@id/tvTitleDeadline"
             app:layout_constraintTop_toBottomOf="@id/tvTitleSignaturesRequired" />
@@ -64,7 +64,7 @@
             android:layout_marginTop="15dp"
             android:text="@string/policy_total_collected"
             android:textColor="#53585f"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTitleDeadline" />
 
@@ -75,7 +75,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:textColor="#53585f"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@id/imgAlert"
             app:layout_constraintStart_toEndOf="@id/tvTitleTotalCollected"
             app:layout_constraintTop_toBottomOf="@id/tvTitleDeadline" />
@@ -97,7 +97,7 @@
         android:layout_marginTop="30dp"
         android:text="@string/policy_not_live"
         android:textColor="#53585f"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent" />
 

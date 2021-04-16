@@ -18,7 +18,6 @@ import com.kidssaveocean.fatechanger.firebase.viewmodel.PoliciesViewModel
 import kotlinx.android.synthetic.main.activity_policy_vote.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 import java.text.DecimalFormat
-import kotlin.random.Random
 
 class PolicyVoteActivity : BaseActivity() {
     private var votes: Int = 0
@@ -105,8 +104,8 @@ class PolicyVoteActivity : BaseActivity() {
     override fun onBackPressed() {
         if (policyValue != null) {
             val intent = Intent()
-            intent.putExtra(Constants.intentPolicyName, policyName)
-            intent.putExtra(Constants.intentPolicyValue, policyValue)
+            intent.putExtra(Constants.INTENT_POLICY_NAME, policyName)
+            intent.putExtra(Constants.INTENT_POLICY_VALUE, policyValue)
             setResult(Activity.RESULT_OK, intent)
         }
         this.finish()

@@ -30,7 +30,7 @@
             android:lineSpacingExtra="4sp"
             android:text="@string/policy_home_title"
             android:textColor="#474c53"
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/imgTop" />
 
         <TextView
@@ -38,7 +38,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvPolicyStepTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="13sp"
             android:textColor="#53585f"
             android:letterSpacing="-0.02"
             android:lineSpacingExtra="2sp"
@@ -49,7 +49,8 @@
             android:id="@+id/rlvSteps"
             app:layout_constraintTop_toBottomOf="@id/tvPolicyStepSubTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

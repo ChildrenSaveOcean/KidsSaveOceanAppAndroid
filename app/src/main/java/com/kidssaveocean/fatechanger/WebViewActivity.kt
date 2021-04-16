@@ -1,24 +1,35 @@
 package com.kidssaveocean.fatechanger
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_BACK
+import androidx.appcompat.widget.Toolbar
 import com.kidssaveocean.fatechanger.common.BaseActivity
 import kotlinx.android.synthetic.main.activity_webview.*
-import kotlinx.android.synthetic.main.view_toolbar.*
 
 class WebViewActivity: BaseActivity() {
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
-        webView.loadUrl(Constants.learnMoreUrl)
-        val settings = webView.settings
-        settings.javaScriptEnabled = true
-
-        toolbar.setOnClickListener {
+        findViewById<Toolbar>(R.id.toolbar).setOnClickListener{
             onBackPressed()
         }
+        var loadUrl = ""
+        if (intent != null) {
+            val url = intent.getStringExtra("URL")
+            if (!TextUtils.isEmpty(url)){
+                loadUrl = url
+            }
+        }
+
+        val settings = webView.settings
+        settings.javaScriptEnabled = true
+        if (!TextUtils.isEmpty(loadUrl))
+        webView.loadUrl(loadUrl)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="80dp"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textColor="#fffefc"
         android:letterSpacing="0.02"
         android:gravity="center"
@@ -30,11 +30,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="#ffffff"
         android:layout_marginTop="14dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         android:text="@string/first_paragraph"/>
 
     <TextView
@@ -45,11 +45,11 @@
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="#ffffff"
         android:layout_marginTop="18dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         android:text="@string/second_paragraph"/>
 
     <TextView
@@ -59,11 +59,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="#ffffff"
         android:layout_marginTop="18dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         android:text="@string/third_paragraph"/>
 
     <TextView
@@ -74,11 +74,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="#ffffff"
         android:layout_marginTop="18dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         android:text="@string/fourth_paragraph"/>
 
     <TextView
@@ -89,11 +89,11 @@
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="#ffffff"
         android:layout_marginTop="18dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         android:text="@string/fifth_paragraph"/>
 
     <TextView
@@ -104,18 +104,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="#ffffff"
         android:layout_marginTop="18dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         android:text="@string/sixth_paragraph"/>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:src="@drawable/ic_x"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSixthParagraph"
         app:layout_constraintDimensionRatio="196:212"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.0" />

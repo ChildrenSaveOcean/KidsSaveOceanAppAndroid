@@ -8,30 +8,31 @@
 
     <TextView
         android:id="@+id/tvNumber"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/ic_round_red"
         android:gravity="center"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:textColor="#ffffff"/>
 
     <TextView
         android:id="@+id/tvStepContent"
-        app:layout_constraintTop_toTopOf="@id/tvNumber"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvNumber"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/step_one"
         android:textColor="#53585f"
         android:letterSpacing="-0.02"
         android:lineSpacingExtra="2sp"
-        android:textSize="20sp" />
+        android:textSize="13sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

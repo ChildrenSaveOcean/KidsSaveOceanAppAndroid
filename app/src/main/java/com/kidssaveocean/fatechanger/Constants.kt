@@ -10,12 +10,15 @@ object Constants {
     const val TABLE_NAME_POLICIES = "POLICIES"
     const val TABLE_NAME_USERS = "USERS"
 
-    const val requestPolicyVote = 100
-    const val requestPolicyCentrolCenter = 101
-    const val intentPolicyName = "policyName"
-    const val intentPolicyValue = "policyValue"
-    const val intentCampaignValue = "campaignVaule"
-    const val intentCampaignName = "campaignName"
-    const val shareText = "https://www.kidssaveocean.com/change-fate"
-    const val learnMoreUrl= "https://www.kidssaveocean.com/projects"
+    const val REQUEST_POLICY_VOTE = 100
+    const val REQUEST_POLICY_CONTROL_CENTER = 101
+    const val INTENT_POLICY_NAME = "policyName"
+    const val INTENT_POLICY_VALUE = "policyValue"
+    const val INTENT_CAMPAIGN_VALUE = "campaignValue"
+    const val INTENT_CAMPAIGN_NAME = "campaignName"
+    const val INTENT_URL = "URL"
+    const val URL_SHARE_TEXT = "https://www.kidssaveocean.com/change-fate"
+    const val URL_LEARN_MORE= "https://www.kidssaveocean.com/projects"
+    const val URL_POLICY_VIDEO = "https://www.kidssaveocean.com/hijackpolicy"
+    const val URL_SHARE_LIKE_A_BOSS = "https://www.kidssaveocean.com/sharelikeaboss"
 }

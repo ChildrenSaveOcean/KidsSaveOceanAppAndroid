@@ -1,21 +1,16 @@
 package com.kidssaveocean.fatechanger.bottomNavigation
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.dashboard.DashboardSteps
 import com.kidssaveocean.fatechanger.dashboard.MainDashboardFragment
-import com.kidssaveocean.fatechanger.donation.DonationFragment
 import com.kidssaveocean.fatechanger.home.HomeFragment
 import com.kidssaveocean.fatechanger.map.MapFragment
 import com.kidssaveocean.fatechanger.news.NewsFragment
 import com.kidssaveocean.fatechanger.resources.ResourcesFragment
-
 import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
 

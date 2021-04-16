@@ -29,12 +29,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="24dp"
                 android:gravity="center_horizontal"
                 android:text="@string/policy_vote_subtitle"
                 android:textColor="#4a4a4a"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/imgTop" />
 
@@ -54,7 +54,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="24dp"
-                app:wheel_item_text_size="18sp"
+                app:wheel_item_text_size="14sp"
                 app:wheel_selected_item_text_color="@color/black"
                 app:wheel_curtain="true"
                 app:wheel_curtain_color="#30FFAD74"
@@ -70,13 +70,13 @@
                 app:layout_constraintTop_toBottomOf="@id/wPickerPolicyDes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/bg_input_from_leaders"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <TextView
                     android:id="@+id/tvTitleInput"
@@ -86,7 +86,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:gravity="center"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="#4a4a4a"
                     android:text="@string/policy_vote_input"/>
@@ -101,7 +101,7 @@
                     app:layout_constraintHorizontal_weight="1"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:text="9.2"/>
@@ -115,7 +115,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"
                     android:gravity="center"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:text="1.7"/>
@@ -129,7 +129,7 @@
                     app:layout_constraintEnd_toStartOf="@id/tvImpactDivDifficultyValue"
                     app:layout_constraintHorizontal_weight="1"
                     android:gravity="center"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:text="5.3"/>
@@ -175,11 +175,11 @@
                 android:id="@+id/tvSummaryTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="35dp"
                 android:text="@string/policy_vote_summary_title"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/lytInputFromLeaders" />
@@ -188,10 +188,10 @@
                 android:id="@+id/tvSummaryContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="24dp"
-                android:textSize="17sp"
+                android:layout_marginEnd="35dp"
+                android:textSize="14sp"
                 app:layout_constraintTop_toBottomOf="@id/tvSummaryTitle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

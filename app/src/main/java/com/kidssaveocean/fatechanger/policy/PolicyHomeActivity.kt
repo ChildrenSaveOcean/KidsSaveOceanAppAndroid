@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.WebViewActivity
 import com.kidssaveocean.fatechanger.common.BaseActivity
 import com.kidssaveocean.fatechanger.firebase.model.CampaignsModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
@@ -32,7 +33,9 @@ class PolicyHomeActivity : BaseActivity() {
         }
 
         imgHowToWork.setOnClickListener{
-            startActivity(Intent(this, PolicyVideoActivity::class.java))
+            val intent = Intent(this, WebViewActivity::class.java)
+            intent.putExtra(Constants.INTENT_URL, Constants.URL_POLICY_VIDEO)
+            startActivity(intent)
         }
 
         imgFollowStep.setOnClickListener{
@@ -40,7 +43,7 @@ class PolicyHomeActivity : BaseActivity() {
         }
 
         imgPolicyPush.setOnClickListener{
-            startActivityForResult(Intent(this, PolicyVoteActivity::class.java), Constants.requestPolicyVote)
+            startActivityForResult(Intent(this, PolicyVoteActivity::class.java), Constants.REQUEST_POLICY_VOTE)
         }
 
         imgImpact.setOnClickListener{
@@ -50,17 +53,17 @@ class PolicyHomeActivity : BaseActivity() {
         imgSignatures.setOnClickListener {
             val intent = Intent(this, PolicyControlCenterActivity::class.java)
             if (policyValue != null) {
-                intent.putExtra(Constants.intentPolicyValue, policyValue)
-                intent.putExtra(Constants.intentPolicyName, policyName)
+                intent.putExtra(Constants.INTENT_POLICY_VALUE, policyValue)
+                intent.putExtra(Constants.INTENT_POLICY_NAME, policyName)
             }
-            startActivityForResult(intent, Constants.requestPolicyCentrolCenter)
+            startActivityForResult(intent, Constants.REQUEST_POLICY_CONTROL_CENTER)
         }
 
         imgTrackTheHijack.setOnClickListener{
             val intent = Intent(this, TrackCampaignActivity::class.java)
             if (campaign != null){
-                intent.putExtra(Constants.intentCampaignName, campaignName)
-                intent.putExtra(Constants.intentCampaignValue, campaign)
+                intent.putExtra(Constants.INTENT_CAMPAIGN_NAME, campaignName)
+                intent.putExtra(Constants.INTENT_CAMPAIGN_VALUE, campaign)
             }
             startActivity(intent)
         }
@@ -70,16 +73,16 @@ class PolicyHomeActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK){
             when(requestCode){
-                Constants.requestPolicyVote -> {
+                Constants.REQUEST_POLICY_VOTE -> {
                     data?.apply {
-                        policyValue = getParcelableExtra(Constants.intentPolicyValue)
-                        policyName = getStringExtra(Constants.intentPolicyName)?: ""
+                        policyValue = getParcelableExtra(Constants.INTENT_POLICY_VALUE)
+                        policyName = getStringExtra(Constants.INTENT_POLICY_NAME)?: ""
                     }
                 }
-                Constants.requestPolicyCentrolCenter -> {
+                Constants.REQUEST_POLICY_CONTROL_CENTER -> {
                     data?.apply {
-                        campaign = getParcelableExtra(Constants.intentCampaignValue)
-                        campaignName = getStringExtra(Constants.intentCampaignName)?: ""
+                        campaign = getParcelableExtra(Constants.INTENT_CAMPAIGN_VALUE)
+                        campaignName = getStringExtra(Constants.INTENT_CAMPAIGN_NAME)?: ""
                     }
                 }
             }

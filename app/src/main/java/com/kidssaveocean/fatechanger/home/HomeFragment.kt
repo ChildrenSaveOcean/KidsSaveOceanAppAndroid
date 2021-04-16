@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.WebViewActivity
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.countryContacts.CountryIntroFragment
 import com.kidssaveocean.fatechanger.dashboard.MainDashboardFragment
@@ -18,6 +20,7 @@ import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.map.MapFragment
 import com.kidssaveocean.fatechanger.news.NewsFragment
 import com.kidssaveocean.fatechanger.policy.PolicyHomeActivity
+import com.kidssaveocean.fatechanger.policy.PolicyVideoActivity
 import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
 class HomeFragment : Fragment(), HomeRecyclerAdapter.ItemClick {
@@ -27,7 +30,8 @@ class HomeFragment : Fragment(), HomeRecyclerAdapter.ItemClick {
         LETTER_IMPACT,
         POLICY,
         DASHBOARD,
-        MAP
+        MAP,
+        SHARE_LIKE_A_BOSS
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +75,12 @@ class HomeFragment : Fragment(), HomeRecyclerAdapter.ItemClick {
                 startActivity(Intent(activity, PolicyHomeActivity::class.java))
 
             Operator.MAP.ordinal -> bottomActivity.setMenuItem(R.id.action_map)
+
+            Operator.SHARE_LIKE_A_BOSS.ordinal -> {
+                val intent = Intent(activity, WebViewActivity::class.java)
+                intent.putExtra(Constants.INTENT_URL, Constants.URL_SHARE_LIKE_A_BOSS)
+                startActivity(intent)
+            }
         }
     }
 

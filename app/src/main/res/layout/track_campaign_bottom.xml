@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16dp"
         android:text="@string/your_planned_signatures" />
 
     <TextView
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="@id/tvYourPlanned"
         app:layout_constraintStart_toEndOf="@id/tvYourPlanned"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16dp"
         android:layout_marginStart="10dp"
         android:text="200" />
 
@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16dp"
         android:text="@string/your_collected_signatures" />
 
     <TextView
@@ -46,23 +46,24 @@
         app:layout_constraintTop_toTopOf="@id/tvYourCollected"
         app:layout_constraintStart_toEndOf="@id/tvYourCollected"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="16dp"
         android:layout_marginStart="10dp"
         android:text="200" />
 
     <Button
         android:id="@+id/btnUpdate"
         android:layout_width="95dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@id/tvYourPlanned"
         app:layout_constraintBottom_toBottomOf="@id/tvYourCollected"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/ic_round_red"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:text="@string/update"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
+        app:layout_constraintDimensionRatio="95:40"
         android:textAllCaps="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
