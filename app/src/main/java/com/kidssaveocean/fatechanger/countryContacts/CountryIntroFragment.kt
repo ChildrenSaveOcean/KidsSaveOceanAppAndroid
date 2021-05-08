@@ -1,7 +1,5 @@
 package com.kidssaveocean.fatechanger.countryContacts
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,9 +36,11 @@ class CountryIntroFragment : Fragment() {
         }
 
         btnWriteWhat?.setOnClickListener {
-            val uri = Uri.parse(WRITE_ABOUT_WAHT)
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(intent)
+            val bottomActivity = activity as BottomNavigationActivity
+            WebViewFragment().addToNavigationStack(
+                    bottomActivity.supportFragmentManager,
+                    R.id.fragment_container,
+                    "select_country_fragment")
         }
         return view
     }

@@ -1,37 +1,35 @@
 package com.kidssaveocean.fatechanger.dashboard
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
-import com.kidssaveocean.fatechanger.R
-import android.graphics.drawable.Drawable
-
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import com.kidssaveocean.fatechanger.extensions.getScreenSize
+import android.content.res.AssetFileDescriptor
 import android.graphics.*
+import android.graphics.drawable.Drawable
+import android.media.MediaPlayer
 import android.os.AsyncTask
-import android.widget.ImageView
-import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.fragment_main_dashboard.*
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.countryContacts.CountryIntroFragment
 import com.kidssaveocean.fatechanger.database.AppDatabase
 import com.kidssaveocean.fatechanger.database.entities.DashboardStep
 import com.kidssaveocean.fatechanger.database.entities.KeyValue
-import com.kidssaveocean.fatechanger.extensions.setImage
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
+import com.kidssaveocean.fatechanger.extensions.getScreenSize
+import com.kidssaveocean.fatechanger.extensions.setImage
 import com.kidssaveocean.fatechanger.views.ActionAlertDialog
 import io.reactivex.subjects.PublishSubject
-import android.media.MediaPlayer
-import android.content.res.AssetFileDescriptor
+import kotlinx.android.synthetic.main.fragment_main_dashboard.*
 import java.io.IOException
 
 
@@ -526,6 +524,13 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
             e.printStackTrace()
         }
     }
+    companion object {
+        fun dp2px(context: Context, dpValue: Float): Int {
+            val scale = context.resources.displayMetrics.density
+            return (dpValue * scale + 0.5f).toInt()
+        }
+    }
+
 }
 
 private class BackgroundDrawable(
@@ -542,11 +547,11 @@ private class BackgroundDrawable(
         bg.color = ContextCompat.getColor(activity, R.color.dashboard_bg_color)
         canvas.drawRect(0F, 0F, screenSize.width.toFloat(), screenSize.height.toFloat(), bg)
 
-        val imageView = ImageView(activity)
+        /*val imageView = ImageView(activity)
         imageView.setImageResource(R.drawable.whale_bg)
-        val drawable = imageView.drawable;
+        val drawable = imageView.drawable
         drawable.setBounds(0, (screenSize.height * 0.66).toInt(), screenSize.width, screenSize.height);
-        drawable.draw(canvas)
+        drawable.draw(canvas)*/
 
         val line = Paint()
         line.color = Color.WHITE
@@ -554,10 +559,10 @@ private class BackgroundDrawable(
         line.strokeWidth = activity.resources.getDimension(R.dimen.dashboard_stroke_width)//.dpToPx()
 
         // draw lines points
-        val point1 = PointF(topLeftSteeringWeelCorner.x, topLeftSteeringWeelCorner.y)
-        val point2 = PointF(topLeftSteeringWeelCorner.x - 100, topLeftSteeringWeelCorner.y - 100)
+        val point1 = PointF(topLeftSteeringWeelCorner.x + MainDashboardFragment.dp2px(activity,35f), topLeftSteeringWeelCorner.y)
+        val point2 = PointF(topLeftSteeringWeelCorner.x, topLeftSteeringWeelCorner.y - 100)
         val point3 = PointF(point2.x, bottomLeftPoint.y - activity.resources.getDimension(R.dimen.dashboard_stroke_width) / 2)
-        val point4 = PointF(point3.x + 100, point3.y)
+        val point4 = PointF(topLeftSteeringWeelCorner.x + MainDashboardFragment.dp2px(activity,35f), point3.y)
         // connecting lines
         canvas.drawLine(point1.x, point1.y, point2.x, point2.y, line)
         canvas.drawLine(point2.x, point2.y, point3.x, point3.y, line)

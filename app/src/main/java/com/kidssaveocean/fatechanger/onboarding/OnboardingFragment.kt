@@ -2,15 +2,14 @@ package com.kidssaveocean.fatechanger.onboarding
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
-
+import androidx.fragment.app.Fragment
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.onboarding.userIdentification.UserIdentificationActivity
 
@@ -26,7 +25,7 @@ class OnboardingFragment : Fragment() {
         val layoutId = bundle.getInt(LAYOUT)
         val extraId = bundle.getInt(EXTRA)
 
-        val layout = inflater.inflate(layoutId, container, false) as ConstraintLayout
+        val layout = inflater.inflate(layoutId, container, false) as ScrollView
 
         layout.findViewById<ImageView>(R.id.onboarding_image).setImageDrawable(resources.getDrawable(imageId))
         layout.findViewById<TextView>(R.id.title).setText(titleTextId)

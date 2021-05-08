@@ -109,6 +109,8 @@ class EnterLetterFragment : Fragment() {
         country_picker.maxValue = countries.size - 1
         country_picker.displayedValues = countryNames
         country_picker.wrapSelectorWheel = true
+        country_picker.visibility = View.VISIBLE
+        progressBar_cyclic.visibility = View.GONE
         country_picker.setOnValueChangedListener { _, _, newVal ->
             currentCountry = countries[newVal]
         }

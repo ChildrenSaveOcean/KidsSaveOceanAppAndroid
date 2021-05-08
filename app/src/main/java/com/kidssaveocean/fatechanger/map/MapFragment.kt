@@ -51,15 +51,6 @@ class MapFragment : Fragment(), Observer {
                     "enter_letter_fragment")
         }
 
-        manager = childFragmentManager
-        transaction = manager?.beginTransaction()?.apply {
-            if (!mapShownFragment.isAdded)
-                add(R.id.fragment_map_container, mapShownFragment)
-            else
-                show(mapShownFragment)
-            commit()
-        }
-
         tabLayout.addOnTabSelectedListener(object : BaseOnTabSelectedListener<TabLayout.Tab> {
             override fun onTabReselected(p0: TabLayout.Tab?) {
             }
@@ -76,6 +67,8 @@ class MapFragment : Fragment(), Observer {
                 when (tab?.tag) {
                     "Map" -> {
                         flag = 0
+                        tabLayout.getTabAt(0)?.text = "Map"
+                        tabLayout.getTabAt(1)?.text = "Top 10 View"
                         transaction?.run {
                             hide(countryListFragment)
                             show(mapShownFragment)
@@ -85,6 +78,8 @@ class MapFragment : Fragment(), Observer {
 
                     "Top Ten" -> {
                         flag = 1
+                        tabLayout.getTabAt(0)?.text = "Map View"
+                        tabLayout.getTabAt(1)?.text = "Top 10"
                         transaction?.run {
 
                             hide(mapShownFragment)
@@ -125,5 +120,17 @@ class MapFragment : Fragment(), Observer {
             letters_written.text = letterNum.toString()
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        manager = childFragmentManager
+        transaction = manager?.beginTransaction()?.apply {
+            if (!mapShownFragment.isAdded)
+                add(R.id.fragment_map_container, mapShownFragment)
+            else
+                show(mapShownFragment)
+            commit()
+        }
     }
 }

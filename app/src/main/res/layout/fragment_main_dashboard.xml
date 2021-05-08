@@ -8,31 +8,45 @@
     android:background="@color/dashboard_bg_color"
     tools:context=".dashboard.MainDashboardFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/icons"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/standart_margin"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/iconsContent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/firstLayout"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/secondLayout"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/firstIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_gravity="center"
                     android:layout_margin="@dimen/dashboard_icon_margin"
                     custom:isActive="true"
                     custom:isCompleted="false" />
@@ -45,14 +59,21 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/secondLayout"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/thirdLayout"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/firstLayout"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/secondIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_gravity="center"
                     android:layout_margin="@dimen/dashboard_icon_margin"
                     custom:isActive="false"
                     custom:isCompleted="false" />
@@ -65,14 +86,21 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/thirdLayout"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/forthLayout"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/secondLayout"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/thirdIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_gravity="center"
                     android:layout_margin="@dimen/dashboard_icon_margin"
                     custom:isActive="false"
                     custom:isCompleted="false" />
@@ -85,14 +113,21 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/forthLayout"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fifthLayout"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/thirdLayout"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/fourthIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_gravity="center"
                     android:layout_margin="@dimen/dashboard_icon_margin"
                     custom:isActive="false"
                     custom:isCompleted="false" />
@@ -105,14 +140,21 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/fifthLayout"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/sixthLayout"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/forthLayout"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/fifthIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_gravity="center"
                     android:layout_margin="@dimen/dashboard_icon_margin"
                     custom:isActive="false"
                     custom:isCompleted="false" />
@@ -125,14 +167,21 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/sixthLayout"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/fifthLayout"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
                     android:id="@+id/sixthIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
+                    android:layout_gravity="center"
                     android:layout_margin="@dimen/dashboard_icon_margin"
                     custom:isActive="false"
                     custom:isCompleted="false" />
@@ -144,136 +193,152 @@
                     android:background="#FFFFFF" />
             </LinearLayout>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="@dimen/dashboard_stroke_width"
             android:layout_gravity="center"
-            android:layout_marginLeft="22dp"
-            android:layout_marginRight="24dp"
-            android:background="#FFFFFF" />
-    </LinearLayout>
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="35dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="@id/iconsContent"
+            app:layout_constraintStart_toStartOf="@id/iconsContent"
+            app:layout_constraintTop_toBottomOf="@id/iconsContent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainDashboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/dashboard_meter_bg"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/alert_field"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/alert_field"
+        app:layout_constraintDimensionRatio="1:0.9"
+        app:layout_constraintLeft_toLeftOf="@id/icons"
+        app:layout_constraintRight_toRightOf="@id/icons"
         app:layout_constraintTop_toBottomOf="@+id/icons">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <FrameLayout
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_margin="@dimen/standart_margin">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/standart_margin"
-                        android:src="@drawable/meter_scale" />
-
-                    <RelativeLayout
-                        android:id="@+id/meteor_ball"
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginBottom="30dp">
-
-                        <View
-                            android:layout_width="54dp"
-                            android:layout_height="2dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="6dp"
-                            android:background="#4e89b6" />
-
-                        <View
-                            android:layout_width="8dp"
-                            android:layout_height="8dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="6dp"
-                            android:background="@drawable/dashboard_black_circle" />
-
-                        <View
-                            android:id="@+id/small_white_circle"
-                            android:layout_width="6dp"
-                            android:layout_height="6dp"
-                            android:layout_centerInParent="true"
-                            android:background="@drawable/dashboard_small_white_circle" />
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/bottomLayout"
+            app:layout_constraintTop_toTopOf="parent">
 
 
-                    </RelativeLayout>
-                </FrameLayout>
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_margin="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/rightIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/incomplete_fist_and_writing"
-                    android:text="Complete"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/standart_margin"
+                    android:src="@drawable/meter_scale" />
 
-            <LinearLayout
+                <RelativeLayout
+                    android:id="@+id/meteor_ball"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_gravity="bottom">
+
+                    <View
+                        android:layout_width="54dp"
+                        android:layout_height="2dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:background="#4e89b6" />
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:background="@drawable/dashboard_black_circle" />
+
+                    <View
+                        android:id="@+id/small_white_circle"
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/dashboard_small_white_circle" />
+
+
+                </RelativeLayout>
+            </FrameLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/standart_margin"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/incomplete_fist_and_writing"
+                android:text="Complete"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/frameLayout"
+                app:layout_constraintStart_toStartOf="@id/frameLayout"
+                app:layout_constraintTop_toBottomOf="@id/frameLayout" />
+
+            <LinearLayout
+                android:id="@+id/rightIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="20dp"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/complete_image"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_height="140dp"
                     android:src="@drawable/incomplete_fist_and_writing" />
 
                 <TextView
                     android:id="@+id/complete_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_marginBottom="5dp"
                     android:src="@drawable/incomplete_fist_and_writing"
                     android:text="Complete"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
+            android:id="@+id/bottomLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/dashboard_buttons_bg"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <com.github.jivimberg.library.AutoResizeTextView
                 android:id="@+id/task_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/standart_margin"
+                android:gravity="center"
                 android:text="TASK: Spread Fatechanger by sharing"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -284,53 +349,66 @@
                     android:id="@+id/how_button"
                     style="@style/dashboard_button_style"
                     android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="10dp"
-                    android:padding="5dp"
+                    android:layout_height="0dp"
                     android:text="How?"
-                    android:textSize="18dp" />
+                    android:textSize="16sp"
+                    app:layout_constraintDimensionRatio="3:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.github.jivimberg.library.AutoResizeTextView
                     android:id="@+id/I_did_it_1"
                     style="@style/dashboard_button_style"
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:padding="5dp"
                     android:text="I did it about plastic"
-                    android:textSize="18dp"
-                    android:visibility="gone" />
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.github.jivimberg.library.AutoResizeTextView
                     android:id="@+id/I_did_it_2"
                     style="@style/dashboard_button_style"
                     android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:padding="5dp"
+                    android:layout_height="0dp"
                     android:text="I did it!"
-                    android:textSize="18dp" />
-            </LinearLayout>
+                    android:textSize="16sp"
+                    app:layout_constraintDimensionRatio="3:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/alert_field"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintLeft_toLeftOf="@id/icons"
+        app:layout_constraintRight_toRightOf="@id/icons"
+        app:layout_constraintTop_toBottomOf="@id/mainDashboard">
 
         <FrameLayout
             android:id="@+id/wheel_area"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/steering_wheel"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="center"
                 android:layout_margin="@dimen/standart_margin"
                 android:src="@drawable/wheel_volume" />
 
@@ -352,13 +430,12 @@
 
         <ImageView
             android:id="@+id/action_alert_button"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_alignBottom="@+id/wheel_area"
-            android:layout_margin="10dp"
-            android:layout_toRightOf="@+id/wheel_area"
+            android:layout_width="0dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:src="@drawable/ic_action_alert" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/link"
