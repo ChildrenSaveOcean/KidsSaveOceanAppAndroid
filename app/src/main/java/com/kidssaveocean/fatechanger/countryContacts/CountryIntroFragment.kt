@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
@@ -23,6 +25,17 @@ class CountryIntroFragment : Fragment() {
         val fragment = SelectCountryFragment()
         FirebaseService.getInstance().addObserver(fragment)
         val view = inflater.inflate(R.layout.fragment_country_intro, container, false)
+        (activity as AppCompatActivity).supportActionBar?.run{
+            setHomeButtonEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            setDisplayShowTitleEnabled(false)
+            setDisplayHomeAsUpEnabled(true)
+            setHasOptionsMenu(true)
+        }
+
+        view.findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener {
+            (activity as AppCompatActivity).onBackPressed()
+        }
         var button = view.findViewById(R.id.write_to_where_button) as Button?
         var btnWriteWhat = view.findViewById(R.id.write_about_what_button) as Button?
         button?.setOnClickListener {

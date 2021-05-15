@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dashboard_bg_color"
+    android:background="@drawable/bg_dashboard"
     tools:context=".dashboard.MainDashboardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,11 +30,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/firstLayout"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
-                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/secondLayout"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -43,22 +42,38 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/firstIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
-                    android:layout_gravity="center"
+                    android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/dashboard_icon_margin"
                     custom:isActive="true"
                     custom:isCompleted="false" />
 
                 <View
+                    android:id="@+id/viewFirst"
                     android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="#FFFFFF" />
-            </LinearLayout>
+                    android:layout_height="0dp"
+                    android:layout_below="@id/firstIcon"
+                    android:background="#FFFFFF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/firstIcon"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <LinearLayout
+                <View
+                    app:layout_constraintStart_toStartOf="@id/viewFirst"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/white"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/secondLayout"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
@@ -70,6 +85,9 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/secondIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
@@ -79,13 +97,25 @@
                     custom:isCompleted="false" />
 
                 <View
+                    android:id="@+id/viewSecond"
                     android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="#FFFFFF" />
-            </LinearLayout>
+                    android:layout_height="0dp"
+                    android:background="#FFFFFF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/secondIcon"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <LinearLayout
+                <View
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/white"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/thirdLayout"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
@@ -97,22 +127,35 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/thirdIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
-                    android:layout_gravity="center"
                     android:layout_margin="@dimen/dashboard_icon_margin"
                     custom:isActive="false"
                     custom:isCompleted="false" />
 
                 <View
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/thirdIcon"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
+                    android:layout_height="0dp"
                     android:background="#FFFFFF" />
-            </LinearLayout>
 
-            <LinearLayout
+                <View
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/white"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/forthLayout"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
@@ -124,22 +167,36 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/fourthIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
-                    android:layout_gravity="center"
                     android:layout_margin="@dimen/dashboard_icon_margin"
                     custom:isActive="false"
                     custom:isCompleted="false" />
 
                 <View
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fourthIcon"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_width="3dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:background="#FFFFFF" />
-            </LinearLayout>
 
-            <LinearLayout
+                <View
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/white"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fifthLayout"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
@@ -151,22 +208,35 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/fifthIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
-                    android:layout_gravity="center"
                     android:layout_margin="@dimen/dashboard_icon_margin"
                     custom:isActive="false"
                     custom:isCompleted="false" />
 
                 <View
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fifthIcon"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
+                    android:layout_height="0dp"
                     android:background="#FFFFFF" />
-            </LinearLayout>
 
-            <LinearLayout
+                <View
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/white"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/sixthLayout"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_and_line_icon_height"
@@ -178,33 +248,36 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.kidssaveocean.fatechanger.views.SurferIconView
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/sixthIcon"
                     android:layout_width="@dimen/dashboard_icon_size"
                     android:layout_height="@dimen/dashboard_icon_size"
-                    android:layout_gravity="center"
                     android:layout_margin="@dimen/dashboard_icon_margin"
                     custom:isActive="false"
                     custom:isCompleted="false" />
 
                 <View
+                    android:id="@+id/viewSixth"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sixthIcon"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
+                    android:layout_height="0dp"
                     android:background="#FFFFFF" />
-            </LinearLayout>
+
+                <View
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    app:layout_constraintEnd_toEndOf="@id/viewSixth"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/white"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dashboard_stroke_width"
-            android:layout_gravity="center"
-            android:layout_marginStart="35dp"
-            android:layout_marginEnd="35dp"
-            android:background="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="@id/iconsContent"
-            app:layout_constraintStart_toStartOf="@id/iconsContent"
-            app:layout_constraintTop_toBottomOf="@id/iconsContent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -212,13 +285,13 @@
         android:id="@+id/mainDashboard"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/dashboard_meter_bg"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/alert_field"
-        app:layout_constraintDimensionRatio="1:0.9"
+        app:layout_constraintDimensionRatio="1:0.95"
         app:layout_constraintLeft_toLeftOf="@id/icons"
         app:layout_constraintRight_toRightOf="@id/icons"
         app:layout_constraintTop_toBottomOf="@+id/icons">
@@ -237,6 +310,7 @@
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_margin="20dp"
+                app:layout_constraintDimensionRatio="1.3:1"
                 app:layout_constraintEnd_toStartOf="@+id/rightIcon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
