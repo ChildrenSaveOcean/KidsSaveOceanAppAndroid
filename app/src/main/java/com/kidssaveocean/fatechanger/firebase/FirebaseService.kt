@@ -37,7 +37,7 @@ class FirebaseService : Observable ()  {
         Log.d("FirebaseService", "init")
         auth.signInAnonymously().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Log.d("FirebaseService", task.result?.user?.uid)
+                Log.d("FirebaseService", task.result?.user?.uid ?: "UID not available")
                 var dbInstance = FirebaseDatabase.getInstance().reference;
                 dbInstance.child(COUNTRIES_TABLE).addListenerForSingleValueEvent(object : ValueEventListener {
 

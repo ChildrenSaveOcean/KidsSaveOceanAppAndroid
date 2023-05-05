@@ -28,9 +28,12 @@ class EngageLocalGovernmentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tools_button?.setOnClickListener {
-            ResourcesFragment("https://www.kidssaveocean.com/studentresources").addToNavigationStack(
-                    (activity as BottomNavigationActivity)?.supportFragmentManager,
-                    R.id.fragment_container)
+            (activity as? BottomNavigationActivity)?.supportFragmentManager?.let { fragmentManager ->
+                ResourcesFragment("https://www.kidssaveocean.com/studentresources").addToNavigationStack(
+                    fragmentManager,
+                    R.id.fragment_container
+                )
+            }
         }
     }
 }

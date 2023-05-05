@@ -8,7 +8,6 @@ import android.content.res.AssetFileDescriptor
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +30,9 @@ import com.kidssaveocean.fatechanger.views.ActionAlertDialog
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_main_dashboard.*
 import java.io.IOException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
@@ -125,6 +127,14 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
                         stepSix.isSecondCompleted = it.second
                         changeCompletedStatus(bottomActivity, stepSix)
                     }
+                    null -> {
+                        // Handle the null case if necessary, or leave it empty if there's nothing to do
+                    }
+                    else -> {
+                        // This branch should never be executed if all possible cases are covered above
+                        // You can either leave it empty or throw an exception to indicate an unexpected value
+                        // throw IllegalStateException("Unexpected value: ${currentTask.type}")
+                    }
                 }
             }
         }
@@ -217,7 +227,7 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
     }
 
     private fun saveTaskToDb(task: DashboardTask) {
-        AsyncTask.execute {
+        CoroutineScope(Dispatchers.IO).launch {
             val step = db?.dashboardStepDao()?.getDashboardStep(task.type!!)
             val newStep = DashboardStep(task.type!!, task.isFirstCompleted, task.isSecondCompleted)
             when (step) {
@@ -228,17 +238,18 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
     }
 
     private fun saveLastCurrentTaskToDb(task: DashboardTask) {
-        var value = ""
-        when (task.type) {
-            DashboardSteps.RESEARCH -> value = DashboardStep.STEP_1
-            DashboardSteps.WRITE_LETTER -> value = DashboardStep.STEP_2
-            DashboardSteps.SHARING -> value = DashboardStep.STEP_3
-            DashboardSteps.LETTER_CAMPAING -> value = DashboardStep.STEP_4
-            DashboardSteps.GOVERNMENT -> value = DashboardStep.STEP_5
-            DashboardSteps.PROTEST -> value = DashboardStep.STEP_6
+        var value = when (task.type) {
+            DashboardSteps.RESEARCH -> DashboardStep.STEP_1
+            DashboardSteps.WRITE_LETTER -> DashboardStep.STEP_2
+            DashboardSteps.SHARING -> DashboardStep.STEP_3
+            DashboardSteps.LETTER_CAMPAING -> DashboardStep.STEP_4
+            DashboardSteps.GOVERNMENT -> DashboardStep.STEP_5
+            DashboardSteps.PROTEST -> DashboardStep.STEP_6
+            null -> DashboardStep.STEP_1
+            else -> DashboardStep.STEP_1
         }
 
-        AsyncTask.execute {
+        CoroutineScope(Dispatchers.IO).launch {
             val keyValue = db?.keyValueDao()?.getKeyValue(KeyValue.LAST_CURRENT_STEP)
             val newKeyValue = KeyValue(KeyValue.LAST_CURRENT_STEP, value)
             when (keyValue) {
@@ -442,7 +453,7 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
         }
 
         db?.let {
-            AsyncTask.execute {
+            CoroutineScope(Dispatchers.IO).launch {
                 val savedSteps = it.dashboardStepDao().getAllDashboardSteps()
                 savedSteps.forEach {
                     when (it.step) {

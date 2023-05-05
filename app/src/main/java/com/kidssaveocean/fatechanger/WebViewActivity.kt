@@ -21,8 +21,10 @@ class WebViewActivity: BaseActivity() {
         var loadUrl = ""
         if (intent != null) {
             val url = intent.getStringExtra("URL")
-            if (!TextUtils.isEmpty(url)){
-                loadUrl = url
+            url?.let {
+                if (!TextUtils.isEmpty(it)) {
+                    loadUrl = it
+                }
             }
         }
 
