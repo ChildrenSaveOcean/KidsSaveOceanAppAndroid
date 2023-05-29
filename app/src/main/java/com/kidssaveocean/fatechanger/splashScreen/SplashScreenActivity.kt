@@ -2,7 +2,10 @@ package com.kidssaveocean.fatechanger.splashScreen
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -11,8 +14,10 @@ class SplashScreenActivity : AppCompatActivity() {
         // defined theme in manifest: "@style/SplashTheme"
         // layout not needed
 
-        Handler().postDelayed({
-            CheckOnboardingStatusTask().execute(this)
+        Handler(Looper.getMainLooper()).postDelayed({
+            GlobalScope.launch {
+                CheckOnboardingStatusTask().execute(this@SplashScreenActivity)
+            }
         }, SPLASH_DURATION.toLong())
     }
 

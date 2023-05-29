@@ -199,6 +199,8 @@ class PolicyControlCenterActivity : BaseActivity() {
             when (campaignModel?.live) {
                 true -> situation = lived
                 false -> situation = notLived
+                null -> notLived
+                else -> notLived
             }
         } else {
             situation = chooseLocation

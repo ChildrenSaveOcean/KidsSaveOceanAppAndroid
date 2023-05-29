@@ -23,8 +23,10 @@ class PolicyVideoActivity: BaseActivity() {
         var loadUrl = URL
         if (intent != null) {
             val url = intent.getStringExtra("URL")
-            if (!TextUtils.isEmpty(url)){
-                loadUrl = url
+            url?.let {
+                if (!TextUtils.isEmpty(url)){
+                    loadUrl = url
+                }
             }
         }
         val webView = this.findViewById<WebView>(R.id.webView)
