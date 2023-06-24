@@ -8,6 +8,6 @@
         android:fillColor="@color/white"
         android:pathData="M 0 1 L 24 1"
         android:strokeColor="@color/white"
-        android:strokeWidth="6" />
+        android:strokeWidth="1.8" />
 
 </vector>
