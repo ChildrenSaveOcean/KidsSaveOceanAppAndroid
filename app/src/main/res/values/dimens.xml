@@ -10,4 +10,19 @@
     <dimen name="nobody_listen_buttons_height">180dp</dimen>
     <dimen name="map_marker_width">25dp</dimen>
     <dimen name="map_marker_height">30dp</dimen>
+
+    <!-- Main Dashboard Fragment -->
+
+        <!-- Dashboard layout -->
+    <dimen name="layout_dashboard_complete_image_width">120dp</dimen>
+    <dimen name="layout_dashboard_complete_image_height">120dp</dimen>
+    <dimen name="layout_dashboard_complete_image_margin_top">30dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_width">200dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_height">100dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_end_point_width">24dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_end_point_height">24dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_start_point_width">24dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_start_point_height">24dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_start_point_text_size">20sp</dimen>
+
 </resources>

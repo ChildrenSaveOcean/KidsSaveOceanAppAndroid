@@ -161,4 +161,10 @@
     <string name="fourth_paragraph">Bunch * 20-ish = Loads of signatures</string>
     <string name="fifth_paragraph">And ask them to multiply their impact…</string>
     <string name="sixth_paragraph">Loads * Multiplied = MONSTER IMPACT</string>
+
+    <!-- Main Dashboard Fragment -->
+
+        <!-- Dashboard layout -->
+    <string name="dashboard_layout_meter_scale_start_point_text">0</string>
+    <string name="dashboard_layout_meter_sclae_radical_meter_text">Radical Meter</string>
 </resources>
