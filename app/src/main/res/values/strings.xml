@@ -166,5 +166,5 @@
 
         <!-- Dashboard layout -->
     <string name="dashboard_layout_meter_scale_start_point_text">0</string>
-    <string name="dashboard_layout_meter_sclae_radical_meter_text">Radical Meter</string>
+    <string name="dashboard_layout_meter_scale_radical_meter_text">Radical Meter</string>
 </resources>

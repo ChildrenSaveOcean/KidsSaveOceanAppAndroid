@@ -50,12 +50,42 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dashboard_layout_meter_sclae_radical_meter_text"
+            android:text="@string/dashboard_layout_meter_scale_radical_meter_text"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@id/meter_scale"
             app:layout_constraintStart_toStartOf="@id/meter_scale"
             app:layout_constraintTop_toBottomOf="@id/meter_scale" />
 
+        <ImageView
+            android:id="@+id/layout_dashboard_scale_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/meter_scale"
+            app:layout_constraintEnd_toEndOf="@id/meter_scale"
+            app:layout_constraintBottom_toBottomOf="@id/meter_scale"
+            android:src="@drawable/dashboard_small_white_circle"
+            android:layout_marginBottom="2dp"
+            />
+
+        <View
+            android:id="@+id/layout_dashboard_scale_line"
+            android:layout_width="96dp"
+            android:layout_height="2dp"
+            android:background="#4e89b6"
+            app:layout_constraintEnd_toStartOf="@id/layout_dashboard_scale_dot"
+            app:layout_constraintTop_toTopOf="@id/layout_dashboard_scale_dot"
+            app:layout_constraintBottom_toBottomOf="@id/layout_dashboard_scale_dot"
+            />
+
+        <ImageView
+            android:id="@+id/layout_dashboard_scale_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/layout_dashboard_scale_line"
+            app:layout_constraintStart_toStartOf="@id/layout_dashboard_scale_line"
+            app:layout_constraintBottom_toBottomOf="@id/layout_dashboard_scale_line"
+            android:src="@drawable/dashboard_black_circle"
+            />
         <!--todo in order to make the marker rotate and scale with the meter scale
                 you need to run two animations, in order to do that, you need to use animation set.-->
     </androidx.constraintlayout.widget.ConstraintLayout>
