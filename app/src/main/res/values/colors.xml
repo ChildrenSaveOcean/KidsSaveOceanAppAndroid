@@ -27,4 +27,9 @@
     <color name="color_map_select">#0D7E91</color>
     <color name="write_letter_button">#1fa1e9</color>
     <color name="color_policy_step">#e71fa1e9</color>
+
+    <!-- Main Dashboard Fragment -->
+
+        <!-- Dashboard layout -->
+    <color name="layout_dashboard_scale_line_color">#4e89b6</color>
 </resources>

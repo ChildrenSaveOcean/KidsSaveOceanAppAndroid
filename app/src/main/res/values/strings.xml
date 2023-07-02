@@ -167,4 +167,9 @@
         <!-- Dashboard layout -->
     <string name="dashboard_layout_meter_scale_start_point_text">0</string>
     <string name="dashboard_layout_meter_scale_radical_meter_text">Radical Meter</string>
+    <string name="dashboard_layout_task_status_incomplete">Incomplete</string>
+    <string name="dashboard_layout_task_status_complete">Complete!</string>
+    <string name="dashboard_layout_how_button_text">How?</string>
+    <string name="dashboard_layout_task_button_complete">I did it!</string>
+    <string name="dashboard_layout_task_button_incomplete">Not yet</string>
 </resources>

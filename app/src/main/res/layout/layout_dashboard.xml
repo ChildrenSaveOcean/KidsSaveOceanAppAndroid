@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="ContentDescription"
-        android:background="@drawable/dashboard_meter_bg">
+        android:background="@drawable/dashboard_meter_bg"
+        tools:ignore="ContentDescription">
 
         <ImageView
             android:id="@+id/complete_image"
@@ -16,21 +17,22 @@
             android:src="@drawable/incomplete_fist_and_writing"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/meter_scale"
-            app:layout_constraintTop_toTopOf="parent"
-             />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/meter_scale"
-            android:src="@drawable/meter_scale"
             android:layout_width="@dimen/layout_dashboard_meter_scale_width"
             android:layout_height="@dimen/layout_dashboard_meter_scale_height"
-            app:layout_constraintTop_toTopOf="@id/complete_image"
+            android:src="@drawable/meter_scale"
             app:layout_constraintEnd_toStartOf="@id/complete_image"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/complete_image" />
 
         <ImageView
+            android:id="@+id/dashboard_max_radical_icon"
             android:layout_width="@dimen/layout_dashboard_meter_scale_end_point_width"
             android:layout_height="@dimen/layout_dashboard_meter_scale_end_point_height"
+            android:layout_marginTop="@dimen/layout_dashboard_max_radical_icon_margin_top"
             android:src="@drawable/complete_fist_and_writing"
             app:layout_constraintEnd_toEndOf="@id/meter_scale"
             app:layout_constraintStart_toEndOf="@id/meter_scale"
@@ -39,13 +41,13 @@
         <TextView
             android:layout_width="@dimen/layout_dashboard_meter_scale_start_point_width"
             android:layout_height="@dimen/layout_dashboard_meter_scale_start_point_height"
+            android:gravity="center"
             android:text="@string/dashboard_layout_meter_scale_start_point_text"
             android:textColor="@color/black"
-            android:textAlignment="center"
             android:textSize="@dimen/layout_dashboard_meter_scale_start_point_text_size"
-            app:layout_constraintStart_toStartOf="@id/meter_scale"
             app:layout_constraintEnd_toStartOf="@id/meter_scale"
-            app:layout_constraintTop_toBottomOf="@id/meter_scale" />
+            app:layout_constraintStart_toStartOf="@id/meter_scale"
+            app:layout_constraintTop_toTopOf="@id/dashboard_max_radical_icon" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,38 +56,92 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@id/meter_scale"
             app:layout_constraintStart_toStartOf="@id/meter_scale"
-            app:layout_constraintTop_toBottomOf="@id/meter_scale" />
+            app:layout_constraintTop_toBottomOf="@id/dashboard_max_radical_icon" />
 
-        <ImageView
-            android:id="@+id/layout_dashboard_scale_dot"
+        <TextView
+            android:id="@+id/dashboard_task_status_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/meter_scale"
-            app:layout_constraintEnd_toEndOf="@id/meter_scale"
-            app:layout_constraintBottom_toBottomOf="@id/meter_scale"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/complete_image"
+            app:layout_constraintStart_toStartOf="@id/complete_image"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_max_radical_icon"
+            android:text="@string/dashboard_layout_task_status_incomplete" />
+
+        <ImageView
+            android:id="@+id/dashboard_scale_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/dashboard_small_white_circle"
-            android:layout_marginBottom="2dp"
-            />
+            app:layout_constraintBottom_toBottomOf="@id/meter_scale"
+            app:layout_constraintEnd_toEndOf="@id/meter_scale"
+            app:layout_constraintStart_toStartOf="@id/meter_scale" />
 
         <View
-            android:id="@+id/layout_dashboard_scale_line"
-            android:layout_width="96dp"
-            android:layout_height="2dp"
-            android:background="#4e89b6"
-            app:layout_constraintEnd_toStartOf="@id/layout_dashboard_scale_dot"
-            app:layout_constraintTop_toTopOf="@id/layout_dashboard_scale_dot"
-            app:layout_constraintBottom_toBottomOf="@id/layout_dashboard_scale_dot"
-            />
+            android:id="@+id/dashboard_scale_line"
+            android:layout_width="@dimen/layout_dashboard_scale_line_width"
+            android:layout_height="@dimen/layout_dashboard_scale_line_height"
+            android:background="@color/layout_dashboard_scale_line_color"
+            app:layout_constraintBottom_toBottomOf="@id/dashboard_scale_dot"
+            app:layout_constraintEnd_toStartOf="@id/dashboard_scale_dot"
+            app:layout_constraintTop_toTopOf="@id/dashboard_scale_dot" />
 
         <ImageView
-            android:id="@+id/layout_dashboard_scale_end"
+            android:id="@+id/dashboard_scale_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/layout_dashboard_scale_line"
-            app:layout_constraintStart_toStartOf="@id/layout_dashboard_scale_line"
-            app:layout_constraintBottom_toBottomOf="@id/layout_dashboard_scale_line"
             android:src="@drawable/dashboard_black_circle"
-            />
+            app:layout_constraintBottom_toBottomOf="@id/dashboard_scale_line"
+            app:layout_constraintStart_toStartOf="@id/dashboard_scale_line"
+            app:layout_constraintTop_toTopOf="@id/dashboard_scale_line" />
+
+        <ImageView
+            android:id="@+id/dashboard_button_background"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_dashboard_button_background_height"
+            android:layout_marginTop="@dimen/layout_dashboard_button_background_margin_top"
+            android:src="@drawable/dashboard_buttons_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/complete_image" />
+
+        <com.github.jivimberg.library.AutoResizeTextView
+            android:id="@+id/dashboard_task_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_dashboard_task_description_margin"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dashboard_button_background"
+            tools:text="TASK: Spread Fate changer by sharing" />
+
+        <Button
+            android:id="@+id/dashboard_how_button"
+            android:layout_width="@dimen/layout_dashboard_button_width"
+            android:layout_height="@dimen/layout_dashboard_button_height"
+            android:layout_marginTop="@dimen/layout_dashboard_how_button_margin_top"
+            android:background="@drawable/dashboard_button"
+            android:text="@string/dashboard_layout_how_button_text"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/layout_dashboard_button_text_size"
+            app:layout_constraintEnd_toStartOf="@id/dashboard_task_status_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_task_description" />
+
+        <Button
+            android:id="@+id/dashboard_task_status_button"
+            android:layout_width="@dimen/layout_dashboard_button_width"
+            android:layout_height="@dimen/layout_dashboard_button_height"
+            android:background="@drawable/dashboard_button"
+            android:text="@string/dashboard_layout_task_button_incomplete"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/layout_dashboard_button_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dashboard_how_button"
+            app:layout_constraintTop_toTopOf="@id/dashboard_how_button" />
         <!--todo in order to make the marker rotate and scale with the meter scale
                 you need to run two animations, in order to do that, you need to use animation set.-->
     </androidx.constraintlayout.widget.ConstraintLayout>

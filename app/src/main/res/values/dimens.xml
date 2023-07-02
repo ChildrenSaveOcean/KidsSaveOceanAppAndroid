@@ -16,7 +16,7 @@
         <!-- Dashboard layout -->
     <dimen name="layout_dashboard_complete_image_width">120dp</dimen>
     <dimen name="layout_dashboard_complete_image_height">120dp</dimen>
-    <dimen name="layout_dashboard_complete_image_margin_top">30dp</dimen>
+    <dimen name="layout_dashboard_complete_image_margin_top">60dp</dimen>
     <dimen name="layout_dashboard_meter_scale_width">200dp</dimen>
     <dimen name="layout_dashboard_meter_scale_height">100dp</dimen>
     <dimen name="layout_dashboard_meter_scale_end_point_width">24dp</dimen>
@@ -24,5 +24,16 @@
     <dimen name="layout_dashboard_meter_scale_start_point_width">24dp</dimen>
     <dimen name="layout_dashboard_meter_scale_start_point_height">24dp</dimen>
     <dimen name="layout_dashboard_meter_scale_start_point_text_size">20sp</dimen>
+    <dimen name="layout_dashboard_max_radical_icon_margin_top">4dp</dimen>
+    <dimen name="layout_dashboard_scale_line_width">96dp</dimen>
+    <dimen name="layout_dashboard_scale_line_height">2dp</dimen>
+    <dimen name="layout_dashboard_button_background_height">90dp</dimen>
+    <dimen name="layout_dashboard_button_background_margin_top">60dp</dimen>
+    <dimen name="layout_dashboard_task_description_margin">10dp</dimen>
+    <dimen name="layout_dashboard_button_width">90dp</dimen>
+    <dimen name="layout_dashboard_button_height">26dp</dimen>
+    <dimen name="layout_dashboard_how_button_margin_top">20dp</dimen>
+    <dimen name="layout_dashboard_button_text_size">14sp</dimen>
+
 
 </resources>
