@@ -7,6 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/dashboard_meter_bg"
+        android:layout_marginStart="@dimen/layout_dashboard_margin_start"
+        android:layout_marginEnd="@dimen/layout_dashboard_margin_end"
         tools:ignore="ContentDescription">
 
         <ImageView
@@ -14,6 +16,7 @@
             android:layout_width="@dimen/layout_dashboard_complete_image_width"
             android:layout_height="@dimen/layout_dashboard_complete_image_height"
             android:layout_marginTop="@dimen/layout_dashboard_complete_image_margin_top"
+            android:layout_marginEnd="@dimen/layout_dashboard_complete_image_margin_end"
             android:src="@drawable/incomplete_fist_and_writing"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/meter_scale"
@@ -21,8 +24,10 @@
 
         <ImageView
             android:id="@+id/meter_scale"
-            android:layout_width="@dimen/layout_dashboard_meter_scale_width"
+            android:layout_width="0dp"
             android:layout_height="@dimen/layout_dashboard_meter_scale_height"
+            android:layout_marginEnd="@dimen/layout_dashboard_meter_scale_margin_start"
+            android:layout_marginStart="@dimen/layout_dashboard_meter_scale_margin_end"
             android:src="@drawable/meter_scale"
             app:layout_constraintEnd_toStartOf="@id/complete_image"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,23 +73,32 @@
             app:layout_constraintTop_toBottomOf="@id/dashboard_max_radical_icon"
             android:text="@string/dashboard_layout_task_status_incomplete" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/meter_scale_indicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/meter_scale"
+            app:layout_constraintEnd_toEndOf="@id/meter_scale"
+            app:layout_constraintStart_toStartOf="@id/meter_scale"
+            >
+        <View
+            android:id="@+id/dashboard_scale_line"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/layout_dashboard_scale_line_height"
+            android:background="@color/layout_dashboard_scale_line_color"
+            app:layout_constraintBottom_toBottomOf="@id/dashboard_scale_dot"
+            app:layout_constraintStart_toEndOf="@id/dashboard_scale_end"
+            app:layout_constraintEnd_toStartOf="@id/dashboard_scale_dot"
+            app:layout_constraintTop_toTopOf="@id/dashboard_scale_dot" />
+
         <ImageView
             android:id="@+id/dashboard_scale_dot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/dashboard_small_white_circle"
-            app:layout_constraintBottom_toBottomOf="@id/meter_scale"
-            app:layout_constraintEnd_toEndOf="@id/meter_scale"
-            app:layout_constraintStart_toStartOf="@id/meter_scale" />
-
-        <View
-            android:id="@+id/dashboard_scale_line"
-            android:layout_width="@dimen/layout_dashboard_scale_line_width"
-            android:layout_height="@dimen/layout_dashboard_scale_line_height"
-            android:background="@color/layout_dashboard_scale_line_color"
-            app:layout_constraintBottom_toBottomOf="@id/dashboard_scale_dot"
-            app:layout_constraintEnd_toStartOf="@id/dashboard_scale_dot"
-            app:layout_constraintTop_toTopOf="@id/dashboard_scale_dot" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/dashboard_scale_end"
@@ -92,8 +106,9 @@
             android:layout_height="wrap_content"
             android:src="@drawable/dashboard_black_circle"
             app:layout_constraintBottom_toBottomOf="@id/dashboard_scale_line"
-            app:layout_constraintStart_toStartOf="@id/dashboard_scale_line"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/dashboard_scale_line" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/dashboard_button_background"

@@ -113,7 +113,6 @@
             app:layout_constraintStart_toStartOf="@id/vertical_dash"
             app:layout_constraintTop_toBottomOf="@id/vertical_dash" />
 
-
         <include layout="@layout/layout_dashboard"
             android:id="@+id/dashboard_layout"
             android:layout_width="0dp"

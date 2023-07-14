@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
-import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.kidssaveocean.fatechanger.R
@@ -23,12 +22,12 @@ import com.kidssaveocean.fatechanger.countryContacts.CountryIntroFragment
 import com.kidssaveocean.fatechanger.database.AppDatabase
 import com.kidssaveocean.fatechanger.database.entities.DashboardStep
 import com.kidssaveocean.fatechanger.database.entities.KeyValue
+import com.kidssaveocean.fatechanger.databinding.FragmentMainDashboardNewBinding
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.extensions.getScreenSize
 import com.kidssaveocean.fatechanger.extensions.setImage
 import com.kidssaveocean.fatechanger.views.ActionAlertDialog
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.fragment_main_dashboard.*
 import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -53,6 +52,7 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
     private var currentTask: DashboardTask = DashboardTask(DashboardSteps.RESEARCH)
     private var db: AppDatabase? = null
     private val mp = MediaPlayer()
+    private lateinit var binding: FragmentMainDashboardNewBinding
 
     private val isAllPointsInitiated: Boolean
         get() {
@@ -76,9 +76,10 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_dashboard, container, false)
+        binding = FragmentMainDashboardNewBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onResume() {
@@ -139,81 +140,50 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
             }
         }
 
-        action_alert_button.setOnClickListener {
+        binding.actionAlertButton.setOnClickListener {
             ActionAlertDialog(bottomActivity).show()
         }
 
-        firstIcon.setOnClickListener {
+        binding.one.setOnClickListener {
             playClick(bottomActivity)
             clickOnSurfer(stepOne)
         }
 
-        secondIcon.setOnClickListener {
+        binding.two.setOnClickListener {
             playClick(bottomActivity)
             clickOnSurfer(stepTwo)
         }
 
-        thirdIcon.setOnClickListener {
+        binding.three.setOnClickListener {
             playClick(bottomActivity)
             clickOnSurfer(stepThree)
         }
 
-        fourthIcon.setOnClickListener {
+        binding.four.setOnClickListener {
             playClick(bottomActivity)
             clickOnSurfer(stepFour)
         }
 
-        fifthIcon.setOnClickListener {
+        binding.five.setOnClickListener {
             playClick(bottomActivity)
             clickOnSurfer(stepFive)
         }
 
-        sixthIcon.setOnClickListener {
+        binding.six.setOnClickListener {
             playClick(bottomActivity)
             clickOnSurfer(stepSix)
         }
 
-        how_button?.setOnClickListener {
+        binding.dashboardLayout.dashboardHowButton.setOnClickListener {
             howButtonAction(currentTask.type!!)
         }
 
-        I_did_it_1?.setOnClickListener {
-            if (currentTask.type == DashboardSteps.WRITE_LETTER) {
-                currentTask.isSecondCompleted = currentTask.isSecondCompleted.not()
-                saveTaskToDb(currentTask)
-            }
-        }
-
-        I_did_it_2?.setOnClickListener {
+        binding.dashboardLayout.dashboardTaskStatusButton.setOnClickListener {
             currentTask.isFirstCompleted = currentTask.isFirstCompleted.not()
             saveTaskToDb(currentTask)
         }
 
-        icons.viewTreeObserver.addOnGlobalLayoutListener {
-            if (icons != null) {
-                bottomLeftPoint = PointF(icons.x, icons.y + icons.height)
-                if (isAllPointsInitiated) {
-                    view.background = BackgroundDrawable(
-                            activity as Activity,
-                            bottomLeftPoint!!,
-                            topLeftSteeringWeelCorner!!)
-                }
-            }
-        }
-
-        alert_field.viewTreeObserver.addOnGlobalLayoutListener {
-            if (alert_field != null) {
-                topLeftSteeringWeelCorner = PointF(alert_field.x, alert_field.y)
-                if (isAllPointsInitiated) {
-                    view.background = BackgroundDrawable(
-                            activity as Activity,
-                            bottomLeftPoint!!,
-                            topLeftSteeringWeelCorner!!)
-                }
-            }
-        }
-
-        link.setOnClickListener {
+        binding.link.setOnClickListener {
             startActivity(Intent(requireActivity(), DashBoardVideoActivity::class.java))
         }
     }
@@ -261,12 +231,12 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
 
     private fun changeVisuals(task: DashboardTask) {
         activity?.runOnUiThread {
-            firstIcon.isActive = task.type?.ordinal == 0
-            secondIcon.isActive = task.type?.ordinal == 1
-            thirdIcon.isActive = task.type?.ordinal == 2
-            fourthIcon.isActive = task.type?.ordinal == 3
-            fifthIcon.isActive = task.type?.ordinal == 4
-            sixthIcon.isActive = task.type?.ordinal == 5
+            binding.one.isActive = task.type?.ordinal == 0
+            binding.two.isActive = task.type?.ordinal == 1
+            binding.three.isActive = task.type?.ordinal == 2
+            binding.four.isActive = task.type?.ordinal == 3
+            binding.five.isActive = task.type?.ordinal == 4
+            binding.six.isActive = task.type?.ordinal == 5
             rotateWheel(task.type!!)
             rotateMeteor(task.type!!)
             changeDescriptionText(task)
@@ -289,7 +259,7 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
                 )
                 rotate.fillAfter = true
                 rotate.duration = 1000
-                floating_area.startAnimation(rotate)
+                binding.floatingArea.startAnimation(rotate)
                 currentCircleAngle = newAngle
             }
             else -> println("Wrong position number")
@@ -311,7 +281,7 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
                 )
                 rotate.fillAfter = true
                 rotate.duration = 1000
-                meteor_ball.startAnimation(rotate)
+                binding.dashboardLayout.meterScaleIndicator.startAnimation(rotate)
                 currentMeteorAngle = newAngle
             }
             else -> println("Wrong position number")
@@ -321,8 +291,7 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
     private fun changeCompletedStatus(context: Context, task: DashboardTask) {
         when (currentTask.type) {
             DashboardSteps.RESEARCH -> {
-                firstIcon.isCompleted = task.isFirstCompleted
-                I_did_it_1.visibility = View.GONE
+                binding.one.isCompleted = task.isFirstCompleted
                 changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
             }
             DashboardSteps.WRITE_LETTER -> {
@@ -341,28 +310,23 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
 //                    false -> I_did_it_2.text = getString(R.string.I_did_it_about_climate)
 //                }
 
-                secondIcon.isCompleted = task.isFirstCompleted
-                I_did_it_1.visibility = View.GONE
+                binding.two.isCompleted = task.isFirstCompleted
                 changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
             }
             DashboardSteps.SHARING -> {
-                thirdIcon.isCompleted = task.isFirstCompleted
-                I_did_it_1.visibility = View.GONE
+                binding.three.isCompleted = task.isFirstCompleted
                 changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
             }
             DashboardSteps.LETTER_CAMPAING -> {
-                fourthIcon.isCompleted = task.isFirstCompleted
-                I_did_it_1.visibility = View.GONE
+                binding.four.isCompleted = task.isFirstCompleted
                 changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
             }
             DashboardSteps.GOVERNMENT -> {
-                fifthIcon.isCompleted = task.isFirstCompleted
-                I_did_it_1.visibility = View.GONE
+                binding.five.isCompleted = task.isFirstCompleted
                 changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
             }
             DashboardSteps.PROTEST -> {
-                sixthIcon.isCompleted = task.isFirstCompleted
-                I_did_it_1.visibility = View.GONE
+                binding.six.isCompleted = task.isFirstCompleted
                 changeTextOnButtonAndFistIcon(context, task.isFirstCompleted)
             }
             else -> println("Unknown type for DashboardSteps")
@@ -372,36 +336,36 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
     private fun changeTextOnButtonAndFistIcon(context: Context, completed: Boolean) {
         when (completed) {
             true -> {
-                complete_image.setImage(context, R.drawable.complete_fist_and_writing)
-                I_did_it_2.text = getString(R.string.Not_yet)
+                binding.dashboardLayout.completeImage.setImage(context, R.drawable.complete_fist_and_writing)
+                binding.dashboardLayout.dashboardTaskStatusButton.text = getString(R.string.Not_yet)
             }
             false -> {
-                complete_image.setImage(context, R.drawable.incomplete_fist_and_writing)
-                I_did_it_2.text = getString(R.string.I_did_it)
+                binding.dashboardLayout.completeImage.setImage(context, R.drawable.incomplete_fist_and_writing)
+                binding.dashboardLayout.dashboardTaskStatusButton.text = getString(R.string.I_did_it)
             }
         }
     }
 
     private fun changeIconsBg(task: DashboardTask) {
         when (task.type) {
-            DashboardSteps.RESEARCH -> firstIcon.isCompleted = task.isFirstCompleted
-            DashboardSteps.WRITE_LETTER -> secondIcon.isCompleted = task.isFirstCompleted && task.isSecondCompleted
-            DashboardSteps.SHARING -> thirdIcon.isCompleted = task.isFirstCompleted
-            DashboardSteps.LETTER_CAMPAING -> fourthIcon.isCompleted = task.isFirstCompleted
-            DashboardSteps.GOVERNMENT -> fifthIcon.isCompleted = task.isFirstCompleted
-            DashboardSteps.PROTEST -> sixthIcon.isCompleted = task.isFirstCompleted
+            DashboardSteps.RESEARCH -> binding.one.isCompleted = task.isFirstCompleted
+            DashboardSteps.WRITE_LETTER -> binding.two.isCompleted = task.isFirstCompleted && task.isSecondCompleted
+            DashboardSteps.SHARING -> binding.three.isCompleted = task.isFirstCompleted
+            DashboardSteps.LETTER_CAMPAING -> binding.four.isCompleted = task.isFirstCompleted
+            DashboardSteps.GOVERNMENT -> binding.five.isCompleted = task.isFirstCompleted
+            DashboardSteps.PROTEST -> binding.six.isCompleted = task.isFirstCompleted
             else -> println("Unknown type for DashboardSteps")
         }
     }
 
     private fun changeDescriptionText(task: DashboardTask) {
         when (task.type) {
-            DashboardSteps.RESEARCH -> task_description.text = getString(R.string.research_task_description)
-            DashboardSteps.WRITE_LETTER -> task_description.text = getString(R.string.write_letter_task_description)
-            DashboardSteps.SHARING -> task_description.text = getString(R.string.write_letter_task_climate)
-            DashboardSteps.LETTER_CAMPAING -> task_description.text = getString(R.string.sharing_task_description)
-            DashboardSteps.GOVERNMENT -> task_description.text = getString(R.string.government_task_description)
-            DashboardSteps.PROTEST -> task_description.text = getString(R.string.protest_task_description)
+            DashboardSteps.RESEARCH -> binding.dashboardLayout.dashboardTaskDescription.text = getString(R.string.research_task_description)
+            DashboardSteps.WRITE_LETTER -> binding.dashboardLayout.dashboardTaskDescription.text = getString(R.string.write_letter_task_description)
+            DashboardSteps.SHARING -> binding.dashboardLayout.dashboardTaskDescription.text = getString(R.string.write_letter_task_climate)
+            DashboardSteps.LETTER_CAMPAING -> binding.dashboardLayout.dashboardTaskDescription.text = getString(R.string.sharing_task_description)
+            DashboardSteps.GOVERNMENT -> binding.dashboardLayout.dashboardTaskDescription.text = getString(R.string.government_task_description)
+            DashboardSteps.PROTEST -> binding.dashboardLayout.dashboardTaskDescription.text = getString(R.string.protest_task_description)
             else -> println("Unknown type for DashboardSteps")
         }
     }
