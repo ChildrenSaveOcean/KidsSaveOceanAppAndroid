@@ -29,7 +29,7 @@
     <color name="color_policy_step">#e71fa1e9</color>
 
     <!-- Main Dashboard Fragment -->
-
+    <color name="main_dashboard_link_color">#dceef7</color>
         <!-- Dashboard layout -->
     <color name="layout_dashboard_scale_line_color">#4e89b6</color>
 </resources>

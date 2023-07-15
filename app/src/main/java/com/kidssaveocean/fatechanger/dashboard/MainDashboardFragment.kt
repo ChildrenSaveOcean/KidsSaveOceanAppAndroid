@@ -140,7 +140,7 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
             }
         }
 
-        binding.actionAlertButton.setOnClickListener {
+        binding.alertField.actionAlertButton.setOnClickListener {
             ActionAlertDialog(bottomActivity).show()
         }
 
@@ -259,7 +259,7 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
                 )
                 rotate.fillAfter = true
                 rotate.duration = 1000
-                binding.floatingArea.startAnimation(rotate)
+                binding.alertField.wheelIndicator.startAnimation(rotate)
                 currentCircleAngle = newAngle
             }
             else -> println("Wrong position number")

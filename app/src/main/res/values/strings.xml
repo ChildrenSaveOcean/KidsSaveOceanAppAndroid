@@ -172,4 +172,5 @@
     <string name="dashboard_layout_how_button_text">How?</string>
     <string name="dashboard_layout_task_button_complete">I did it!</string>
     <string name="dashboard_layout_task_button_incomplete">Not yet</string>
+    <string name="main_dashboard_link_string_value">\?</string>
 </resources>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ContentDescription">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_dashboard"
@@ -78,7 +79,6 @@
             android:layout_height="@dimen/dashboard_icon_size"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/dashboard_icon_margin"
-            android:layout_marginHorizontal="20dp"
             app:layout_constraintBottom_toTopOf="@id/bottom_sheet"
             app:layout_constraintEnd_toEndOf="@id/bottom_sheet"
             app:layout_constraintStart_toEndOf="@id/bottom_sheet" />
@@ -106,12 +106,12 @@
 
         <ImageView
             android:id="@+id/diagonal_dash"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/main_dashboard_diagonal_line_width"
+            android:layout_height="@dimen/main_dashboard_diagonal_line_height"
             android:src="@drawable/diagonal_dash"
             android:translationY="-1dp"
             app:layout_constraintStart_toStartOf="@id/vertical_dash"
-            app:layout_constraintTop_toBottomOf="@id/vertical_dash" />
+            app:layout_constraintTop_toBottomOf="@id/vertical_dash"/>
 
         <include layout="@layout/layout_dashboard"
             android:id="@+id/dashboard_layout"
@@ -125,64 +125,26 @@
             app:layout_constraintBottom_toTopOf="@id/alert_field"
             />
 
-        <LinearLayout
+        <include layout="@layout/layout_alert_field"
             android:id="@+id/alert_field"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/link"
+            app:layout_constraintStart_toStartOf="@id/bottom_sheet"
             app:layout_constraintEnd_toEndOf="@id/bottom_sheet"
-            app:layout_constraintStart_toStartOf="@id/bottom_sheet">
-
-            <FrameLayout
-                android:id="@+id/wheel_area"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/steering_wheel"
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/standart_margin"
-                    android:src="@drawable/wheel_volume" />
-
-                <FrameLayout
-                    android:id="@+id/floating_area"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent">
-
-                    <View
-                        android:id="@+id/dashboard_circle"
-                        android:layout_width="@dimen/dashboard_circle_size"
-                        android:layout_height="@dimen/dashboard_circle_size"
-                        android:layout_gravity="start|bottom"
-                        android:background="@drawable/dashboard_white_circle" />
-                </FrameLayout>
-            </FrameLayout>
-
-            <ImageView
-                android:id="@+id/action_alert_button"
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/ic_action_alert" />
-        </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_layout"
+            />
 
         <Button
             android:id="@+id/link"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_width="@dimen/main_dashboard_link_width"
+            android:layout_height="@dimen/main_dashboard_link_height"
+            android:layout_marginBottom="@dimen/main_dashboard_link_margin_bottom"
+            android:layout_marginEnd="@dimen/main_dashboard_link_margin_end"
             android:background="@drawable/bg_dashboard_link_button"
             android:scaleType="center"
-            android:text="\?"
-            android:textColor="#dceef7"
+            android:text="@string/main_dashboard_link_string_value"
+            android:textColor="@color/main_dashboard_link_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
