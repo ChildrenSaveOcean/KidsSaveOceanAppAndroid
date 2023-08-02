@@ -85,7 +85,7 @@
 
         <ImageView
             android:id="@+id/horizontal_dash"
-            android:layout_width="30dp"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
@@ -129,8 +129,8 @@
             android:id="@+id/alert_field"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/bottom_sheet"
-            app:layout_constraintEnd_toEndOf="@id/bottom_sheet"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dashboard_layout"
             />
