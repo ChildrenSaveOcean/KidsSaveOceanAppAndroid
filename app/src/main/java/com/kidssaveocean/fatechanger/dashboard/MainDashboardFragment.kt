@@ -338,10 +338,13 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
             true -> {
                 binding.dashboardLayout.completeImage.setImage(context, R.drawable.complete_fist_and_writing)
                 binding.dashboardLayout.dashboardTaskStatusButton.text = getString(R.string.Not_yet)
+                binding.dashboardLayout.dashboardTaskStatusText.text = getString(R.string.dashboard_layout_task_status_complete)
             }
             false -> {
                 binding.dashboardLayout.completeImage.setImage(context, R.drawable.incomplete_fist_and_writing)
                 binding.dashboardLayout.dashboardTaskStatusButton.text = getString(R.string.I_did_it)
+                binding.dashboardLayout.dashboardTaskStatusText.text = getString(R.string.dashboard_layout_task_status_incomplete)
+
             }
         }
     }
