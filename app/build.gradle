@@ -32,18 +32,17 @@ android {
         }
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
-        abortOnError false
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     namespace 'com.kidssaveocean.fatechanger'
+    lint {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -63,7 +62,7 @@ dependencies {
     implementation "android.arch.lifecycle:viewmodel:1.1.2"
 
     // Google
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
 
     // Butterknife
     implementation 'com.jakewharton:butterknife:10.0.0'
@@ -96,7 +95,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'
 
     // Location
-    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     //Rxjava
     implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
