@@ -19,6 +19,7 @@ object Constants {
     const val INTENT_URL = "URL"
     const val URL_SHARE_TEXT = "https://www.kidssaveocean.com/change-fate"
     const val URL_LEARN_MORE= "https://www.kidssaveocean.com/projects"
-    const val URL_POLICY_VIDEO = "https://www.kidssaveocean.com/hijackpolicy"
-    const val URL_SHARE_LIKE_A_BOSS = "https://www.kidssaveocean.com/sharelikeaboss"
+    const val URL_POLICY_VIDEO = "https://pederhill.wixsite.com/kids-save-ocean/hijackpolicy"
+    const val URL_SHARE_LIKE_A_BOSS = "https://pederhill.wixsite.com/kids-save-ocean/sharelikeaboss"
+    const val URL_STUDENT_RESOURCES = "https://pederhill.wixsite.com/kids-save-ocean/studentresources"
 }

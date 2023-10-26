@@ -30,7 +30,7 @@ class NewsFragment : Fragment() {
     }
 
     companion object {
-        private const val url = "https://www.kidssaveocean.com/updates"
+        private const val url = "https://pederhill.wixsite.com/kids-save-ocean/updates"
     }
 
 }

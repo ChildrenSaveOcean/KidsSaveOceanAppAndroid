@@ -16,7 +16,7 @@ import com.kidssaveocean.fatechanger.firebase.FirebaseService
 
 class CountryIntroFragment : Fragment() {
     companion object {
-        const val WRITE_ABOUT_WAHT = "https://www.kidssaveocean.com/copy-of-write-letters-with-your-kid"
+        const val WRITE_ABOUT_WAHT = "https://pederhill.wixsite.com/kids-save-ocean/copy-of-write-letters-with-your-kid"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
