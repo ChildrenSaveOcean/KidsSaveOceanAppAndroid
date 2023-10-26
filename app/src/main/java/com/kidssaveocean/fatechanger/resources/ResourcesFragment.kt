@@ -19,7 +19,7 @@ import com.kidssaveocean.fatechanger.utility.GeneralImageListCardView
 import java.util.ArrayList
 
 
-class ResourcesFragment (private val url : String = "https://www.kidssaveocean.com/fatechanger-resources") : Fragment() {
+class ResourcesFragment (private val url : String = "https://pederhill.wixsite.com/kids-save-ocean/fatechanger-resources") : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_resources, container, false)

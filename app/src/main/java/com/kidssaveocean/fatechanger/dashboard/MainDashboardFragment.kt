@@ -16,9 +16,10 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.WebViewActivity
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
-import com.kidssaveocean.fatechanger.countryContacts.CountryIntroFragment
 import com.kidssaveocean.fatechanger.database.AppDatabase
 import com.kidssaveocean.fatechanger.database.entities.DashboardStep
 import com.kidssaveocean.fatechanger.database.entities.KeyValue
@@ -376,17 +377,20 @@ class MainDashboardFragment(step: DashboardSteps? = null) : Fragment() {
     private fun howButtonAction(step: DashboardSteps) {
         val bottomActivity = activity as BottomNavigationActivity
         when (step) {
-            DashboardSteps.RESEARCH -> bottomActivity.setMenuItem(R.id.action_resources)
+            DashboardSteps.RESEARCH -> {
+                val intent = Intent(requireContext(), WebViewActivity::class.java)
+                intent.putExtra(Constants.INTENT_URL, Constants.URL_STUDENT_RESOURCES)
+                startActivity(intent)
+            }
             DashboardSteps.WRITE_LETTER -> {
-                CountryIntroFragment().addToNavigationStack(
-                        bottomActivity.supportFragmentManager,
-                        R.id.fragment_container,
-                        "country_fragment")
+                val intent = Intent(requireContext(), WebViewActivity::class.java)
+                intent.putExtra(Constants.INTENT_URL, Constants.URL_STUDENT_RESOURCES)
+                startActivity(intent)
             }
             DashboardSteps.SHARING -> {
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, "https://www.kidssaveocean.com/")
+                    putExtra(Intent.EXTRA_TEXT, "https://pederhill.wixsite.com/kids-save-ocean")
                     type = "text/plain"
                 }
                 val shareIntent = Intent.createChooser(sendIntent, null)

@@ -159,7 +159,7 @@ class PolicyControlCenterActivity : BaseActivity() {
 
         btnLearnMore.setOnClickListener {
             val intent = Intent(this, WebViewActivity::class.java)
-            intent.putExtra(Constants.INTENT_URL, Constants.URL_LEARN_MORE)
+            intent.putExtra(Constants.INTENT_URL, Constants.URL_POLICY_VIDEO)
             startActivity(intent)
         }
     }
