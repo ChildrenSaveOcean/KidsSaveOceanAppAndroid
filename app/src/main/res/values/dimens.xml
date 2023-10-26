@@ -10,4 +10,44 @@
     <dimen name="nobody_listen_buttons_height">180dp</dimen>
     <dimen name="map_marker_width">25dp</dimen>
     <dimen name="map_marker_height">30dp</dimen>
+
+    <!-- Main Dashboard Fragment -->
+    <dimen name="main_dashboard_diagonal_line_width">38dp</dimen>
+    <dimen name="main_dashboard_diagonal_line_height">38dp</dimen>
+    <dimen name="main_dashboard_link_width">24dp</dimen>
+    <dimen name="main_dashboard_link_height">24dp</dimen>
+    <dimen name="main_dashboard_link_margin_bottom">20dp</dimen>
+    <dimen name="main_dashboard_link_margin_end">20dp</dimen>
+        <!-- Dashboard layout -->
+    <dimen name="layout_dashboard_margin_start">50dp</dimen>
+    <dimen name="layout_dashboard_margin_end">20dp</dimen>
+    <dimen name="layout_dashboard_complete_image_width">100dp</dimen>
+    <dimen name="layout_dashboard_complete_image_height">100dp</dimen>
+    <dimen name="layout_dashboard_complete_image_margin_top">60dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_width">180dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_height">90dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_end_point_width">24dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_end_point_height">24dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_start_point_width">24dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_start_point_height">24dp</dimen>
+    <dimen name="layout_dashboard_meter_scale_start_point_text_size">20sp</dimen>
+    <dimen name="layout_dashboard_max_radical_icon_margin_top">4dp</dimen>
+    <dimen name="layout_dashboard_scale_line_width">96dp</dimen>
+    <dimen name="layout_dashboard_scale_line_height">2dp</dimen>
+    <dimen name="layout_dashboard_button_background_height">90dp</dimen>
+    <dimen name="layout_dashboard_button_background_margin_top">60dp</dimen>
+    <dimen name="layout_dashboard_task_description_margin">10dp</dimen>
+    <dimen name="layout_dashboard_button_width">90dp</dimen>
+    <dimen name="layout_dashboard_button_height">26dp</dimen>
+    <dimen name="layout_dashboard_how_button_margin_top">20dp</dimen>
+    <dimen name="layout_dashboard_button_text_size">14sp</dimen>
+        <!-- Alert field layout -->
+    <dimen name="alert_field_steering_wheel_width">140dp</dimen>
+    <dimen name="alert_field_steering_wheel_height">140dp</dimen>
+    <dimen name="alert_field_steering_wheel_margin">10dp</dimen>
+    <dimen name="alert_field_action_alert_button_width">140dp</dimen>
+    <dimen name="alert_field_action_alert_button_height">140dp</dimen>
+    <dimen name="alert_field_action_alert_button_margin">10dp</dimen>
+
+
 </resources>

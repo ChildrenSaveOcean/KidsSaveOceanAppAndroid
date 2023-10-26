@@ -11,6 +11,11 @@ android {
         experimental = true
     }
 
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
     defaultConfig {
         applicationId "com.kidssaveocean.fatechanger"
         minSdkVersion 21

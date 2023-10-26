@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ContentDescription">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dashboard"
+        tools:context=".dashboard.MainDashboardFragment">
+
+        <ImageView
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="60dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/dashboard_lineup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.kidssaveocean.fatechanger.views.SurferIconView
+            android:id="@+id/one"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            app:layout_constraintBottom_toTopOf="@id/bottom_sheet"
+            app:layout_constraintEnd_toStartOf="@id/bottom_sheet"
+            app:layout_constraintStart_toStartOf="@id/bottom_sheet" />
+
+        <com.kidssaveocean.fatechanger.views.SurferIconView
+            android:id="@+id/two"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            app:layout_constraintBottom_toTopOf="@id/bottom_sheet"
+            app:layout_constraintEnd_toStartOf="@id/three"
+            app:layout_constraintStart_toEndOf="@id/one" />
+
+        <com.kidssaveocean.fatechanger.views.SurferIconView
+            android:id="@+id/three"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            app:layout_constraintBottom_toTopOf="@id/bottom_sheet"
+            app:layout_constraintEnd_toStartOf="@id/four"
+            app:layout_constraintStart_toEndOf="@id/two" />
+
+        <com.kidssaveocean.fatechanger.views.SurferIconView
+            android:id="@+id/four"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            app:layout_constraintBottom_toTopOf="@id/bottom_sheet"
+            app:layout_constraintEnd_toStartOf="@id/five"
+            app:layout_constraintStart_toEndOf="@id/three" />
+
+        <com.kidssaveocean.fatechanger.views.SurferIconView
+            android:id="@+id/five"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            app:layout_constraintBottom_toTopOf="@id/bottom_sheet"
+            app:layout_constraintEnd_toStartOf="@id/six"
+            app:layout_constraintStart_toEndOf="@id/four" />
+
+        <com.kidssaveocean.fatechanger.views.SurferIconView
+            android:id="@+id/six"
+            android:layout_width="@dimen/dashboard_icon_size"
+            android:layout_height="@dimen/dashboard_icon_size"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/dashboard_icon_margin"
+            app:layout_constraintBottom_toTopOf="@id/bottom_sheet"
+            app:layout_constraintEnd_toEndOf="@id/bottom_sheet"
+            app:layout_constraintStart_toEndOf="@id/bottom_sheet" />
+
+        <ImageView
+            android:id="@+id/horizontal_dash"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/horizontal_dash"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_sheet"
+            app:layout_constraintEnd_toStartOf="@id/bottom_sheet" />
+
+        <ImageView
+            android:id="@+id/vertical_dash"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/vertical_dash"
+            app:layout_constraintBottom_toTopOf="@id/alert_field"
+            app:layout_constraintStart_toStartOf="@id/horizontal_dash"
+            app:layout_constraintTop_toTopOf="@id/horizontal_dash" />
+
+        <ImageView
+            android:id="@+id/diagonal_dash"
+            android:layout_width="@dimen/main_dashboard_diagonal_line_width"
+            android:layout_height="@dimen/main_dashboard_diagonal_line_height"
+            android:src="@drawable/diagonal_dash"
+            android:translationY="-1dp"
+            app:layout_constraintStart_toStartOf="@id/vertical_dash"
+            app:layout_constraintTop_toBottomOf="@id/vertical_dash"/>
+
+        <include layout="@layout/layout_dashboard"
+            android:id="@+id/dashboard_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintStart_toStartOf="@id/horizontal_dash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bottom_sheet"
+            app:layout_constraintBottom_toTopOf="@id/alert_field"
+            />
+
+        <include layout="@layout/layout_alert_field"
+            android:id="@+id/alert_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dashboard_layout"
+            />
+
+        <Button
+            android:id="@+id/link"
+            android:layout_width="@dimen/main_dashboard_link_width"
+            android:layout_height="@dimen/main_dashboard_link_height"
+            android:layout_marginBottom="@dimen/main_dashboard_link_margin_bottom"
+            android:layout_marginEnd="@dimen/main_dashboard_link_margin_end"
+            android:background="@drawable/bg_dashboard_link_button"
+            android:scaleType="center"
+            android:text="@string/main_dashboard_link_string_value"
+            android:textColor="@color/main_dashboard_link_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
