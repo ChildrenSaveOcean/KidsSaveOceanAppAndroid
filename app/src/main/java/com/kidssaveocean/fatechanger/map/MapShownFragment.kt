@@ -73,7 +73,7 @@ class MapShownFragment : Fragment(), OnMapReadyCallback, Observer {
 
                 CustomMapMarkerView.numberLetter = item.country_number.toString()
                 val icon = BitmapDescriptorFactory
-                        .fromBitmap(activity?.let { createDrawableFromView(it, CustomMapMarkerView(it)) })
+                        .fromBitmap(activity?.let { createDrawableFromView(it, CustomMapMarkerView(it)) }!!)
 
                 if (icon is BitmapDescriptor){
                     mGoogleMap.addMarker(MarkerOptions()
