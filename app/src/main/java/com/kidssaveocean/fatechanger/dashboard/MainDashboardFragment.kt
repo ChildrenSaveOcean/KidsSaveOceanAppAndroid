@@ -64,8 +64,8 @@ class MainDashboardFragment(private val providedStep: DashboardSteps? = null) : 
             surferIcons = listOf(
                 Pair(DashboardSteps.RESEARCH, one),
                 Pair(DashboardSteps.WRITE_LETTER, two),
-                Pair(DashboardSteps.SHARING, three),
-                Pair(DashboardSteps.LETTER_CAMPAIGN, four),
+                Pair(DashboardSteps.LETTER_CAMPAIGN, three),
+                Pair(DashboardSteps.SHARING, four),
                 Pair(DashboardSteps.GOVERNMENT, five),
                 Pair(DashboardSteps.PROTEST, six)
             )
