@@ -3,8 +3,6 @@
 
     <string name="back">Back</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="how_you_can_help_description">As a student, fight to protect the ocean or stop climate change by deeply engaging your government. We’ll show you how. As a teacher, we have rich and expanding resources. As a parent or individual, you can empower the kids.</string>
     <string name="learn_write_share">Write, Share, Engage</string>
     <string name="how_you_can_help">How You Can Help</string>
@@ -13,7 +11,6 @@
     <string name="children_saving_the_ocean">A Tool with Teeth</string>
     <string name="welcome_to_fate_changer_description">This app was designed with a single purpose: to give youth a powerful voice to protect our world’s environment. It is no ordinary app.</string>
     <string name="are_you_ready">Are you ready?</string>
-    <string name="empty"></string>
     <string name="stay_engaged">Engage</string>
     <string name="stay_connected_for_updates">Stay Connected for Updates.</string>
     <string name="stay_engaged_description">Visit the app often to track our progress and get Action Alerts. Watch a growing army of determined kids change the world.</string>
@@ -36,9 +33,9 @@
     <string name="sample_letters_description">Here are some examples of letters that students have written.</string>
     <string name="country_contacts">Country Contacts</string>
     <string name="country_contacts_description">Look up who is the best person to write to in your country.</string>
-    <string name="teaching_9_to_12">Teaching Materials\n Ages 9 - 12</string>
-    <string name="teaching_13_to_15">Teaching Materials\n Ages 13 - 15</string>
-    <string name="teaching_16_to_18">Teaching Materials\n Ages 16 - 18</string>
+    <string name="teaching_9_to_12">Teaching Materials\n Ages 9 – 12</string>
+    <string name="teaching_13_to_15">Teaching Materials\n Ages 13 – 15</string>
+    <string name="teaching_16_to_18">Teaching Materials\n Ages 16 – 18</string>
     <string name="for_student">For Student</string>
     <string name="for_teacher">For Teacher</string>
     <string name="updates">UPDATES</string>
@@ -51,7 +48,6 @@
     <string name="q_and_a_with_founder"><![CDATA[Q&A with the founder]]></string>
     <string name="high_scores">High Scores</string>
     <string name="see_where_your_country_ranks">See where your country ranks</string>
-    <string name="empty_string"></string>
     <string name="write_and_get_the_world_out">Write And Get The World Out</string>
     <string name="select_your_country">Select Your Country</string>
     <string name="who_do_I_write_a_letter_to">Who do I write a letter to?</string>
@@ -131,7 +127,7 @@
     <string name="policy_chosen">Policy chosen: </string>
     <string name="policy_location_live">Your location is live: </string>
     <string name="policy_location_campaigns">Live campaigns:</string>
-    <string name="policy_location_not_choose">I\'m sorry, but the goverment of your location doesn\'t offer the opportunity for citizen ballon initiatives. But you can influence them with letters in our letter-writing campaign.</string>
+    <string name="policy_location_not_choose">I\'m sorry, but the government of your location doesn\'t offer the opportunity for citizen ballon initiatives. But you can influence them with letters in our letter-writing campaign.</string>
     <string name="policy_location_not_live">none - still building</string>
     <string name="policy_control_center_learn_more">Learn more</string>
     <string name="policy_control_center_share">Share</string>

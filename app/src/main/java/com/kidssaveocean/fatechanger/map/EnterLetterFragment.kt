@@ -76,29 +76,30 @@ class EnterLetterFragment : Fragment() {
         when (countries.isNotEmpty()) {
             true -> fillPicker(countries)
             false -> {
-                FirebaseService.getInstance().countriesObservable
-                        .doOnError {
-                            print(it.message)
-                        }
-                        .subscribe {
-                            if (it.isNotEmpty()) {
-                                progressBar_cyclic.visibility = View.GONE
-                                country_picker.visibility = View.VISIBLE
-                                countries = it
-                                fillPicker(it)
-
-                                if (ContextCompat.checkSelfPermission(bottomActivity, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-                                    ActivityCompat.requestPermissions(
-                                            bottomActivity,
-                                            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                                            PERMISSION_ACCESS_FINE_LOCATION
-                                    )
-                                }
-                                else {
-                                    obtainLocation()
-                                }
-                            }
-                        }
+                //todo fix
+//                FirebaseService.getInstance().countriesObservable
+//                        .doOnError {
+//                            print(it.message)
+//                        }
+//                        .subscribe {
+//                            if (it.isNotEmpty()) {
+//                                progressBar_cyclic.visibility = View.GONE
+//                                country_picker.visibility = View.VISIBLE
+//                                countries = it
+//                                fillPicker(it)
+//
+//                                if (ContextCompat.checkSelfPermission(bottomActivity, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+//                                    ActivityCompat.requestPermissions(
+//                                            bottomActivity,
+//                                            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+//                                            PERMISSION_ACCESS_FINE_LOCATION
+//                                    )
+//                                }
+//                                else {
+//                                    obtainLocation()
+//                                }
+//                            }
+//                        }
             }
         }
     }
@@ -127,6 +128,7 @@ class EnterLetterFragment : Fragment() {
     }
 
     private fun obtainLocation() {
+        //todo fix
         fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
                     location?.let { it ->

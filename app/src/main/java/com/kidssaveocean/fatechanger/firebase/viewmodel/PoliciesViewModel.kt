@@ -10,8 +10,6 @@ import com.kidssaveocean.fatechanger.firebase.model.PolicyCombineData
 import com.kidssaveocean.fatechanger.firebase.repository.CampaignsRepo
 import com.kidssaveocean.fatechanger.firebase.repository.HijackPoliciesRepo
 import com.kidssaveocean.fatechanger.firebase.repository.HijackPolicyLocationRepo
-import io.reactivex.Single
-import io.reactivex.functions.Function3
 import javax.inject.Inject
 
 class PoliciesViewModel : BaseViewModel() {
@@ -33,39 +31,43 @@ class PoliciesViewModel : BaseViewModel() {
 
     fun getLiveDataPolicies(): LiveData<List<Pair<String, HijackPoliciesModel>>> {
         liveDataPolicies = MutableLiveData()
-        disposables.add(hijackPoliciesRepo.getData().subscribe({
-            liveDataPolicies.value = it
-        }, {}))
+        //todo fix all of them
+//        disposables.add(hijackPoliciesRepo.getData().subscribe({
+//            liveDataPolicies.value = it
+//        }, {}))
         return liveDataPolicies
     }
 
     fun getLiveDataCampaigns(): LiveData<List<Pair<String, CampaignsModel>>> {
         liveDataCampaigns = MutableLiveData()
-        disposables.add(campaignsRepo.getData().subscribe ({
-            liveDataCampaigns.value = it
-        }, {}))
+        //todo
+//        disposables.add(campaignsRepo.getData().subscribe ({
+//            liveDataCampaigns.value = it
+//        }, {}))
         return liveDataCampaigns
     }
 
     fun getLiveDataPolicyLocations(): LiveData<List<Pair<String, HijackPolicyLocationModel>>> {
         liveDataPolicyLocations = MutableLiveData()
-        disposables.add(policyLocationRepo.getData().subscribe ({
-            liveDataPolicyLocations.value = it
-        }, {}))
+        //todo
+//        disposables.add(policyLocationRepo.getData().subscribe ({
+//            liveDataPolicyLocations.value = it
+//        }, {}))
         return liveDataPolicyLocations
     }
 
 
     fun getPolicyCombineData(): LiveData<PolicyCombineData>{
         val policyCombineData = MutableLiveData<PolicyCombineData>()
-        disposables.add(Single.zip(hijackPoliciesRepo.getData(),
-                campaignsRepo.getData(),
-                policyLocationRepo.getData(),
-                Function3<List<Pair<String, HijackPoliciesModel>>, List<Pair<String, CampaignsModel>>, List<Pair<String, HijackPolicyLocationModel>>, PolicyCombineData> { t1, t2, t3 ->
-                    PolicyCombineData(t1, t2, t3)
-                }).subscribe ({
-            policyCombineData.value = it
-        }, {}))
+        //todo fix
+//        disposables.add(Single.zip(hijackPoliciesRepo.getData(),
+//                campaignsRepo.getData(),
+//                policyLocationRepo.getData(),
+//                Function3<List<Pair<String, HijackPoliciesModel>>, List<Pair<String, CampaignsModel>>, List<Pair<String, HijackPolicyLocationModel>>, PolicyCombineData> { t1, t2, t3 ->
+//                    PolicyCombineData(t1, t2, t3)
+//                }).subscribe ({
+//            policyCombineData.value = it
+//        }, {}))
         return policyCombineData
     }
 

@@ -4,11 +4,14 @@ import com.kidssaveocean.fatechanger.firebase.model.*
 import com.kidssaveocean.fatechanger.firebase.repository.*
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
+@InstallIn(SingletonComponent::class)
+//todo fix
 abstract class HijackPoliciesRepoModule {
 
-    @Module
     companion object {
         @JvmStatic
         @Provides

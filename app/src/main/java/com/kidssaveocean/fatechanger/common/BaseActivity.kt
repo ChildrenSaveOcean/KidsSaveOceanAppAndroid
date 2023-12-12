@@ -6,10 +6,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
-import io.reactivex.disposables.Disposable
 
 open class BaseActivity : AppCompatActivity() {
-    private val disposableList = mutableListOf<Disposable>()
     private val networkReceiver = NetworkReceiver()
 
     override fun onResume() {
@@ -17,16 +15,9 @@ open class BaseActivity : AppCompatActivity() {
         registerReceiver(networkReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
-    fun disposableOnDestroy(disposable: Disposable) {
-        disposableList.add(disposable)
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(networkReceiver)
-        disposableList.map {
-            it.dispose()
-        }
     }
 
     open fun isNetworkConnected(): Boolean {
