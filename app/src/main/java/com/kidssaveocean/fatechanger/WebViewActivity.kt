@@ -6,15 +6,18 @@ import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_BACK
 import androidx.appcompat.widget.Toolbar
-import com.kidssaveocean.fatechanger.common.AbstractActivity
+import com.kidssaveocean.fatechanger.databinding.ActivityWebviewBinding
+import com.kidssaveocean.fatechanger.presentation.mvvm.activity.AbstractActivity
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_webview.*
 
-class WebViewActivity: AbstractActivity() {
+@AndroidEntryPoint
+class WebViewActivity: AbstractActivity<ActivityWebviewBinding, EmptyViewModel>() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_webview)
         findViewById<Toolbar>(R.id.toolbar).setOnClickListener{
             onBackPressed()
         }
@@ -33,6 +36,10 @@ class WebViewActivity: AbstractActivity() {
         if (!TextUtils.isEmpty(loadUrl))
         webView.loadUrl(loadUrl)
     }
+
+    override fun getLayoutId(): Int = R.layout.activity_webview
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KEYCODE_BACK && webView.canGoBack()){

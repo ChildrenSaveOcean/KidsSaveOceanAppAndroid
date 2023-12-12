@@ -12,21 +12,44 @@ import androidx.lifecycle.ViewModelProviders
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.WebViewActivity
-import com.kidssaveocean.fatechanger.common.AbstractActivity
+import com.kidssaveocean.fatechanger.databinding.ActivityPolicyControlCenterBinding
 import com.kidssaveocean.fatechanger.firebase.model.CampaignsModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPolicyLocationModel
 import com.kidssaveocean.fatechanger.firebase.repository.CampaignsRepo
 import com.kidssaveocean.fatechanger.firebase.repository.UsersRepo
 import com.kidssaveocean.fatechanger.firebase.viewmodel.PoliciesViewModel
-import kotlinx.android.synthetic.main.activity_policy_control_center.*
-import kotlinx.android.synthetic.main.policy_center_control_bottom.*
-import kotlinx.android.synthetic.main.policy_control_center_location.*
-import kotlinx.android.synthetic.main.policy_control_center_requirement.*
-import kotlinx.android.synthetic.main.view_toolbar.*
+import com.kidssaveocean.fatechanger.presentation.mvvm.activity.AbstractActivity
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_policy_control_center.btnLearnMore
+import kotlinx.android.synthetic.main.activity_policy_control_center.btnShare
+import kotlinx.android.synthetic.main.activity_policy_control_center.groupTop
+import kotlinx.android.synthetic.main.activity_policy_control_center.lytBottom
+import kotlinx.android.synthetic.main.activity_policy_control_center.lytChooseLocation
+import kotlinx.android.synthetic.main.activity_policy_control_center.lytRequirement
+import kotlinx.android.synthetic.main.activity_policy_control_center.progressBar
+import kotlinx.android.synthetic.main.activity_policy_control_center.tvLocation
+import kotlinx.android.synthetic.main.activity_policy_control_center.tvLocationContent
+import kotlinx.android.synthetic.main.activity_policy_control_center.tvPolicyChosenContent
+import kotlinx.android.synthetic.main.policy_center_control_bottom.btnCollectedUpdate
+import kotlinx.android.synthetic.main.policy_center_control_bottom.btnPlannedUpdate
+import kotlinx.android.synthetic.main.policy_center_control_bottom.etCollectedSign
+import kotlinx.android.synthetic.main.policy_center_control_bottom.etPlannedSign
+import kotlinx.android.synthetic.main.policy_center_control_bottom.tvLivedNotice
+import kotlinx.android.synthetic.main.policy_center_control_bottom.tvPlannedSign
+import kotlinx.android.synthetic.main.policy_control_center_location.btnChooseLocation
+import kotlinx.android.synthetic.main.policy_control_center_location.imgTriangle
+import kotlinx.android.synthetic.main.policy_control_center_location.lytSpinner
+import kotlinx.android.synthetic.main.policy_control_center_location.tvYourLocation
+import kotlinx.android.synthetic.main.policy_control_center_requirement.groupRequirement
+import kotlinx.android.synthetic.main.policy_control_center_requirement.tvNotLive
+import kotlinx.android.synthetic.main.policy_control_center_requirement.tvSignaturesRequired
+import kotlinx.android.synthetic.main.policy_control_center_requirement.tvTotalCollected
+import kotlinx.android.synthetic.main.view_toolbar.toolbar
 
-
-class PolicyControlCenterActivity : AbstractActivity() {
+@AndroidEntryPoint
+class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenterBinding, EmptyViewModel>() {
     var policyLocations: List<Pair<String, HijackPolicyLocationModel>>? = null
     private var campaigns: List<Pair<String, CampaignsModel>>? = null
     private var campaignModel: CampaignsModel? = null
@@ -43,7 +66,6 @@ class PolicyControlCenterActivity : AbstractActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_policy_control_center)
 
         toolbar.setOnClickListener {
             onBackPressed()
@@ -286,6 +308,11 @@ class PolicyControlCenterActivity : AbstractActivity() {
             }
         }
     }
+
+
+    override fun getLayoutId(): Int = R.layout.activity_policy_control_center
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     override fun onBackPressed() {
         if (campaignModel != null) {

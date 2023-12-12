@@ -2,18 +2,20 @@ package com.kidssaveocean.fatechanger.policy
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.webkit.WebView
 import androidx.appcompat.widget.Toolbar
 import com.kidssaveocean.fatechanger.R
-import com.kidssaveocean.fatechanger.common.AbstractActivity
+import com.kidssaveocean.fatechanger.databinding.ActivityWebviewBinding
+import com.kidssaveocean.fatechanger.presentation.mvvm.activity.AbstractActivity
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import com.kidssaveocean.fatechanger.views.ErrorWebViewClient
+import dagger.hilt.android.AndroidEntryPoint
 
-class PolicyVideoActivity: AbstractActivity() {
+@AndroidEntryPoint
+class PolicyVideoActivity: AbstractActivity<ActivityWebviewBinding, EmptyViewModel>() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_webview)
 
         findViewById<Toolbar>(R.id.toolbar).setOnClickListener{
             onBackPressed()
@@ -27,7 +29,7 @@ class PolicyVideoActivity: AbstractActivity() {
                 }
             }
         }
-        val webView = this.findViewById<WebView>(R.id.webView)
+        val webView = binding.webView
         val settings = webView.settings
         settings.javaScriptEnabled = true
         settings.useWideViewPort = true
@@ -36,6 +38,9 @@ class PolicyVideoActivity: AbstractActivity() {
         webView.loadUrl(loadUrl)
     }
 
+    override fun getLayoutId(): Int = R.layout.activity_webview
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     companion object {
         private const val URL = "https://pederhill.wixsite.com/kids-save-ocean/hijackpolicy"

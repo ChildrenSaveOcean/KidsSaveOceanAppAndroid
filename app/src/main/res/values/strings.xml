@@ -125,6 +125,7 @@
     <string name="your_collected_signatures">Your collected signatures: </string>
     <string name="your_planned_signatures">Your planned signatures: </string>
     <string name="policy_chosen">Policy chosen: </string>
+    <string name="empty"></string>
     <string name="policy_location_live">Your location is live: </string>
     <string name="policy_location_campaigns">Live campaigns:</string>
     <string name="policy_location_not_choose">I\'m sorry, but the government of your location doesn\'t offer the opportunity for citizen ballon initiatives. But you can influence them with letters in our letter-writing campaign.</string>

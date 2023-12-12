@@ -1,210 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-    <ScrollView
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="80dp">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imgTop"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/policy_vote_top"
-                app:layout_constraintDimensionRatio="997:283"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <include layout="@layout/view_toolbar" />
-
-            <TextView
-                android:id="@+id/tvPolicyVoteSubTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="24dp"
-                android:gravity="center_horizontal"
-                android:text="@string/policy_vote_subtitle"
-                android:textColor="#4a4a4a"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/imgTop" />
-
-            <ProgressBar
-                android:id="@+id/pbPolicies"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:layout_constraintTop_toTopOf="@id/wPickerPolicyDes"
-                app:layout_constraintBottom_toBottomOf="@id/wPickerPolicyDes"
-                app:layout_constraintStart_toStartOf="@id/wPickerPolicyDes"
-                app:layout_constraintEnd_toEndOf="@id/wPickerPolicyDes"/>
-
-            <com.aigestudio.wheelpicker.WheelPicker
-                android:id="@+id/wPickerPolicyDes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="24dp"
-                app:wheel_item_text_size="14sp"
-                app:wheel_selected_item_text_color="@color/black"
-                app:wheel_curtain="true"
-                app:wheel_curtain_color="#30FFAD74"
-                android:visibility="invisible"
-                app:wheel_atmospheric="true"
-                app:wheel_curved="false"
-                app:wheel_cyclic="true"
-                app:wheel_visible_item_count="2"
-                app:layout_constraintTop_toBottomOf="@id/tvPolicyVoteSubTitle" />
+            android:layout_height="match_parent"
+            android:layout_marginBottom="80dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/lytInputFromLeaders"
-                app:layout_constraintTop_toBottomOf="@id/wPickerPolicyDes"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
-                android:layout_marginEnd="35dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
-                android:background="@drawable/bg_input_from_leaders"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp">
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/policy_vote_top"
+                    app:layout_constraintDimensionRatio="997:283"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include layout="@layout/view_toolbar" />
 
                 <TextView
-                    android:id="@+id/tvTitleInput"
+                    android:id="@+id/tvPolicyVoteSubTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:gravity="center"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/policy_vote_subtitle"
                     android:textColor="#4a4a4a"
-                    android:text="@string/policy_vote_input"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/imgTop" />
+
+                <ProgressBar
+                    android:id="@+id/pbPolicies"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintBottom_toBottomOf="@id/wPickerPolicyDes"
+                    app:layout_constraintEnd_toEndOf="@id/wPickerPolicyDes"
+                    app:layout_constraintStart_toStartOf="@id/wPickerPolicyDes"
+                    app:layout_constraintTop_toTopOf="@id/wPickerPolicyDes" />
+
+                <com.aigestudio.wheelpicker.WheelPicker
+                    android:id="@+id/wPickerPolicyDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="30dp"
+                    android:visibility="invisible"
+                    app:layout_constraintTop_toBottomOf="@id/tvPolicyVoteSubTitle"
+                    app:wheel_atmospheric="true"
+                    app:wheel_curtain="true"
+                    app:wheel_curtain_color="#30FFAD74"
+                    app:wheel_curved="false"
+                    app:wheel_cyclic="true"
+                    app:wheel_item_text_size="14sp"
+                    app:wheel_selected_item_text_color="@color/black"
+                    app:wheel_visible_item_count="2" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lytInputFromLeaders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/bg_input_from_leaders"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/wPickerPolicyDes">
+
+                    <TextView
+                        android:id="@+id/tvTitleInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/policy_vote_input"
+                        android:textColor="#4a4a4a"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvImpactValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="9.2"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/tvDifficultyValue"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitleInput" />
+
+                    <TextView
+                        android:id="@+id/tvImpactDivDifficultyValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1.7"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintStart_toEndOf="@id/tvDifficultyValue"
+                        app:layout_constraintTop_toTopOf="@id/tvImpactValue" />
+
+                    <TextView
+                        android:id="@+id/tvDifficultyValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="5.3"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/tvImpactDivDifficultyValue"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintStart_toEndOf="@id/tvImpactValue"
+                        app:layout_constraintTop_toTopOf="@id/tvImpactValue" />
+
+                    <TextView
+                        android:id="@+id/tvImpact"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/policy_vote_impact"
+                        android:textSize="10sp"
+                        app:layout_constraintEnd_toStartOf="@id/tvDifficulty"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvImpactValue" />
+
+                    <TextView
+                        android:id="@+id/tvImpactDivDifficulty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/policy_vote_impact_div_difficulty"
+                        android:textSize="10sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintStart_toEndOf="@id/tvDifficulty"
+                        app:layout_constraintTop_toTopOf="@id/tvImpact" />
+
+                    <TextView
+                        android:id="@+id/tvDifficulty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/policy_vote_difficulty"
+                        android:textSize="10sp"
+                        app:layout_constraintEnd_toStartOf="@id/tvImpactDivDifficulty"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintStart_toEndOf="@id/tvImpact"
+                        app:layout_constraintTop_toTopOf="@id/tvImpact" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    app:layout_constraintTop_toBottomOf="@id/tvTitleInput"
-                    android:id="@+id/tvImpactValue"
-                    android:layout_width="0dp"
+                    android:id="@+id/tvSummaryTitle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tvDifficultyValue"
-                    app:layout_constraintHorizontal_weight="1"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginTop="25dp"
+                    android:text="@string/policy_vote_summary_title"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/lytInputFromLeaders" />
+
+                <TextView
+                    android:id="@+id/tvSummaryContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginStart="35dp"
                     android:layout_marginTop="5dp"
-                    android:gravity="center"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="9.2"/>
-
-                <TextView
-                    app:layout_constraintTop_toTopOf="@id/tvImpactValue"
-                    android:id="@+id/tvImpactDivDifficultyValue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/tvDifficultyValue"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    android:gravity="center"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="1.7"/>
-
-                <TextView
-                    app:layout_constraintTop_toTopOf="@id/tvImpactValue"
-                    android:id="@+id/tvDifficultyValue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/tvImpactValue"
-                    app:layout_constraintEnd_toStartOf="@id/tvImpactDivDifficultyValue"
-                    app:layout_constraintHorizontal_weight="1"
-                    android:gravity="center"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="5.3"/>
-
-                <TextView
-                    app:layout_constraintTop_toBottomOf="@id/tvImpactValue"
-                    android:id="@+id/tvImpact"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tvDifficulty"
-                    app:layout_constraintHorizontal_weight="1"
-                    android:gravity="center"
-                    android:textSize="10sp"
-                    android:text="@string/policy_vote_impact"/>
-
-                <TextView
-                    app:layout_constraintTop_toTopOf="@id/tvImpact"
-                    android:id="@+id/tvImpactDivDifficulty"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/tvDifficulty"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    android:gravity="center"
-                    android:textSize="10sp"
-                    android:text="@string/policy_vote_impact_div_difficulty"/>
-
-                <TextView
-                    app:layout_constraintTop_toTopOf="@id/tvImpact"
-                    android:id="@+id/tvDifficulty"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/tvImpact"
-                    app:layout_constraintEnd_toStartOf="@id/tvImpactDivDifficulty"
-                    app:layout_constraintHorizontal_weight="1"
-                    android:gravity="center"
-                    android:textSize="10sp"
-                    android:text="@string/policy_vote_difficulty"/>
+                    app:layout_constraintTop_toBottomOf="@id/tvSummaryTitle" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
-            <TextView
-                android:id="@+id/tvSummaryTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="35dp"
-                android:text="@string/policy_vote_summary_title"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/lytInputFromLeaders" />
+        <Button
+            android:id="@+id/btnVote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_signatures_update"
+            android:text="@string/vote"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
-            <TextView
-                android:id="@+id/tvSummaryContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="35dp"
-                android:textSize="14sp"
-                app:layout_constraintTop_toBottomOf="@id/tvSummaryTitle" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-
-    <Button
-        android:id="@+id/btnVote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="20dp"
-        android:text="@string/vote"
-        android:textSize="17sp"
-        android:textColor="@color/white"
-        android:background="@drawable/bg_signatures_update"/>
-
-</FrameLayout>
+    </FrameLayout>
+</layout>

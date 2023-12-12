@@ -1,124 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="6dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imgTop"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/policy_step_top"
-            app:layout_constraintDimensionRatio="997:283"/>
-
-        <include layout="@layout/view_toolbar"/>
-
-        <TextView
-            android:id="@+id/tvPolicyHomeTitle"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:letterSpacing="0.02"
-            android:lineSpacingExtra="4sp"
-            android:text="@string/policy_home_title"
-            android:textColor="#474c53"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/imgTop" />
+            android:paddingBottom="6dp">
 
-        <TextView
-            android:id="@+id/tvPolicyHomeSubtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="24dp"
-            android:gravity="center"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="3.3sp"
-            android:text="@string/policy_home_subtitle"
-            android:textColor="#4a81b6"
-            android:textSize="13sp"
-            app:layout_constraintTop_toBottomOf="@id/tvPolicyHomeTitle" />
+            <ImageView
+                android:id="@+id/imgTop"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/policy_step_top"
+                app:layout_constraintDimensionRatio="997:283"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imgHowToWork"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/how_to_work"
-            app:layout_constraintDimensionRatio="228.7:35"
-            app:layout_constraintTop_toBottomOf="@id/tvPolicyHomeSubtitle" />
+            <include layout="@layout/view_toolbar" />
 
-        <ImageView
-            android:id="@+id/imgFollowStep"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/follow_steps"
-            app:layout_constraintDimensionRatio="228.7:35"
-            app:layout_constraintTop_toBottomOf="@id/imgHowToWork" />
+            <TextView
+                android:id="@+id/tvPolicyHomeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:letterSpacing="0.02"
+                android:lineSpacingExtra="4sp"
+                android:text="@string/policy_home_title"
+                android:textColor="#474c53"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/imgTop" />
 
-        <ImageView
-            android:id="@+id/imgPolicyPush"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/policy_push"
-            app:layout_constraintDimensionRatio="228.7:35"
-            app:layout_constraintTop_toBottomOf="@id/imgFollowStep" />
+            <TextView
+                android:id="@+id/tvPolicyHomeSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="3.3sp"
+                android:text="@string/policy_home_subtitle"
+                android:textColor="#4a81b6"
+                android:textSize="13sp"
+                app:layout_constraintTop_toBottomOf="@id/tvPolicyHomeTitle" />
 
-        <ImageView
-            android:id="@+id/imgSignatures"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/signatures"
-            app:layout_constraintDimensionRatio="228.7:35"
-            app:layout_constraintTop_toBottomOf="@id/imgPolicyPush" />
+            <ImageView
+                android:id="@+id/imgHowToWork"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/how_to_work"
+                app:layout_constraintDimensionRatio="228.7:35"
+                app:layout_constraintTop_toBottomOf="@id/tvPolicyHomeSubtitle" />
 
-        <ImageView
-            android:id="@+id/imgImpact"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/impact"
-            app:layout_constraintDimensionRatio="228.7:35"
-            app:layout_constraintTop_toBottomOf="@id/imgSignatures" />
+            <ImageView
+                android:id="@+id/imgFollowStep"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/follow_steps"
+                app:layout_constraintDimensionRatio="228.7:35"
+                app:layout_constraintTop_toBottomOf="@id/imgHowToWork" />
 
-        <ImageView
-            android:id="@+id/imgTrackTheHijack"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/track_the_hijack"
-            app:layout_constraintDimensionRatio="228.8:63.2"
-            app:layout_constraintTop_toBottomOf="@id/imgImpact" />
+            <ImageView
+                android:id="@+id/imgPolicyPush"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/policy_push"
+                app:layout_constraintDimensionRatio="228.7:35"
+                app:layout_constraintTop_toBottomOf="@id/imgFollowStep" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <ImageView
+                android:id="@+id/imgSignatures"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/signatures"
+                app:layout_constraintDimensionRatio="228.7:35"
+                app:layout_constraintTop_toBottomOf="@id/imgPolicyPush" />
+
+            <ImageView
+                android:id="@+id/imgImpact"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/impact"
+                app:layout_constraintDimensionRatio="228.7:35"
+                app:layout_constraintTop_toBottomOf="@id/imgSignatures" />
+
+            <ImageView
+                android:id="@+id/imgTrackTheHijack"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/track_the_hijack"
+                app:layout_constraintDimensionRatio="228.8:63.2"
+                app:layout_constraintTop_toBottomOf="@id/imgImpact" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
