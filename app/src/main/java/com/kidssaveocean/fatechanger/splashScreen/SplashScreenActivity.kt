@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 
 class SplashScreenActivity : AppCompatActivity() {
 
+    //todo fix the damn splashscreen?
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // defined theme in manifest: "@style/SplashTheme"
