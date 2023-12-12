@@ -33,37 +33,32 @@ abstract class AppDatabase : RoomDatabase() {
             }
             return INSTANCE
         }
-
-        fun destroyInstance() {
-            INSTANCE = null
-        }
     }
 }
 
 class StepConverter {
     @TypeConverter
     fun toStep(key: String): DashboardSteps {
-        when(key) {
-            DashboardStep.STEP_1 -> return DashboardSteps.RESEARCH
-            DashboardStep.STEP_2 -> return DashboardSteps.WRITE_LETTER
-            DashboardStep.STEP_3 -> return DashboardSteps.SHARING
-            DashboardStep.STEP_4 -> return DashboardSteps.LETTER_CAMPAING
-            DashboardStep.STEP_5 -> return DashboardSteps.GOVERNMENT
-            DashboardStep.STEP_6 -> return DashboardSteps.PROTEST
-            else -> return DashboardSteps.RESEARCH
+        return when(key) {
+            DashboardSteps.RESEARCH.name -> DashboardSteps.RESEARCH
+            DashboardSteps.WRITE_LETTER.name -> DashboardSteps.WRITE_LETTER
+            DashboardSteps.SHARING.name -> DashboardSteps.SHARING
+            DashboardSteps.LETTER_CAMPAIGN.name -> DashboardSteps.LETTER_CAMPAIGN
+            DashboardSteps.GOVERNMENT.name-> DashboardSteps.GOVERNMENT
+            DashboardSteps.PROTEST.name -> DashboardSteps.PROTEST
+            else -> DashboardSteps.RESEARCH
         }
     }
 
     @TypeConverter
     fun toKey(step : DashboardSteps): String {
-        when(step) {
-            DashboardSteps.RESEARCH -> return DashboardStep.STEP_1
-            DashboardSteps.WRITE_LETTER -> return DashboardStep.STEP_2
-            DashboardSteps.SHARING -> return DashboardStep.STEP_3
-            DashboardSteps.LETTER_CAMPAING -> return DashboardStep.STEP_4
-            DashboardSteps.GOVERNMENT -> return DashboardStep.STEP_5
-            DashboardSteps.PROTEST -> return DashboardStep.STEP_6
-            else -> return ""
+        return when(step) {
+            DashboardSteps.RESEARCH -> DashboardSteps.RESEARCH.name
+            DashboardSteps.WRITE_LETTER -> DashboardSteps.WRITE_LETTER.name
+            DashboardSteps.SHARING -> DashboardSteps.SHARING.name
+            DashboardSteps.LETTER_CAMPAIGN -> DashboardSteps.LETTER_CAMPAIGN.name
+            DashboardSteps.GOVERNMENT -> DashboardSteps.GOVERNMENT.name
+            DashboardSteps.PROTEST -> DashboardSteps.PROTEST.name
         }
     }
 }

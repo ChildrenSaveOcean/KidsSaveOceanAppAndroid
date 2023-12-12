@@ -37,6 +37,7 @@
     <dimen name="layout_dashboard_button_background_height">90dp</dimen>
     <dimen name="layout_dashboard_button_background_margin_top">60dp</dimen>
     <dimen name="layout_dashboard_task_description_margin">10dp</dimen>
+    <dimen name="layout_dashboard_task_description_min_height">16dp</dimen>
     <dimen name="layout_dashboard_button_width">90dp</dimen>
     <dimen name="layout_dashboard_button_height">26dp</dimen>
     <dimen name="layout_dashboard_how_button_margin_top">20dp</dimen>

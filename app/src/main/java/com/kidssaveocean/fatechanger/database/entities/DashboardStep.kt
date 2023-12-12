@@ -18,16 +18,4 @@ data class DashboardStep (
         /* The column represents "I did it about plastic" button */
         @ColumnInfo(name = "second_completed_step")
         val second_completed_step: Boolean
-) {
-
-    companion object {
-        const val STEP_1 = "STEP_1"
-        const val STEP_2 = "STEP_2"
-        const val STEP_3 = "STEP_3"
-        const val STEP_4 = "STEP_4"
-        const val STEP_5 = "STEP_5"
-        const val STEP_6 = "STEP_6"
-        const val STEP_7 = "STEP_7"
-    }
-
-}
+)
