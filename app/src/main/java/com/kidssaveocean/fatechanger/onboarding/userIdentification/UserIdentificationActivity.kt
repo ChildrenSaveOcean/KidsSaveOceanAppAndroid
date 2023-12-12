@@ -3,14 +3,17 @@ package com.kidssaveocean.fatechanger.onboarding.userIdentification
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.common.UserRecoverableException
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.databinding.ActivityUserIdentificationBinding
 import com.kidssaveocean.fatechanger.firebase.repository.UsersRepo
+import com.kidssaveocean.fatechanger.presentation.mvvm.activity.AbstractActivity
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class UserIdentificationActivity : AppCompatActivity(), UserIdentificaitonRecyclerAdapter.ItemClick {
+@AndroidEntryPoint
+class UserIdentificationActivity : AbstractActivity<ActivityUserIdentificationBinding, EmptyViewModel>(), UserIdentificaitonRecyclerAdapter.ItemClick {
     private enum class Operator {
         STUDENT,
         TEACHER,
@@ -19,16 +22,19 @@ class UserIdentificationActivity : AppCompatActivity(), UserIdentificaitonRecycl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_identification)
 
-        val recyclerview: RecyclerView = findViewById(R.id.user_identification_recyclerview)
+        val recyclerview: RecyclerView = binding.userIdentificationRecyclerview
 
-        var adapter = UserIdentificaitonRecyclerAdapter(this)
+        val adapter = UserIdentificaitonRecyclerAdapter(this)
         adapter.setItemClickListener(this)
 
-        recyclerview?.adapter = adapter
-        recyclerview?.layoutManager = LinearLayoutManager(this)
+        recyclerview.adapter = adapter
+        recyclerview.layoutManager = LinearLayoutManager(this)
     }
+
+    override fun getLayoutId(): Int = R.layout.activity_user_identification
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     override fun OnItemClick(v: View, position: Int) {
         when(position){

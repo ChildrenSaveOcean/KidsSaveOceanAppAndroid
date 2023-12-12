@@ -46,7 +46,7 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
     protected abstract fun getViewModelClass(): Class<VM>
 
     //override this if you want to make status bar transparent for current activity
-    protected open fun shouldMakeStatusBarTransparent(): Boolean = true
+    protected open fun shouldMakeStatusBarTransparent(): Boolean = false
 
     //region public methods
 
