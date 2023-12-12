@@ -1,14 +1,13 @@
 package com.kidssaveocean.fatechanger
 
 import android.os.Bundle
-import com.kidssaveocean.fatechanger.common.BaseActivity
+import com.kidssaveocean.fatechanger.common.AbstractActivity
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
-import com.kidssaveocean.fatechanger.firebase.repository.HijackPoliciesRepo
 
 /**
  * this class explain how to get data from the Firebase.
  */
-class FirebaseGetDataInAct : BaseActivity() {
+class FirebaseGetDataInAct : AbstractActivity() {
     lateinit var list: List<Pair<String, HijackPoliciesModel>>
 
     //todo delete this class after firebase usage is fixed
