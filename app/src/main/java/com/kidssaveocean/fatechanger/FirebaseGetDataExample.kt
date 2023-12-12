@@ -11,6 +11,7 @@ import com.kidssaveocean.fatechanger.firebase.repository.HijackPoliciesRepo
 class FirebaseGetDataInAct : BaseActivity() {
     lateinit var list: List<Pair<String, HijackPoliciesModel>>
 
+    //todo delete this class after firebase usage is fixed
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /**
@@ -21,19 +22,19 @@ class FirebaseGetDataInAct : BaseActivity() {
          * This method will return a disposable, need to dispose it onDestroy(),
          * Here we can directly call disposableOnDestroy(), under the hood it will handle the disposables.
          */
-        disposableOnDestroy(HijackPoliciesRepo.getData().subscribe({ data ->
-            /**
-             * Success callback. Will return the data we request.
-             * The return type of the data depends on the business requirements.
-             */
-            list = data
-        }, {
-
-            /**
-             * it.message is the reason why the request fails.
-             * Here could handle the error message.
-             */
-            it.message
-        }))
+//        disposableOnDestroy(HijackPoliciesRepo.getData().subscribe({ data ->
+//            /**
+//             * Success callback. Will return the data we request.
+//             * The return type of the data depends on the business requirements.
+//             */
+//            list = data
+//        }, {
+//
+//            /**
+//             * it.message is the reason why the request fails.
+//             * Here could handle the error message.
+//             */
+//            it.message
+//        }))
     }
 }
