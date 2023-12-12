@@ -1,18 +1,17 @@
 package com.kidssaveocean.fatechanger
 
 import android.os.Bundle
-import com.kidssaveocean.fatechanger.common.AbstractActivity
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
 
 /**
  * this class explain how to get data from the Firebase.
  */
-class FirebaseGetDataInAct : AbstractActivity() {
+class FirebaseGetDataInAct  {
     lateinit var list: List<Pair<String, HijackPoliciesModel>>
 
     //todo delete this class after firebase usage is fixed
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    fun onCreate(savedInstanceState: Bundle?) {
+
         /**
          * For example, if we want to get the data for hijack policies from Firebase, use
          * {@link com.kidssaveocean.fatechanger.firebase.repository.HijackPoliciesRepo } class

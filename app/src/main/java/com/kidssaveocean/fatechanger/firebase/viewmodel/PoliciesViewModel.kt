@@ -10,9 +10,13 @@ import com.kidssaveocean.fatechanger.firebase.model.PolicyCombineData
 import com.kidssaveocean.fatechanger.firebase.repository.CampaignsRepo
 import com.kidssaveocean.fatechanger.firebase.repository.HijackPoliciesRepo
 import com.kidssaveocean.fatechanger.firebase.repository.HijackPolicyLocationRepo
+import com.kidssaveocean.fatechanger.presentation.AbstractViewModel
+import com.kidssaveocean.fatechanger.service.coroutines.ICoroutineContextProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-class PoliciesViewModel : BaseViewModel() {
+@HiltViewModel
+class PoliciesViewModel @Inject constructor(contextProvider: ICoroutineContextProvider): AbstractViewModel(contextProvider) {
     lateinit var liveDataPolicies: MutableLiveData<List<Pair<String, HijackPoliciesModel>>>
     @Inject
     lateinit var hijackPoliciesRepo: HijackPoliciesRepo

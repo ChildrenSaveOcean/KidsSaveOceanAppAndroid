@@ -5,23 +5,24 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
-
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerSupportFragment
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
-import com.kidssaveocean.fatechanger.common.AbstractActivity
+import com.kidssaveocean.fatechanger.databinding.ActivityIntroductionVideoBinding
+import com.kidssaveocean.fatechanger.presentation.mvvm.activity.AbstractActivity
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_introduction_video.youtube_text_view
 
-import kotlinx.android.synthetic.main.activity_introduction_video.*
-
-class IntroductionVideoActivity : AbstractActivity() {
+@AndroidEntryPoint
+class IntroductionVideoActivity : AbstractActivity<ActivityIntroductionVideoBinding, EmptyViewModel>() {
 
     private lateinit var flNoInternet: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_introduction_video)
 
         val title = intent.getStringExtra(INTRO_TYPE)
         youtube_text_view.text = title
@@ -29,6 +30,7 @@ class IntroductionVideoActivity : AbstractActivity() {
         updateFlNoInternet()
 
 
+        //todo fix this everywhere
         val fragment = supportFragmentManager.findFragmentById(R.id.youtube_fragment) as YouTubePlayerSupportFragment?
         fragment?.initialize(DEVELOPER_KEY, object : YouTubePlayer.OnInitializedListener {
             override fun onInitializationSuccess(provider: YouTubePlayer.Provider, youTubePlayer: YouTubePlayer, wasRestored: Boolean) {
@@ -45,13 +47,10 @@ class IntroductionVideoActivity : AbstractActivity() {
     }
 
     private fun updateFlNoInternet() {
-        flNoInternet.visibility = if (isNetworkConnected()) View.GONE else View.VISIBLE
+        //todo fix
+//        flNoInternet.visibility = if (isNetworkConnected()) View.GONE else View.VISIBLE
     }
 
-    override fun networkChangeConnect() {
-        super.networkChangeConnect()
-        updateFlNoInternet()
-    }
 
     fun clickStartButton(view: View) {
         val completedOnboardingTask = CompletedOnboardingTask()
@@ -61,6 +60,11 @@ class IntroductionVideoActivity : AbstractActivity() {
         startActivity(intent)
 
     }
+
+
+    override fun getLayoutId(): Int = R.layout.activity_introduction_video
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     companion object {
 

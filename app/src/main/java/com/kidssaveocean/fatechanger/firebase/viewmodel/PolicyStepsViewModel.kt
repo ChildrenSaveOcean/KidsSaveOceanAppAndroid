@@ -3,13 +3,16 @@ package com.kidssaveocean.fatechanger.firebase.viewmodel
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.dagger.component.DaggerHijackPolicyComponent
 import com.kidssaveocean.fatechanger.firebase.repository.PolicyStepsRepo
+import com.kidssaveocean.fatechanger.presentation.AbstractViewModel
+import com.kidssaveocean.fatechanger.service.coroutines.ICoroutineContextProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-class PolicyStepsViewModel : ViewModel(){
+@HiltViewModel
+class PolicyStepsViewModel @Inject constructor(contextProvider: ICoroutineContextProvider) : AbstractViewModel(contextProvider){
     lateinit var policySteps: MutableLiveData<List<String>>
     @Inject lateinit var policyStepsRepo: PolicyStepsRepo
 
