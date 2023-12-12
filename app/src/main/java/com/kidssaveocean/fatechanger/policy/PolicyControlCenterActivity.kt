@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.WebViewActivity
-import com.kidssaveocean.fatechanger.common.BaseActivity
+import com.kidssaveocean.fatechanger.common.AbstractActivity
 import com.kidssaveocean.fatechanger.firebase.model.CampaignsModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPolicyLocationModel
@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.policy_control_center_requirement.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 
 
-class PolicyControlCenterActivity : BaseActivity() {
+class PolicyControlCenterActivity : AbstractActivity() {
     var policyLocations: List<Pair<String, HijackPolicyLocationModel>>? = null
     private var campaigns: List<Pair<String, CampaignsModel>>? = null
     private var campaignModel: CampaignsModel? = null

@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
-import com.kidssaveocean.fatechanger.common.BaseActivity
+import com.kidssaveocean.fatechanger.common.AbstractActivity
 import com.kidssaveocean.fatechanger.dagger.component.DaggerHijackPolicyComponent
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
 import com.kidssaveocean.fatechanger.firebase.repository.UsersRepo
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_policy_vote.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 import java.text.DecimalFormat
 
-class PolicyVoteActivity : BaseActivity() {
+class PolicyVoteActivity : AbstractActivity() {
     private var votes: Int = 0
     private lateinit var policyName: String
     private var policyValue: HijackPoliciesModel? = null

@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.WebViewActivity
-import com.kidssaveocean.fatechanger.common.BaseActivity
+import com.kidssaveocean.fatechanger.common.AbstractActivity
 import com.kidssaveocean.fatechanger.firebase.model.CampaignsModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPolicyLocationModel
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.track_campaign_bottom.*
 import kotlinx.android.synthetic.main.track_campaign_live.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 
-class TrackCampaignActivity : BaseActivity(), View.OnClickListener {
+class TrackCampaignActivity : AbstractActivity(), View.OnClickListener {
 
     private var campaignModel: CampaignsModel? = null
     private var policyValue: HijackPoliciesModel? = null

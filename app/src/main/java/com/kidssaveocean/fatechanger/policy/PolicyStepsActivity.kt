@@ -5,13 +5,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kidssaveocean.fatechanger.R
-import com.kidssaveocean.fatechanger.common.BaseActivity
+import com.kidssaveocean.fatechanger.common.AbstractActivity
 import com.kidssaveocean.fatechanger.dagger.component.DaggerHijackPolicyComponent
 import com.kidssaveocean.fatechanger.firebase.viewmodel.PolicyStepsViewModel
 import kotlinx.android.synthetic.main.activity_policy_step.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 
-class PolicyStepsActivity : BaseActivity() {
+class PolicyStepsActivity : AbstractActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

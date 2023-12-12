@@ -2,7 +2,6 @@ package com.kidssaveocean.fatechanger.onboarding.userIdentification
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -12,11 +11,11 @@ import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerSupportFragment
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
-import com.kidssaveocean.fatechanger.common.BaseActivity
+import com.kidssaveocean.fatechanger.common.AbstractActivity
 
 import kotlinx.android.synthetic.main.activity_introduction_video.*
 
-class IntroductionVideoActivity : BaseActivity() {
+class IntroductionVideoActivity : AbstractActivity() {
 
     private lateinit var flNoInternet: FrameLayout
 

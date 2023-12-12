@@ -6,10 +6,10 @@ import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_BACK
 import androidx.appcompat.widget.Toolbar
-import com.kidssaveocean.fatechanger.common.BaseActivity
+import com.kidssaveocean.fatechanger.common.AbstractActivity
 import kotlinx.android.synthetic.main.activity_webview.*
 
-class WebViewActivity: BaseActivity() {
+class WebViewActivity: AbstractActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {

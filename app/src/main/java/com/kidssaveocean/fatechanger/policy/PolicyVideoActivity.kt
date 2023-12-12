@@ -5,10 +5,10 @@ import android.text.TextUtils
 import android.webkit.WebView
 import androidx.appcompat.widget.Toolbar
 import com.kidssaveocean.fatechanger.R
-import com.kidssaveocean.fatechanger.common.BaseActivity
+import com.kidssaveocean.fatechanger.common.AbstractActivity
 import com.kidssaveocean.fatechanger.views.ErrorWebViewClient
 
-class PolicyVideoActivity: BaseActivity() {
+class PolicyVideoActivity: AbstractActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
