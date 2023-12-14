@@ -13,12 +13,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_webview.*
 
 @AndroidEntryPoint
-class WebViewActivity: AbstractActivity<ActivityWebviewBinding, EmptyViewModel>() {
+class WebViewActivity : AbstractActivity<ActivityWebviewBinding, EmptyViewModel>() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        findViewById<Toolbar>(R.id.toolbar).setOnClickListener{
+        findViewById<Toolbar>(R.id.toolbar).setOnClickListener {
             onBackPressed()
         }
         var loadUrl = ""
@@ -34,7 +34,7 @@ class WebViewActivity: AbstractActivity<ActivityWebviewBinding, EmptyViewModel>(
         val settings = webView.settings
         settings.javaScriptEnabled = true
         if (!TextUtils.isEmpty(loadUrl))
-        webView.loadUrl(loadUrl)
+            webView.loadUrl(loadUrl)
     }
 
     override fun getLayoutId(): Int = R.layout.activity_webview
@@ -42,7 +42,7 @@ class WebViewActivity: AbstractActivity<ActivityWebviewBinding, EmptyViewModel>(
     override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KEYCODE_BACK && webView.canGoBack()){
+        if (keyCode == KEYCODE_BACK && webView.canGoBack()) {
             webView.goBack()
             return true
         }
@@ -50,7 +50,7 @@ class WebViewActivity: AbstractActivity<ActivityWebviewBinding, EmptyViewModel>(
     }
 
     override fun onDestroy() {
-        if (webView != null){
+        if (webView != null) {
             webView.clearHistory()
             webView.destroy()
         }
