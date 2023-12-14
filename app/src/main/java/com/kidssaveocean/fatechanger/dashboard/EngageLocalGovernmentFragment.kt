@@ -2,16 +2,15 @@ package com.kidssaveocean.fatechanger.dashboard
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.resources.ResourcesFragment
-import kotlinx.android.synthetic.main.fragment_start_activist_campaign.*
+import kotlinx.android.synthetic.main.fragment_start_activist_campaign.tools_button
 
 /**
  * A simple [Fragment] subclass.
@@ -29,7 +28,7 @@ class EngageLocalGovernmentFragment : Fragment() {
 
         tools_button?.setOnClickListener {
             (activity as? BottomNavigationActivity)?.supportFragmentManager?.let { fragmentManager ->
-                ResourcesFragment("https://www.kidssaveocean.com/studentresources").addToNavigationStack(
+                ResourcesFragment("https://pederhill.wixsite.com/kids-save-ocean/studentresources").addToNavigationStack(
                     fragmentManager,
                     R.id.fragment_container
                 )

@@ -1,17 +1,16 @@
 package com.kidssaveocean.fatechanger.dashboard
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-
+import androidx.fragment.app.Fragment
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.resources.ResourcesFragment
-import kotlinx.android.synthetic.main.fragment_nobodys_listening.*
+import kotlinx.android.synthetic.main.fragment_nobodys_listening.activist_toolkit_button
+import kotlinx.android.synthetic.main.fragment_nobodys_listening.golden_rules_button
 
 class NobodysListeningFragment : Fragment() {
 
@@ -32,7 +31,7 @@ class NobodysListeningFragment : Fragment() {
         }
 
         activist_toolkit_button?.setOnClickListener {
-            ResourcesFragment("https://www.kidssaveocean.com/studentresources").addToNavigationStack(
+            ResourcesFragment("https://pederhill.wixsite.com/kids-save-ocean/studentresources").addToNavigationStack(
                     bottomActivity.supportFragmentManager,
                     R.id.fragment_container)
         }
