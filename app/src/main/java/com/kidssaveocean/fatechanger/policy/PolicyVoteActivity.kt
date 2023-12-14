@@ -7,19 +7,26 @@ import android.text.TextUtils
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
-import com.kidssaveocean.fatechanger.common.BaseActivity
-import com.kidssaveocean.fatechanger.dagger.component.DaggerHijackPolicyComponent
+import com.kidssaveocean.fatechanger.databinding.ActivityPolicyVoteBinding
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
 import com.kidssaveocean.fatechanger.firebase.repository.UsersRepo
 import com.kidssaveocean.fatechanger.firebase.viewmodel.PoliciesViewModel
-import kotlinx.android.synthetic.main.activity_policy_vote.*
-import kotlinx.android.synthetic.main.view_toolbar.*
+import com.kidssaveocean.fatechanger.presentation.mvvm.activity.AbstractActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_policy_vote.btnVote
+import kotlinx.android.synthetic.main.activity_policy_vote.pbPolicies
+import kotlinx.android.synthetic.main.activity_policy_vote.tvDifficultyValue
+import kotlinx.android.synthetic.main.activity_policy_vote.tvImpactDivDifficultyValue
+import kotlinx.android.synthetic.main.activity_policy_vote.tvImpactValue
+import kotlinx.android.synthetic.main.activity_policy_vote.tvSummaryContent
+import kotlinx.android.synthetic.main.activity_policy_vote.wPickerPolicyDes
+import kotlinx.android.synthetic.main.view_toolbar.toolbar
 import java.text.DecimalFormat
 
-class PolicyVoteActivity : BaseActivity() {
+@AndroidEntryPoint
+class PolicyVoteActivity : AbstractActivity<ActivityPolicyVoteBinding, PoliciesViewModel>() {
     private var votes: Int = 0
     private lateinit var policyName: String
     private var policyValue: HijackPoliciesModel? = null
@@ -29,17 +36,14 @@ class PolicyVoteActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_policy_vote)
 
         toolbar.setOnClickListener{
             onBackPressed()
         }
 
-        DaggerHijackPolicyComponent.builder().build().inject(this)
 
-        val policesViewModel = ViewModelProviders.of(this).get(PoliciesViewModel::class.java)
         val temproaryData = initTemporaryData()
-        policesViewModel.getLiveDataPolicies().observe(this, Observer {
+        viewModel.getLiveDataPolicies().observe(this, Observer {
             if (!it.isNullOrEmpty()){
                 policies.addAll(it)
 
@@ -79,14 +83,13 @@ class PolicyVoteActivity : BaseActivity() {
         })
 
 
-
-        btnVote?.apply {
+        binding.btnVote.apply {
             isEnabled = false
             setOnClickListener {
                 AlertDialog.Builder(this@PolicyVoteActivity)
                         .setMessage(resources.getString(R.string.policy_vote_dialog_message))
                         .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
-                            policesViewModel.policyVote(policyName,"votes", votes + 1)
+                            viewModel.policyVote(policyName,"votes", votes + 1)
                             UsersRepo.userModel?.second?.apply {
                                 hijack_policy_selected = policyName
                                 UsersRepo.updateOrCreateUser(this)
@@ -100,6 +103,10 @@ class PolicyVoteActivity : BaseActivity() {
             }
         }
     }
+
+    override fun getLayoutId(): Int = R.layout.activity_policy_vote
+
+    override fun getViewModelClass(): Class<PoliciesViewModel> = PoliciesViewModel::class.java
 
     override fun onBackPressed() {
         if (policyValue != null) {

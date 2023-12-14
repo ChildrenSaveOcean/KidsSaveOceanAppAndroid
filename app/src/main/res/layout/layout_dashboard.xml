@@ -156,7 +156,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/dashboard_how_button"
             app:layout_constraintTop_toTopOf="@id/dashboard_how_button" />
-        <!--todo in order to make the marker rotate and scale with the meter scale
-                you need to run two animations, in order to do that, you need to use animation set.-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

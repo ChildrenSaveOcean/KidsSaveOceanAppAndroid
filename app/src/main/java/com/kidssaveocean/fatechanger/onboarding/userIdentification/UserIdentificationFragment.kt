@@ -9,7 +9,6 @@ import android.view.ViewGroup
 
 import com.kidssaveocean.fatechanger.R
 
-import butterknife.ButterKnife
 
 
 class UserIdentificationFragment : Fragment() {

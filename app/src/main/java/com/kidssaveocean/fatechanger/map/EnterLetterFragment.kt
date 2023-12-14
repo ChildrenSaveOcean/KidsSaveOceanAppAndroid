@@ -1,47 +1,52 @@
 package com.kidssaveocean.fatechanger.map
 
-
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.NumberPicker
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.transition.Visibility
+import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-
+import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.dashboard.DashboardSteps
-import com.kidssaveocean.fatechanger.dashboard.MainDashboardFragment
+import com.kidssaveocean.fatechanger.databinding.FragmentEnterLetterBinding
 import com.kidssaveocean.fatechanger.extensions.getCountryByLocation
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
-import kotlinx.android.synthetic.main.fragment_enter_letter.*
+import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_enter_letter.country_picker
+import kotlinx.android.synthetic.main.fragment_enter_letter.progressBar_cyclic
+import kotlinx.android.synthetic.main.fragment_enter_letter.submit_button
 
 /**
  * A simple [Fragment] subclass.
  */
-class EnterLetterFragment : Fragment() {
+@AndroidEntryPoint
+class EnterLetterFragment : AbstractFragment<FragmentEnterLetterBinding, EmptyViewModel>() {
 
-    private val PERMISSION_ACCESS_FINE_LOCATION : Int = 111
-    private var countries : List<CountryModel> = listOf()
-    private var currentCountry : CountryModel? = null
+    private val PERMISSION_ACCESS_FINE_LOCATION: Int = 111
+    private var countries: List<CountryModel> = listOf()
+    private var currentCountry: CountryModel? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onPrepareLayout(layoutView: View?) {
+        super.onPrepareLayout(layoutView)
         val bottomActivity = activity as BottomNavigationActivity
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(bottomActivity)
-        return inflater.inflate(R.layout.fragment_enter_letter, container, false)
     }
+
+    override fun getViewModelResId(): Int = BR.emptyVM
+
+    override fun getLayoutResId(): Int = R.layout.fragment_enter_letter
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,7 +54,6 @@ class EnterLetterFragment : Fragment() {
         val bottomActivity = activity as BottomNavigationActivity
 
         countries = FirebaseService.getInstance().countries
-
         submit_button.setOnClickListener {
             val dialog = AlertDialog.Builder(bottomActivity)
             dialog
@@ -59,13 +63,13 @@ class EnterLetterFragment : Fragment() {
                         currentCountry?.let { FirebaseService.getInstance().increaseWrittenLettersNumber(it) }
                     }
                     AlertDialog.Builder(bottomActivity)
-                            .setTitle(R.string.youre_letter_has_been_recorded)
-                            .setMessage(R.string.enter_letter_congratulations_title)
-                            .setPositiveButton(R.string.fatechangers_click_here) { _, _ ->
-                                bottomActivity.openMainDashboard(DashboardSteps.WRITE_LETTER)
-                            }
-                            .create()
-                            .show()
+                        .setTitle(R.string.youre_letter_has_been_recorded)
+                        .setMessage(R.string.enter_letter_congratulations_title)
+                        .setPositiveButton(R.string.fatechangers_click_here) { _, _ ->
+                            bottomActivity.openMainDashboard(DashboardSteps.WRITE_LETTER)
+                        }
+                        .create()
+                        .show()
 
                 }
                 .setNegativeButton(R.string.enter_letter_negative_answer) { dialog, _ -> dialog.cancel() }
@@ -76,29 +80,28 @@ class EnterLetterFragment : Fragment() {
         when (countries.isNotEmpty()) {
             true -> fillPicker(countries)
             false -> {
-                FirebaseService.getInstance().countriesObservable
-                        .doOnError {
-                            print(it.message)
-                        }
-                        .subscribe {
-                            if (it.isNotEmpty()) {
-                                progressBar_cyclic.visibility = View.GONE
-                                country_picker.visibility = View.VISIBLE
-                                countries = it
-                                fillPicker(it)
+                FirebaseService.getInstance().countriesObservable.observe(this.viewLifecycleOwner) {
+                    if (it.isNotEmpty()) {
+                        progressBar_cyclic.visibility = View.GONE
+                        country_picker.visibility = View.VISIBLE
+                        countries = it
+                        fillPicker(it)
 
-                                if (ContextCompat.checkSelfPermission(bottomActivity, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-                                    ActivityCompat.requestPermissions(
-                                            bottomActivity,
-                                            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                                            PERMISSION_ACCESS_FINE_LOCATION
-                                    )
-                                }
-                                else {
-                                    obtainLocation()
-                                }
-                            }
+                        if (ContextCompat.checkSelfPermission(
+                                bottomActivity,
+                                android.Manifest.permission.ACCESS_FINE_LOCATION
+                            ) != PackageManager.PERMISSION_GRANTED
+                        ) {
+                            ActivityCompat.requestPermissions(
+                                bottomActivity,
+                                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                                PERMISSION_ACCESS_FINE_LOCATION
+                            )
+                        } else {
+                            obtainLocation()
                         }
+                    }
+                }
             }
         }
     }
@@ -127,15 +130,16 @@ class EnterLetterFragment : Fragment() {
     }
 
     private fun obtainLocation() {
+        //todo fix
         fusedLocationClient.lastLocation
-                .addOnSuccessListener { location: Location? ->
-                    location?.let { it ->
-                        val country = it.getCountryByLocation(countries)
-                        country?.let { c ->
-                            val index = countries.indexOf(c)
-                            country_picker?.value = index
-                        }
+            .addOnSuccessListener { location: Location? ->
+                location?.let { it ->
+                    val country = it.getCountryByLocation(countries)
+                    country?.let { c ->
+                        val index = countries.indexOf(c)
+                        country_picker?.value = index
                     }
                 }
+            }
     }
 }

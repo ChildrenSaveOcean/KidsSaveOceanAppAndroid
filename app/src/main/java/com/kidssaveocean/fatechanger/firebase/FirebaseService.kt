@@ -1,19 +1,23 @@
 package com.kidssaveocean.fatechanger.firebase
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseException
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
-import com.kidssaveocean.fatechanger.highScores.Country
-import io.reactivex.subjects.PublishSubject
-import java.util.*
+import java.util.Observable
 
+//todo this class needs a serious rework
 class FirebaseService : Observable ()  {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val _countries : MutableCollection<CountryModel> = mutableListOf()
 
-    val countriesObservable = PublishSubject.create<List<CountryModel>>()
+    val countriesObservable: MutableLiveData<List<CountryModel>> = MutableLiveData()
 
     val countries : List<CountryModel>
         get() = _countries.toList()
@@ -52,7 +56,7 @@ class FirebaseService : Observable ()  {
                             }
                         }
                         notifyObservers(countries)
-                        countriesObservable.onNext(countries)
+                        countriesObservable.value = countries
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {

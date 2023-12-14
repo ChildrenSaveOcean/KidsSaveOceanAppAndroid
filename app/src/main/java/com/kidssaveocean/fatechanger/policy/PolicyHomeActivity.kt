@@ -6,13 +6,23 @@ import android.os.Bundle
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.WebViewActivity
-import com.kidssaveocean.fatechanger.common.BaseActivity
+import com.kidssaveocean.fatechanger.databinding.ActivityPolicyHomeBinding
 import com.kidssaveocean.fatechanger.firebase.model.CampaignsModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
-import kotlinx.android.synthetic.main.activity_policy_home.*
-import kotlinx.android.synthetic.main.view_toolbar.*
+import com.kidssaveocean.fatechanger.presentation.mvvm.activity.AbstractActivity
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_policy_home.imgFollowStep
+import kotlinx.android.synthetic.main.activity_policy_home.imgHowToWork
+import kotlinx.android.synthetic.main.activity_policy_home.imgImpact
+import kotlinx.android.synthetic.main.activity_policy_home.imgPolicyPush
+import kotlinx.android.synthetic.main.activity_policy_home.imgSignatures
+import kotlinx.android.synthetic.main.activity_policy_home.imgTrackTheHijack
+import kotlinx.android.synthetic.main.view_toolbar.toolbar
 
-class PolicyHomeActivity : BaseActivity() {
+@AndroidEntryPoint
+class PolicyHomeActivity : AbstractActivity<ActivityPolicyHomeBinding, EmptyViewModel>() {
+
     private var policyValue: HijackPoliciesModel? = null
     private lateinit var policyName: String
     private var campaign: CampaignsModel? = null
@@ -20,8 +30,7 @@ class PolicyHomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_policy_home)
-        supportActionBar?.run{
+        supportActionBar?.run {
             setHomeButtonEnabled(true)
             setDisplayShowHomeEnabled(true)
             setDisplayShowTitleEnabled(false)
@@ -32,21 +41,21 @@ class PolicyHomeActivity : BaseActivity() {
             onBackPressed()
         }
 
-        imgHowToWork.setOnClickListener{
+        imgHowToWork.setOnClickListener {
             val intent = Intent(this, WebViewActivity::class.java)
             intent.putExtra(Constants.INTENT_URL, Constants.URL_POLICY_VIDEO)
             startActivity(intent)
         }
 
-        imgFollowStep.setOnClickListener{
+        imgFollowStep.setOnClickListener {
             startActivity(Intent(this, PolicyStepsActivity::class.java))
         }
 
-        imgPolicyPush.setOnClickListener{
+        imgPolicyPush.setOnClickListener {
             startActivityForResult(Intent(this, PolicyVoteActivity::class.java), Constants.REQUEST_POLICY_VOTE)
         }
 
-        imgImpact.setOnClickListener{
+        imgImpact.setOnClickListener {
             startActivity(Intent(this, PolicyImpactActivity::class.java))
         }
 
@@ -59,9 +68,9 @@ class PolicyHomeActivity : BaseActivity() {
             startActivityForResult(intent, Constants.REQUEST_POLICY_CONTROL_CENTER)
         }
 
-        imgTrackTheHijack.setOnClickListener{
+        imgTrackTheHijack.setOnClickListener {
             val intent = Intent(this, TrackCampaignActivity::class.java)
-            if (campaign != null){
+            if (campaign != null) {
                 intent.putExtra(Constants.INTENT_CAMPAIGN_NAME, campaignName)
                 intent.putExtra(Constants.INTENT_CAMPAIGN_VALUE, campaign)
             }
@@ -69,24 +78,28 @@ class PolicyHomeActivity : BaseActivity() {
         }
     }
 
+    override fun getLayoutId(): Int = R.layout.activity_policy_home
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK){
-            when(requestCode){
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
                 Constants.REQUEST_POLICY_VOTE -> {
                     data?.apply {
                         policyValue = getParcelableExtra(Constants.INTENT_POLICY_VALUE)
-                        policyName = getStringExtra(Constants.INTENT_POLICY_NAME)?: ""
+                        policyName = getStringExtra(Constants.INTENT_POLICY_NAME) ?: ""
                     }
                 }
+
                 Constants.REQUEST_POLICY_CONTROL_CENTER -> {
                     data?.apply {
                         campaign = getParcelableExtra(Constants.INTENT_CAMPAIGN_VALUE)
-                        campaignName = getStringExtra(Constants.INTENT_CAMPAIGN_NAME)?: ""
+                        campaignName = getStringExtra(Constants.INTENT_CAMPAIGN_NAME) ?: ""
                     }
                 }
             }
-
         }
     }
 }

@@ -6,40 +6,48 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.WebViewActivity
-import com.kidssaveocean.fatechanger.common.BaseActivity
+import com.kidssaveocean.fatechanger.databinding.ActivityTrackCampaignBinding
 import com.kidssaveocean.fatechanger.firebase.model.CampaignsModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPoliciesModel
 import com.kidssaveocean.fatechanger.firebase.model.HijackPolicyLocationModel
 import com.kidssaveocean.fatechanger.firebase.repository.UsersRepo
 import com.kidssaveocean.fatechanger.firebase.viewmodel.PoliciesViewModel
-import kotlinx.android.synthetic.main.activity_track_campaign.*
-import kotlinx.android.synthetic.main.track_campaign_bottom.*
-import kotlinx.android.synthetic.main.track_campaign_live.*
-import kotlinx.android.synthetic.main.view_toolbar.*
+import com.kidssaveocean.fatechanger.presentation.mvvm.activity.AbstractActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_track_campaign.btnSpread
+import kotlinx.android.synthetic.main.activity_track_campaign.groupLive
+import kotlinx.android.synthetic.main.activity_track_campaign.groupNotLive
+import kotlinx.android.synthetic.main.activity_track_campaign.lytMain
+import kotlinx.android.synthetic.main.track_campaign_bottom.btnUpdate
+import kotlinx.android.synthetic.main.track_campaign_bottom.tvYourCollectedNum
+import kotlinx.android.synthetic.main.track_campaign_bottom.tvYourPlannedNum
+import kotlinx.android.synthetic.main.track_campaign_live.btnLiveSpread
+import kotlinx.android.synthetic.main.track_campaign_live.btnMoreInfo
+import kotlinx.android.synthetic.main.track_campaign_live.tvCampaignLoc
+import kotlinx.android.synthetic.main.track_campaign_live.tvSignaturesRequired
+import kotlinx.android.synthetic.main.track_campaign_live.tvTotalCollected
+import kotlinx.android.synthetic.main.track_campaign_live.tvTrackChosenContent
+import kotlinx.android.synthetic.main.view_toolbar.toolbar
 
-class TrackCampaignActivity : BaseActivity(), View.OnClickListener {
+@AndroidEntryPoint
+class TrackCampaignActivity : AbstractActivity<ActivityTrackCampaignBinding, PoliciesViewModel>(), View.OnClickListener {
 
     private var campaignModel: CampaignsModel? = null
     private var policyValue: HijackPoliciesModel? = null
     private lateinit var policyName: String
     private lateinit var campaignName: String
-    private lateinit var policyViewModel: PoliciesViewModel
     private var isLive = false
 
     private var policyLocation: Pair<String, HijackPolicyLocationModel>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_track_campaign)
         toolbar.setOnClickListener {
             onBackPressed()
         }
-
-        policyViewModel = ViewModelProviders.of(this).get(PoliciesViewModel::class.java)
 
         initData()
 
@@ -57,6 +65,10 @@ class TrackCampaignActivity : BaseActivity(), View.OnClickListener {
             startActivityForResult(Intent(this, PolicyControlCenterActivity::class.java), Constants.REQUEST_POLICY_CONTROL_CENTER)
         }
     }
+
+    override fun getLayoutId(): Int = R.layout.activity_track_campaign
+
+    override fun getViewModelClass(): Class<PoliciesViewModel> = PoliciesViewModel::class.java
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -92,7 +104,7 @@ class TrackCampaignActivity : BaseActivity(), View.OnClickListener {
         } else {
 //            campaignName = intent.getStringExtra(Constants.intentCampaignName)
 //            isLive = campaign!!.live
-            policyViewModel.getPolicyCombineData().observe(this, Observer {
+            viewModel.getPolicyCombineData().observe(this, Observer {
                 it.campaigns.map { campaign ->
                     if (campaign.first == campaignName)
                         campaignModel = campaign.second

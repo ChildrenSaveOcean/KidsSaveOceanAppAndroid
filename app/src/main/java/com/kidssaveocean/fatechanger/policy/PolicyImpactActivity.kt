@@ -2,14 +2,17 @@ package com.kidssaveocean.fatechanger.policy
 
 import android.os.Bundle
 import com.kidssaveocean.fatechanger.R
-import com.kidssaveocean.fatechanger.common.BaseActivity
-import kotlinx.android.synthetic.main.view_toolbar.*
+import com.kidssaveocean.fatechanger.databinding.ActivityPolicyImpactBinding
+import com.kidssaveocean.fatechanger.presentation.mvvm.activity.AbstractActivity
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.view_toolbar.toolbar
 
-class PolicyImpactActivity: BaseActivity(){
+@AndroidEntryPoint
+class PolicyImpactActivity : AbstractActivity<ActivityPolicyImpactBinding, EmptyViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_policy_impact)
         setSupportActionBar(toolbar)
         supportActionBar?.run {
             setHomeButtonEnabled(true)
@@ -22,4 +25,8 @@ class PolicyImpactActivity: BaseActivity(){
             onBackPressed()
         }
     }
+
+    override fun getLayoutId(): Int = R.layout.activity_policy_impact
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 }
