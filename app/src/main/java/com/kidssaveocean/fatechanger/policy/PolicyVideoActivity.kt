@@ -2,13 +2,11 @@ package com.kidssaveocean.fatechanger.policy
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import android.webkit.WebView
 import androidx.appcompat.widget.Toolbar
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.common.BaseActivity
 import com.kidssaveocean.fatechanger.views.ErrorWebViewClient
-import kotlinx.android.synthetic.main.view_toolbar.*
 
 class PolicyVideoActivity: BaseActivity() {
 
@@ -40,6 +38,6 @@ class PolicyVideoActivity: BaseActivity() {
 
 
     companion object {
-        private const val URL = "https://www.kidssaveocean.com/hijackpolicy"
+        private const val URL = "https://pederhill.wixsite.com/kids-save-ocean/hijackpolicy"
     }
 }

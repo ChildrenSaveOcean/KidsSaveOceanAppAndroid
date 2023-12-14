@@ -29,7 +29,7 @@ class WebViewFragment : Fragment() {
     }
 
     companion object {
-        private const val url = "https://www.kidssaveocean.com/copy-of-write-letters-with-your-kid"
+        private const val url = "https://pederhill.wixsite.com/kids-save-ocean/copy-of-write-letters-with-your-kid"
     }
 
 }
