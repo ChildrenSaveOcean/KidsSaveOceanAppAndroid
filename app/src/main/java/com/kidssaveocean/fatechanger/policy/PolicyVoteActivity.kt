@@ -83,8 +83,7 @@ class PolicyVoteActivity : AbstractActivity<ActivityPolicyVoteBinding, PoliciesV
         })
 
 
-
-        btnVote?.apply {
+        binding.btnVote.apply {
             isEnabled = false
             setOnClickListener {
                 AlertDialog.Builder(this@PolicyVoteActivity)

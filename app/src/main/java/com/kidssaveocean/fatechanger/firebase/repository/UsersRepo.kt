@@ -11,6 +11,7 @@ import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.firebase.FirebaseFailedException
 import com.kidssaveocean.fatechanger.firebase.UserNotExsitException
 import com.kidssaveocean.fatechanger.firebase.model.UsersModel
+import com.kidssaveocean.fatechanger.service.FateResult
 
 object UsersRepo : BaseFirebaseDBRepo<UsersModel, List<Pair<String, UsersModel>>>(Constants.TABLE_NAME_USERS, UsersModel::class.java) {
 
@@ -20,55 +21,54 @@ object UsersRepo : BaseFirebaseDBRepo<UsersModel, List<Pair<String, UsersModel>>
         return list
     }
 
-    fun getUser() {
-        //todo fix
-//        return loginAndGetUid().retry(1).flatMap { uid ->
-//            Single.create<Pair<String, UsersModel>> { emitter ->
-//                FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_USERS).child(uid)
-//                        .addListenerForSingleValueEvent(object : ValueEventListener {
-//                            override fun onCancelled(databaseError: DatabaseError) {
-//                                emitter.onError(FirebaseFailedException(databaseError.message))
-//                            }
-//
-//                            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                                Log.d("FirebaseService", "onDataChange")
-//                                val key = dataSnapshot.key!!
-//                                val value = dataSnapshot.getValue(UsersModel::class.java)
-//                                if (value == null) {
-//                                    emitter.onError(UserNotExsitException())
-//                                } else {
-//                                    userModel = Pair(key, value)
-//                                    emitter.onSuccess(Pair(key, value))
-//                                }
-//                            }
-//                        })
-//            }
-//        }.subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
+    fun getUser(onComplete: (FateResult<Pair<String, UsersModel>>) -> Unit) {
+        loginAndGetUid { fateResult ->
+            fateResult.onSuccess {uid ->
+                FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_USERS).child(uid)
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            onComplete(FateResult.Failure(FirebaseFailedException(databaseError.message)))
+                        }
+
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            Log.d("FirebaseService", "onDataChange")
+                            val key = dataSnapshot.key!!
+                            val value = dataSnapshot.getValue(UsersModel::class.java)
+                            if (value == null) {
+                                onComplete(FateResult.Failure(UserNotExsitException()))
+                            } else {
+                                userModel = Pair(key, value)
+                                onComplete(FateResult.Success(Pair(key, value)))
+                            }
+                        }
+                    })
+            }.onFailure {
+                onComplete(FateResult.Failure(it))
+            }
+
+        }
     }
 
     private fun getUIDFromFirebase(): String? {
         return FirebaseAuth.getInstance().currentUser?.uid
     }
 
-    private fun loginAndGetUid() {
-        //todo fix
-//        return Single.create<String> {
-//            var uid = getUIDFromFirebase()
-//            if (TextUtils.isEmpty(uid)) {
-//                FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener { task ->
-//                    FirebaseAuthCheckRepo.isAuth = task.isSuccessful
-//                    uid = getUIDFromFirebase()
-//                    if (task.isSuccessful && !TextUtils.isEmpty(uid)) {
-//                        it.onSuccess(uid!!)
-//                    } else {
-//                        it.onError(FirebaseFailedException("Authentication failed"))
-//                    }
-//                }
-//            } else {
-//                it.onSuccess(uid!!)
-//            }
-//        }
+    private fun loginAndGetUid(onComplete: (FateResult<String>) -> Unit) {
+        var uid = getUIDFromFirebase()
+        if (TextUtils.isEmpty(uid)) {
+            FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener { task ->
+                FirebaseAuthCheckRepo.isAuth = task.isSuccessful
+                uid = getUIDFromFirebase()
+
+                if (task.isSuccessful && !TextUtils.isEmpty(uid)) {
+                    onComplete(FateResult.Success(uid!!))
+                } else {
+                    onComplete(FateResult.Failure(FirebaseFailedException("Authentication failed")))
+                }
+            }
+        } else {
+            onComplete(FateResult.Success(uid!!))
+        }
     }
 
     fun updateOrCreateUser(user: UsersModel?) {

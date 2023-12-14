@@ -47,8 +47,7 @@ class IntroductionVideoActivity : AbstractActivity<ActivityIntroductionVideoBind
     }
 
     private fun updateFlNoInternet() {
-        //todo fix
-//        flNoInternet.visibility = if (isNetworkConnected()) View.GONE else View.VISIBLE
+        flNoInternet.visibility = if (isNetworkConnected()) View.GONE else View.VISIBLE
     }
 
 
@@ -58,7 +57,6 @@ class IntroductionVideoActivity : AbstractActivity<ActivityIntroductionVideoBind
         val intent = Intent(this, BottomNavigationActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
-
     }
 
 
