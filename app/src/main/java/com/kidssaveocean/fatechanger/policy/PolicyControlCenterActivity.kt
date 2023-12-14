@@ -8,7 +8,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.WebViewActivity
@@ -20,7 +19,6 @@ import com.kidssaveocean.fatechanger.firebase.repository.CampaignsRepo
 import com.kidssaveocean.fatechanger.firebase.repository.UsersRepo
 import com.kidssaveocean.fatechanger.firebase.viewmodel.PoliciesViewModel
 import com.kidssaveocean.fatechanger.presentation.mvvm.activity.AbstractActivity
-import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_policy_control_center.btnLearnMore
 import kotlinx.android.synthetic.main.activity_policy_control_center.btnShare
@@ -49,7 +47,7 @@ import kotlinx.android.synthetic.main.policy_control_center_requirement.tvTotalC
 import kotlinx.android.synthetic.main.view_toolbar.toolbar
 
 @AndroidEntryPoint
-class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenterBinding, EmptyViewModel>() {
+class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenterBinding, PoliciesViewModel>() {
     var policyLocations: List<Pair<String, HijackPolicyLocationModel>>? = null
     private var campaigns: List<Pair<String, CampaignsModel>>? = null
     private var campaignModel: CampaignsModel? = null
@@ -75,9 +73,8 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
 
 //        val data = intent.getParcelableExtra<HijackPoliciesModel>(Constants.intentPolicyValue)
 
-        val policiesViewModel = ViewModelProviders.of(this).get(PoliciesViewModel::class.java)
 
-        policiesViewModel.getPolicyCombineData().observe(this, Observer {
+        viewModel.getPolicyCombineData().observe(this, Observer {
             //            if (data == null) {
 //                policyName = it.policies[0].first
 //                policyValue = it.policies[0].second
@@ -312,7 +309,7 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
 
     override fun getLayoutId(): Int = R.layout.activity_policy_control_center
 
-    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
+    override fun getViewModelClass(): Class<PoliciesViewModel> = PoliciesViewModel::class.java
 
     override fun onBackPressed() {
         if (campaignModel != null) {

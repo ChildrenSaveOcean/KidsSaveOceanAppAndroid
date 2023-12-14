@@ -3,6 +3,7 @@ package com.kidssaveocean.fatechanger.presentation.mvvm.activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -197,13 +198,15 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
 
     //handles back presses while there are fragments in the backstack of the activity
     private fun handleBackPress() {
-        ++numOfBackPressed
-        if (numOfBackPressed == MAX_NUM_OF_BACK_PRESSES || skipBackMsg) {
-            //todo fix deprecated stuff
-            super.onBackPressed()
-        } else {
-            handleExitMsg()
-        }
+        //todo the app has more than 1 activity... so the logic for double for as exit will have to wait until we get rid of all of them
+        super.onBackPressed()
+//        ++numOfBackPressed
+//        if (numOfBackPressed == MAX_NUM_OF_BACK_PRESSES || skipBackMsg) {
+//
+//            super.onBackPressed()
+//        } else {
+//            handleExitMsg()
+//        }
     }
 
     //handles back presses while the activity has only one fragment in the backstack
@@ -258,6 +261,16 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             statusBarColor = Color.TRANSPARENT
         }
+    }
+
+    open fun isNetworkConnected(): Boolean {
+
+        val mNetworkInfo = (this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
+        if (mNetworkInfo != null) {
+            return mNetworkInfo.isAvailable && mNetworkInfo.isConnected
+        }
+
+        return false
     }
 }
 

@@ -1,6 +1,7 @@
 package com.kidssaveocean.fatechanger.dashboard
 
 import android.os.Bundle
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
 import com.google.android.youtube.player.YouTubeInitializationResult
@@ -38,8 +39,7 @@ class DashBoardVideoActivity : AbstractActivity<ActivityDashboardVideoBinding, E
     }
 
     private fun updateFlNoInternet() {
-        //todo fix
-//        flNoInternet.visibility = if (isNetworkConnected()) View.GONE else View.VISIBLE
+        flNoInternet.visibility = if (isNetworkConnected()) View.GONE else View.VISIBLE
     }
 
 
