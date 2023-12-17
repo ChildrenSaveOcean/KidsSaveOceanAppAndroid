@@ -1,30 +1,29 @@
 package com.kidssaveocean.fatechanger.countryContacts
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.appcompat.widget.Toolbar
+import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
+import com.kidssaveocean.fatechanger.databinding.FragmentCountryIntroBinding
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
+import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class CountryIntroFragment : Fragment() {
+@AndroidEntryPoint
+class CountryIntroFragment : AbstractFragment<FragmentCountryIntroBinding, EmptyViewModel>() {
     companion object {
         const val WRITE_ABOUT_WAHT = "https://pederhill.wixsite.com/kids-save-ocean/copy-of-write-letters-with-your-kid"
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-
+    override fun onPrepareLayout(layoutView: View?) {
+        super.onPrepareLayout(layoutView)
+        //TODO this is bad, needs fixing
         val fragment = SelectCountryFragment()
         FirebaseService.getInstance().addObserver(fragment)
-        val view = inflater.inflate(R.layout.fragment_country_intro, container, false)
         (activity as AppCompatActivity).supportActionBar?.run{
             setHomeButtonEnabled(true)
             setDisplayShowHomeEnabled(true)
@@ -33,12 +32,10 @@ class CountryIntroFragment : Fragment() {
             setHasOptionsMenu(true)
         }
 
-        view.findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener {
+        view?.findViewById<Toolbar>(R.id.toolbar)?.setNavigationOnClickListener {
             (activity as AppCompatActivity).onBackPressed()
         }
-        var button = view.findViewById(R.id.write_to_where_button) as Button?
-        var btnWriteWhat = view.findViewById(R.id.write_about_what_button) as Button?
-        button?.setOnClickListener {
+        binding.writeToWhereButton.setOnClickListener {
             if (FirebaseService.getInstance().hasCountries) {
                 val bottomActivity = activity as BottomNavigationActivity
                 fragment.addToNavigationStack(
@@ -48,13 +45,18 @@ class CountryIntroFragment : Fragment() {
             }
         }
 
-        btnWriteWhat?.setOnClickListener {
+        binding.writeAboutWhatButton.setOnClickListener {
             val bottomActivity = activity as BottomNavigationActivity
             WebViewFragment().addToNavigationStack(
-                    bottomActivity.supportFragmentManager,
-                    R.id.fragment_container,
-                    "select_country_fragment")
+                bottomActivity.supportFragmentManager,
+                R.id.fragment_container,
+                "select_country_fragment")
         }
-        return view
     }
+
+    override fun getViewModelResId(): Int = BR.emptyVM
+
+    override fun getLayoutResId(): Int = R.layout.fragment_country_intro
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 }

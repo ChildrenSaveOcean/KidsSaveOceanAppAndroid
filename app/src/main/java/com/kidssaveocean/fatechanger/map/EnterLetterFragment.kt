@@ -55,17 +55,18 @@ class EnterLetterFragment : AbstractFragment<FragmentEnterLetterBinding, EmptyVi
 
         countries = FirebaseService.getInstance().countries
         submit_button.setOnClickListener {
-            val dialog = AlertDialog.Builder(bottomActivity)
+            val dialog = AlertDialog.Builder(requireContext())
             dialog
                 .setTitle(R.string.enter_letter_dialog_question)
                 .setPositiveButton(R.string.enter_letter_positive_answer) { _, _ ->
                     run {
                         currentCountry?.let { FirebaseService.getInstance().increaseWrittenLettersNumber(it) }
                     }
-                    AlertDialog.Builder(bottomActivity)
+                    AlertDialog.Builder(requireContext())
                         .setTitle(R.string.youre_letter_has_been_recorded)
                         .setMessage(R.string.enter_letter_congratulations_title)
                         .setPositiveButton(R.string.fatechangers_click_here) { _, _ ->
+                            //todo fix this
                             bottomActivity.openMainDashboard(DashboardSteps.WRITE_LETTER)
                         }
                         .create()
@@ -120,6 +121,7 @@ class EnterLetterFragment : AbstractFragment<FragmentEnterLetterBinding, EmptyVi
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        //todo fix
         when (requestCode) {
             PERMISSION_ACCESS_FINE_LOCATION -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {

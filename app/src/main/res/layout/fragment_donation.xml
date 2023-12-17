@@ -1,91 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/pink_jellyfish"
-    tools:context=".donation.DonationFragment">
+<layout>
 
-    <TextView
-        android:id="@+id/how_you_can_help_text_view"
+    <data>
+
+        <variable
+            name="emptyVM"
+            type="com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/gold"
-        android:textSize="14sp"
-        android:text="@string/how_you_can_help_capitalized"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
-        android:gravity="left"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@drawable/pink_jellyfish"
+        tools:context=".donation.DonationFragment">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="26sp"
-        android:text="@string/donate_today"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:gravity="left"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/how_you_can_help_text_view"/>
+        <TextView
+            android:id="@+id/how_you_can_help_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:gravity="left"
+            android:text="@string/how_you_can_help_capitalized"
+            android:textColor="@color/gold"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:text="@string/donation_description"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:gravity="left"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"/>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:gravity="left"
+            android:text="@string/donate_today"
+            android:textColor="@android:color/white"
+            android:textSize="26sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/how_you_can_help_text_view" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/donation_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="#AFcbe5f8"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.8">
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:text="@string/donation_description"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
 
-        <LinearLayout
-            android:id="@+id/donation_layout"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/donation_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp" >
+            app:cardBackgroundColor="#AFcbe5f8"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8">
 
-            <ImageView
-                android:id="@+id/paypal_image"
+            <LinearLayout
+                android:id="@+id/donation_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/paypal"
-                android:scaleType="centerInside"
-                android:layout_gravity="center"/>
+                android:orientation="vertical"
+                android:padding="20dp">
 
-            <Button
-                android:id="@+id/donate_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/donate_now"
-                android:textColor="@android:color/white"
-                android:background="@color/greenish_blue"/>
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/paypal_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/paypal" />
 
-    </androidx.cardview.widget.CardView>
+                <Button
+                    android:id="@+id/donate_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/greenish_blue"
+                    android:text="@string/donate_now"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,20 +1,18 @@
 package com.kidssaveocean.fatechanger.dashboard
 
-import android.content.Context
-import android.net.Uri
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import com.kidssaveocean.fatechanger.BR
 
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.databinding.FragmentGoldenRulesBinding
+import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class GoldenRulesFragment : Fragment() {
+@AndroidEntryPoint
+class GoldenRulesFragment : AbstractFragment<FragmentGoldenRulesBinding, EmptyViewModel>() {
+    override fun getViewModelResId(): Int = BR.emptyVM
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_golden_rules, container, false)
-    }
+    override fun getLayoutResId(): Int = R.layout.fragment_golden_rules
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 }

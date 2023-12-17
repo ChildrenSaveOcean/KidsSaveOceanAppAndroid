@@ -1,36 +1,42 @@
 package com.kidssaveocean.fatechanger.onboarding.userIdentification
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
+import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.R
-
-import kotlinx.android.synthetic.main.fragment_user_identification_card.*
+import com.kidssaveocean.fatechanger.databinding.FragmentUserIdentificationCardBinding
+import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+import kotlinx.android.synthetic.main.fragment_user_identification_card.description
+import kotlinx.android.synthetic.main.fragment_user_identification_card.user_identification_image_button
+import kotlinx.android.synthetic.main.fragment_user_identification_card.user_identification_type_text_view
 
-class UserIdentificationCardFragment : Fragment() {
+//todo this and UserIdentificationFragment might be only one fragment
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.fragment_user_identification_card, container, false)
+@AndroidEntryPoint
+class UserIdentificationCardFragment : AbstractFragment<FragmentUserIdentificationCardBinding, EmptyViewModel>() {
+
+    override fun getViewModelResId(): Int = BR.emptyVM
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
+
+    override fun getLayoutResId(): Int = R.layout.fragment_user_identification_card
 
     fun setBackgroundImage(backgroundImageId: Int) {
         val multiTransformation = MultiTransformation(
-                CenterCrop(),
-                RoundedCornersTransformation(50, 0)
+            CenterCrop(),
+            RoundedCornersTransformation(50, 0)
         )
 
         Glide.with(this)
-             .load(backgroundImageId)
-             .apply(RequestOptions.bitmapTransform(multiTransformation))
-             .into(user_identification_image_button)
+            .load(backgroundImageId)
+            .apply(RequestOptions.bitmapTransform(multiTransformation))
+            .into(user_identification_image_button)
     }
 
     fun setUserTypeText(textId: Int) = user_identification_type_text_view.setText(textId)
@@ -44,5 +50,4 @@ class UserIdentificationCardFragment : Fragment() {
             startActivity(intent)
         }
     }
-
 }

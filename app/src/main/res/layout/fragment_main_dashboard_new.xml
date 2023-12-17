@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="ContentDescription">
 
+    <data>
+        <variable
+            name="dashboardViewModel"
+            type="com.kidssaveocean.fatechanger.dashboard.MainDashboardViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

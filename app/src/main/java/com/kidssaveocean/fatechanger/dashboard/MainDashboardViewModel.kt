@@ -1,19 +1,25 @@
 package com.kidssaveocean.fatechanger.dashboard
 
 import android.content.Context
-import androidx.lifecycle.ViewModel
 import com.kidssaveocean.fatechanger.dashboard.DashboardSteps.GOVERNMENT
 import com.kidssaveocean.fatechanger.dashboard.DashboardSteps.LETTER_CAMPAIGN
 import com.kidssaveocean.fatechanger.dashboard.DashboardSteps.PROTEST
 import com.kidssaveocean.fatechanger.dashboard.DashboardSteps.RESEARCH
 import com.kidssaveocean.fatechanger.dashboard.DashboardSteps.SHARING
 import com.kidssaveocean.fatechanger.dashboard.DashboardSteps.WRITE_LETTER
+import com.kidssaveocean.fatechanger.presentation.AbstractViewModel
+import com.kidssaveocean.fatechanger.service.coroutines.ICoroutineContextProvider
 import com.kidssaveocean.fatechanger.sharedprefs.FateChangerSharedPrefs
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainDashboardViewModel(context: Context) : ViewModel() {
+@HiltViewModel
+class MainDashboardViewModel @Inject constructor(@ApplicationContext context: Context, contextProvider: ICoroutineContextProvider) :
+    AbstractViewModel(contextProvider) {
 
     private var prefs: FateChangerSharedPrefs = FateChangerSharedPrefs(context)
     val tasks: List<DashboardTask> = listOf(
@@ -56,7 +62,7 @@ class MainDashboardViewModel(context: Context) : ViewModel() {
 
     private fun loadLastSelectedFromPrefs() {
         val result = prefs.getString(FateChangerSharedPrefs.LAST_SELECTED_DASHBOARD_CONST)
-        lastSelected = when(result){
+        lastSelected = when (result) {
             RESEARCH.name -> RESEARCH
             WRITE_LETTER.name -> WRITE_LETTER
             SHARING.name -> SHARING
@@ -73,7 +79,7 @@ class MainDashboardViewModel(context: Context) : ViewModel() {
         lastSelected = step
     }
 
-    fun onDestroy(){
+    fun onDestroy() {
         tasks.forEach { saveStepsProgress(it) }
         saveLastSelectedInPrefs()
     }

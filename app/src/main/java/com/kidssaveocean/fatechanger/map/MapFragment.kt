@@ -2,39 +2,42 @@ package com.kidssaveocean.fatechanger.map
 
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.BaseOnTabSelectedListener
+import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.R
-
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
+import com.kidssaveocean.fatechanger.databinding.FragmentMapBinding
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
-import kotlinx.android.synthetic.main.fragment_map.*
-import java.util.*
+import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_map.countries
+import kotlinx.android.synthetic.main.fragment_map.enter_your_letter
+import kotlinx.android.synthetic.main.fragment_map.letters_written
+import java.util.Observable
+import java.util.Observer
 
-
-class MapFragment : Fragment(), Observer {
+@AndroidEntryPoint
+class MapFragment : AbstractFragment<FragmentMapBinding, EmptyViewModel>(), Observer {
     var manager: FragmentManager? = null
     var transaction: FragmentTransaction? = null
     var mapShownFragment = MapShownFragment()
     var countryListFragment = CountryListFragment()
     var flag = 0
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onPrepareLayout(layoutView: View?) {
+        super.onPrepareLayout(layoutView)
         FirebaseService.getInstance().addObserver(this)
-        return inflater.inflate(R.layout.fragment_map, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
+        val tabLayout = binding.tabLayout
 
         updateText(FirebaseService.getInstance().countries)
 
@@ -97,7 +100,6 @@ class MapFragment : Fragment(), Observer {
             }
 
         })
-
     }
 
     override fun update(o: Observable?, arg: Any?) {
@@ -133,4 +135,10 @@ class MapFragment : Fragment(), Observer {
             commit()
         }
     }
+
+    override fun getViewModelResId(): Int = BR.emptyVM
+
+    override fun getLayoutResId(): Int = R.layout.fragment_map
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 }

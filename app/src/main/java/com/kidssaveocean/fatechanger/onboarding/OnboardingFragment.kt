@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.onboarding.userIdentification.UserIdentificationActivity
 
+//todo what is this abomination ?????
 class OnboardingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
