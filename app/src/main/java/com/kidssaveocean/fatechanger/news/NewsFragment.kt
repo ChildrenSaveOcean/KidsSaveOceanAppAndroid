@@ -1,36 +1,40 @@
 package com.kidssaveocean.fatechanger.news
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.webkit.WebView
-
+import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.databinding.FragmentNewsBinding
+import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import com.kidssaveocean.fatechanger.views.ErrorWebViewClient
+import dagger.hilt.android.AndroidEntryPoint
 
-class NewsFragment : Fragment() {
+@AndroidEntryPoint
+class NewsFragment : AbstractFragment<FragmentNewsBinding, EmptyViewModel>() {
 
-    lateinit var webView: WebView
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        webView = inflater.inflate(R.layout.fragment_news, container, false) as WebView
-        val settings = webView.settings
+    override fun onPrepareLayout(layoutView: View?) {
+        //todo fix
+        super.onPrepareLayout(layoutView)
+        val settings = binding.newsWebview.settings
         settings.javaScriptEnabled = true
         settings.useWideViewPort = true
         settings.loadWithOverviewMode = true
-        webView.webViewClient = ErrorWebViewClient()
-        return webView
+        binding.newsWebview.webViewClient = ErrorWebViewClient()
     }
 
     override fun onResume() {
         super.onResume()
-        webView.loadUrl(url)
+        binding.newsWebview.loadUrl(url)
     }
+
+    override fun getViewModelResId(): Int = BR.emptyVM
+
+    override fun getLayoutResId(): Int = R.layout.fragment_news
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     companion object {
+
         private const val url = "https://pederhill.wixsite.com/kids-save-ocean/updates"
     }
-
 }

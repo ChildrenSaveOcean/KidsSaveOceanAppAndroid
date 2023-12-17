@@ -10,11 +10,10 @@ import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.resources.ResourcesFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_start_activist_campaign.tools_button
 
-/**
- * A simple [Fragment] subclass.
- */
+@AndroidEntryPoint
 class EngageLocalGovernmentFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

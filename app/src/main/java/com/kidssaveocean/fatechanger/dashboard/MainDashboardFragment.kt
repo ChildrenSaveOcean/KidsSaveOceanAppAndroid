@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
-import androidx.fragment.app.Fragment
+import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.WebViewActivity
@@ -17,19 +17,20 @@ import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.databinding.FragmentMainDashboardNewBinding
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.extensions.setImage
+import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssaveocean.fatechanger.views.ActionAlertDialog
 import com.kidssaveocean.fatechanger.views.SurferIconView
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 
-class MainDashboardFragment(private val providedStep: DashboardSteps? = null) : Fragment() {
+@AndroidEntryPoint
+class MainDashboardFragment(private val providedStep: DashboardSteps? = null) : AbstractFragment<FragmentMainDashboardNewBinding, MainDashboardViewModel>() {
 
     private var currentCircleAngle: Float = 0f
     private var currentMeteorAngle: Float = 0f
 
     private lateinit var surferIcons: List<Pair<DashboardSteps, SurferIconView>>
     private val mp = MediaPlayer()
-    private lateinit var binding: FragmentMainDashboardNewBinding
-    private lateinit var viewModel: MainDashboardViewModel
 
     init {
 
@@ -41,7 +42,6 @@ class MainDashboardFragment(private val providedStep: DashboardSteps? = null) : 
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentMainDashboardNewBinding.inflate(inflater)
-        viewModel = MainDashboardViewModel(requireContext())
         providedStep?.let {
             viewModel.saveLastSelectedIcon(it)
         }
@@ -52,6 +52,12 @@ class MainDashboardFragment(private val providedStep: DashboardSteps? = null) : 
         super.onResume()
         loadDashboardInfo()
     }
+
+    override fun getViewModelResId(): Int = BR.dashboardViewModel
+
+    override fun getLayoutResId(): Int = R.layout.fragment_main_dashboard_new
+
+    override fun getViewModelClass(): Class<MainDashboardViewModel> = MainDashboardViewModel::class.java
 
     override fun onDestroy() {
         viewModel.onDestroy()

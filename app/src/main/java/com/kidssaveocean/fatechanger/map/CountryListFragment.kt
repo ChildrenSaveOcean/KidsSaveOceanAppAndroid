@@ -1,28 +1,32 @@
 package com.kidssaveocean.fatechanger.map
 
 import android.content.Context
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.databinding.FragmentCountryListBinding
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
-import java.util.*
+import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.Observable
+import java.util.Observer
 
-class CountryListFragment : Fragment(), Observer {
+@AndroidEntryPoint
+class CountryListFragment : AbstractFragment<FragmentCountryListBinding, EmptyViewModel>(), Observer {
 
     private var countries: List<CountryModel> = listOf()
     private lateinit var mAdapter: CountryListAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_country_list, container, false)
-        val recyclerview: RecyclerView = view.findViewById(R.id.country_list_rv)
+    override fun onPrepareLayout(layoutView: View?) {
+        super.onPrepareLayout(layoutView)
+        val recyclerview: RecyclerView = binding.countryListRv
 
+        //todo get rid of this
         FirebaseService.getInstance().addObserver(this)
 
         mAdapter = CountryListAdapter(activity as Context)
@@ -34,9 +38,13 @@ class CountryListFragment : Fragment(), Observer {
         }
 
         updateList(FirebaseService.getInstance().countries)
-
-        return view
     }
+
+    override fun getViewModelResId(): Int = BR.emptyVM
+
+    override fun getLayoutResId(): Int = R.layout.fragment_country_list
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     private fun updateList(data: List<CountryModel>) {
         if (data.isNotEmpty()) {

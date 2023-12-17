@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.views.ErrorWebViewClient
 
+
+//todo another web view fragment
 class WebViewFragment : Fragment() {
 
     lateinit var webView: WebView

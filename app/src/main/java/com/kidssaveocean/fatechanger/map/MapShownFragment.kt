@@ -2,17 +2,12 @@ package com.kidssaveocean.fatechanger.map
 
 import android.app.Activity
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
-import android.util.AttributeSet
 import android.util.DisplayMetrics
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -21,24 +16,33 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.R
+import com.kidssaveocean.fatechanger.databinding.FragmentMapShownBinding
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
+import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import com.kidssaveocean.fatechanger.views.CustomMapMarkerView
-import java.util.*
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.Observable
+import java.util.Observer
 
-
-class MapShownFragment : Fragment(), OnMapReadyCallback, Observer {
+//todo fix
+@AndroidEntryPoint
+class MapShownFragment : AbstractFragment<FragmentMapShownBinding, EmptyViewModel>(), OnMapReadyCallback, Observer {
 
     private var countries: MutableCollection<CountryModel> = mutableListOf()
     private lateinit var mGoogleMap: GoogleMap
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun getViewModelResId(): Int = BR.emptyVM
 
-        return inflater.inflate(R.layout.fragment_map_shown, container, false)
-    }
+    override fun getLayoutResId(): Int = R.layout.fragment_map_shown
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //todo what ????
         val fragment = childFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment?
         fragment!!.getMapAsync(this)

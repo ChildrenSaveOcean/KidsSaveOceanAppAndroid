@@ -1,29 +1,26 @@
 package com.kidssaveocean.fatechanger.home
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.WebViewActivity
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.countryContacts.CountryIntroFragment
-import com.kidssaveocean.fatechanger.dashboard.MainDashboardFragment
+import com.kidssaveocean.fatechanger.databinding.HomeFragmentBinding
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
-import com.kidssaveocean.fatechanger.map.MapFragment
-import com.kidssaveocean.fatechanger.news.NewsFragment
 import com.kidssaveocean.fatechanger.policy.PolicyHomeActivity
-import com.kidssaveocean.fatechanger.policy.PolicyVideoActivity
-import kotlinx.android.synthetic.main.activity_bottom_navigation.*
+import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
+import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class HomeFragment : Fragment(), HomeRecyclerAdapter.ItemClick {
+@AndroidEntryPoint
+class HomeFragment : AbstractFragment<HomeFragmentBinding, EmptyViewModel>(), HomeRecyclerAdapter.ItemClick {
 
     private enum class Operator {
         NEWS_MEDIA,
@@ -39,20 +36,25 @@ class HomeFragment : Fragment(), HomeRecyclerAdapter.ItemClick {
         Log.d("HomeFragment", "onCreate")
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.home_fragment, container, false)
-        val recyclerview: RecyclerView = view.findViewById(R.id.home_recyclerview)
+    override fun onPrepareLayout(layoutView: View?) {
+        super.onPrepareLayout(layoutView)
+        val recyclerview: RecyclerView = binding.homeRecyclerview
 
-        var adapter = HomeRecyclerAdapter(activity as Context)
+        val adapter = HomeRecyclerAdapter(requireContext())
         adapter.setItemClickListener(this)
 
-        recyclerview?.adapter = adapter
-        recyclerview?.layoutManager = LinearLayoutManager(activity)
-
-        return view
+        recyclerview.adapter = adapter
+        recyclerview.layoutManager = LinearLayoutManager(activity)
     }
 
+    override fun getViewModelResId(): Int = BR.emptyVM
+
+    override fun getLayoutResId(): Int = R.layout.home_fragment
+
+    override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
+
     override fun onItemClick(v: View, position: Int) {
+        //todo fix
         val bottomActivity = activity as BottomNavigationActivity
 
         when (position) {
