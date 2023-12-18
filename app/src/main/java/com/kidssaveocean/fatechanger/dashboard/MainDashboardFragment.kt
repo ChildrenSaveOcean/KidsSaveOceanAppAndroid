@@ -4,9 +4,7 @@ import android.content.Intent
 import android.content.res.AssetFileDescriptor
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import com.kidssaveocean.fatechanger.BR
@@ -18,35 +16,21 @@ import com.kidssaveocean.fatechanger.databinding.FragmentMainDashboardNewBinding
 import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.extensions.setImage
 import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
+import com.kidssaveocean.fatechanger.utility.getSerializableCompat
 import com.kidssaveocean.fatechanger.views.ActionAlertDialog
 import com.kidssaveocean.fatechanger.views.SurferIconView
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 
 @AndroidEntryPoint
-class MainDashboardFragment(private val providedStep: DashboardSteps? = null) : AbstractFragment<FragmentMainDashboardNewBinding, MainDashboardViewModel>() {
+class MainDashboardFragment :
+    AbstractFragment<FragmentMainDashboardNewBinding, MainDashboardViewModel>() {
 
     private var currentCircleAngle: Float = 0f
     private var currentMeteorAngle: Float = 0f
 
     private lateinit var surferIcons: List<Pair<DashboardSteps, SurferIconView>>
     private val mp = MediaPlayer()
-
-    init {
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        binding = FragmentMainDashboardNewBinding.inflate(inflater)
-        providedStep?.let {
-            viewModel.saveLastSelectedIcon(it)
-        }
-        return binding.root
-    }
 
     override fun onResume() {
         super.onResume()
@@ -66,6 +50,12 @@ class MainDashboardFragment(private val providedStep: DashboardSteps? = null) : 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments?.let {
+            val step = it.getSerializableCompat<DashboardSteps>(DASHBOARD_STEP_KEY)
+            step?.let {
+                viewModel.saveLastSelectedIcon(it)
+            }
+        }
         binding.apply {
             surferIcons = listOf(
                 Pair(DashboardSteps.RESEARCH, one),
@@ -247,7 +237,6 @@ class MainDashboardFragment(private val providedStep: DashboardSteps? = null) : 
             }
         }
         clickOnSurfer(viewModel.lastSelected)
-
     }
 
     private fun playClick() {
@@ -265,6 +254,10 @@ class MainDashboardFragment(private val providedStep: DashboardSteps? = null) : 
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
+
+    companion object {
+        const val DASHBOARD_STEP_KEY = "dashboard_step"
     }
 }
 

@@ -22,7 +22,9 @@
             android:src="@drawable/fishes"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include layout="@layout/view_toolbar" />
+        <include
+            android:id="@+id/country_info_toolbar"
+            layout="@layout/view_toolbar" />
 
         <TextView
             android:id="@+id/title"

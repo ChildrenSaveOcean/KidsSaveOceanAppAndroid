@@ -1,10 +1,6 @@
 package com.kidssaveocean.fatechanger.extensions
 
 import android.annotation.SuppressLint
-import android.view.KeyEvent
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
@@ -12,17 +8,21 @@ import android.graphics.Point
 import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Size
+import android.view.KeyEvent
 import android.view.View
 import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.kidssaveocean.fatechanger.R
 
 /*
 * Helps to add fragments to the navigation stack
 * */
+//todo remove this method
 fun Fragment.addToNavigationStack(manager: FragmentManager, containerId: Int, tag: String = "") {
     val fragmentTransaction = manager.beginTransaction()
     when (tag) {
