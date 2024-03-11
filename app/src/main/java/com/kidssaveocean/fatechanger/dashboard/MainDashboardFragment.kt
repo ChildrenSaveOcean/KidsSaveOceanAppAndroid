@@ -11,9 +11,7 @@ import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.Constants
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.WebViewActivity
-import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.databinding.FragmentMainDashboardNewBinding
-import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.extensions.setImage
 import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssaveocean.fatechanger.utility.getSerializableCompat
@@ -50,8 +48,8 @@ class MainDashboardFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.let {
-            val step = it.getSerializableCompat<DashboardSteps>(DASHBOARD_STEP_KEY)
+        arguments?.let { args ->
+            val step = args.getSerializableCompat<DashboardSteps>(DASHBOARD_STEP_KEY)
             step?.let {
                 viewModel.saveLastSelectedIcon(it)
             }
@@ -180,7 +178,6 @@ class MainDashboardFragment :
     }
 
     private fun howButtonAction(step: DashboardSteps) {
-        val bottomActivity = activity as BottomNavigationActivity
         when (step) {
             DashboardSteps.RESEARCH -> {
                 val intent = Intent(requireContext(), WebViewActivity::class.java)
@@ -205,27 +202,15 @@ class MainDashboardFragment :
             }
 
             DashboardSteps.LETTER_CAMPAIGN -> {
-                StartActivistCampaignFragment().addToNavigationStack(
-                    bottomActivity.supportFragmentManager,
-                    R.id.fragment_container,
-                    "activist_fragment"
-                )
+                navigateToView(StartActivistCampaignFragment::class)
             }
 
             DashboardSteps.GOVERNMENT -> {
-                EngageLocalGovernmentFragment().addToNavigationStack(
-                    bottomActivity.supportFragmentManager,
-                    R.id.fragment_container,
-                    "government_fragment"
-                )
+                navigateToView(EngageLocalGovernmentFragment::class)
             }
 
             DashboardSteps.PROTEST -> {
-                NobodysListeningFragment().addToNavigationStack(
-                    bottomActivity.supportFragmentManager,
-                    R.id.fragment_container,
-                    "nobody_listening_fragment"
-                )
+                navigateToView(NobodysListeningFragment::class)
             }
         }
     }

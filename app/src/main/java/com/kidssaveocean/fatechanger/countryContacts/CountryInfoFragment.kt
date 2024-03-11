@@ -12,11 +12,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CountryInfoFragment : AbstractFragment<FragmentCountryInfoBinding, EmptyViewModel>() {
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val address = arguments?.getString("address") ?: ""
+        val address = arguments?.getString(ADDRESS_KEY) ?: ""
         binding.countryInfoToolbar.toolbar.setNavigationOnClickListener {
             navigateBack()
         }
@@ -28,4 +27,9 @@ class CountryInfoFragment : AbstractFragment<FragmentCountryInfoBinding, EmptyVi
     override fun getLayoutResId(): Int = R.layout.fragment_country_info
 
     override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
+
+    companion object {
+
+        const val ADDRESS_KEY = "address"
+    }
 }

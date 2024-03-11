@@ -52,12 +52,17 @@ class BottomNavigationActivity : AbstractActivity<ActivityBottomNavigationBindin
                 R.id.action_map -> MapFragment::class
                 else -> throw IllegalStateException("Menu item id not implemented!")
             }
+            isInnerNavigation = true
             openView(classz)
             true
         }
 
     override fun <T : Any> onViewChanged(classz: KClass<T>) {
         super.onViewChanged(classz)
+        if(isInnerNavigation){
+            isInnerNavigation = false
+            return
+        }
         val itemId = when (classz) {
             HomeFragment::class -> R.id.action_home
             NewsFragment::class -> R.id.action_news
