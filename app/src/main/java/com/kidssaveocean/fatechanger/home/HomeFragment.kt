@@ -13,7 +13,6 @@ import com.kidssaveocean.fatechanger.WebViewActivity
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.countryContacts.CountryIntroFragment
 import com.kidssaveocean.fatechanger.databinding.HomeFragmentBinding
-import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.policy.PolicyHomeActivity
 import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
@@ -63,10 +62,7 @@ class HomeFragment : AbstractFragment<HomeFragmentBinding, EmptyViewModel>(), Ho
             }
 
             Operator.LETTER_IMPACT.ordinal -> {
-                CountryIntroFragment().addToNavigationStack(
-                        bottomActivity.supportFragmentManager,
-                        R.id.fragment_container,
-                        "letter_impact_fragment")
+                navigateToView(CountryIntroFragment::class)
             }
 
             Operator.DASHBOARD.ordinal -> {

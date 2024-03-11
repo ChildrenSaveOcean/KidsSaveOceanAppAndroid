@@ -7,6 +7,7 @@
             type="com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel" />
     </data>
 
+    <!-- todo fix this layout -->
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -22,7 +23,9 @@
             android:src="@drawable/fishes"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include layout="@layout/view_toolbar" />
+        <include
+            android:id="@+id/country_info_toolbar"
+            layout="@layout/view_toolbar" />
 
         <TextView
             android:id="@+id/title"

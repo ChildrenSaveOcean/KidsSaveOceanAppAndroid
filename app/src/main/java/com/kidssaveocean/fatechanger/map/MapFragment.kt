@@ -9,9 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.BaseOnTabSelectedListener
 import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.R
-import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.databinding.FragmentMapBinding
-import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
 import com.kidssaveocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
@@ -48,10 +46,7 @@ class MapFragment : AbstractFragment<FragmentMapBinding, EmptyViewModel>(), Obse
         }
 
         enter_your_letter.setOnClickListener {
-            EnterLetterFragment().addToNavigationStack(
-                    (activity as BottomNavigationActivity).supportFragmentManager,
-                    R.id.fragment_container,
-                    "enter_letter_fragment")
+            navigateToView(EnterLetterFragment::class)
         }
 
         tabLayout.addOnTabSelectedListener(object : BaseOnTabSelectedListener<TabLayout.Tab> {

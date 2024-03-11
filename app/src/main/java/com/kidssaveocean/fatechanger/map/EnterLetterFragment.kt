@@ -14,6 +14,7 @@ import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.dashboard.DashboardSteps
+import com.kidssaveocean.fatechanger.dashboard.MainDashboardFragment
 import com.kidssaveocean.fatechanger.databinding.FragmentEnterLetterBinding
 import com.kidssaveocean.fatechanger.extensions.getCountryByLocation
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
@@ -38,8 +39,7 @@ class EnterLetterFragment : AbstractFragment<FragmentEnterLetterBinding, EmptyVi
 
     override fun onPrepareLayout(layoutView: View?) {
         super.onPrepareLayout(layoutView)
-        val bottomActivity = activity as BottomNavigationActivity
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(bottomActivity)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
     }
 
     override fun getViewModelResId(): Int = BR.emptyVM
@@ -66,14 +66,14 @@ class EnterLetterFragment : AbstractFragment<FragmentEnterLetterBinding, EmptyVi
                         .setTitle(R.string.youre_letter_has_been_recorded)
                         .setMessage(R.string.enter_letter_congratulations_title)
                         .setPositiveButton(R.string.fatechangers_click_here) { _, _ ->
-                            //todo fix this
-                            bottomActivity.openMainDashboard(DashboardSteps.WRITE_LETTER)
+                            val bundle = Bundle().apply { putSerializable(MainDashboardFragment.DASHBOARD_STEP_KEY, DashboardSteps.WRITE_LETTER) }
+                            navigateToView(MainDashboardFragment::class, bundle)
                         }
                         .create()
                         .show()
 
                 }
-                .setNegativeButton(R.string.enter_letter_negative_answer) { dialog, _ -> dialog.cancel() }
+                .setNegativeButton(R.string.enter_letter_negative_answer) { d, _ -> d.cancel() }
 
             dialog.create().show()
         }

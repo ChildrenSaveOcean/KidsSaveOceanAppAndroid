@@ -76,8 +76,8 @@ class MapShownFragment : AbstractFragment<FragmentMapShownBinding, EmptyViewMode
                 val country = LatLng(item.latitude, item.longitude)
 
                 CustomMapMarkerView.numberLetter = item.country_number.toString()
-                val icon = BitmapDescriptorFactory
-                        .fromBitmap(activity?.let { createDrawableFromView(it, CustomMapMarkerView(it)) }!!)
+                val drawable = activity?.let { createDrawableFromView(it, CustomMapMarkerView(it)) }!!
+                val icon = BitmapDescriptorFactory.fromBitmap(drawable)
 
                 if (icon is BitmapDescriptor){
                     mGoogleMap.addMarker(MarkerOptions()
