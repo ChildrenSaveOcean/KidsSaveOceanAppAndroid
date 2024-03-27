@@ -44,7 +44,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    namespace 'com.kidssaveocean.fatechanger'
+    namespace 'com.fatechanger.app'
     lint {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,

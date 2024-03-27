@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.kidssaveocean.fatechanger.views.CustomMapMarkerView
+    <com.fatechanger.app.views.CustomMapMarkerView
         android:id="@+id/map_marker"
         android:layout_width="25dp"
         android:layout_height="30dp"
