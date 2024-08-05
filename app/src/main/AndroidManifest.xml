@@ -29,11 +29,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".onboarding.OnboardingActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity
             android:name=".onboarding.userIdentification.IntroductionVideoActivity"
             android:screenOrientation="portrait" />
 
@@ -59,7 +54,7 @@
 
         <activity android:name=".policy.PolicyVideoActivity"/>
 
-        <activity android:name=".splashScreen.SplashScreenActivity"
+        <activity android:name=".onboarding.OnboardingActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait"
             android:exported="true">

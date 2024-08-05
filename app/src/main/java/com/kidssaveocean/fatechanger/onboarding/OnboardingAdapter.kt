@@ -7,7 +7,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 import com.kidssaveocean.fatechanger.R
 
-class OnboardingAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+//todo fix this
+class OnboardingAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     //todo fix this adapter
     override fun getItem(position: Int): Fragment {

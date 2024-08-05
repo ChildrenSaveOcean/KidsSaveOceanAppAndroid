@@ -1,18 +1,17 @@
 package com.kidssaveocean.fatechanger.onboarding.userIdentification
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.Toast
-import com.google.android.youtube.player.YouTubeInitializationResult
-import com.google.android.youtube.player.YouTubePlayer
-import com.google.android.youtube.player.YouTubePlayerSupportFragment
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.databinding.ActivityIntroductionVideoBinding
+import com.kidssaveocean.fatechanger.onboarding.OnboardingViewModel
 import com.kidssaveocean.fatechanger.presentation.mvvm.activity.AbstractActivity
 import com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
+import com.kidssaveocean.fatechanger.sharedprefs.FateChangerSharedPrefs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_introduction_video.youtube_text_view
 
@@ -21,6 +20,7 @@ class IntroductionVideoActivity : AbstractActivity<ActivityIntroductionVideoBind
 
     private lateinit var flNoInternet: FrameLayout
 
+    @SuppressLint("SetJavaScriptEnabled") // we need javascript for youtube videos to load
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,20 +29,14 @@ class IntroductionVideoActivity : AbstractActivity<ActivityIntroductionVideoBind
         flNoInternet = findViewById(R.id.fl_no_internet)
         updateFlNoInternet()
 
-
-        //todo fix this everywhere
-        val fragment = supportFragmentManager.findFragmentById(R.id.youtube_fragment) as YouTubePlayerSupportFragment?
-        fragment?.initialize(DEVELOPER_KEY, object : YouTubePlayer.OnInitializedListener {
-            override fun onInitializationSuccess(provider: YouTubePlayer.Provider, youTubePlayer: YouTubePlayer, wasRestored: Boolean) {
-                if (!wasRestored) {
-                    youTubePlayer.cueVideo(INTRO_VIDEO_STRING)
-                }
-            }
-
-            override fun onInitializationFailure(provider: YouTubePlayer.Provider, youTubeInitializationResult: YouTubeInitializationResult) {
-                Toast.makeText(this@IntroductionVideoActivity, R.string.Unable_To_Play_Youtube_Video, Toast.LENGTH_LONG).show()
-            }
-        })
+        val videoData = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/aWbPiPh_gaU?si=dLHSbFkaeqQ5DHOZ\" " +
+                "title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; " +
+                "picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+        binding.videoWebView.apply {
+            settings.javaScriptEnabled = true
+            loadData(videoData, "text/html", "utf-8")
+//            webChromeClient = WebChromeClient() -- might need this, the webview is running really bad on emulator, so it needs more testing
+        }
 
     }
 
@@ -52,8 +46,10 @@ class IntroductionVideoActivity : AbstractActivity<ActivityIntroductionVideoBind
 
 
     fun clickStartButton(view: View) {
-        val completedOnboardingTask = CompletedOnboardingTask()
-        completedOnboardingTask.execute(this)
+        val prefs = FateChangerSharedPrefs(this)
+        prefs.edit {
+            putBoolean(OnboardingViewModel.ONBOARDING_STATUS_KEY, true)
+        }
         val intent = Intent(this, BottomNavigationActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
@@ -65,10 +61,7 @@ class IntroductionVideoActivity : AbstractActivity<ActivityIntroductionVideoBind
     override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     companion object {
-
         const val INTRO_TYPE = "INTRO_TYPE"
-        private const val DEVELOPER_KEY = "Apparently you don't need a key to play videos"
-        private const val INTRO_VIDEO_STRING = "aWbPiPh_gaU"
     }
 
 }

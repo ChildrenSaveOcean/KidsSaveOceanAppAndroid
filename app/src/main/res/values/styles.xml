@@ -18,11 +18,12 @@
         <item name="android:layout_marginRight">20dp</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-
+    <style name="SplashTheme" parent="Theme.SplashScreen">
+<!--        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_background</item>-->
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowAnimationStyle">@style/AppTheme.WindowTransition</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
 
     </style>
 
@@ -47,7 +48,7 @@
         <item name="android:background">@drawable/dashboard_button</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
     </style>
 
