@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -13,7 +14,6 @@ import com.kidssaveocean.fatechanger.BR
 import com.kidssaveocean.fatechanger.R
 import com.kidssaveocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssaveocean.fatechanger.databinding.FragmentLetterBinding
-import com.kidssaveocean.fatechanger.extensions.addToNavigationStack
 import com.kidssaveocean.fatechanger.extensions.getCountryByLocation
 import com.kidssaveocean.fatechanger.firebase.FirebaseService
 import com.kidssaveocean.fatechanger.firebase.model.CountryModel
@@ -59,13 +59,8 @@ class SelectCountryFragment : AbstractFragment<FragmentLetterBinding, EmptyViewM
 
         binding.submitButton.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("address", letterAddress)
-            val fragment = CountryInfoFragment()
-            fragment.arguments = bundle
-            fragment.addToNavigationStack(
-                bottomActivity.supportFragmentManager,
-                R.id.fragment_container,
-                "country_info_fragment")
+            bundle.putString(CountryInfoFragment.ADDRESS_KEY, letterAddress)
+            navigateToView(CountryInfoFragment::class, bundle)
         }
 
     }
@@ -92,6 +87,7 @@ class SelectCountryFragment : AbstractFragment<FragmentLetterBinding, EmptyViewM
         }
     }
 
+    //todo fix this
     override fun update(o: Observable?, arg: Any?) {
         when (o) {
             is FirebaseService -> {
@@ -101,6 +97,7 @@ class SelectCountryFragment : AbstractFragment<FragmentLetterBinding, EmptyViewM
         }
     }
 
+    //todo update this
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_ACCESS_FINE_LOCATION -> {
@@ -111,8 +108,16 @@ class SelectCountryFragment : AbstractFragment<FragmentLetterBinding, EmptyViewM
         }
     }
 
+    //todo fix this method and everything with locaiton
     @SuppressLint("MissingPermission")
     private fun obtainLocation() {
+        val country: String = requireContext().resources.configuration.locales[0].country
+        Log.e("test", "country of mine: $country")
+        val sb = StringBuilder()
+        countries.forEach {
+            sb.append(it.country_name).append("--\t--")
+        }
+        Log.e("test", sb.toString())
         fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
                     location?.let { it ->

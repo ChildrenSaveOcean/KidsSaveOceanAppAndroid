@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:background="@color/transparent"
-        app:elevation="0dp">
+    <merge xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="wrap_content"
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="@drawable/ic_back">
+            android:background="@color/transparent"
+            android:paddingTop="10dp"
+            app:elevation="0dp">
 
-            <TextView
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/back"
-                android:textColor="#1fa1e9"
-                android:textSize="18sp" />
+                app:contentInsetStartWithNavigation="0dp"
+                app:navigationIcon="@drawable/ic_back">
 
-        </androidx.appcompat.widget.Toolbar>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/back"
+                    android:textColor="#1fa1e9"
+                    android:textSize="18sp" />
 
-    </com.google.android.material.appbar.AppBarLayout>
-</merge>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+    </merge>
+</layout>

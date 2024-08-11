@@ -95,7 +95,6 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
             throw RuntimeException("MISSING VIEW CONTAINER ID")
         }
 
-        onViewChanged()
         val viewName = viewClass.qualifiedName ?: return
 
         var currentViewClassName: String? = null
@@ -115,11 +114,14 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
                 attachNewView(fm, containerViewId, viewName, args)
             }
             currentView = newView
+            currentView?.let {
+                onViewChanged(it::class)
+            }
         }
     }
 
     //override this if you need to do something after every view change
-    protected open fun onViewChanged() {
+    protected open fun<T: Any> onViewChanged(classz: KClass<T>) {
     }
 
     private fun popBackStackTo(
@@ -179,7 +181,6 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
         if (lastBackStackEntryIndex <= 0) {
             handleFinishAfterTransition()
         } else {
-            onViewChanged()
             var lastTaggedEntryIndex = lastBackStackEntryIndex - 1
             var backStackEntry: FragmentManager.BackStackEntry
 
@@ -192,13 +193,16 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
             if (viewClassName != null) {
                 val newView = popBackStackTo(fm, viewClassName, null)
                 currentView = newView
+                currentView?.let {
+                    onViewChanged(it::class)
+                }
             }
         }
     }
 
     //handles back presses while there are fragments in the backstack of the activity
     private fun handleBackPress() {
-        //todo the app has more than 1 activity... so the logic for double for as exit will have to wait until we get rid of all of them
+        //todo the app has more than 1 activity... so the logic for double tap as exit will have to wait until we get rid of all of them
         super.onBackPressed()
 //        ++numOfBackPressed
 //        if (numOfBackPressed == MAX_NUM_OF_BACK_PRESSES || skipBackMsg) {

@@ -9,6 +9,7 @@ import com.kidssaveocean.fatechanger.R
 
 class OnboardingAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
+    //todo fix this adapter
     override fun getItem(position: Int): Fragment {
         val imageId: Int
         val titleId: Int
