@@ -249,8 +249,8 @@ class MainDashboardFragment :
 enum class DashboardSteps(val res: Int) {
     RESEARCH(R.string.research_task_description),
     WRITE_LETTER(R.string.write_letter_task_description),
-    SHARING(R.string.write_letter_task_climate),
     LETTER_CAMPAIGN(R.string.sharing_task_description),
+    SHARING(R.string.write_letter_task_climate),
     GOVERNMENT(R.string.government_task_description),
     PROTEST(R.string.protest_task_description),
 }

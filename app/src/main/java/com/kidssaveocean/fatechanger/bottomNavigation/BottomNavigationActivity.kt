@@ -50,7 +50,7 @@ class BottomNavigationActivity : AbstractActivity<ActivityBottomNavigationBindin
                 R.id.action_dashboard -> MainDashboardFragment::class
                 R.id.action_resources -> ResourcesFragment::class
                 R.id.action_map -> MapFragment::class
-                else -> throw IllegalStateException("Menu item id not implemented!")
+                else -> error("Menu item id not implemented!")
             }
             isInnerNavigation = true
             openView(classz)

@@ -32,8 +32,8 @@ class OnboardingViewModel @Inject constructor(@ApplicationContext context: Conte
 
     fun checkStatus() {
         launch(Dispatchers.IO) {
-//            hasCompletedOnboarding = sharedPrefs.getBoolean(ONBOARDING_STATUS_KEY, false)
-//            onboardingStatus.postValue(hasCompletedOnboarding)
+            hasCompletedOnboarding = sharedPrefs.getBoolean(ONBOARDING_STATUS_KEY, false)
+            onboardingStatus.postValue(hasCompletedOnboarding)
 
             isReady = true
         }
