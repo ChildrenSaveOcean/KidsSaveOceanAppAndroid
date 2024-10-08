@@ -21,12 +21,6 @@ plugins {
 }
 
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
-}
 
 tasks.register('clean', Delete) {
     delete rootProject.buildDir
