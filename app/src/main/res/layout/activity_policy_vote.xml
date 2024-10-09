@@ -30,9 +30,9 @@
                     android:id="@+id/tvPolicyVoteSubTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="24dp"
                     android:gravity="center_horizontal"
                     android:text="@string/policy_vote_subtitle"
                     android:textColor="#4a4a4a"
@@ -44,41 +44,33 @@
                     android:id="@+id/pbPolicies"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvPolicyVoteSubTitle"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPolicyVoteSubTitle" />
 
-<!--                <com.aigestudio.wheelpicker.WheelPicker-->
-<!--                    android:id="@+id/wPickerPolicyDes"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginEnd="24dp"-->
-<!--                    android:layout_marginStart="24dp"-->
-<!--                    android:layout_marginTop="30dp"-->
-<!--                    android:visibility="invisible"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tvPolicyVoteSubTitle"-->
-<!--                    app:wheel_atmospheric="true"-->
-<!--                    app:wheel_curtain="true"-->
-<!--                    app:wheel_curtain_color="#30FFAD74"-->
-<!--                    app:wheel_curved="false"-->
-<!--                    app:wheel_cyclic="true"-->
-<!--                    app:wheel_item_text_size="14sp"-->
-<!--                    app:wheel_selected_item_text_color="@color/black"-->
-<!--                    app:wheel_visible_item_count="2" />-->
+                <NumberPicker
+                    android:id="@+id/policy_name_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="24dp"
+                    android:textSize="24sp"
+                    android:visibility="invisible"
+                    app:layout_constraintTop_toBottomOf="@id/tvPolicyVoteSubTitle" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/lytInputFromLeaders"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:layout_marginEnd="35dp"
                     android:layout_marginStart="35dp"
                     android:layout_marginTop="25dp"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/bg_input_from_leaders"
-                    android:paddingBottom="5dp"
                     android:paddingTop="5dp"
-                    app:layout_constraintTop_toBottomOf="@id/pbPolicies">
+                    android:paddingBottom="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/policy_name_picker">
 
                     <TextView
                         android:id="@+id/tvTitleInput"
@@ -177,9 +169,9 @@
                     android:id="@+id/tvSummaryTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="35dp"
                     android:layout_marginStart="35dp"
                     android:layout_marginTop="25dp"
+                    android:layout_marginEnd="35dp"
                     android:text="@string/policy_vote_summary_title"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -190,9 +182,9 @@
                     android:id="@+id/tvSummaryContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="35dp"
                     android:layout_marginStart="35dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginEnd="35dp"
                     android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@id/tvSummaryTitle" />
             </androidx.constraintlayout.widget.ConstraintLayout>

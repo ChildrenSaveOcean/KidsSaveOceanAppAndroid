@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import com.kidssavetheocean.fatechanger.Constants
@@ -15,6 +16,7 @@ import com.kidssavetheocean.fatechanger.firebase.viewmodel.PoliciesViewModel
 import com.kidssavetheocean.fatechanger.presentation.mvvm.activity.AbstractActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_policy_vote.btnVote
+import kotlinx.android.synthetic.main.activity_policy_vote.pbPolicies
 import kotlinx.android.synthetic.main.activity_policy_vote.tvSummaryContent
 import kotlinx.android.synthetic.main.view_toolbar.toolbar
 import java.text.DecimalFormat
@@ -31,46 +33,51 @@ class PolicyVoteActivity : AbstractActivity<ActivityPolicyVoteBinding, PoliciesV
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        toolbar.setOnClickListener{
+        toolbar.setOnClickListener {
             onBackPressed()
         }
 
 
         val temproaryData = initTemporaryData()
         viewModel.getLiveDataPolicies().observe(this, Observer {
-            if (!it.isNullOrEmpty()){
+            if (!it.isNullOrEmpty()) {
                 policies.addAll(it)
 
                 val policyDes = policies.map { policy -> policy.second.description }.toList()
-//                wPickerPolicyDes?.apply {
-//                    data = policyDes
-//                    visibility = View.VISIBLE
-//                    pbPolicies.visibility = View.INVISIBLE
-//                    setOnItemSelectedListener { _, _, position ->
-//                        policyValue = policies[position].second
-//                        policyName = policies[position].first
-//                        tvSummaryContent.text = policyValue?.summary
-//                        val impact =  temproaryData.get(position)[0]
-//                        val difficulty = temproaryData.get(position)[1]
-//                        tvImpactValue.text = decimalFormat.format(impact)
-//                        tvDifficultyValue.text = decimalFormat.format(difficulty)
-//                        tvImpactDivDifficultyValue.text = decimalFormat.format(impact/difficulty)
-//                        votes = policyValue?.votes ?: 0
-//                    }
-//                }
+                binding.policyNamePicker.minValue = 0
+                binding.policyNamePicker.apply {
+                    minValue = 0
+                    maxValue = policyDes.size - 1
+                    displayedValues = policyDes.toTypedArray()
+                    visibility = View.VISIBLE
+                    pbPolicies.visibility = View.INVISIBLE
+                    setOnValueChangedListener { _, _, position ->
+                        policyValue = policies[position].second
+                        policyName = policies[position].first
+                        tvSummaryContent.text = policyValue?.summary
+                        val impact = temproaryData.get(position)[0]
+                        val difficulty = temproaryData.get(position)[1]
+                        binding.tvImpactValue.text = decimalFormat.format(impact)
+                        binding.tvImpactValue.text = decimalFormat.format(difficulty)
+                        binding.tvImpactDivDifficultyValue.text =
+                            decimalFormat.format(impact / difficulty)
+                        votes = policyValue?.votes ?: 0
+                    }
+                }
+
                 policyValue = policies[0].second
                 policyName = policies[0].first
                 votes = policyValue?.votes ?: 0
                 tvSummaryContent.text = policyValue?.summary
-                if (!TextUtils.isEmpty(UsersRepo.userModel?.second?.hijack_policy_selected)){
+                if (!TextUtils.isEmpty(UsersRepo.userModel?.second?.hijack_policy_selected)) {
                     btnVote.isEnabled = false
                     AlertDialog.Builder(this@PolicyVoteActivity)
-                            .setMessage(resources.getString(R.string.policy_vote_already))
-                            .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
-                                dialog.dismiss()
-                            }.create().show()
+                        .setMessage(resources.getString(R.string.policy_vote_already))
+                        .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
+                            dialog.dismiss()
+                        }.create().show()
 
-                }else{
+                } else {
                     btnVote.isEnabled = true
                 }
             }
@@ -81,19 +88,19 @@ class PolicyVoteActivity : AbstractActivity<ActivityPolicyVoteBinding, PoliciesV
             isEnabled = false
             setOnClickListener {
                 AlertDialog.Builder(this@PolicyVoteActivity)
-                        .setMessage(resources.getString(R.string.policy_vote_dialog_message))
-                        .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
-                            viewModel.policyVote(policyName,"votes", votes + 1)
-                            UsersRepo.userModel?.second?.apply {
-                                hijack_policy_selected = policyName
-                                UsersRepo.updateOrCreateUser(this)
-                            }
-                            dialog.dismiss()
-                            onBackPressed()
+                    .setMessage(resources.getString(R.string.policy_vote_dialog_message))
+                    .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
+                        viewModel.policyVote(policyName, "votes", votes + 1)
+                        UsersRepo.userModel?.second?.apply {
+                            hijack_policy_selected = policyName
+                            UsersRepo.updateOrCreateUser(this)
                         }
-                        .setNegativeButton(resources.getString(R.string.no)){ dialog, _ ->
-                            dialog.dismiss()
-                        }.create().show()
+                        dialog.dismiss()
+                        onBackPressed()
+                    }
+                    .setNegativeButton(resources.getString(R.string.no)) { dialog, _ ->
+                        dialog.dismiss()
+                    }.create().show()
             }
         }
     }
@@ -112,7 +119,7 @@ class PolicyVoteActivity : AbstractActivity<ActivityPolicyVoteBinding, PoliciesV
         this.finish()
     }
 
-    private fun initTemporaryData(): MutableList<FloatArray>{
+    private fun initTemporaryData(): MutableList<FloatArray> {
         val temporaryData = mutableListOf<FloatArray>()
         temporaryData.add(floatArrayOf(7.2f, 5.5f))
         temporaryData.add(floatArrayOf(8.8f, 6.0f))
