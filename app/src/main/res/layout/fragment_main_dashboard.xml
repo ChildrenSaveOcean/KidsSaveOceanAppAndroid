@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:custom="http://schemas.android.com/apk/res/com.kidssaveocean.fatechanger"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_dashboard"
-    tools:context=".dashboard.MainDashboardFragment">
+    tools:context="com.kidssavetheocean.fatechanger.dashboard.MainDashboardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/icons"
@@ -41,7 +41,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.kidssaveocean.fatechanger.views.SurferIconView
+                <com.kidssavetheocean.fatechanger.views.SurferIconView
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +84,7 @@
                 app:layout_constraintStart_toEndOf="@id/firstLayout"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.kidssaveocean.fatechanger.views.SurferIconView
+                <com.kidssavetheocean.fatechanger.views.SurferIconView
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +126,7 @@
                 app:layout_constraintStart_toEndOf="@id/secondLayout"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.kidssaveocean.fatechanger.views.SurferIconView
+                <com.kidssavetheocean.fatechanger.views.SurferIconView
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +166,7 @@
                 app:layout_constraintStart_toEndOf="@id/thirdLayout"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.kidssaveocean.fatechanger.views.SurferIconView
+                <com.kidssavetheocean.fatechanger.views.SurferIconView
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -207,7 +207,7 @@
                 app:layout_constraintStart_toEndOf="@id/forthLayout"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.kidssaveocean.fatechanger.views.SurferIconView
+                <com.kidssavetheocean.fatechanger.views.SurferIconView
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -247,7 +247,7 @@
                 app:layout_constraintStart_toEndOf="@id/fifthLayout"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.kidssaveocean.fatechanger.views.SurferIconView
+                <com.kidssavetheocean.fatechanger.views.SurferIconView
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

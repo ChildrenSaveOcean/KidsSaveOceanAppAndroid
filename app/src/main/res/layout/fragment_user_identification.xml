@@ -20,7 +20,7 @@
 
                 <fragment
                     android:id="@+id/student_fragment"
-                    android:name="com.kidssaveocean.fatechanger.onboarding.userIdentification.UserIdentificationCardFragment"
+                    android:name="com.kidssavetheocean.fatechanger.onboarding.userIdentification.UserIdentificationCardFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
@@ -28,7 +28,7 @@
 
                 <fragment
                     android:id="@+id/teacher_fragment"
-                    android:name="com.kidssaveocean.fatechanger.onboarding.userIdentification.UserIdentificationCardFragment"
+                    android:name="com.kidssavetheocean.fatechanger.onboarding.userIdentification.UserIdentificationCardFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
@@ -36,7 +36,7 @@
 
                 <fragment
                     android:id="@+id/others_fragment"
-                    android:name="com.kidssaveocean.fatechanger.onboarding.userIdentification.UserIdentificationCardFragment"
+                    android:name="com.kidssavetheocean.fatechanger.onboarding.userIdentification.UserIdentificationCardFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"

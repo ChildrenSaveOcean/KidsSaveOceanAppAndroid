@@ -6,7 +6,7 @@
 
         <variable
             name="emptyVM"
-            type="com.kidssaveocean.fatechanger.presentation.mvvm.vm.EmptyViewModel" />
+            type="com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel" />
     </data>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
