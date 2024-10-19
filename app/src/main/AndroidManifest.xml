@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kidssaveocean.fatechanger"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
-        android:name=".MainApplication"
+        android:name="com.kidssavetheocean.fatechanger.MainApplication"
         tools:replace="android:icon"
         android:allowBackup="true"
         android:icon="@mipmap/ic_fatechanger"
@@ -28,37 +28,32 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".onboarding.OnboardingActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity
-            android:name=".onboarding.userIdentification.IntroductionVideoActivity"
+            android:name="com.kidssavetheocean.fatechanger.onboarding.userIdentification.IntroductionVideoActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".bottomNavigation.BottomNavigationActivity"
+            android:name="com.kidssavetheocean.fatechanger.bottomNavigation.BottomNavigationActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".onboarding.userIdentification.UserIdentificationActivity" />
+        <activity android:name="com.kidssavetheocean.fatechanger.onboarding.userIdentification.UserIdentificationActivity" />
 
-        <activity android:name=".policy.PolicyHomeActivity"/>
+        <activity android:name="com.kidssavetheocean.fatechanger.policy.PolicyHomeActivity"/>
 
-        <activity android:name=".policy.PolicyStepsActivity"/>
+        <activity android:name="com.kidssavetheocean.fatechanger.policy.PolicyStepsActivity"/>
 
-        <activity android:name=".policy.PolicyImpactActivity"/>
+        <activity android:name="com.kidssavetheocean.fatechanger.policy.PolicyImpactActivity"/>
 
-        <activity android:name=".policy.PolicyVoteActivity"/>
+        <activity android:name="com.kidssavetheocean.fatechanger.policy.PolicyVoteActivity"/>
 
-        <activity android:name=".policy.PolicyControlCenterActivity"/>
+        <activity android:name="com.kidssavetheocean.fatechanger.policy.PolicyControlCenterActivity"/>
 
-        <activity android:name=".WebViewActivity"/>
+        <activity android:name="com.kidssavetheocean.fatechanger.WebViewActivity"/>
 
-        <activity android:name=".policy.TrackCampaignActivity"/>
+        <activity android:name="com.kidssavetheocean.fatechanger.policy.TrackCampaignActivity"/>
 
-        <activity android:name=".policy.PolicyVideoActivity"/>
+        <activity android:name="com.kidssavetheocean.fatechanger.policy.PolicyVideoActivity"/>
 
-        <activity android:name=".splashScreen.SplashScreenActivity"
+        <activity android:name="com.kidssavetheocean.fatechanger.onboarding.OnboardingActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait"
             android:exported="true">
@@ -70,7 +65,7 @@
         </activity>
 
         <activity
-            android:name=".dashboard.DashBoardVideoActivity"
+            android:name="com.kidssavetheocean.fatechanger.dashboard.DashBoardVideoActivity"
             android:screenOrientation="portrait" />
     </application>
 

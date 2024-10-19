@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="ContentDescription">
 
+    <data>
+        <variable
+            name="dashboardViewModel"
+            type="com.kidssavetheocean.fatechanger.dashboard.MainDashboardViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,7 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.kidssaveocean.fatechanger.views.SurferIconView
+        <com.kidssavetheocean.fatechanger.views.SurferIconView
             android:id="@+id/one"
             android:layout_width="@dimen/dashboard_icon_size"
             android:layout_height="@dimen/dashboard_icon_size"
@@ -33,7 +39,7 @@
             app:layout_constraintEnd_toStartOf="@id/bottom_sheet"
             app:layout_constraintStart_toStartOf="@id/bottom_sheet" />
 
-        <com.kidssaveocean.fatechanger.views.SurferIconView
+        <com.kidssavetheocean.fatechanger.views.SurferIconView
             android:id="@+id/two"
             android:layout_width="@dimen/dashboard_icon_size"
             android:layout_height="@dimen/dashboard_icon_size"
@@ -43,7 +49,7 @@
             app:layout_constraintEnd_toStartOf="@id/three"
             app:layout_constraintStart_toEndOf="@id/one" />
 
-        <com.kidssaveocean.fatechanger.views.SurferIconView
+        <com.kidssavetheocean.fatechanger.views.SurferIconView
             android:id="@+id/three"
             android:layout_width="@dimen/dashboard_icon_size"
             android:layout_height="@dimen/dashboard_icon_size"
@@ -53,7 +59,7 @@
             app:layout_constraintEnd_toStartOf="@id/four"
             app:layout_constraintStart_toEndOf="@id/two" />
 
-        <com.kidssaveocean.fatechanger.views.SurferIconView
+        <com.kidssavetheocean.fatechanger.views.SurferIconView
             android:id="@+id/four"
             android:layout_width="@dimen/dashboard_icon_size"
             android:layout_height="@dimen/dashboard_icon_size"
@@ -63,7 +69,7 @@
             app:layout_constraintEnd_toStartOf="@id/five"
             app:layout_constraintStart_toEndOf="@id/three" />
 
-        <com.kidssaveocean.fatechanger.views.SurferIconView
+        <com.kidssavetheocean.fatechanger.views.SurferIconView
             android:id="@+id/five"
             android:layout_width="@dimen/dashboard_icon_size"
             android:layout_height="@dimen/dashboard_icon_size"
@@ -73,7 +79,7 @@
             app:layout_constraintEnd_toStartOf="@id/six"
             app:layout_constraintStart_toEndOf="@id/four" />
 
-        <com.kidssaveocean.fatechanger.views.SurferIconView
+        <com.kidssavetheocean.fatechanger.views.SurferIconView
             android:id="@+id/six"
             android:layout_width="@dimen/dashboard_icon_size"
             android:layout_height="@dimen/dashboard_icon_size"
