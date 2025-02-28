@@ -20,7 +20,9 @@
                 app:layout_constraintDimensionRatio="997:283"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <include layout="@layout/view_toolbar" />
+            <include
+                android:id="@+id/policy_home_toolbar"
+                layout="@layout/view_toolbar" />
 
             <TextView
                 android:id="@+id/tvPolicyHomeTitle"

@@ -88,7 +88,7 @@ class SelectCountryFragment : AbstractFragment<FragmentLetterBinding, EmptyViewM
         }
     }
 
-    //todo fix this
+//    //todo fix this
     override fun update(o: Observable?, arg: Any?) {
         when (o) {
             is FirebaseService -> {
