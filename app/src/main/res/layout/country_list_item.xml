@@ -5,15 +5,15 @@
 
     <TextView
         android:id="@+id/rank_number"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:gravity="center"
         android:background="@drawable/country_rank_bg"
         android:text="1"
-        android:textSize="20sp">
+        android:textSize="15sp">
 
     </TextView>
 
@@ -27,7 +27,7 @@
         android:layout_toRightOf="@id/rank_number"
         android:text="United States"
         android:textColor="@color/black"
-        android:textSize="20sp"></TextView>
+        android:textSize="15sp"/>
 
     <TextView
         android:id="@+id/country_letter_number"
@@ -38,7 +38,7 @@
         android:layout_marginRight="0dp"
         android:paddingRight="10dp"
         android:textColor="#8E8E93"
-        android:textSize="20sp"></TextView>
+        android:textSize="15sp"/>
 
 
 </RelativeLayout>

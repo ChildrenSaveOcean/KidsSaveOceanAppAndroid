@@ -6,13 +6,13 @@ import com.kidssavetheocean.fatechanger.firebase.viewmodel.PoliciesViewModel
 import com.kidssavetheocean.fatechanger.firebase.viewmodel.PolicyStepsViewModel
 import com.kidssavetheocean.fatechanger.policy.PolicyControlCenterActivity
 import com.kidssavetheocean.fatechanger.policy.PolicyStepsActivity
-import com.kidssavetheocean.fatechanger.policy.PolicyVoteActivity
+import com.kidssavetheocean.fatechanger.policy.vote.PolicyVoteFragment
 import dagger.Component
 
 @Component(modules = [HijackPoliciesRepoModule::class])
 
 interface HijackPolicyComponent {
-    fun inject(policyVoteActivity: PolicyVoteActivity)
+    fun inject(policyVoteActivity: PolicyVoteFragment)
     fun inject(policyStepsActivity: PolicyStepsActivity)
     fun inject(policyControlCenterActivity: PolicyControlCenterActivity)
 
