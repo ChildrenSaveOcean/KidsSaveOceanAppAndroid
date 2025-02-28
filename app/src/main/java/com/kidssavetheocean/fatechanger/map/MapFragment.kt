@@ -15,9 +15,7 @@ import com.kidssavetheocean.fatechanger.firebase.model.CountryModel
 import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_map.countries
-import kotlinx.android.synthetic.main.fragment_map.enter_your_letter
-import kotlinx.android.synthetic.main.fragment_map.letters_written
+
 import java.util.Observable
 import java.util.Observer
 
@@ -45,7 +43,7 @@ class MapFragment : AbstractFragment<FragmentMapBinding, EmptyViewModel>(), Obse
             getTabAt(flag)?.select()
         }
 
-        enter_your_letter.setOnClickListener {
+        binding.enterYourLetter.setOnClickListener {
             navigateToView(EnterLetterFragment::class)
         }
 
@@ -108,13 +106,13 @@ class MapFragment : AbstractFragment<FragmentMapBinding, EmptyViewModel>(), Obse
     private fun updateText(data: List<CountryModel>) {
         var letterNum: Long = 0
         if (data.isNotEmpty()) {
-            countries.text = data.size.toString()
+            binding.countries.text = data.size.toString()
 
             for (i in data.indices) {
                 letterNum = letterNum.plus(data[i].country_number)
             }
 
-            letters_written.text = letterNum.toString()
+            binding.lettersWritten.text = letterNum.toString()
         }
 
     }

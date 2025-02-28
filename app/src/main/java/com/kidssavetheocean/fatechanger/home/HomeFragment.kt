@@ -13,7 +13,7 @@ import com.kidssavetheocean.fatechanger.WebViewActivity
 import com.kidssavetheocean.fatechanger.bottomNavigation.BottomNavigationActivity
 import com.kidssavetheocean.fatechanger.countryContacts.CountryIntroFragment
 import com.kidssavetheocean.fatechanger.databinding.HomeFragmentBinding
-import com.kidssavetheocean.fatechanger.policy.PolicyHomeActivity
+import com.kidssavetheocean.fatechanger.policy.PolicyHomeFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -70,7 +70,8 @@ class HomeFragment : AbstractFragment<HomeFragmentBinding, EmptyViewModel>(), Ho
             }
 
             Operator.POLICY.ordinal ->
-                startActivity(Intent(activity, PolicyHomeActivity::class.java))
+                  navigateToView(PolicyHomeFragment::class)
+//                startActivity(Intent(activity, PolicyHomeActivity::class.java))
 
             Operator.MAP.ordinal -> bottomActivity.setMenuItem(R.id.action_map)
 
