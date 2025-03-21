@@ -4,12 +4,14 @@ import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.firebase.database.FirebaseDatabase
 import com.kidssavetheocean.fatechanger.BR
 import com.kidssavetheocean.fatechanger.R
 import com.kidssavetheocean.fatechanger.bottomNavigation.BottomNavigationActivity
@@ -18,6 +20,7 @@ import com.kidssavetheocean.fatechanger.dashboard.MainDashboardFragment
 import com.kidssavetheocean.fatechanger.databinding.FragmentEnterLetterBinding
 import com.kidssavetheocean.fatechanger.extensions.getCountryByLocation
 import com.kidssavetheocean.fatechanger.firebase.FirebaseService
+import com.kidssavetheocean.fatechanger.firebase.FirebaseService.Companion.COUNTRIES_TABLE
 import com.kidssavetheocean.fatechanger.firebase.model.CountryModel
 import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
@@ -60,7 +63,39 @@ class EnterLetterFragment : AbstractFragment<FragmentEnterLetterBinding, EmptyVi
                 .setTitle(R.string.enter_letter_dialog_question)
                 .setPositiveButton(R.string.enter_letter_positive_answer) { _, _ ->
                     run {
-                        currentCountry?.let { FirebaseService.getInstance().increaseWrittenLettersNumber(it) }
+                        currentCountry?.let { country ->
+                            val writtenLetters = country.letters_written_to_country + 1
+
+                            val dbObject: HashMap<String, Any> = hashMapOf(
+                                "country_name" to country.country_name,
+                                "country_number" to country.country_number,
+                                "country_address" to country.country_address,
+                                "country_head_of_state_title" to country.country_head_of_state_title,
+                                "latitude" to country.latitude,
+                                "longitude" to country.longitude,
+                                "letters_written_to_country" to writtenLetters
+                            )
+
+                            FirebaseDatabase
+                                .getInstance()
+                                .reference
+                                .child(COUNTRIES_TABLE)
+                                .child(country.country_code)
+                                .setValue(dbObject)
+                                .addOnSuccessListener {
+                                    Log.e("test", "onViewCreated: asdas", )
+                                }
+                                .addOnFailureListener {
+                                    Log.e("test", "failed" )
+                                }
+                                .addOnCompleteListener {
+                                    Log.e("test", "complete")
+                                }
+                        }
+
+//                    .ref
+//                    .setValue(dbObject)
+//                        currentCountry?.let { FirebaseService.getInstance().increaseWrittenLettersNumber(it) }
                     }
                     AlertDialog.Builder(requireContext())
                         .setTitle(R.string.youre_letter_has_been_recorded)

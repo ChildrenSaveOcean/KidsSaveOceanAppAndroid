@@ -109,7 +109,7 @@ class MapFragment : AbstractFragment<FragmentMapBinding, EmptyViewModel>(), Obse
             binding.countries.text = data.size.toString()
 
             for (i in data.indices) {
-                letterNum = letterNum.plus(data[i].country_number)
+                letterNum = letterNum.plus(data[i].letters_written_to_country)
             }
 
             binding.lettersWritten.text = letterNum.toString()

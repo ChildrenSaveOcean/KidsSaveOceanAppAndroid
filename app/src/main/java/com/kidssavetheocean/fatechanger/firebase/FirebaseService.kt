@@ -82,6 +82,8 @@ class FirebaseService : Observable ()  {
         )
 
         try {
+
+
             FirebaseDatabase
                     .getInstance()
                     .reference
