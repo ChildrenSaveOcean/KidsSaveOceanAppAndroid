@@ -12,7 +12,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -25,14 +24,14 @@ import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragm
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import com.kidssavetheocean.fatechanger.views.CustomMapMarkerView
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Observable
-import java.util.Observer
+import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 //todo fix
 @AndroidEntryPoint
-class MapShownFragment : AbstractFragment<FragmentMapShownBinding, EmptyViewModel>(), OnMapReadyCallback, Observer {
+class MapShownFragment : AbstractFragment<FragmentMapShownBinding, EmptyViewModel>(),
+    OnMapReadyCallback {
 
-    private var countries: MutableCollection<CountryModel> = mutableListOf()
     private lateinit var mGoogleMap: GoogleMap
 
     override fun getViewModelResId(): Int = BR.emptyVM
@@ -41,65 +40,64 @@ class MapShownFragment : AbstractFragment<FragmentMapShownBinding, EmptyViewMode
 
     override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
+    //todo fix this temp solution
+    @Inject
+    lateinit var firebaseService: FirebaseService
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //todo what ????
         val fragment = childFragmentManager
-                .findFragmentById(R.id.map) as SupportMapFragment?
+            .findFragmentById(R.id.map) as SupportMapFragment?
         fragment!!.getMapAsync(this)
-
-        FirebaseService.getInstance().addObserver(this)
-
-    }
-
-    override fun update(o: Observable?, arg: Any?) {
-        when (o) {
-            is FirebaseService -> {
-                if (o.countries.isNotEmpty()) {
-                    drawMarks()
-                }
-            }
-        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         googleMap.uiSettings.isMapToolbarEnabled = false
         mGoogleMap = googleMap
-        drawMarks()
+        drawMarks(emptyList())
+        firebaseService.countries.observe(this.viewLifecycleOwner) {
+            drawMarks(it)
+        }
+        runBlocking {
+            firebaseService.getCountriesData()
+        }
     }
 
-    private fun drawMarks() {
-        countries.clear()
-        countries.addAll(FirebaseService.getInstance().countries)
+    private fun drawMarks(countries: List<CountryModel>) {
 
         for (item in countries) {
-            if (item.country_number > 0) {
+            if (item.letters_written_to_country > 0) {
                 val country = LatLng(item.latitude, item.longitude)
 
-                CustomMapMarkerView.numberLetter = item.country_number.toString()
-                val drawable = activity?.let { createDrawableFromView(it, CustomMapMarkerView(it)) }!!
+                CustomMapMarkerView.numberLetter = item.letters_written_to_country.toString()
+                val drawable =
+                    activity?.let { createDrawableFromView(it, CustomMapMarkerView(it)) }!!
                 val icon = BitmapDescriptorFactory.fromBitmap(drawable)
-
-                if (icon is BitmapDescriptor){
-                    mGoogleMap.addMarker(MarkerOptions()
-                            .position(country)
-                            .icon(icon)
-                            .title(item.country_name))
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(country))
-                }
+                mGoogleMap.addMarker(
+                    MarkerOptions()
+                        .position(country)
+                        .icon(icon)
+                        .title(item.country_name)
+                )
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(country))
             }
         }
     }
 
-
     private fun createDrawableFromView(context: Context, view: View): Bitmap {
+        //todo fix this
         val displayMetrics = DisplayMetrics()
         (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
-        view.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        view.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
         view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
         view.buildDrawingCache()
 
-        val bitmap: Bitmap = Bitmap.createBitmap(view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888)
+        val bitmap: Bitmap =
+            Bitmap.createBitmap(view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         view.draw(canvas)
         return bitmap

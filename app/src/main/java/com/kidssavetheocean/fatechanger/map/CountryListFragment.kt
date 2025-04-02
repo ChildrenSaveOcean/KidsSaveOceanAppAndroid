@@ -13,21 +13,17 @@ import com.kidssavetheocean.fatechanger.firebase.model.CountryModel
 import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Observable
-import java.util.Observer
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class CountryListFragment : AbstractFragment<FragmentCountryListBinding, EmptyViewModel>(), Observer {
+class CountryListFragment : AbstractFragment<FragmentCountryListBinding, EmptyViewModel>() {
 
-    private var countries: List<CountryModel> = listOf()
     private lateinit var mAdapter: CountryListAdapter
+    @Inject
+    lateinit var firebaseService: FirebaseService
 
     override fun onPrepareLayout(layoutView: View?) {
-        super.onPrepareLayout(layoutView)
         val recyclerview: RecyclerView = binding.countryListRv
-
-        //todo get rid of this
-        FirebaseService.getInstance().addObserver(this)
 
         mAdapter = CountryListAdapter(activity as Context)
         recyclerview.adapter = mAdapter
@@ -37,7 +33,9 @@ class CountryListFragment : AbstractFragment<FragmentCountryListBinding, EmptyVi
             addItemDecoration(object : DividerItemDecoration(activity, VERTICAL) {})
         }
 
-        updateList(FirebaseService.getInstance().countries)
+        firebaseService.countries.observe(this.viewLifecycleOwner) {
+            updateList(it)
+        }
     }
 
     override fun getViewModelResId(): Int = BR.emptyVM
@@ -51,15 +49,5 @@ class CountryListFragment : AbstractFragment<FragmentCountryListBinding, EmptyVi
             mAdapter.countriesLocal = data as MutableList<CountryModel>
             mAdapter.notifyDataSetChanged()
         }
-
     }
-
-    override fun update(o: Observable?, arg: Any?) {
-        when (o) {
-            is FirebaseService -> {
-                updateList(o.countries)
-            }
-        }
-    }
-
 }
