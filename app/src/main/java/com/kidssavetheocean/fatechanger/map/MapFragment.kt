@@ -2,6 +2,7 @@ package com.kidssavetheocean.fatechanger.map
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -15,27 +16,25 @@ import com.kidssavetheocean.fatechanger.firebase.model.CountryModel
 import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
-import java.util.Observable
-import java.util.Observer
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MapFragment : AbstractFragment<FragmentMapBinding, EmptyViewModel>(), Observer {
+class MapFragment : AbstractFragment<FragmentMapBinding, EmptyViewModel>() {
     var manager: FragmentManager? = null
     var transaction: FragmentTransaction? = null
     var mapShownFragment = MapShownFragment()
     var countryListFragment = CountryListFragment()
     var flag = 0
 
-    override fun onPrepareLayout(layoutView: View?) {
-        super.onPrepareLayout(layoutView)
-        FirebaseService.getInstance().addObserver(this)
-    }
+    @Inject
+    lateinit var firebaseService: FirebaseService
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val tabLayout = binding.tabLayout
 
-        updateText(FirebaseService.getInstance().countries)
+        firebaseService.countries.observe(this.viewLifecycleOwner) {
+            updateText(it)
+        }
 
         tabLayout.run {
             addTab(newTab().setText("Map View").setTag("Map"))
@@ -71,7 +70,6 @@ class MapFragment : AbstractFragment<FragmentMapBinding, EmptyViewModel>(), Obse
                             commit()
                         }
                     }
-
                     "Top Ten" -> {
                         flag = 1
                         tabLayout.getTabAt(0)?.text = "Map View"
@@ -88,19 +86,8 @@ class MapFragment : AbstractFragment<FragmentMapBinding, EmptyViewModel>(), Obse
                         }
                     }
                 }
-
-
             }
-
         })
-    }
-
-    override fun update(o: Observable?, arg: Any?) {
-        when (o) {
-            is FirebaseService -> {
-                updateText(o.countries)
-            }
-        }
     }
 
     private fun updateText(data: List<CountryModel>) {
@@ -108,8 +95,9 @@ class MapFragment : AbstractFragment<FragmentMapBinding, EmptyViewModel>(), Obse
         if (data.isNotEmpty()) {
             binding.countries.text = data.size.toString()
 
-            for (i in data.indices) {
-                letterNum = letterNum.plus(data[i].country_number)
+            data.forEach {
+                letterNum += it.letters_written_to_country
+                Log.e("letters", "written in ${it.country_name} equal: ${it.letters_written_to_country}")
             }
 
             binding.lettersWritten.text = letterNum.toString()

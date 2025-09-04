@@ -1,6 +1,7 @@
 package com.kidssavetheocean.fatechanger.firebase
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -9,32 +10,25 @@ import com.google.firebase.database.DatabaseException
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.kidssavetheocean.fatechanger.firebase.model.CountryModel
-import java.util.Observable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
 //todo this class needs a serious rework
-class FirebaseService : Observable ()  {
+@Singleton
+class FirebaseService @Inject constructor() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val _countries : MutableCollection<CountryModel> = mutableListOf()
+    private val _countries = MutableLiveData<List<CountryModel>>(emptyList())
 
-    val countriesObservable: MutableLiveData<List<CountryModel>> = MutableLiveData()
-
-    val countries : List<CountryModel>
-        get() = _countries.toList()
-
-    var hasCountries = false
-        get() = _countries.isNotEmpty()
+    val countries: LiveData<List<CountryModel>>
+        get() = _countries
 
     companion object {
-
-        private val instance: FirebaseService = FirebaseService()
         /* The 'table' in Firebase database */
         const val COUNTRIES_TABLE = "COUNTRIES"
-
-        @Synchronized
-        fun getInstance(): FirebaseService {
-            return instance
-        }
+        const val TAG = "FirebaseService"
     }
 
     init {
@@ -42,54 +36,84 @@ class FirebaseService : Observable ()  {
         auth.signInAnonymously().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d("FirebaseService", task.result?.user?.uid ?: "UID not available")
-                var dbInstance = FirebaseDatabase.getInstance().reference;
-                dbInstance.child(COUNTRIES_TABLE).addListenerForSingleValueEvent(object : ValueEventListener {
-
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                        for (item in dataSnapshot.children) {
-                            var countryModel = item.getValue(CountryModel::class.java)
-                            countryModel?.let {
-                                it.country_code = item.key!!
-                                _countries.add(it)
-                                setChanged()
+                val dbInstance = FirebaseDatabase.getInstance().reference
+                dbInstance.child(COUNTRIES_TABLE)
+                    .addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            val newCountries = mutableListOf<CountryModel>()
+                            for (item in dataSnapshot.children) {
+                                item.getValue(CountryModel::class.java)?.let { tempModel ->
+                                    item.key?.let { key ->
+                                        val model = tempModel.copy(country_code = key)
+                                        newCountries.add(model)
+                                    }
+                                }
                             }
+                            _countries.postValue(newCountries)
                         }
-                        notifyObservers(countries)
-                        countriesObservable.value = countries
-                    }
 
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        println("The read failed: " + databaseError.code)
-                    }
-                })
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            Log.w(TAG, "The read failed: " + databaseError.code)
+                        }
+                    })
             }
         }
     }
 
-    fun increaseWrittenLettersNumber(country : CountryModel) {
+    suspend fun getCountriesData() {
+        withContext(Dispatchers.IO) {
+            auth.signInAnonymously().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("FirebaseService", task.result?.user?.uid ?: "UID not available")
+                    val dbInstance = FirebaseDatabase.getInstance().reference
+                    dbInstance.child(COUNTRIES_TABLE)
+                        .addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                val newCountries = mutableListOf<CountryModel>()
+                                for (item in dataSnapshot.children) {
+                                    item.getValue(CountryModel::class.java)?.let { tempModel ->
+                                        item.key?.let { key ->
+                                            val model = tempModel.copy(country_code = key)
+                                            newCountries.add(model)
+                                        }
+                                    }
+                                }
+                                _countries.postValue(newCountries)
+                            }
+
+                            override fun onCancelled(databaseError: DatabaseError) {
+                                Log.w(TAG, "The read failed: " + databaseError.code)
+                            }
+                        })
+                }
+            }
+        }
+    }
+
+    fun increaseWrittenLettersNumber(country: CountryModel) {
 
         var writtenLetters = country.letters_written_to_country + 1
 
         val dbObject: HashMap<String, Any> = hashMapOf(
-                "country_name" to country.country_name,
-                "country_number" to country.country_number,
-                "country_address" to country.country_address,
-                "country_head_of_state_title" to country.country_head_of_state_title,
-                "latitude" to country.latitude,
-                "longitude" to country.longitude,
-                "letters_written_to_country" to writtenLetters
+            "country_name" to country.country_name,
+            "country_number" to country.country_number,
+            "country_address" to country.country_address,
+            "country_head_of_state_title" to country.country_head_of_state_title,
+            "latitude" to country.latitude,
+            "longitude" to country.longitude,
+            "letters_written_to_country" to writtenLetters
         )
 
         try {
+
+
             FirebaseDatabase
-                    .getInstance()
-                    .reference
-                    .child(COUNTRIES_TABLE)
-                    .child(country.country_code)
-                    .setValue(dbObject)
-        }
-        catch (dE: DatabaseException) {
+                .getInstance()
+                .reference
+                .child(COUNTRIES_TABLE)
+                .child(country.country_code)
+                .setValue(dbObject)
+        } catch (dE: DatabaseException) {
             print("Firebase exception: ${dE.message}")
         }
     }

@@ -16,7 +16,8 @@ class CountryListAdapter(private val context: Context)
     var countriesLocal: MutableList<CountryModel> = mutableListOf()
         set(value) {
             val number = if (value.size > 10) 10 else value.size
-            field.addAll(value.sortedByDescending { it.country_number }.take(number))
+            field.clear()
+            field.addAll(value.sortedByDescending { it.letters_written_to_country }.take(number))
         }
 
     private val colorList = listOf(
@@ -47,7 +48,7 @@ class CountryListAdapter(private val context: Context)
             grad.setColor(context.resources.getColor(colorList[position]))
 
             countryName.text = countriesLocal[position].country_name
-            countryLetterNumber.text = countriesLocal[position].country_number.toString()
+            countryLetterNumber.text = countriesLocal[position].letters_written_to_country.toString()
 
         }
     }

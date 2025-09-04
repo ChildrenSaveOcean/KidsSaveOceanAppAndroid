@@ -19,12 +19,25 @@ android {
         dataBinding true
     }
 
+    signingConfigs {
+        create("release") {
+            def keystorePropertiesFile = rootProject.file("local.properties")
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+            storeFile file(keystoreProperties["KEYSTORE_FILE"])
+            storePassword keystoreProperties["KEYSTORE_PASSWORD"]
+            keyAlias keystoreProperties["KEY_ALIAS"]
+            keyPassword keystoreProperties["KEY_PASSWORD"]
+        }
+    }
+
     defaultConfig {
         applicationId "com.kidssavetheocean.fatechanger"
         minSdkVersion 21
-        targetSdkVersion 34
-        versionCode 1
-        versionName "1.0.1"
+        targetSdkVersion 35
+        versionCode 3
+        versionName "1.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -37,6 +50,7 @@ android {
             resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 

@@ -69,7 +69,7 @@
     <string name="write_letter_task_climate">TASK: Write your government a letter about climate</string>
     <string name="sharing_task_description">TASK: Spread Fatechanger by sharing</string>
     <string name="letter_campaing_task_description">TASK: Start a letter writing campaign</string>
-    <string name="government_task_description">TASK: Help create new environmental laws</string>
+    <string name="environmental_laws_task">TASK: Help create new environmental laws</string>
     <string name="protest_task_description">TASK: Take part in or organize a protest</string>
     <string name="activist_campaign_text">Start a letter-writing campaign with help from your classmates and teacher to fight plastic and climate emergencies. How many letters can your school write?</string>
     <string name="activist_campaign_subtitle">Be a leader. Cause a wave.</string>
@@ -105,7 +105,7 @@
     <string name="policy_vote_impact">IMPACT</string>
     <string name="policy_vote_difficulty">DIFFICULTY</string>
     <string name="policy_vote_impact_div_difficulty">IMPACT/DIFFICULTY</string>
-    <string name="policy_vote_subtitle">Which environmental policy do you feel\nyouth should try to get passed?</string>
+    <string name="policy_vote_subtitle">Which environmental policy do you feel youth should try to get passed?</string>
     <string name="policy_vote_summary_title">Summary of Policy</string>
     <string name="policy_vote_dialog_message">Are you sure you want to vote for this policy?</string>
     <string name="policy_vote_already">You have voted already</string>
