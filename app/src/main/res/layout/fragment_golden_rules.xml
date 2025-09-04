@@ -29,7 +29,7 @@
             android:gravity="center_horizontal"
             android:padding="10dp"
             android:text="@string/golden_rules_of_protesting"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <ScrollView
@@ -45,7 +45,7 @@
                 android:padding="10dp"
                 android:text="@string/golden_rules_text"
                 android:textAlignment="textStart"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </ScrollView>
     </LinearLayout>
 </layout>
