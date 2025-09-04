@@ -9,7 +9,6 @@ import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragm
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import com.kidssavetheocean.fatechanger.resources.ResourcesFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_start_activist_campaign.tools_button
 
 @AndroidEntryPoint
 class EngageLocalGovernmentFragment : AbstractFragment<FragmentEngageLocalGovernmentBinding, EmptyViewModel>() {
@@ -23,7 +22,7 @@ class EngageLocalGovernmentFragment : AbstractFragment<FragmentEngageLocalGovern
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tools_button?.setOnClickListener {
+        binding.toolsButton.setOnClickListener {
             navigateToView(ResourcesFragment::class)
         }
     }

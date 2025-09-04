@@ -10,7 +10,6 @@ import com.kidssavetheocean.fatechanger.databinding.WebViewActBinding
 import com.kidssavetheocean.fatechanger.presentation.mvvm.activity.AbstractActivity
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_webview.webView
 
 @AndroidEntryPoint
 class WebViewActivity : AbstractActivity<WebViewActBinding, EmptyViewModel>() {
@@ -31,10 +30,10 @@ class WebViewActivity : AbstractActivity<WebViewActBinding, EmptyViewModel>() {
             }
         }
 
-        val settings = webView.settings
+        val settings = binding.webView.settings
         settings.javaScriptEnabled = true
         if (!TextUtils.isEmpty(loadUrl))
-            webView.loadUrl(loadUrl)
+            binding.webView.loadUrl(loadUrl)
     }
 
     override fun getLayoutId(): Int = R.layout.activity_webview
@@ -42,18 +41,16 @@ class WebViewActivity : AbstractActivity<WebViewActBinding, EmptyViewModel>() {
     override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KEYCODE_BACK && webView.canGoBack()) {
-            webView.goBack()
+        if (keyCode == KEYCODE_BACK && binding.webView.canGoBack()) {
+            binding.webView.goBack()
             return true
         }
         return super.onKeyDown(keyCode, event)
     }
 
     override fun onDestroy() {
-        if (webView != null) {
-            webView.clearHistory()
-            webView.destroy()
-        }
+        binding.webView.clearHistory()
+        binding.webView.destroy()
         super.onDestroy()
     }
 }

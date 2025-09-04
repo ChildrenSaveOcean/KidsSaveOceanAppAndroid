@@ -1,9 +1,12 @@
 package com.kidssavetheocean.fatechanger.map
 
+import android.Manifest
 import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -12,12 +15,11 @@ import com.kidssavetheocean.fatechanger.R
 import com.kidssavetheocean.fatechanger.dashboard.DashboardSteps
 import com.kidssavetheocean.fatechanger.dashboard.MainDashboardFragment
 import com.kidssavetheocean.fatechanger.databinding.FragmentEnterLetterBinding
+import com.kidssavetheocean.fatechanger.extensions.getCountryByLocation
 import com.kidssavetheocean.fatechanger.firebase.FirebaseService
 import com.kidssavetheocean.fatechanger.firebase.model.CountryModel
 import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_enter_letter.country_picker
-import kotlinx.android.synthetic.main.fragment_enter_letter.progressBar_cyclic
 import javax.inject.Inject
 
 /**
@@ -26,12 +28,17 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class EnterLetterFragment : AbstractFragment<FragmentEnterLetterBinding, EnterLetterViewModel>() {
 
-    private val PERMISSION_ACCESS_FINE_LOCATION: Int = 111
     private var currentCountryIndex: Int = -1
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     @Inject
     lateinit var firebaseService: FirebaseService
+
+    private val locationActivityLauncher = registerForActivityResult(RequestPermission()) { isGranted ->
+        if (isGranted) {
+            viewModel.loadCountriesData()
+        }
+    }
 
     override fun onPrepareLayout(layoutView: View?) {
         super.onPrepareLayout(layoutView)
@@ -66,6 +73,7 @@ class EnterLetterFragment : AbstractFragment<FragmentEnterLetterBinding, EnterLe
         }
         firebaseService.countries.observe(this.viewLifecycleOwner) {
             updateState(DataLoaded(it))
+            obtainLocation(it)
         }
         viewModel.loadCountriesData()
     }
@@ -111,43 +119,32 @@ class EnterLetterFragment : AbstractFragment<FragmentEnterLetterBinding, EnterLe
 
     private fun fillPicker(countries: List<CountryModel>) {
         val countryNames = countries.map { it.country_name }.toTypedArray()
-        country_picker.minValue = 0
-        country_picker.maxValue = countries.size - 1
-        country_picker.displayedValues = countryNames
-        country_picker.wrapSelectorWheel = true
-        country_picker.visibility = View.VISIBLE
-        progressBar_cyclic.visibility = View.GONE
-        country_picker.setOnValueChangedListener { _, _, newVal ->
+       binding.countryPicker.minValue = 0
+       binding.countryPicker.maxValue = countries.size - 1
+       binding.countryPicker.displayedValues = countryNames
+       binding.countryPicker.wrapSelectorWheel = true
+       binding.countryPicker.visibility = View.VISIBLE
+       binding.progressBarCyclic.visibility = View.GONE
+       binding.countryPicker.setOnValueChangedListener { _, _, newVal ->
             currentCountryIndex = newVal
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        //todo fix
-        when (requestCode) {
-            PERMISSION_ACCESS_FINE_LOCATION -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    obtainLocation()
+    private fun obtainLocation(data: List<CountryModel>) {
+        //todo this is "working", but we are making a second unnecessary call for the countries fix it
+        val locationPermission =
+            checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+        if (locationPermission != PackageManager.PERMISSION_GRANTED) {
+            locationActivityLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        } else {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                        val country = location.getCountryByLocation(data)
+                    country.let { c ->
+                        val index = data.indexOf(c)
+                        binding.countryPicker.value = index
+                    }
                 }
-            }
         }
-    }
-
-    private fun obtainLocation() {
-        //todo fix
-//        fusedLocationClient.lastLocation
-//            .addOnSuccessListener { location: Location? ->
-//                location?.let { it ->
-//                    val country = it.getCountryByLocation(countries)
-//                    country?.let { c ->
-//                        val index = countries.indexOf(c)
-//                        country_picker?.value = index
-//                    }
-//                }
-//            }
     }
 }

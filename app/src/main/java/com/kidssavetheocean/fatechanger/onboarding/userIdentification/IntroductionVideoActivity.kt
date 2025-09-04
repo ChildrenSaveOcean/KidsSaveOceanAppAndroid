@@ -13,7 +13,6 @@ import com.kidssavetheocean.fatechanger.presentation.mvvm.activity.AbstractActiv
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import com.kidssavetheocean.fatechanger.sharedprefs.FateChangerSharedPrefs
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_introduction_video.youtube_text_view
 
 @AndroidEntryPoint
 class IntroductionVideoActivity : AbstractActivity<ActivityIntroductionVideoBinding, EmptyViewModel>() {
@@ -25,7 +24,7 @@ class IntroductionVideoActivity : AbstractActivity<ActivityIntroductionVideoBind
         super.onCreate(savedInstanceState)
 
         val title = intent.getStringExtra(INTRO_TYPE)
-        youtube_text_view.text = title
+        binding.youtubeTextView.text = title
         flNoInternet = findViewById(R.id.fl_no_internet)
         updateFlNoInternet()
 

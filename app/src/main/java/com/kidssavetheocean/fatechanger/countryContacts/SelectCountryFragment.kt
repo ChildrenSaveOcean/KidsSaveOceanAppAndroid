@@ -40,10 +40,16 @@ class SelectCountryFragment : AbstractFragment<FragmentLetterBinding, EmptyViewM
 
     override fun getViewModelClass(): Class<EmptyViewModel> = EmptyViewModel::class.java
 
+    override fun onPrepareLayout(layoutView: View?) {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val bottomActivity = activity as BottomNavigationActivity
+        //todo get rid of those fused location clients
+
         if (ContextCompat.checkSelfPermission(
                 bottomActivity,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -66,15 +72,11 @@ class SelectCountryFragment : AbstractFragment<FragmentLetterBinding, EmptyViewM
 
         firebaseService.countries.observe(this.viewLifecycleOwner) {
             countries = it
-            letterAddress = it[0].country_address
-            updatePicker(it)
+            if(it.isNotEmpty()) {
+                letterAddress = it[0].country_address
+                updatePicker(it)
+            }
         }
-
-        //todo get rid of those fused location clients
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(bottomActivity)
-
-
-
     }
 
     private fun updatePicker(data: List<CountryModel>) {
@@ -110,8 +112,7 @@ class SelectCountryFragment : AbstractFragment<FragmentLetterBinding, EmptyViewM
     @SuppressLint("MissingPermission")
     private fun obtainLocation() {
         //todo Issue!!!
-        val country: String = requireContext().resources.configuration.locales[0].country
-        Log.e("test", "country of mine: $country")
+        if(countries.isEmpty()) return
         val sb = StringBuilder()
         countries.forEach {
             sb.append(it.country_name).append("--\t--")

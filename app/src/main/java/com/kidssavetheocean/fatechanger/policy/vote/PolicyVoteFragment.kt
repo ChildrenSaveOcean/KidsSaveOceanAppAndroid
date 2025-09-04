@@ -49,7 +49,7 @@ class PolicyVoteFragment : AbstractFragment<FragmentPolicyVoteBinding, PoliciesV
                     policyValue = policies[position].second
                     policyName = policies[position].first
                     binding.tvSummaryContent.text = policyValue?.summary
-                    val impact = temproaryData[position][0]
+                    val impact = policies[position].second.Impact
                     val difficulty = temproaryData[position][1]
                     binding.tvImpactValue.text = decimalFormat.format(impact)
                     binding.tvDifficultyValue.text = decimalFormat.format(difficulty)

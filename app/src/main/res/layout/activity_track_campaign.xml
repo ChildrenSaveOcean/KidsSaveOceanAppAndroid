@@ -13,7 +13,9 @@
             android:layout_height="wrap_content"
             android:visibility="gone">
 
-            <include layout="@layout/view_toolbar" />
+            <include
+                android:id="@+id/track_campaign_toolbar_view"
+                layout="@layout/view_toolbar" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/groupNotLive"
