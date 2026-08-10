@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    compileSdk 35
+    compileSdk 36
 
     buildFeatures {
         viewBinding true
@@ -33,9 +33,9 @@ android {
     defaultConfig {
         applicationId "com.kidssavetheocean.fatechanger"
         minSdkVersion 21
-        targetSdkVersion 35
-        versionCode 3
-        versionName "1.0.2"
+        targetSdkVersion 36
+        versionCode 4
+        versionName "1.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

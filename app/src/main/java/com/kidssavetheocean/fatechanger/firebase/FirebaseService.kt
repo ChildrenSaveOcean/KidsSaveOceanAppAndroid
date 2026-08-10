@@ -42,6 +42,7 @@ class FirebaseService @Inject constructor() {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             val newCountries = mutableListOf<CountryModel>()
                             for (item in dataSnapshot.children) {
+                                //todo this needs to be split into a DTO and a domain data class
                                 item.getValue(CountryModel::class.java)?.let { tempModel ->
                                     item.key?.let { key ->
                                         val model = tempModel.copy(country_code = key)

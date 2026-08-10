@@ -81,6 +81,7 @@ class PolicyVoteFragment : AbstractFragment<FragmentPolicyVoteBinding, PoliciesV
         binding.btnVote.apply {
             isEnabled = false
             setOnClickListener {
+                UsersRepo.userModel?.second?.user_person_type
                 AlertDialog.Builder(requireContext())
                     .setMessage(resources.getString(R.string.policy_vote_dialog_message))
                     .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->

@@ -14,6 +14,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class UserIdentificationActivity : AbstractActivity<ActivityUserIdentificationBinding, EmptyViewModel>(), UserIdentificaitonRecyclerAdapter.ItemClick {
+    /**
+     * Danger: Be careful with this enum, as some of the logic of the app relies on the ordinal
+     * order of the current types.
+     * TODO: Fix the issue with ordinal values so that it can be easier to work with in the future.
+     */
     private enum class Operator {
         STUDENT,
         TEACHER,
