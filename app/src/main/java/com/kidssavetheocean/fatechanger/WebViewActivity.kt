@@ -6,13 +6,13 @@ import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_BACK
 import androidx.appcompat.widget.Toolbar
-import com.kidssavetheocean.fatechanger.databinding.WebViewActBinding
+import com.kidssavetheocean.fatechanger.databinding.ActivityWebviewBinding
 import com.kidssavetheocean.fatechanger.presentation.mvvm.activity.AbstractActivity
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class WebViewActivity : AbstractActivity<WebViewActBinding, EmptyViewModel>() {
+class WebViewActivity : AbstractActivity<ActivityWebviewBinding, EmptyViewModel>() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
