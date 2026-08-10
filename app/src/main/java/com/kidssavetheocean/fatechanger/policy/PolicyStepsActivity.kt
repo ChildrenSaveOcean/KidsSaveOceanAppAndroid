@@ -23,7 +23,7 @@ class PolicyStepsActivity : AbstractActivity<ActivityPolicyStepBinding, PolicySt
         }
 
         binding.policyStepToolbarView.toolbar.setNavigationOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
 

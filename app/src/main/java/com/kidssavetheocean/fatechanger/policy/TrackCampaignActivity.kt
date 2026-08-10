@@ -33,7 +33,7 @@ class TrackCampaignActivity : AbstractActivity<ActivityTrackCampaignBinding, Pol
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.trackCampaignToolbarView.toolbar.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
         initData()

@@ -28,7 +28,7 @@ class CountryIntroFragment : AbstractFragment<FragmentCountryIntroBinding, Empty
         }
 
         view?.findViewById<Toolbar>(R.id.toolbar)?.setNavigationOnClickListener {
-            (activity as AppCompatActivity).onBackPressed()
+            (activity as AppCompatActivity).onBackPressedDispatcher.onBackPressed()
         }
         binding.writeToWhereButton.setOnClickListener {
             navigateToView(SelectCountryFragment::class)

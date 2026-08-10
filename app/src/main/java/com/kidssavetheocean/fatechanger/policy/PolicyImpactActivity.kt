@@ -21,7 +21,7 @@ class PolicyImpactActivity : AbstractActivity<ActivityPolicyImpactBinding, Empty
         }
 
         binding.viewBack.toolbar.setNavigationOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 

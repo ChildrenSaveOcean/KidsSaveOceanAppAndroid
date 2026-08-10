@@ -11,6 +11,7 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -34,13 +35,31 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
     private var skipBackMsg = false
 
     protected lateinit var binding: B
-    protected val viewModel by lazy { ViewModelProvider(this).get(getViewModelClass()) }
+    protected val viewModel by lazy { ViewModelProvider(this)[getViewModelClass()] }
+
+    private val backPressedDispatcher = onBackPressedDispatcher
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, getLayoutId())
-        if (shouldMakeStatusBarTransparent())
-            makeStatusBarTransparent()
+        if (shouldMakeStatusBarTransparent()) makeStatusBarTransparent()
+
+        backPressedDispatcher.addCallback(
+            this, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val wasEnabled = isEnabled
+                    isEnabled = false
+                    try {
+                        if (currentView == null) {
+                            onBackPressedCompat()
+                        } else {
+                            navigateBack()
+                        }
+                    } finally {
+                        isEnabled = wasEnabled
+                    }
+                }
+            })
     }
 
     protected abstract fun getLayoutId(): Int
@@ -58,15 +77,6 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
     //endregion
 
     //region Base methods for activities
-
-    //todo fix deprecated stuff
-    override fun onBackPressed() {
-        if (currentView == null) {
-            handleBackPress()
-        } else {
-            navigateBack()
-        }
-    }
 
     fun <T : AppCompatActivity> openActivity(activityClass: KClass<T>, args: Bundle? = null) {
         hideKeyboard()
@@ -121,13 +131,11 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
     }
 
     //override this if you need to do something after every view change
-    protected open fun<T: Any> onViewChanged(classz: KClass<T>) {
+    protected open fun <T : Any> onViewChanged(classz: KClass<T>) {
     }
 
     private fun popBackStackTo(
-        fragmentManager: FragmentManager,
-        viewClassName: String,
-        args: Bundle?
+        fragmentManager: FragmentManager, viewClassName: String, args: Bundle?
     ): AbstractFragment<*, *>? {
         val view = fragmentManager.findFragmentByTag(viewClassName) ?: return null
 
@@ -144,10 +152,7 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
     }
 
     private fun attachNewView(
-        fragmentManager: FragmentManager,
-        containerId: Int,
-        viewClassName: String,
-        args: Bundle?
+        fragmentManager: FragmentManager, containerId: Int, viewClassName: String, args: Bundle?
     ): AbstractFragment<*, *> {
 
         //Deprecated version of this, in case we have issues with fragmentFactory
@@ -200,17 +205,8 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
         }
     }
 
-    //handles back presses while there are fragments in the backstack of the activity
-    private fun handleBackPress() {
-        //todo the app has more than 1 activity... so the logic for double tap as exit will have to wait until we get rid of all of them
-        super.onBackPressed()
-//        ++numOfBackPressed
-//        if (numOfBackPressed == MAX_NUM_OF_BACK_PRESSES || skipBackMsg) {
-//
-//            super.onBackPressed()
-//        } else {
-//            handleExitMsg()
-//        }
+    protected open fun onBackPressedCompat() {
+        onBackPressedDispatcher.onBackPressed()
     }
 
     //handles back presses while the activity has only one fragment in the backstack
@@ -269,7 +265,8 @@ abstract class AbstractActivity<B : ViewDataBinding, VM : AbstractViewModel> : A
 
     open fun isNetworkConnected(): Boolean {
 
-        val mNetworkInfo = (this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
+        val mNetworkInfo =
+            (this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
         if (mNetworkInfo != null) {
             return mNetworkInfo.isAvailable && mNetworkInfo.isConnected
         }

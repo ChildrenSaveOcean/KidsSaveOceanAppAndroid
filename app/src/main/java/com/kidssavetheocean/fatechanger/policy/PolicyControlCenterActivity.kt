@@ -41,7 +41,7 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.policyControlCenterToolbarView.toolbar.setOnClickListener {
-            onBackPressed()
+            onBackPressedCompat()
         }
 
         initView()
@@ -320,7 +320,7 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
 
     override fun getViewModelClass(): Class<PoliciesViewModel> = PoliciesViewModel::class.java
 
-    override fun onBackPressed() {
+    override fun onBackPressedCompat() {
         if (campaignModel != null) {
             intent.putExtra(Constants.INTENT_CAMPAIGN_VALUE, campaignModel)
             intent.putExtra(Constants.INTENT_CAMPAIGN_NAME, campaignName)

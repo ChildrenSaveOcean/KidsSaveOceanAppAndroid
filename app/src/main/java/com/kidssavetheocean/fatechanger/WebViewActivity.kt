@@ -18,7 +18,7 @@ class WebViewActivity : AbstractActivity<WebViewActBinding, EmptyViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         findViewById<Toolbar>(R.id.toolbar).setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
         var loadUrl = ""
         if (intent != null) {
