@@ -26,7 +26,10 @@ class PolicyVoteFragment : AbstractFragment<FragmentPolicyVoteBinding, PoliciesV
 
     private var policies: MutableList<Pair<String, HijackPoliciesModel>> = mutableListOf()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding.policyVoteToolbar.toolbar.setOnClickListener {
             navigateBack()
@@ -34,8 +37,9 @@ class PolicyVoteFragment : AbstractFragment<FragmentPolicyVoteBinding, PoliciesV
 
         val temproaryData = initTemporaryData()
         viewModel.getLiveDataPolicies().observe(this.viewLifecycleOwner) {
-            if (it.isNullOrEmpty())
+            if (it.isNullOrEmpty()) {
                 return@observe
+            }
             policies.addAll(it)
 
             val policyDes = policies.map { policy -> policy.second.description }.toList()
@@ -57,7 +61,6 @@ class PolicyVoteFragment : AbstractFragment<FragmentPolicyVoteBinding, PoliciesV
                         decimalFormat.format(impact / difficulty)
                     votes = policyValue?.votes ?: 0
                 }
-
             }
 
             policyValue = policies[0].second
@@ -66,23 +69,23 @@ class PolicyVoteFragment : AbstractFragment<FragmentPolicyVoteBinding, PoliciesV
             binding.tvSummaryContent.text = policyValue?.summary
             if (!TextUtils.isEmpty(UsersRepo.userModel?.second?.hijack_policy_selected)) {
                 binding.btnVote.isEnabled = false
-                AlertDialog.Builder(requireContext())
+                AlertDialog
+                    .Builder(requireContext())
                     .setMessage(resources.getString(R.string.policy_vote_already))
                     .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
                         dialog.dismiss()
-                    }.create().show()
-
-            } else {
+                    }.create()
+                    .show()
+            } else if (UsersRepo.userModel?.second?.user_person_type == 0) {
                 binding.btnVote.isEnabled = true
             }
         }
 
-
         binding.btnVote.apply {
             isEnabled = false
             setOnClickListener {
-                UsersRepo.userModel?.second?.user_person_type
-                AlertDialog.Builder(requireContext())
+                AlertDialog
+                    .Builder(requireContext())
                     .setMessage(resources.getString(R.string.policy_vote_dialog_message))
                     .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
                         viewModel.policyVote(policyName, "votes", votes + 1)
@@ -92,24 +95,24 @@ class PolicyVoteFragment : AbstractFragment<FragmentPolicyVoteBinding, PoliciesV
                         }
                         dialog.dismiss()
                         navigateBack()
-                    }
-                    .setNegativeButton(resources.getString(R.string.no)) { dialog, _ ->
+                    }.setNegativeButton(resources.getString(R.string.no)) { dialog, _ ->
                         dialog.dismiss()
-                    }.create().show()
+                    }.create()
+                    .show()
             }
         }
 
-        val callback: OnBackPressedCallback = object :
-            OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                val bundle = Bundle()
-                bundle.putString(Constants.INTENT_POLICY_NAME, policyName)
-                bundle.putParcelable(Constants.INTENT_POLICY_VALUE, policyValue)
-                navigateToView(PolicyHomeFragment::class, bundle)
+        val callback: OnBackPressedCallback =
+            object :
+                OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val bundle = Bundle()
+                    bundle.putString(Constants.INTENT_POLICY_NAME, policyName)
+                    bundle.putParcelable(Constants.INTENT_POLICY_VALUE, policyValue)
+                    navigateToView(PolicyHomeFragment::class, bundle)
+                }
             }
-        }
         requireActivity().onBackPressedDispatcher.addCallback(this.viewLifecycleOwner, callback)
-
     }
 
     override fun getViewModelResId(): Int = BR.policyVoteViewModel
@@ -119,20 +122,21 @@ class PolicyVoteFragment : AbstractFragment<FragmentPolicyVoteBinding, PoliciesV
     override fun getViewModelClass(): Class<PoliciesViewModel> = PoliciesViewModel::class.java
 
     private fun initTemporaryData(): MutableList<FloatArray> {
-        val temporaryData = mutableListOf<FloatArray>().apply {
-            add(floatArrayOf(7.2f, 5.5f))
-            add(floatArrayOf(8.8f, 6.0f))
-            add(floatArrayOf(6.8f, 5.2f))
-            add(floatArrayOf(8.8f, 7.8f))
-            add(floatArrayOf(8.0f, 5.3f))
-            add(floatArrayOf(8.5f, 4.0f))
-            add(floatArrayOf(9.2f, 5.3f))
-            add(floatArrayOf(7.2f, 5.7f))
-            add(floatArrayOf(8.2f, 6.0f))
-            add(floatArrayOf(6.3f, 5.0f))
-            add(floatArrayOf(8.2f, 6.0f))
-            add(floatArrayOf(6.3f, 5.0f))
-        }
+        val temporaryData =
+            mutableListOf<FloatArray>().apply {
+                add(floatArrayOf(7.2f, 5.5f))
+                add(floatArrayOf(8.8f, 6.0f))
+                add(floatArrayOf(6.8f, 5.2f))
+                add(floatArrayOf(8.8f, 7.8f))
+                add(floatArrayOf(8.0f, 5.3f))
+                add(floatArrayOf(8.5f, 4.0f))
+                add(floatArrayOf(9.2f, 5.3f))
+                add(floatArrayOf(7.2f, 5.7f))
+                add(floatArrayOf(8.2f, 6.0f))
+                add(floatArrayOf(6.3f, 5.0f))
+                add(floatArrayOf(8.2f, 6.0f))
+                add(floatArrayOf(6.3f, 5.0f))
+            }
 
         return temporaryData
     }

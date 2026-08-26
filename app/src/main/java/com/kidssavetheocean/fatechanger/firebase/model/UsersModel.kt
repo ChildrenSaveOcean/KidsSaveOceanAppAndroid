@@ -1,5 +1,6 @@
 package com.kidssavetheocean.fatechanger.firebase.model
 
+//todo this model is.. abysmal, fix it
 data class UsersModel(
     val campaign: Campaign? = null,
     val dash_joined_a_policy_hijack_campaign: Boolean = false,
@@ -12,5 +13,5 @@ data class UsersModel(
     val location_id: String = "",
     var signatures_pledged: Int = 0,
     val user_letters_written: Int = 0,
-    var user_person_type: Int = 0
+    var user_person_type: Int = 0 // 0 = student, 1 = teacher , 2 = support
 )
