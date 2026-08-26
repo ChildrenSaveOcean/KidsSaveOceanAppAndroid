@@ -4,8 +4,8 @@ import com.kidssavetheocean.fatechanger.MainApplication
 import com.kidssavetheocean.fatechanger.dagger.module.HijackPoliciesRepoModule
 import com.kidssavetheocean.fatechanger.firebase.viewmodel.PoliciesViewModel
 import com.kidssavetheocean.fatechanger.firebase.viewmodel.PolicyStepsViewModel
-import com.kidssavetheocean.fatechanger.policy.PolicyControlCenterActivity
 import com.kidssavetheocean.fatechanger.policy.PolicyStepsActivity
+import com.kidssavetheocean.fatechanger.policy.controlcenter.PolicyControlCenterActivity
 import com.kidssavetheocean.fatechanger.policy.vote.PolicyVoteFragment
 import dagger.Component
 

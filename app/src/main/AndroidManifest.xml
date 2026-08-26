@@ -43,7 +43,7 @@
         <activity android:name="com.kidssavetheocean.fatechanger.policy.PolicyImpactActivity"/>
 
 
-        <activity android:name="com.kidssavetheocean.fatechanger.policy.PolicyControlCenterActivity"/>
+        <activity android:name="com.kidssavetheocean.fatechanger.policy.controlcenter.PolicyControlCenterActivity"/>
 
         <activity android:name="com.kidssavetheocean.fatechanger.WebViewActivity"/>
 

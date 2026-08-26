@@ -1,6 +1,5 @@
-package com.kidssavetheocean.fatechanger.policy
+package com.kidssavetheocean.fatechanger.policy.controlcenter
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -19,6 +18,7 @@ import com.kidssavetheocean.fatechanger.firebase.model.HijackPolicyLocationModel
 import com.kidssavetheocean.fatechanger.firebase.repository.CampaignsRepo
 import com.kidssavetheocean.fatechanger.firebase.repository.UsersRepo
 import com.kidssavetheocean.fatechanger.firebase.viewmodel.PoliciesViewModel
+import com.kidssavetheocean.fatechanger.policy.LocationsDialogFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.activity.AbstractActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -76,8 +76,7 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
             policyLocation = it.policyLocations[0]
             with(binding) {
                 lytChooseLocation.lytSpinner.isEnabled = true
-                lytChooseLocation.tvYourLocation.text =
-                    it.policyLocations[0].second.location
+                lytChooseLocation.tvYourLocation.text = it.policyLocations[0].second.location
                 progressBar.visibility = View.GONE
                 if (groupTop.isInvisible) {
                     groupTop.visibility = View.VISIBLE
@@ -87,8 +86,7 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
                 campaignName = campaign_id
                 if (!TextUtils.isEmpty(campaign_id)) {
                     checkDataReturn(true)
-                } else
-                    checkDataReturn(false)
+                } else checkDataReturn(false)
             }
         })
 
@@ -131,7 +129,7 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
                         signatures_pledged = etPlannedSign.text.toString().toInt()
                         UsersRepo.updateOrCreateUser(this)
                     }
-                    val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                    val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
                 }
 
@@ -145,7 +143,7 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
                         "signatures_collected",
                         etCollectedSign.text.toString().toInt()
                     )
-                    val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                    val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
                 }
             }
@@ -220,7 +218,6 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
             groupTop.visibility = View.INVISIBLE
 
             lytBottom.root.visibility = View.INVISIBLE
-            lytRequirement.root.visibility = View.INVISIBLE
             lytChooseLocation.root.visibility = View.INVISIBLE
         }
     }
@@ -231,7 +228,6 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
                 chooseLocation -> {
                     with(binding) {
                         lytChooseLocation.root.visibility = View.VISIBLE
-                        lytRequirement.root.visibility = View.INVISIBLE
                         lytBottom.root.visibility = View.GONE
                         tvLocation.text = resources.getString(R.string.policy_location_campaigns)
                         tvLocationContent.text =
@@ -243,7 +239,6 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
                 notLived -> {
                     with(binding) {
                         lytChooseLocation.root.visibility = View.VISIBLE
-                        lytRequirement.root.visibility = View.VISIBLE
                         lytBottom.root.visibility = View.VISIBLE
                         tvLocation.text = resources.getString(R.string.policy_location_campaigns)
                         tvLocationContent.text =
@@ -261,24 +256,14 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
                             etCollectedSign.isEnabled = false
                             etPlannedSign.setText(UsersRepo.userModel?.second?.signatures_pledged.toString())
                         }
-                        lytRequirement.groupRequirement.visibility = View.INVISIBLE
-                        lytRequirement.tvNotLive.visibility = View.VISIBLE
                     }
                 }
                 lived -> {
                     with(binding) {
                         lytChooseLocation.root.visibility = View.GONE
-                        lytRequirement.root.visibility = View.VISIBLE
                         lytBottom.root.visibility = View.VISIBLE
                         tvLocation.text = resources.getString(R.string.policy_location_live)
                         tvLocationContent.text = policyLocation?.second?.location
-                        with(lytRequirement) {
-                            groupRequirement.visibility = View.VISIBLE
-                            tvNotLive.visibility = View.GONE
-                            tvSignaturesRequired.text =
-                                campaignModel?.signatures_required.toString()
-                            tvTotalCollected.text = campaignModel?.signatures_collected.toString()
-                        }
                         with(lytBottom) {
                             tvPlannedSign.visibility = View.INVISIBLE
                             etPlannedSign.visibility = View.VISIBLE
@@ -295,7 +280,6 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
         } else {
             with(binding) {
                 lytChooseLocation.root.visibility = View.VISIBLE
-                lytRequirement.root.visibility = View.INVISIBLE
                 lytBottom.root.visibility = View.GONE
                 when (situation) {
                     lived -> {
@@ -325,7 +309,7 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
             intent.putExtra(Constants.INTENT_CAMPAIGN_VALUE, campaignModel)
             intent.putExtra(Constants.INTENT_CAMPAIGN_NAME, campaignName)
         }
-        setResult(Activity.RESULT_OK, intent)
+        setResult(RESULT_OK, intent)
         this.finish()
     }
 }

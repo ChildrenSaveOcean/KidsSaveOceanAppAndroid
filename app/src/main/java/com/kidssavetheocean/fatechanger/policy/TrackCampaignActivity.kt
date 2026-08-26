@@ -15,6 +15,7 @@ import com.kidssavetheocean.fatechanger.firebase.model.HijackPoliciesModel
 import com.kidssavetheocean.fatechanger.firebase.model.HijackPolicyLocationModel
 import com.kidssavetheocean.fatechanger.firebase.repository.UsersRepo
 import com.kidssavetheocean.fatechanger.firebase.viewmodel.PoliciesViewModel
+import com.kidssavetheocean.fatechanger.policy.controlcenter.PolicyControlCenterActivity
 import com.kidssavetheocean.fatechanger.presentation.mvvm.activity.AbstractActivity
 import dagger.hilt.android.AndroidEntryPoint
 

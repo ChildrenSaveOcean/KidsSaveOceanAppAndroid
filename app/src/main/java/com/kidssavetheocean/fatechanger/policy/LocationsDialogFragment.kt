@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kidssavetheocean.fatechanger.databinding.FragmentLocationsBinding
+import com.kidssavetheocean.fatechanger.policy.controlcenter.PolicyControlCenterActivity
 
 //TODO fix whatever this is
 class LocationsDialogFragment: DialogFragment() {
