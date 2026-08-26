@@ -46,6 +46,10 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
 
         initView()
 
+//        setContent {
+//            PolicyControlCenterView()
+//        }
+
 //        val data = intent.getParcelableExtra<HijackPoliciesModel>(Constants.intentPolicyValue)
 
 
