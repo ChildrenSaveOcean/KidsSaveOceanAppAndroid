@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Color
 
 val policyTextColor = Color(0xFF53585f)
 val buttonColor = Color(0xe71fa1e9)
+val disabledButtonColor = Color(0xCB6AB9FF)
 
 val lightTheme = lightColorScheme(
     primary = buttonColor,

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
@@ -44,13 +45,13 @@ fun LocationPicker(
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .background(color = Color.White, RectangleShape)
-            .fillMaxWidth(),
+        modifier =
+            modifier
+                .background(color = Color.White, RectangleShape)
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp),
     ) {
-        ExposedDropdownMenuBox(
-            expanded = expanded, onExpandedChange = { expanded = !expanded }) {
-
+        ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = !expanded }) {
             OutlinedTextField(
                 value = selectedLocation,
                 onValueChange = {},
@@ -60,23 +61,22 @@ fun LocationPicker(
                 },
                 trailingIcon = {
                     ExposedDropdownMenuDefaults.TrailingIcon(
-                        expanded = expanded
+                        expanded = expanded,
                     )
                 },
-                modifier = Modifier
-                    .menuAnchor(
-                        type = MenuAnchorType.PrimaryNotEditable, enabled = true
-                    )
-                    .fillMaxWidth()
-                    .background(Color.White),
+                modifier =
+                    Modifier
+                        .menuAnchor(
+                            type = MenuAnchorType.PrimaryNotEditable,
+                            enabled = true,
+                        ).fillMaxWidth()
+                        .background(Color.White),
                 textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
                 shape = RoundedCornerShape(16.dp),
-                singleLine = true
+                singleLine = true,
             )
 
-
-            ExposedDropdownMenu(
-                expanded = expanded, onDismissRequest = { expanded = false }) {
+            ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
                 locations.forEach { location ->
                     DropdownMenuItem(text = {
                         Text(location)
@@ -101,11 +101,10 @@ fun LocationPicker(
 @Preview
 @Composable
 fun PickerPreview() {
-    KstoTheme() {
+    KstoTheme {
         LocationPicker(
             listOf("asd", "qwewq", "Alaska", "Bob the builder"),
             onLocationSelected = {
-
             },
             onChooseLocation = { },
             modifier = Modifier,

@@ -26,12 +26,14 @@ import com.kidssavetheocean.fatechanger.presentation.KstoTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BorderTextInput(
-    startingInput: String
+    startingInput: String,
+    isEnabled: Boolean = true
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val input = remember { mutableStateOf(startingInput) }
 
     BasicTextField(
+        enabled = isEnabled,
         value = input.value,
         onValueChange = { input.value = it },
         modifier = Modifier
@@ -55,10 +57,11 @@ fun BorderTextInput(
                 contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp),
                 container = {
                     OutlinedTextFieldDefaults.Container(
-                        enabled = true,
+                        enabled = isEnabled,
                         isError = false,
                         interactionSource = interactionSource,
-                        colors = OutlinedTextFieldDefaults.colors(),
+                        colors = OutlinedTextFieldDefaults.colors().copy(disabledContainerColor =
+                            Color.White),
                         shape = RoundedCornerShape(16.dp),
                         focusedBorderThickness = 2.dp,
                         unfocusedBorderThickness = 2.dp
@@ -74,7 +77,7 @@ fun BorderTextInput(
 fun PreviewTextInput(){
     KstoTheme() {
         Box(modifier = Modifier.fillMaxSize().background(Color.White)) {
-            BorderTextInput("300")
+            BorderTextInput("300", true)
         }
     }
 }
