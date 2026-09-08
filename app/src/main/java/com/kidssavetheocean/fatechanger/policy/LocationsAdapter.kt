@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.kidssavetheocean.fatechanger.R
+import com.kidssavetheocean.fatechanger.databinding.ItemLocationBinding
 import com.kidssavetheocean.fatechanger.firebase.model.HijackPolicyLocationModel
-import kotlinx.android.synthetic.main.item_location.view.tvLocation
 
 class LocationsAdapter: RecyclerView.Adapter<LocationsAdapter.LocationsViewHolder>() {
     private var policyLocations: List<Pair<String, HijackPolicyLocationModel>>? = null
@@ -26,18 +25,20 @@ class LocationsAdapter: RecyclerView.Adapter<LocationsAdapter.LocationsViewHolde
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_location, parent, false)
-        return LocationsViewHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemLocationBinding.inflate(inflater, parent, false)
+        return LocationsViewHolder(binding)
     }
 
     override fun getItemCount(): Int = policyLocations?.size ?: 0
 
     override fun onBindViewHolder(holder: LocationsViewHolder, position: Int) {
-        holder.itemView.tvLocation.text = policyLocations?.get(position)?.second?.location ?: ""
-        holder.itemView.setOnClickListener{
+
+        holder.binding.tvLocation.text = policyLocations?.get(position)?.second?.location ?: ""
+        holder.binding.tvLocation.setOnClickListener{
             onItemCLickedListener.onItemClicked(it, position)
         }
     }
 
-    class LocationsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class LocationsViewHolder(val binding: ItemLocationBinding) : RecyclerView.ViewHolder(binding.root)
 }

@@ -11,8 +11,10 @@ import com.kidssavetheocean.fatechanger.BR
 import com.kidssavetheocean.fatechanger.Constants
 import com.kidssavetheocean.fatechanger.R
 import com.kidssavetheocean.fatechanger.WebViewActivity
+import com.kidssavetheocean.fatechanger.countryContacts.CountryIntroFragment
 import com.kidssavetheocean.fatechanger.databinding.FragmentMainDashboardNewBinding
 import com.kidssavetheocean.fatechanger.extensions.setImage
+import com.kidssavetheocean.fatechanger.policy.PolicyHomeFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssavetheocean.fatechanger.utility.getSerializableCompat
 import com.kidssavetheocean.fatechanger.views.ActionAlertDialog
@@ -191,6 +193,10 @@ class MainDashboardFragment :
                 startActivity(intent)
             }
 
+            DashboardSteps.LETTER_CAMPAIGN -> {
+                navigateToView(CountryIntroFragment::class)
+            }
+
             DashboardSteps.SHARING -> {
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
@@ -201,12 +207,8 @@ class MainDashboardFragment :
                 startActivity(shareIntent)
             }
 
-            DashboardSteps.LETTER_CAMPAIGN -> {
-                navigateToView(StartActivistCampaignFragment::class)
-            }
-
             DashboardSteps.GOVERNMENT -> {
-                navigateToView(EngageLocalGovernmentFragment::class)
+                navigateToView(PolicyHomeFragment::class)
             }
 
             DashboardSteps.PROTEST -> {
@@ -249,8 +251,8 @@ class MainDashboardFragment :
 enum class DashboardSteps(val res: Int) {
     RESEARCH(R.string.research_task_description),
     WRITE_LETTER(R.string.write_letter_task_description),
-    LETTER_CAMPAIGN(R.string.sharing_task_description),
-    SHARING(R.string.write_letter_task_climate),
-    GOVERNMENT(R.string.government_task_description),
+    LETTER_CAMPAIGN(R.string.write_letter_task_climate),
+    SHARING(R.string.sharing_task_description),
+    GOVERNMENT(R.string.environmental_laws_task),
     PROTEST(R.string.protest_task_description),
 }

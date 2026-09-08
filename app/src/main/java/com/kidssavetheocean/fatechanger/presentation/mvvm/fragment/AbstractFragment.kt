@@ -110,7 +110,7 @@ abstract class AbstractFragment<B : ViewDataBinding, VM : AbstractViewModel> : F
     }
 
     fun navigateBack() {
-        activity?.onBackPressed()
+        activity?.onBackPressedDispatcher?.onBackPressed()
     }
 
     abstract fun getViewModelResId(): Int

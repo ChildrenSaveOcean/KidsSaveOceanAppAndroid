@@ -1,0 +1,29 @@
+# Top-level EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+
+[*.{kt,kts}]
+# Kotlin specific rules
+# Maximum line length
+max_line_length = 120
+
+# ktlint rules
+# https://pinterest.github.io/ktlint/latest/rules/configuration-attributes/
+ktlint_code_style = android_studio
+
+# Align with Kotlin Style Guide
+kotlin_imports_layout = *,java.**,javax.**,kotlin.**,kotlinx.**
+# Use trailing commas
+ij_kotlin_allow_trailing_comma = true
+ij_kotlin_allow_trailing_comma_on_call_site = true
+
+# Compose specific naming rules
+# Allows Composable functions to start with a capital letter (PascalCase)
+# This prevents ktlint from flagging Composable functions as violating function naming conventions
+ktlint_function_naming_ignore_when_annotated_with = Composable

@@ -17,8 +17,8 @@ class PolicyVideoActivity: AbstractActivity<ActivityWebviewBinding, EmptyViewMod
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        findViewById<Toolbar>(R.id.toolbar).setOnClickListener{
-            onBackPressed()
+        findViewById<Toolbar>(R.id.toolbar).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
         var loadUrl = URL
         if (intent != null) {

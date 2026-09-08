@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar
 import com.kidssavetheocean.fatechanger.BR
 import com.kidssavetheocean.fatechanger.R
 import com.kidssavetheocean.fatechanger.databinding.FragmentCountryIntroBinding
-import com.kidssavetheocean.fatechanger.firebase.FirebaseService
 import com.kidssavetheocean.fatechanger.news.NewsFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
@@ -19,9 +18,7 @@ class CountryIntroFragment : AbstractFragment<FragmentCountryIntroBinding, Empty
 
     override fun onPrepareLayout(layoutView: View?) {
         super.onPrepareLayout(layoutView)
-        //TODO this is bad, needs fixing
-        val fragment = SelectCountryFragment()
-        FirebaseService.getInstance().addObserver(fragment)
+
         (activity as AppCompatActivity).supportActionBar?.run {
             setHomeButtonEnabled(true)
             setDisplayShowHomeEnabled(true)
@@ -31,12 +28,10 @@ class CountryIntroFragment : AbstractFragment<FragmentCountryIntroBinding, Empty
         }
 
         view?.findViewById<Toolbar>(R.id.toolbar)?.setNavigationOnClickListener {
-            (activity as AppCompatActivity).onBackPressed()
+            (activity as AppCompatActivity).onBackPressedDispatcher.onBackPressed()
         }
         binding.writeToWhereButton.setOnClickListener {
-            if (FirebaseService.getInstance().hasCountries) {
-                navigateToView(SelectCountryFragment::class)
-            }
+            navigateToView(SelectCountryFragment::class)
         }
 
         binding.writeAboutWhatButton.setOnClickListener {

@@ -11,9 +11,6 @@ import com.kidssavetheocean.fatechanger.databinding.FragmentUserIdentificationCa
 import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_user_identification_card.description
-import kotlinx.android.synthetic.main.fragment_user_identification_card.user_identification_image_button
-import kotlinx.android.synthetic.main.fragment_user_identification_card.user_identification_type_text_view
 
 //todo this and UserIdentificationFragment might be only one fragment
 
@@ -36,15 +33,15 @@ class UserIdentificationCardFragment : AbstractFragment<FragmentUserIdentificati
         Glide.with(this)
             .load(backgroundImageId)
             .apply(RequestOptions.bitmapTransform(multiTransformation))
-            .into(user_identification_image_button)
+            .into(binding.userIdentificationImageButton)
     }
 
-    fun setUserTypeText(textId: Int) = user_identification_type_text_view.setText(textId)
+    fun setUserTypeText(textId: Int) = binding.userIdentificationTypeTextView.setText(textId)
 
-    fun setDesciption(textId: Int) = description.setText(textId)
+    fun setDesciption(textId: Int) = binding.description.setText(textId)
 
     fun setUpImageButtonOnClick(type: String) {
-        user_identification_image_button.setOnClickListener { v ->
+        binding.userIdentificationImageButton.setOnClickListener { v ->
             val intent = Intent(activity, IntroductionVideoActivity::class.java)
             intent.putExtra(IntroductionVideoActivity.INTRO_TYPE, type)
             startActivity(intent)

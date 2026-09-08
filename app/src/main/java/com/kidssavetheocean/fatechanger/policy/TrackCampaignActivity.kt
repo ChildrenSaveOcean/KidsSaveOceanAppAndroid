@@ -15,23 +15,11 @@ import com.kidssavetheocean.fatechanger.firebase.model.HijackPoliciesModel
 import com.kidssavetheocean.fatechanger.firebase.model.HijackPolicyLocationModel
 import com.kidssavetheocean.fatechanger.firebase.repository.UsersRepo
 import com.kidssavetheocean.fatechanger.firebase.viewmodel.PoliciesViewModel
+import com.kidssavetheocean.fatechanger.policy.controlcenter.PolicyControlCenterActivity
 import com.kidssavetheocean.fatechanger.presentation.mvvm.activity.AbstractActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_track_campaign.btnSpread
-import kotlinx.android.synthetic.main.activity_track_campaign.groupLive
-import kotlinx.android.synthetic.main.activity_track_campaign.groupNotLive
-import kotlinx.android.synthetic.main.activity_track_campaign.lytMain
-import kotlinx.android.synthetic.main.track_campaign_bottom.btnUpdate
-import kotlinx.android.synthetic.main.track_campaign_bottom.tvYourCollectedNum
-import kotlinx.android.synthetic.main.track_campaign_bottom.tvYourPlannedNum
-import kotlinx.android.synthetic.main.track_campaign_live.btnLiveSpread
-import kotlinx.android.synthetic.main.track_campaign_live.btnMoreInfo
-import kotlinx.android.synthetic.main.track_campaign_live.tvCampaignLoc
-import kotlinx.android.synthetic.main.track_campaign_live.tvSignaturesRequired
-import kotlinx.android.synthetic.main.track_campaign_live.tvTotalCollected
-import kotlinx.android.synthetic.main.track_campaign_live.tvTrackChosenContent
-import kotlinx.android.synthetic.main.view_toolbar.toolbar
 
+//TODO i removed all the synthetics but I need to fix the UI, it's a mess
 @AndroidEntryPoint
 class TrackCampaignActivity : AbstractActivity<ActivityTrackCampaignBinding, PoliciesViewModel>(), View.OnClickListener {
 
@@ -45,23 +33,23 @@ class TrackCampaignActivity : AbstractActivity<ActivityTrackCampaignBinding, Pol
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        toolbar.setOnClickListener {
-            onBackPressed()
+        binding.trackCampaignToolbarView.toolbar.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
 
         initData()
 
 
-        btnLiveSpread.setOnClickListener(this)
-        btnSpread.setOnClickListener(this)
+        binding.lytLived.btnLiveSpread.setOnClickListener(this)
+        binding.btnSpread.setOnClickListener(this)
 
-        btnMoreInfo.setOnClickListener {
+        binding.lytLived.btnMoreInfo.setOnClickListener {
             val intent = Intent(this, WebViewActivity::class.java)
             intent.putExtra(Constants.INTENT_URL, Constants.URL_LEARN_MORE)
             startActivity(intent)
         }
 
-        btnUpdate.setOnClickListener {
+        binding.lytBottom.btnUpdate.setOnClickListener {
             startActivityForResult(Intent(this, PolicyControlCenterActivity::class.java), Constants.REQUEST_POLICY_CONTROL_CENTER)
         }
     }
@@ -78,19 +66,28 @@ class TrackCampaignActivity : AbstractActivity<ActivityTrackCampaignBinding, Pol
     }
 
     private fun setView() {
-        lytMain.visibility = View.VISIBLE
+        binding.lytMain.visibility = View.VISIBLE
         if (isLive) {
-            groupLive.visibility = View.VISIBLE
-            groupNotLive.visibility = View.INVISIBLE
-            tvTrackChosenContent.text = policyValue?.description
-            tvYourPlannedNum.text = UsersRepo.userModel?.second?.signatures_pledged.toString()
-            tvYourCollectedNum.text = campaignModel?.signatures_collected.toString()
-            tvSignaturesRequired.text = campaignModel?.signatures_required.toString()
-            tvTotalCollected.text = campaignModel?.signatures_collected.toString()
-            tvCampaignLoc.text = policyLocation?.second?.location.toString()
+            with(binding) {
+
+                groupLive.visibility = View.VISIBLE
+                groupNotLive.visibility = View.INVISIBLE
+            }
+            with(binding.lytBottom) {
+                tvYourPlannedNum.text = UsersRepo.userModel?.second?.signatures_pledged.toString()
+                tvYourCollectedNum.text = campaignModel?.signatures_collected.toString()
+            }
+            with(binding.lytLived){
+                tvTrackChosenContent.text = policyValue?.description
+                tvSignaturesRequired.text = campaignModel?.signatures_required.toString()
+                tvTotalCollected.text = campaignModel?.signatures_collected.toString()
+                tvCampaignLoc.text = policyLocation?.second?.location.toString()
+            }
         } else {
-            groupLive.visibility = View.INVISIBLE
-            groupNotLive.visibility = View.VISIBLE
+            with(binding) {
+                groupLive.visibility = View.INVISIBLE
+                groupNotLive.visibility = View.VISIBLE
+            }
         }
     }
 

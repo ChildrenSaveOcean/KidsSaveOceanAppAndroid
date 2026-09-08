@@ -10,8 +10,6 @@ import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import com.kidssavetheocean.fatechanger.resources.ResourcesFragment
 import com.kidssavetheocean.fatechanger.webview.WebViewFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_nobodys_listening.activist_toolkit_button
-import kotlinx.android.synthetic.main.fragment_nobodys_listening.golden_rules_button
 
 @AndroidEntryPoint
 class NobodysListeningFragment : AbstractFragment<FragmentNobodysListeningBinding, EmptyViewModel>() {
@@ -25,11 +23,11 @@ class NobodysListeningFragment : AbstractFragment<FragmentNobodysListeningBindin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        golden_rules_button?.setOnClickListener {
+        binding.goldenRulesButton.setOnClickListener {
             navigateToView(GoldenRulesFragment::class)
         }
 
-        activist_toolkit_button?.setOnClickListener {
+        binding.activistToolkitButton.setOnClickListener {
             val args = Bundle()
             args.putString(WebViewFragment.URL_KEY, WebViewFragment.WEB_VIEW_STUDENT_RESOURCES_URL)
             navigateToView(ResourcesFragment::class, args)

@@ -13,45 +13,47 @@ import com.kidssavetheocean.fatechanger.firebase.UserNotExsitException
 import com.kidssavetheocean.fatechanger.firebase.model.UsersModel
 import com.kidssavetheocean.fatechanger.service.FateResult
 
+// todo fix this
 object UsersRepo : BaseFirebaseDBRepo<UsersModel, List<Pair<String, UsersModel>>>(Constants.TABLE_NAME_USERS, UsersModel::class.java) {
+    lateinit var userModel: Pair<String, UsersModel>
 
-    var userModel: Pair<String, UsersModel?>? = null
-
-    override fun handleData(list: List<Pair<String, UsersModel>>): List<Pair<String, UsersModel>> {
-        return list
-    }
+    override fun handleData(list: List<Pair<String, UsersModel>>): List<Pair<String, UsersModel>> = list
 
     fun getUser(onComplete: (FateResult<Pair<String, UsersModel>>) -> Unit) {
         loginAndGetUid { fateResult ->
-            fateResult.onSuccess {uid ->
-                FirebaseDatabase.getInstance().reference.child(Constants.TABLE_NAME_USERS).child(uid)
-                    .addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onCancelled(databaseError: DatabaseError) {
-                            onComplete(FateResult.Failure(FirebaseFailedException(databaseError.message)))
-                        }
+            fateResult
+                .onSuccess { uid ->
+                    FirebaseDatabase
+                        .getInstance()
+                        .reference
+                        .child(Constants.TABLE_NAME_USERS)
+                        .child(uid)
+                        .addListenerForSingleValueEvent(
+                            object : ValueEventListener {
+                                override fun onCancelled(databaseError: DatabaseError) {
+                                    onComplete(FateResult.Failure(FirebaseFailedException(databaseError.message)))
+                                }
 
-                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            Log.d("FirebaseService", "onDataChange")
-                            val key = dataSnapshot.key!!
-                            val value = dataSnapshot.getValue(UsersModel::class.java)
-                            if (value == null) {
-                                onComplete(FateResult.Failure(UserNotExsitException()))
-                            } else {
-                                userModel = Pair(key, value)
-                                onComplete(FateResult.Success(Pair(key, value)))
-                            }
-                        }
-                    })
-            }.onFailure {
-                onComplete(FateResult.Failure(it))
-            }
-
+                                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                    Log.d("FirebaseService", "onDataChange")
+                                    val key = dataSnapshot.key!!
+                                    val value = dataSnapshot.getValue(UsersModel::class.java)
+                                    if (value == null) {
+                                        onComplete(FateResult.Failure(UserNotExsitException()))
+                                    } else {
+                                        userModel = Pair(key, value)
+                                        onComplete(FateResult.Success(Pair(key, value)))
+                                    }
+                                }
+                            },
+                        )
+                }.onFailure {
+                    onComplete(FateResult.Failure(it))
+                }
         }
     }
 
-    private fun getUIDFromFirebase(): String? {
-        return FirebaseAuth.getInstance().currentUser?.uid
-    }
+    private fun getUIDFromFirebase(): String? = FirebaseAuth.getInstance().currentUser?.uid
 
     private fun loginAndGetUid(onComplete: (FateResult<String>) -> Unit) {
         var uid = getUIDFromFirebase()

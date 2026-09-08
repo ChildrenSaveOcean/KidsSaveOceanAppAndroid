@@ -61,6 +61,6 @@
         android:text="@string/policy_choose_location"
         android:layout_gravity="center"
         android:textAllCaps="false"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 
 </LinearLayout>

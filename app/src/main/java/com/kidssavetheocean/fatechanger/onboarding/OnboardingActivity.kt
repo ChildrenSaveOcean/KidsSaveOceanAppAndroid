@@ -8,7 +8,6 @@ import com.kidssavetheocean.fatechanger.bottomNavigation.BottomNavigationActivit
 import com.kidssavetheocean.fatechanger.databinding.ActivityOnboardingBinding
 import com.kidssavetheocean.fatechanger.presentation.mvvm.activity.AbstractActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_onboarding.viewpager
 
 @AndroidEntryPoint
 class OnboardingActivity : AbstractActivity<ActivityOnboardingBinding, OnboardingViewModel>() {
@@ -31,8 +30,8 @@ class OnboardingActivity : AbstractActivity<ActivityOnboardingBinding, Onboardin
                 openActivity(BottomNavigationActivity::class)
             }
         }
-        viewpager.adapter = OnboardingAdapter(supportFragmentManager)
-        binding.dotIndicator.setupWithViewPager(viewpager)
+        binding.viewpager.adapter = OnboardingAdapter(supportFragmentManager)
+        binding.dotIndicator.setupWithViewPager(binding.viewpager)
     }
 
     override fun getLayoutId() = R.layout.activity_onboarding

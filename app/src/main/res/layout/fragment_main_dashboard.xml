@@ -515,11 +515,11 @@
         android:id="@+id/link"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/bg_dashboard_link_button"
         android:scaleType="center"
-        android:text="?"
+        android:text="@string/main_dashboard_link_string_value"
         android:textColor="#dceef7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

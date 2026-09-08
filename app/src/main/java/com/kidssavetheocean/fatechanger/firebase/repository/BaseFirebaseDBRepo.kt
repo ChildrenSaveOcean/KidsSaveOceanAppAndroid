@@ -20,7 +20,7 @@ abstract class BaseFirebaseDBRepo<T : Any, R : Any>(private val tableName: Strin
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     Log.d("FirebaseService", "onDataChange")
                     val list = dataSnapshot.children
-                        .filter { dataSnapshot.key != null && dataSnapshot.getValue(clazz) != null }
+                        .filter { it.key != null && it.getValue(clazz) != null }
                         .map {
                             Pair(it.key!!, it.getValue(clazz)!!)
                         }

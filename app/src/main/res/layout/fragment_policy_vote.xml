@@ -52,29 +52,21 @@
                     android:id="@+id/pbPolicies"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvPolicyVoteSubTitle" />
 
-<!--                <NumberPicker-->
-<!--                    android:id="@+id/policy_name_picker"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="60dp"-->
-<!--                    android:layout_marginStart="24dp"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:layout_marginEnd="24dp"-->
-<!--                    android:textSize="24sp"-->
-<!--                    android:visibility="invisible"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tvPolicyVoteSubTitle" />-->
-                <androidx.recyclerview.widget.RecyclerView
+                <NumberPicker
                     android:id="@+id/policy_name_picker"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvPolicyVoteSubTitle"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="24dp"
-                    />
+                    android:textSize="24sp"
+                    android:theme="@style/numberPickerStyle"
+                    app:layout_constraintTop_toBottomOf="@id/tvPolicyVoteSubTitle" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/lytInputFromLeaders"

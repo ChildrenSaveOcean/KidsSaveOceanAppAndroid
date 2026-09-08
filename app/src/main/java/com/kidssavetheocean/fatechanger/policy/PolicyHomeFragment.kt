@@ -11,6 +11,7 @@ import com.kidssavetheocean.fatechanger.WebViewActivity
 import com.kidssavetheocean.fatechanger.databinding.FragmentPolicyHomeBinding
 import com.kidssavetheocean.fatechanger.firebase.model.CampaignsModel
 import com.kidssavetheocean.fatechanger.firebase.model.HijackPoliciesModel
+import com.kidssavetheocean.fatechanger.policy.controlcenter.PolicyControlCenterActivity
 import com.kidssavetheocean.fatechanger.policy.vote.PolicyVoteFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.fragment.AbstractFragment
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel

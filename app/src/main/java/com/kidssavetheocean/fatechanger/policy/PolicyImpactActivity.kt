@@ -6,14 +6,13 @@ import com.kidssavetheocean.fatechanger.databinding.ActivityPolicyImpactBinding
 import com.kidssavetheocean.fatechanger.presentation.mvvm.activity.AbstractActivity
 import com.kidssavetheocean.fatechanger.presentation.mvvm.vm.EmptyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.view_toolbar.toolbar
 
 @AndroidEntryPoint
 class PolicyImpactActivity : AbstractActivity<ActivityPolicyImpactBinding, EmptyViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.viewBack.toolbar)
         supportActionBar?.run {
             setHomeButtonEnabled(true)
             setDisplayShowHomeEnabled(true)
@@ -21,8 +20,8 @@ class PolicyImpactActivity : AbstractActivity<ActivityPolicyImpactBinding, Empty
             setDisplayHomeAsUpEnabled(true)
         }
 
-        toolbar.setNavigationOnClickListener {
-            onBackPressed()
+        binding.viewBack.toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
