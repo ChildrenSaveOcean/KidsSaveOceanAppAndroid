@@ -10,3 +10,17 @@ object HijackPolicyLocationRepo: BaseFirebaseDBRepo<HijackPolicyLocationModel,
         return list
     }
 }
+
+data class HijackPolicyLocation(
+    val locationId: String,
+    val location: String
+){
+    companion object
+}
+
+fun HijackPolicyLocation.Companion.fromPair(pair: Pair<String, HijackPolicyLocationModel>): HijackPolicyLocation {
+    return HijackPolicyLocation(
+        pair.first,
+        pair.second.location
+    )
+}

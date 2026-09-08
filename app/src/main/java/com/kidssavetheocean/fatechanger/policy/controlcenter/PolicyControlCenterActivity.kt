@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isInvisible
-import androidx.lifecycle.Observer
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kidssavetheocean.fatechanger.Constants
 import com.kidssavetheocean.fatechanger.R
 import com.kidssavetheocean.fatechanger.WebViewActivity
@@ -17,13 +18,14 @@ import com.kidssavetheocean.fatechanger.firebase.model.HijackPoliciesModel
 import com.kidssavetheocean.fatechanger.firebase.model.HijackPolicyLocationModel
 import com.kidssavetheocean.fatechanger.firebase.repository.CampaignsRepo
 import com.kidssavetheocean.fatechanger.firebase.repository.UsersRepo
-import com.kidssavetheocean.fatechanger.firebase.viewmodel.PoliciesViewModel
 import com.kidssavetheocean.fatechanger.policy.LocationsDialogFragment
+import com.kidssavetheocean.fatechanger.policy.controlcenter.view.PolicyControlCenterScreen
+import com.kidssavetheocean.fatechanger.presentation.KstoTheme
 import com.kidssavetheocean.fatechanger.presentation.mvvm.activity.AbstractActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenterBinding, PoliciesViewModel>() {
+class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenterBinding, PolicyControlCenterViewModel>() {
     var policyLocations: List<Pair<String, HijackPolicyLocationModel>>? = null
     private var campaigns: List<Pair<String, CampaignsModel>>? = null
     private var campaignModel: CampaignsModel? = null
@@ -46,53 +48,60 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
 
         initView()
 
-//        setContent {
-//            PolicyControlCenterView()
-//        }
+        viewModel.loadControlCenterData()
+
+        setContent {
+            val state by viewModel.uiState.collectAsStateWithLifecycle()
+            KstoTheme {
+                PolicyControlCenterScreen(state) {
+                    viewModel.onEvent(it)
+                }
+            }
+        }
 
 //        val data = intent.getParcelableExtra<HijackPoliciesModel>(Constants.intentPolicyValue)
 
 
-        viewModel.getPolicyCombineData().observe(this, Observer {
-            //            if (data == null) {
+//        viewModel.getPolicyCombineData().observe(this, Observer {
+//            //            if (data == null) {
+////                policyName = it.policies[0].first
+////                policyValue = it.policies[0].second
+////            } else {
+////                policyValue = data
+////                policyName = intent.getStringExtra(Constants.intentPolicyName)
+////            }
+//            UsersRepo.userModel?.second?.apply {
+//                policyName = this.hijack_policy_selected
+//            }
+//            if (!TextUtils.isEmpty(policyName)) {
+//                it.policies.forEach { policy ->
+//                    if (policy.first == policyName) {
+//                        policyValue = policy.second
+//                    }
+//                }
+//            } else {
 //                policyName = it.policies[0].first
 //                policyValue = it.policies[0].second
-//            } else {
-//                policyValue = data
-//                policyName = intent.getStringExtra(Constants.intentPolicyName)
 //            }
-            UsersRepo.userModel?.second?.apply {
-                policyName = this.hijack_policy_selected
-            }
-            if (!TextUtils.isEmpty(policyName)) {
-                it.policies.forEach { policy ->
-                    if (policy.first == policyName) {
-                        policyValue = policy.second
-                    }
-                }
-            } else {
-                policyName = it.policies[0].first
-                policyValue = it.policies[0].second
-            }
-            campaigns = it.campaigns
-            policyLocations = it.policyLocations
-            binding.lytChooseLocation.lytSpinner.isEnabled = true
-            policyLocation = it.policyLocations[0]
-            with(binding) {
-                lytChooseLocation.lytSpinner.isEnabled = true
-                lytChooseLocation.tvYourLocation.text = it.policyLocations[0].second.location
-                progressBar.visibility = View.GONE
-                if (groupTop.isInvisible) {
-                    groupTop.visibility = View.VISIBLE
-                }
-            }
-            UsersRepo.userModel?.second?.campaign?.apply {
-                campaignName = campaign_id
-                if (!TextUtils.isEmpty(campaign_id)) {
-                    checkDataReturn(true)
-                } else checkDataReturn(false)
-            }
-        })
+//            campaigns = it.campaigns
+//            policyLocations = it.policyLocations
+//            binding.lytChooseLocation.lytSpinner.isEnabled = true
+//            policyLocation = it.policyLocations[0]
+//            with(binding) {
+//                lytChooseLocation.lytSpinner.isEnabled = true
+//                lytChooseLocation.tvYourLocation.text = it.policyLocations[0].second.location
+//                progressBar.visibility = View.GONE
+//                if (groupTop.isInvisible) {
+//                    groupTop.visibility = View.VISIBLE
+//                }
+//            }
+//            UsersRepo.userModel?.second?.campaign?.apply {
+//                campaignName = campaign_id
+//                if (!TextUtils.isEmpty(campaign_id)) {
+//                    checkDataReturn(true)
+//                } else checkDataReturn(false)
+//            }
+//        })
 
         binding.lytChooseLocation.lytSpinner.setOnClickListener {
             LocationsDialogFragment().show(supportFragmentManager, "policy_location")
@@ -107,7 +116,7 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
 //                        }
 //                        campaignName = "campaign_${campaigns?.size?.plus(1)}"
 //                        policiesViewModel.campaignCreated(campaign, campaignName)
-                        UsersRepo.userModel?.second?.apply {
+                        UsersRepo.userModel.second.apply {
                             campaign?.campaign_id = campaignName
                             campaign?.signatures_collected = campaignModel?.signatures_collected
                                     ?: 0
@@ -306,7 +315,7 @@ class PolicyControlCenterActivity : AbstractActivity<ActivityPolicyControlCenter
 
     override fun getLayoutId(): Int = R.layout.activity_policy_control_center
 
-    override fun getViewModelClass(): Class<PoliciesViewModel> = PoliciesViewModel::class.java
+    override fun getViewModelClass(): Class<PolicyControlCenterViewModel> = PolicyControlCenterViewModel::class.java
 
     override fun onBackPressedCompat() {
         if (campaignModel != null) {

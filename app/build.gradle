@@ -124,6 +124,7 @@ dependencies {
     // Location
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 
+    //todo we need to remove this library
     implementation 'com.github.jivimberg:autoresizetextview:0.0.2'
 
     //wheel picker

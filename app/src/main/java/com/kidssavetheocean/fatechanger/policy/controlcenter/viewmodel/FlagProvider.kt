@@ -1,4 +1,4 @@
-package com.kidssavetheocean.fatechanger.policy.controlcenter
+package com.kidssavetheocean.fatechanger.policy.controlcenter.viewmodel
 
 object CountryFlagProvider {
     /** * Returns the flag emoji for the given ISO 3166-1 alpha-2 country code. * Normalizes to uppercase. * Falls back to 🌐 for unknown/invalid country codes. */

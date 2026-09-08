@@ -10,7 +10,7 @@ data class UsersModel(
     val dash_wrote_a_letter_about_climate: Boolean = false,
     val dash_wrote_a_letter_about_plastic: Boolean = false,
     var hijack_policy_selected: String = "",
-    val location_id: String = "",
+    var location_id: String = "",
     var signatures_pledged: Int = 0,
     val user_letters_written: Int = 0,
     var user_person_type: Int = 0 // 0 = student, 1 = teacher , 2 = support
