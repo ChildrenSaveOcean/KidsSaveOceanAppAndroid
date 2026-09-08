@@ -28,7 +28,7 @@ class PolicyControlCenterViewModel @Inject constructor(
     val userModel: Pair<String, UsersModel> = UsersRepo.userModel
 
     private val _uiState = MutableStateFlow(
-        PolicyControlCenterUiState(isLoadingData = true),
+        PolicyControlCenterUiState(isLoadingPolicyData = true, isLoadingLocationsData = true),
     )
 
     val uiState: StateFlow<PolicyControlCenterUiState> = _uiState.asStateFlow()
@@ -37,14 +37,14 @@ class PolicyControlCenterViewModel @Inject constructor(
         when (uiEvent) {
             is ControlCenterUiEvent.LocationChosen -> {
                 _uiState.update {
-                    it.copy(isLoadingData = true)
+                    it.copy(isLoadingLocationsData = true)
                 }
                 UsersRepo.userModel.second.apply {
                     location_id = uiEvent.location.locationId
                     UsersRepo.updateOrCreateUser(this)
                 }
                 _uiState.update {
-                    it.copy(selectedLocation = uiEvent.location, isLoadingData = false)
+                    it.copy(selectedLocation = uiEvent.location, isLoadingLocationsData = false)
                 }
             }
 
@@ -53,12 +53,15 @@ class PolicyControlCenterViewModel @Inject constructor(
                 UsersRepo.userModel.second.apply {
                     signatures_pledged = signatures
                     UsersRepo.updateOrCreateUser(this)
+                    _uiState.update {
+                        it.copy(plannedSignatures = signatures)
+                    }
                 }
             }
         }
     }
 
-    fun loadControlCenterData() {
+    fun loadPolicyData() {
         viewModelScope.launch {
             hijackPoliciesRepo.getData { result ->
                 result.onSuccess { policies ->
@@ -66,14 +69,25 @@ class PolicyControlCenterViewModel @Inject constructor(
                         it.first == userModel.second.hijack_policy_selected
                     }
                     if (policy == null) {
+                        _uiState.update {
+                            it.copy(selectedPolicy = null, isLoadingPolicyData = false)
+                        }
                         return@getData
                     }
                     _uiState.update {
-                        it.copy(selectedPolicy = fromPair(policy))
+                        it.copy(
+                            selectedPolicy = fromPair(policy),
+                            isLoadingPolicyData = false,
+                            plannedSignatures = userModel.second.signatures_pledged,
+                        )
                     }
-                    updateUiState()
                 }
             }
+        }
+    }
+
+    fun loadLocationsData() {
+        viewModelScope.launch {
             policyLocationRepo.getData { result ->
                 result.onSuccess { locations ->
                     _uiState.update { state ->
@@ -86,25 +100,24 @@ class PolicyControlCenterViewModel @Inject constructor(
                         )
                     }
                     updateUiState()
+                }.onFailure {
+                    updateUiState()
                 }
             }
         }
     }
 
     private fun updateUiState() {
-        if (_uiState.value.selectedPolicy?.description?.isNotEmpty() == true) {
+        if (_uiState.value.policyLocations.isNotEmpty()) {
             _uiState.update {
                 val selectedLocation = _uiState.value.policyLocations.find { location ->
                     location.locationId == userModel.second.location_id
                 }
-                it.copy(isLoadingData = false, selectedLocation = selectedLocation)
+                it.copy(isLoadingLocationsData = false, selectedLocation = selectedLocation)
             }
-        } else if (_uiState.value.policyLocations.isNotEmpty()) {
-
-        }
-        else {
+        } else {
             _uiState.update {
-                it.copy(isLoadingData = false, selectedPolicy = null)
+                it.copy(isLoadingLocationsData = false, selectedLocation = null)
             }
         }
     }

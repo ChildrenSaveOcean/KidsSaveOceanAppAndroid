@@ -1,10 +1,8 @@
 package com.kidssavetheocean.fatechanger.policy.controlcenter.view
 
-import android.widget.Spinner
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -59,14 +57,7 @@ fun PolicyControlCenterScreen(state: PolicyControlCenterUiState, onEvent: (Contr
             color = policyTextColor,
             fontSize = 12.sp,
         )
-        if(state.isLoadingData){
-            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Spinner(context)
-            }
-        } else{
-            PolicyControlCenterView(state, onEvent)
-
-        }
+        PolicyControlCenterView(state, onEvent)
     }
 }
 
@@ -78,7 +69,6 @@ fun PolicyPreview() {
     KstoTheme {
         PolicyControlCenterScreen(
             PolicyControlCenterUiState(
-                isLoadingData = false,
                 selectedPolicy = HijackPolicy(description = "Water for all"),
                 policyLocations = listOf(
                     HijackPolicyLocation("asd", "UK"),

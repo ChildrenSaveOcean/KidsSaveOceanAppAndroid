@@ -35,14 +35,14 @@ private val buttonWidth = 100.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignaturesView(onUpdatePlannedSignatures: (Int) -> Unit) {
+fun SignaturesView(onUpdatePlannedSignatures: (Int) -> Unit, plannedSignatures: Int = 0) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 12.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top),
     ) {
-        var plannedSignatures by remember { mutableIntStateOf(0) }
+        var plannedSignatures by remember { mutableIntStateOf(plannedSignatures) }
         Text(
             "Your location is currently not live, but you can already fill out your planned signatures below",
             modifier = Modifier
@@ -62,8 +62,10 @@ fun SignaturesView(onUpdatePlannedSignatures: (Int) -> Unit) {
                 modifier = Modifier.width(textWidth),
                 fontSize = textFontSize,
             )
-            BorderTextInput("") {
-                if (it.isDigitsOnly()) {
+            BorderTextInput(plannedSignatures.toString()) {
+                if (it.isEmpty()){
+                    plannedSignatures = 0
+                } else if (it.isDigitsOnly()) {
                     plannedSignatures = it.toInt()
                 }
             }
@@ -125,7 +127,7 @@ fun SignaturesView(onUpdatePlannedSignatures: (Int) -> Unit) {
 fun SignaturesPreview() {
     KstoTheme {
         Box(Modifier.background(Color.White)) {
-            SignaturesView {}
+            SignaturesView(plannedSignatures = 30, onUpdatePlannedSignatures = {})
         }
     }
 }

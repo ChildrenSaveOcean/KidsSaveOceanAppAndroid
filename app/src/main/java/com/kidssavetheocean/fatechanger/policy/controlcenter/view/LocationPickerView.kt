@@ -2,7 +2,10 @@ package com.kidssavetheocean.fatechanger.policy.controlcenter.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,6 +18,7 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,6 +33,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import com.kidssavetheocean.fatechanger.presentation.KstoTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,7 +48,8 @@ fun LocationPicker(
     if (locations.isEmpty() && presetLocation == null) return
     var selectedLocation by remember { mutableStateOf(locations.first()) }
     var selectedIndex by remember { mutableIntStateOf(0) }
-    if(presetLocation != null) selectedLocation = presetLocation
+    if (presetLocation != null) selectedLocation = presetLocation
+    var showConfirmationDialog by remember { mutableStateOf(false) }
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -78,29 +84,102 @@ fun LocationPicker(
                 singleLine = true,
                 enabled = presetLocation == null,
             )
-            if(presetLocation == null)
-                ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                locations.forEachIndexed { index, location ->
-                    DropdownMenuItem(
-                        text = {
-                            Text(location)
-                        },
-                        onClick = {
-                            selectedLocation = location
-                            selectedIndex = index
-                            expanded = false
-                        },
-                    )
+            if (presetLocation == null) {
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                ) {
+                    locations.forEachIndexed { index, location ->
+                        DropdownMenuItem(
+                            text = {
+                                Text(location)
+                            },
+                            onClick = {
+                                selectedLocation = location
+                                selectedIndex = index
+                                expanded = false
+                            },
+                        )
+                    }
                 }
             }
         }
 
         Button(
-            onClick = { onChooseLocation(selectedIndex) },
+            onClick = {
+                showConfirmationDialog = true
+            },
             enabled = presetLocation == null,
             modifier = Modifier.height(32.dp),
         ) {
             Text("Choose Location")
+        }
+    }
+
+    if (showConfirmationDialog) {
+        LocationDialog(
+            onDismiss = { showConfirmationDialog = false },
+            onConfirm = {
+                onChooseLocation(selectedIndex)
+                showConfirmationDialog = false
+            },
+        )
+    }
+}
+
+@Composable
+fun LocationDialog(onDismiss: () -> Unit, onConfirm: () -> Unit) {
+    Dialog(
+        onDismissRequest = { onDismiss() },
+    ) {
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            color = Color.White,
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                Text(
+                    text = "Are you sure this your location? This is important.",
+                    textAlign = TextAlign.Center,
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Button(
+                        onClick = { onDismiss() },
+                        modifier = Modifier.weight(1f),
+                    ) {
+                        Text("No")
+                    }
+                    Button(
+                        onClick = {
+                            onConfirm()
+                        },
+                        modifier = Modifier.weight(1f),
+                    ) {
+                        Text("Yes")
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun DialogPreview() {
+    KstoTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Gray),
+            contentAlignment = Alignment.Center,
+        ) {
+            LocationDialog({}, {})
         }
     }
 }
